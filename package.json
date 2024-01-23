@@ -1,0 +1,51 @@
+{
+  "name": "@bedy90/riotentity",
+  "version": "2024.1.1",
+  "description": "Bedy90 - Riot Entity",
+  "main": "build/index.js",
+  "types": "./build/index.d.ts",
+  "scripts": {
+    "== Compile ==": "",
+    "compile:npx": "npx tsc",
+    "compile:rim": "rimraf ./build && tsc",
+    "== DEV ==": "",
+    "npm:refreshLock": "npm i --package-lock-only",
+    "npm:prune": "npm prune",
+    "npm:pack": "npm pack",
+    "local:pack": "npm run compile:npx && npm pack",
+    "local:cleanPack": "npm run compile:rim && npm pack",
+    "local:packCopy": "npm run compile:npx && npm pack && copy.bat",
+    "local:cleanPackCopy": "npm run compile:rim && npm pack && copy.bat",
+    "== Eslint ==": "",
+    "eslint": "npx eslint .",
+    "eslintFix": "npx eslint . --fix"
+  },
+  "files": [
+    "build/**",
+    "changelog.md"
+  ],
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bedy90/riotEntity.git"
+  },
+  "author": "MBelangerB",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bedy90/riotEntity/issues"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "homepage": "https://github.com/bedy90/riotEntity#readme",
+  "devDependencies": {
+    "@types/node": "^20.11.5",
+    "@typescript-eslint/eslint-plugin": "^6.19.0",
+    "eslint": "^8.56.0",
+    "rimraf": "^5.0.5",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  }
+}

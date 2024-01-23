@@ -1,43 +1,27 @@
-# Bedy Riot module
-![GitHub package.json version (subfolder of monorepo)](https://img.shields.io/github/package-json/v/MBelangerB/RiotModule)
+# Bedy90 - Riot entity
+![GitHub package.json version (subfolder of monorepo)](https://img.shields.io/github/package-json/v/bedy90/riotEntity)
 
 A simple library to communicate with Riot's League of Legend API.
 
-![GitHub last commit (branch)](https://img.shields.io/github/last-commit/MBelangerB/RiotModule/dev)
-![GitHub (Pre-)Release Date](https://img.shields.io/github/release-date-pre/MBelangerB/RiotModule?label=Last%20Release)
-[![codecov](https://codecov.io/gh/MBelangerB/RiotModule/graph/badge.svg?token=VZ7R9KTH4M)](https://codecov.io/gh/MBelangerB/RiotModule)
+![GitHub last commit (branch)](https://img.shields.io/github/last-commit/bedy90/riotEntity/dev)
+![GitHub (Pre-)Release Date](https://img.shields.io/github/release-date-pre/bedy90/riotEntity?label=Last%20Release)
 
 
 # Table of Contents
-- [Bedy Riot module](#bedy-riot-module)
+- [Bedy90 - Riot entity](#bedy90---riot-entity)
 - [Table of Contents](#table-of-contents)
-- [Prerequisites](#prerequisites)
 - [Features](#features)
   - [Installation](#installation)
     - [Login to Github registry package](#login-to-github-registry-package)
-- [Requirement](#requirement)
-  - [Environment Variables](#environment-variables)
-    - [.env Exemple](#env-exemple)
 - [How to use](#how-to-use)
-  - [Exemple](#exemple)
+  - [Exemple Javascript](#exemple-javascript)
+  - [Exemple Typescript](#exemple-typescript)
 - [League of Legends API](#league-of-legends-api)
   - [API Versions](#api-versions)
 - [Authors](#authors)
 
-
-# Prerequisites
-To use this library you will need an API key to access the Riot API.
-
-To get this key you need to make a request to Riot.
-
-[Riot Developer Portal](https://developer.riotgames.com)
-
 # Features
-- Request helpers (caching)
-- Dragon helpers
-- Access the informations about the summoner (rank, masteries)
-- Get the current rotation (new player and normal)
-- Validate region parameters
+- Riot Developper API - Entity
 
 ## Installation
 This is a **Node.js** module available through the npm registry.
@@ -55,48 +39,46 @@ npm login --scope=@mbelangerb --auth-type=legacy --registry=https://npm.pkg.gith
 
 Installation is done using the **npm install** command:
 ```bash
-npm install @mbelangerb/riotmodule
-```
-
-# Requirement
-
-## Environment Variables
-
-To run this project, you will need to add the following environment variables to your **.env** file
-
-In production, to be able to communicate with the Riot API, you must add the following keys.
-`Riot_LolToken` and  `Riot_TftToken`
-
-If you are in development mode `NODE_ENV="development"` you can use a unique key valid for **24 hours** that is provided to you by Riot and allows access to all features (League of Legend & TFT) with the key : `Riot_APIDevKey`
-
-If you want enabled the cache system you need to add key `CacheEnabled=true`
-
-### .env Exemple
-```bash
-# Production Mode
-Riot_LolToken='RGAPI-'
-Riot_TftToken='RGAPI-'
-
-# Developper Mode (24 hours tokens)
-Riot_APIDevKey='RGAPI-'
+npm install @bedy90/riotEntity
 ```
 
 # How to use
 
-## Exemple
+1. Install the module
+   
+## Exemple Javascript
+2. Import the module
+```js
+const RiotEntity = require('@bedy90/riotentity');
+
+// AccountChecker
+const myObj = {
+  puuid: "test",
+  gameName: "test",
+  tagLine: "#TEST"
+}
+
+RiotEntity.AccountChecker.isAccountDTO(myObj) // Return true
+
+// SummonerChecker
+const myObj2 = {
+  accountId: "test",
+  profileIconId: 1,
+  revisionDate: 1,
+  name: "test",
+  id: "test",
+  puuid: "test",
+  summonerLevel: 10
+}
+
+RiotEntity.SummonerChecker.isSummonerDTO(myObj2) // Return true
+```
+
+## Exemple Typescript
+TODO
 
 ```ts
-import { RiotService, ValidationService, RiotHttpStatusCode } from '@mbelangerb/riotmodule';
-
-# Initialize 'RiotService'
-const service: RiotService = new RiotService();
-
-# Validate Region
-let valideRegion: string = ValidationService.convertToRealRegion(region);
-
-# Get SummonerDTO
-import { ISummonerDTO } from '@mbelangerb/riotmodule';
-const apiSummoner: ISummonerDTO = await service.SummonerV4.getBySummonerName(summonerName, region);
+// import { IAccountDTO, AccountChecker } from '@bedy90/riotentity';
 ```
 
 # League of Legends API
@@ -119,4 +101,5 @@ For more information about Riot's Developer API, please consult the official API
 # Authors
 
 - [@MBelangerB](https://www.github.com/MBelangerB)
+- [@Bedy90](https://www.github.com/Bedy90)
 
