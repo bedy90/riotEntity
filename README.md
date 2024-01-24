@@ -11,8 +11,8 @@ A simple library to communicate with Riot's League of Legend API.
 - [Bedy90 - Riot entity](#bedy90---riot-entity)
 - [Table of Contents](#table-of-contents)
 - [Features](#features)
-  - [Installation](#installation)
-    - [Login to Github registry package](#login-to-github-registry-package)
+- [Installation](#installation)
+- [Login to Github registry package](#login-to-github-registry-package)
 - [How to use](#how-to-use)
   - [Exemple Javascript](#exemple-javascript)
   - [Exemple Typescript](#exemple-typescript)
@@ -23,7 +23,7 @@ A simple library to communicate with Riot's League of Legend API.
 # Features
 - Riot Developper API - Entity
 
-## Installation
+# Installation
 This is a **Node.js** module available through the npm registry.
 
 Before installing, download and install **Node.js**. 
@@ -31,12 +31,34 @@ Node.js 18.0 or higher is required.
 
 If this is a brand new project, make sure to create a package.json first with the `npm init` command.
 
-### Login to Github registry package
-Require PAT *(Personal access token)* for install the package
-```bash
-npm login --scope=@mbelangerb --auth-type=legacy --registry=https://npm.pkg.github.com
+
+
+- [Bedy90 - Riot entity](#bedy90---riot-entity)
+- [Table of Contents](#table-of-contents)
+- [Features](#features)
+- [Installation](#installation)
+- [Login to Github registry package](#login-to-github-registry-package)
+- [How to use](#how-to-use)
+  - [Exemple Javascript](#exemple-javascript)
+  - [Exemple Typescript](#exemple-typescript)
+- [League of Legends API](#league-of-legends-api)
+  - [API Versions](#api-versions)
+- [Authors](#authors)
+# Login to Github registry package
+Require PAT *(Personal access token)* for publish and using the package
+
+1. Create `.npmrc` and add link with github registry
+```
+@Bedy90:registry=https://npm.pkg.github.com/:_authToken={YOUR PAT}
 ```
 
+2. Log on the registry
+```bash
+npm login --scope=@bedy90 --registry=https://npm.pkg.github.com
+```
+The username is main account username and the password is the PAT.
+
+3. Install the package
 Installation is done using the **npm install** command:
 ```bash
 npm install @bedy90/riotEntity
@@ -45,9 +67,11 @@ npm install @bedy90/riotEntity
 # How to use
 
 1. Install the module
+2. Use exemple for using it
    
 ## Exemple Javascript
-2. Import the module and try it
+
+Import the module and try it
 ```js
 const RiotEntity = require('@bedy90/riotentity');
 
@@ -75,7 +99,8 @@ RiotEntity.SummonerChecker.isSummonerDTO(myObj2) // Return true
 ```
 
 ## Exemple Typescript
-2. Import the module and try it
+
+Import the module and try it
 ```ts
 import { IAccountDTO, AccountChecker, ISummonerDTO, SummonerChecker } from '@bedy90/riotentity';
 
