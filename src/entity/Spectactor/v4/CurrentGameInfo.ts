@@ -1,4 +1,8 @@
 import { IBannedChampion, IObserver } from './FeaturedGames';
+
+// --------------------------------------
+// Interface
+// --------------------------------------
 export interface ICurrentGameInfo {
     /**
      * The ID of the game
@@ -45,6 +49,7 @@ export interface ICurrentGameInfo {
      */
     participants: Array<ICurrentGameParticipant>;
 }
+
 export interface ICurrentGameParticipant {
     /**
      * 	The ID of the champion played by this participant
@@ -87,6 +92,7 @@ export interface ICurrentGameParticipant {
      */
     gameCustomizationObjects: Array<IGameCustomizationObject>;
 }
+
 export interface IPerks {
     /**
      * IDs of the perks/runes assigned.
@@ -101,6 +107,7 @@ export interface IPerks {
      */
     perkSubStyle: number;
 }
+
 export interface IGameCustomizationObject {
     /**
      * Category identifier for Game Customization
@@ -111,3 +118,11 @@ export interface IGameCustomizationObject {
      */
     content: string;
 }
+
+// --------------------------------------
+// Class
+// --------------------------------------
+
+// --------------------------------------
+// Checker
+// --------------------------------------

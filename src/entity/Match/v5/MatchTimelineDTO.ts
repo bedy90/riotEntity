@@ -1,8 +1,11 @@
-    // TODO
+/* eslint-disable-next-line @typescript-eslint/no-empty-interface */
 
 // --------------------------------------
 // Interface
 // --------------------------------------
+export interface IMatchTimelineDto {
+    // TODO
+}
 
 // --------------------------------------
 // Class
