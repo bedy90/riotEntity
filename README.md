@@ -1,11 +1,10 @@
 # Bedy90 - Riot entity
 ![GitHub package.json version (subfolder of monorepo)](https://img.shields.io/github/package-json/v/bedy90/riotEntity)
 
-A simple library to communicate with Riot's League of Legend API.
+A simple library for obtaining entities related to the use of Riot's League of Legend API. 
 
 ![GitHub last commit (branch)](https://img.shields.io/github/last-commit/bedy90/riotEntity/dev)
 ![GitHub (Pre-)Release Date](https://img.shields.io/github/release-date-pre/bedy90/riotEntity?label=Last%20Release)
-
 
 # Table of Contents
 - [Bedy90 - Riot entity](#bedy90---riot-entity)
@@ -22,6 +21,7 @@ A simple library to communicate with Riot's League of Legend API.
 
 # Features
 - Riot Developper API - Entity
+- Entity Checker
 
 # Installation
 This is a **Node.js** module available through the npm registry.
@@ -31,19 +31,6 @@ Node.js 18.0 or higher is required.
 
 If this is a brand new project, make sure to create a package.json first with the `npm init` command.
 
-
-
-- [Bedy90 - Riot entity](#bedy90---riot-entity)
-- [Table of Contents](#table-of-contents)
-- [Features](#features)
-- [Installation](#installation)
-- [Login to Github registry package](#login-to-github-registry-package)
-- [How to use](#how-to-use)
-  - [Exemple Javascript](#exemple-javascript)
-  - [Exemple Typescript](#exemple-typescript)
-- [League of Legends API](#league-of-legends-api)
-  - [API Versions](#api-versions)
-- [Authors](#authors)
 # Login to Github registry package
 Require PAT *(Personal access token)* for publish and using the package
 
