@@ -1,6 +1,6 @@
 {
   "name": "@bedy90/riotentity",
-  "version": "2024.1.1",
+  "version": "2024.1.2",
   "description": "Bedy90 - Riot Entity",
   "main": "build/index.js",
   "types": "./build/index.d.ts",
@@ -41,8 +41,8 @@
   },
   "homepage": "https://github.com/bedy90/riotEntity#readme",
   "devDependencies": {
-    "@types/node": "^20.11.5",
-    "@typescript-eslint/eslint-plugin": "^6.19.0",
+    "@types/node": "^20.11.7",
+    "@typescript-eslint/eslint-plugin": "^6.19.1",
     "eslint": "^8.56.0",
     "rimraf": "^5.0.5",
     "ts-node": "^10.9.2",

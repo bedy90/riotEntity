@@ -1,3 +1,6 @@
+// --------------------------------------
+// Interface
+// --------------------------------------
 export interface IShardStatus {
     locales: Array<string>;
     hostname: string;

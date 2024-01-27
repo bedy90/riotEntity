@@ -1,3 +1,6 @@
+// --------------------------------------
+// Interface
+// --------------------------------------
 export interface IChampionMasteryDTO {
     /**
      * Number of points needed to achieve next level. Zero if player reached maximum champion level for this champion.
@@ -37,6 +40,24 @@ export interface IChampionMasteryDTO {
     tokensEarned: number;
 }
 
+// --------------------------------------
+// Class
+// --------------------------------------
+export class ChampionMasteryDTO implements IChampionMasteryDTO {
+    championPointsUntilNextLevel!: number;
+    chestGranted!: boolean;
+    championId!: number;
+    lastPlayTime!: number;
+    championLevel!: number;
+    summonerId!: string;
+    championPoints!: number;
+    championPointsSinceLastLevel!: number;
+    tokensEarned!: number;
+
+}
+// --------------------------------------
+// Checker
+// --------------------------------------
 export class ChampionMasteryChecker {
     static isChampionMasteryDTO(obj: any): obj is IChampionMasteryDTO {
         return (
@@ -51,12 +72,3 @@ export class ChampionMasteryChecker {
         );
     }
 }
-
-
-// export interface IArrChampionMasteryDTO {
-//     championMasteries: Array<IChampionMasteryDTO>;
-// }
-
-// export class ChampionMasteryDTO {
-//     championMasteries: Array<IChampionMasteryDTO> = new Array<IChampionMasteryDTO>;
-// }

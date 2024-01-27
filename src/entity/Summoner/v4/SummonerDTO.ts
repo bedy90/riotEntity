@@ -1,3 +1,6 @@
+// --------------------------------------
+// Interface
+// --------------------------------------
 export interface ISummonerDTO {
     /**
      * 	Encrypted account ID. Max length 56 characters.
@@ -29,6 +32,9 @@ export interface ISummonerDTO {
     summonerLevel: number;
 }
 
+// --------------------------------------
+// Class
+// --------------------------------------
 export class SummonerDTO implements ISummonerDTO {
     accountId!: string; // = '';
     profileIconId!: number; // = 0;
@@ -39,6 +45,9 @@ export class SummonerDTO implements ISummonerDTO {
     summonerLevel!: number; // = 0;
 }
 
+// --------------------------------------
+// Checker
+// --------------------------------------
 export class SummonerChecker {
     static isSummonerDTO(obj: any): obj is ISummonerDTO {
         return (

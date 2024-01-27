@@ -1,5 +1,8 @@
 import { IMiniSeriesDTO } from './LeagueListDTO';
 
+// --------------------------------------
+// Interface
+// --------------------------------------
 export interface ILeagueEntryDTO {
     leagueId: string;
     /**
@@ -29,6 +32,9 @@ export interface ILeagueEntryDTO {
     miniSeries: IMiniSeriesDTO;
 }
 
+// --------------------------------------
+// Class
+// --------------------------------------
 export class LeagueEntryDTO implements ILeagueEntryDTO {
     leagueId!: string;
     summonerId!: string;
@@ -46,6 +52,9 @@ export class LeagueEntryDTO implements ILeagueEntryDTO {
     miniSeries!: IMiniSeriesDTO;
 }
 
+// --------------------------------------
+// Checker
+// --------------------------------------
 export class LeagueEntryChecker {
     static isLeagueEntryDTO(obj: any): obj is ILeagueEntryDTO {
         return (

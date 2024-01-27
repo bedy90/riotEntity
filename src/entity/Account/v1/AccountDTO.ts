@@ -1,3 +1,6 @@
+// --------------------------------------
+// Interface
+// --------------------------------------
 export interface IAccountDTO {
     puuid: string;
     /**
@@ -13,12 +16,18 @@ export interface IAccountDTO {
 }
 
 
+// --------------------------------------
+// Class
+// --------------------------------------
 export class AccountDTO implements IAccountDTO {
     puuid!: string;
     gameName!: string;
     tagLine!: string;
 }
 
+// --------------------------------------
+// Checker
+// --------------------------------------
 export class AccountChecker {
     static isAccountDTO(obj: any): obj is IAccountDTO {
         return (
