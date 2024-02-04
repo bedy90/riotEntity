@@ -1,31 +1,8 @@
-// --------------------------------------
-// Interface
-// --------------------------------------
-export interface IApexPlayerInfoDTO {
-    puuid: string;
-    value: number;
-    position: number;
-}
+import { Interfaces } from '@/index';
 
-// --------------------------------------
-// Class
-// --------------------------------------
-export class ApexPlayerInfoDTO implements IApexPlayerInfoDTO {
+export class ApexPlayerInfoDTO implements Interfaces.Challenges.v1.IApexPlayerInfoDTO {
     puuid!: string;
     value!: number;
     position!: number;
 
-}
-
-// --------------------------------------
-// Checker
-// --------------------------------------
-export class ApexPlayerInfoChecker {
-    static isDTO(obj: any): obj is IApexPlayerInfoDTO {
-        return (
-            'puuid' in obj &&
-            'value' in obj &&
-            'position' in obj
-        );
-    }
 }
