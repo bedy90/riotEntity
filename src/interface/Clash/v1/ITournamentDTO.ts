@@ -1,4 +1,3 @@
-
 export interface ITournamentDTO {
     id: number;
     themeId: number;
@@ -7,7 +6,7 @@ export interface ITournamentDTO {
     /**
      * 	Tournament phase
      */
-    schedule: Array<ITournamentPhaseDTO>;
+    schedule: ITournamentPhaseDTO[];
 }
 
 export interface ITournamentPhaseDTO {

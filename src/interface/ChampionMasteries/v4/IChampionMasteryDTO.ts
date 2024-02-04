@@ -1,4 +1,3 @@
-
 export interface IChampionMasteryDTO {
     /**
      * Number of points needed to achieve next level. Zero if player reached maximum champion level for this champion.

@@ -1,4 +1,3 @@
-
 export interface IPlayerDTO {
     summonerId: string;
     teamId: string;

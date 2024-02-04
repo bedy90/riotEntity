@@ -12,7 +12,7 @@ export class CurrentGameInfo implements Interfaces.Spectactor.v4.ICurrentGameInf
     gameQueueConfigId!: number;
     observers!: Interfaces.Spectactor.v4.IObserver;
     participants!: Interfaces.Spectactor.v4.ICurrentGameParticipant[];
-    
+
 }
 
 export class CurrentGameParticipant implements Interfaces.Spectactor.v4.ICurrentGameParticipant {
@@ -26,7 +26,7 @@ export class CurrentGameParticipant implements Interfaces.Spectactor.v4.ICurrent
     spell1Id!: number;
     spell2Id!: number;
     gameCustomizationObjects!: Interfaces.Spectactor.v4.IGameCustomizationObject[];
-    
+
 }
 
 export class Perks implements Interfaces.Spectactor.v4.IPerks {
@@ -38,5 +38,5 @@ export class Perks implements Interfaces.Spectactor.v4.IPerks {
 export class GameCustomizationObject implements Interfaces.Spectactor.v4.IGameCustomizationObject {
     category!: string;
     content!: string;
-    
+
 }

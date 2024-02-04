@@ -2,7 +2,7 @@
 //     export namespace v4 {
         export interface ILeagueListDTO {
             leagueId: string;
-            entries: Array<ILeagueItemDTO>;
+            entries: ILeagueItemDTO[];
             tier: string;
             name: string;
             queue: string;

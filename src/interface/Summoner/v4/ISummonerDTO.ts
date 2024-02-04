@@ -1,4 +1,3 @@
-
 export interface ISummonerDTO {
     /**
      * 	Encrypted account ID. Max length 56 characters.

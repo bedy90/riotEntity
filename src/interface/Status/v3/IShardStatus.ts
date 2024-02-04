@@ -1,9 +1,8 @@
-
 export interface IShardStatus {
-    locales: Array<string>;
+    locales: string[];
     hostname: string;
     name: string;
-    services: Array<IService>;
+    services: IService[];
     slug: string;
     region_tag: string;
 }
@@ -12,14 +11,14 @@ export interface IService {
     name: string;
     slug: string;
     status: string;
-    incidents: Array<IIncident>;
+    incidents: IIncident[];
 }
 
 export interface IIncident {
     id: number;
     active: boolean;
     created_at: string;
-    updates: Array<IMessage>;
+    updates: IMessage[];
 }
 
 export interface IMessage {
@@ -30,7 +29,7 @@ export interface IMessage {
     severity: string;
     created_at: string;
     updated_at: string;
-    translations: Array<ITranslation>;
+    translations: ITranslation[];
 }
 
 export interface ITranslation {

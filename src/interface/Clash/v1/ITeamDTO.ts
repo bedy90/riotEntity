@@ -14,5 +14,5 @@ export interface ITeamDTO {
     /**
      * 	Team members.
      */
-    players: Array<IPlayerDTO>;
+    players: IPlayerDTO[];
 }

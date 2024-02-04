@@ -12,7 +12,7 @@ export class MatchDTO implements Interfaces.Match.v5.IMatchDTO {
 export class MetadataDTO implements Interfaces.Match.v5.IMetadataDTO {
     dataVersion!: string;
     matchId!: string;
-    participants!: Array<string>;
+    participants!: string[];
 }
 
 export class InfoDTO implements Interfaces.Match.v5.IInfoDTO {
@@ -145,7 +145,7 @@ export class ParticipantDTO implements Interfaces.Match.v5.IParticipantDTO {
 
 export class PerksDTO implements Interfaces.Match.v5.IPerksDTO {
     statPerks!: Interfaces.Match.v5.IPerkStatsDTO;
-    styles!: Array<Interfaces.Match.v5.IPerkStyleDTO>;
+    styles!: Interfaces.Match.v5.IPerkStyleDTO[];
 }
 
 export class PerkStatsDTO implements Interfaces.Match.v5.IPerkStatsDTO {
@@ -156,7 +156,7 @@ export class PerkStatsDTO implements Interfaces.Match.v5.IPerkStatsDTO {
 
 export class PerkStyleDTO implements Interfaces.Match.v5.IPerkStyleDTO {
     description!: string;
-    selections!: Array<Interfaces.Match.v5.IPerkStyleSelectionDTO>;
+    selections!: Interfaces.Match.v5.IPerkStyleSelectionDTO[];
     style!: number;
 }
 
@@ -168,7 +168,7 @@ export class PerkStyleSelectionDTO implements Interfaces.Match.v5.IPerkStyleSele
 }
 
 export class TeamDTO implements Interfaces.Match.v5.ITeamDTO {
-    bans!: Array<Interfaces.Match.v5.IBanDTO>;
+    bans!: Interfaces.Match.v5.IBanDTO[];
     objectives!: Interfaces.Match.v5.IObjectivesDTO;
     teamId!: number;
     win!: boolean;

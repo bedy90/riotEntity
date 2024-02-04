@@ -1,4 +1,3 @@
-
 import { Interfaces } from '@/index';
 
 export function isILeagueEntryDTO(obj: any): obj is Interfaces.League.v4.ILeagueEntryDTO {

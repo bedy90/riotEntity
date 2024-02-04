@@ -1,7 +1,6 @@
-
 export interface IChampionInfo {
     maxNewPlayerLevel: number;
-    freeChampionIdsForNewPlayers: Array<number>;
-    freeChampionIds: Array<number>;
+    freeChampionIdsForNewPlayers: number[];
+    freeChampionIds: number[];
 }
 

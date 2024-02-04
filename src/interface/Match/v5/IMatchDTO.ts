@@ -27,7 +27,7 @@ export interface IMetadataDTO {
     /**
      * A list of participant PUUIDs.
      */
-    participants: Array<string>;
+    participants: string[];
 }
 
 export interface IInfoDTO {
@@ -67,7 +67,7 @@ export interface IInfoDTO {
      * Refer to the Game Constants documentation.
      */
     mapId: number;
-    participants: Array<IParticipantDTO>;
+    participants: IParticipantDTO[];
     /**
      * Platform where the match was played.
      */
@@ -76,7 +76,7 @@ export interface IInfoDTO {
      * Refer to the Game Constants documentation.
      */
     queueId: number;
-    teams: Array<ITeamDTO>;
+    teams: ITeamDTO[];
     /**
      * Tournament code used to generate the match. This field was added to match-v5 in patch 11.13 on June 23rd, 2021.
      */
@@ -212,7 +212,7 @@ export interface IParticipantDTO {
 
 export interface IPerksDTO {
     statPerks: IPerkStatsDTO;
-    styles: Array<IPerkStyleDTO>;
+    styles: IPerkStyleDTO[];
 }
 
 export interface IPerkStatsDTO {
@@ -223,7 +223,7 @@ export interface IPerkStatsDTO {
 
 export interface IPerkStyleDTO {
     description: string;
-    selections: Array<IPerkStyleSelectionDTO>;
+    selections: IPerkStyleSelectionDTO[];
     style: number;
 }
 
@@ -235,7 +235,7 @@ export interface IPerkStyleSelectionDTO {
 }
 
 export interface ITeamDTO {
-    bans: Array<IBanDTO>;
+    bans: IBanDTO[];
     objectives: IObjectivesDTO;
     teamId: number;
     win: boolean;

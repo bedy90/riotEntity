@@ -1,9 +1,8 @@
-
 export interface IFeaturedGames {
     /**
      * The list of featured games
      */
-    gameList: Array<IFeaturedGameInfo>;
+    gameList: IFeaturedGameInfo[];
     /**
      * 	The suggested interval to wait before requesting FeaturedGames again
      */
@@ -30,7 +29,7 @@ export interface IFeaturedGameInfo {
     /**
      * Banned champion information
      */
-    bannedChampions: Array<IBannedChampion>;
+    bannedChampions: IBannedChampion[];
     /**
      * The ID of the game
      */
@@ -50,7 +49,7 @@ export interface IFeaturedGameInfo {
     /**
      * 	The participant information
      */
-    participants: Array<IParticipant>;
+    participants: IParticipant[];
     /**
      * The ID of the platform on which the game is being played
      */

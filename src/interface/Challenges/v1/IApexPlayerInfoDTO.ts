@@ -1,4 +1,3 @@
-
 export interface IApexPlayerInfoDTO {
     puuid: string;
     value: number;

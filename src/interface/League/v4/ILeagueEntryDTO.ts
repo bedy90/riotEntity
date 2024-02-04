@@ -1,4 +1,4 @@
-import { IMiniSeriesDTO } from "./ILeagueListDTO";
+import { IMiniSeriesDTO } from './ILeagueListDTO';
 
 // export namespace League {
 //     export namespace v4 {

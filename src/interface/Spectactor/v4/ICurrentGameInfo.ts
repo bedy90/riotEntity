@@ -33,7 +33,7 @@ export interface ICurrentGameInfo {
     /**
      * 	Banned champion information
      */
-    bannedChampions: Array<IBannedChampion>;
+    bannedChampions: IBannedChampion[];
     /**
      * The queue type (queue types are documented on the Game Constants page)
      */
@@ -45,7 +45,7 @@ export interface ICurrentGameInfo {
     /**
      * 	The participant information
      */
-    participants: Array<ICurrentGameParticipant>;
+    participants: ICurrentGameParticipant[];
 }
 
 export interface ICurrentGameParticipant {
@@ -88,14 +88,14 @@ export interface ICurrentGameParticipant {
     /**
      * List of Game Customizations
      */
-    gameCustomizationObjects: Array<IGameCustomizationObject>;
+    gameCustomizationObjects: IGameCustomizationObject[];
 }
 
 export interface IPerks {
     /**
      * IDs of the perks/runes assigned.
      */
-    perkIds: Array<number>;
+    perkIds: number[];
     /**
      * Primary runes path
      */

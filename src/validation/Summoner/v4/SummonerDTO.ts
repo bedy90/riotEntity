@@ -1,4 +1,3 @@
-
 import { Interfaces } from '@/index';
 
 export function isISummonerDTO(obj: any): obj is Interfaces.Summoner.v4.ISummonerDTO {
