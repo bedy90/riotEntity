@@ -1,4 +1,4 @@
-import * as SummonerCheck from './v4/SummonerDTO';
+import * as SummonerCheck from './v4/SummonerChecker';
 
 export namespace Summoner {
     export namespace v4 {

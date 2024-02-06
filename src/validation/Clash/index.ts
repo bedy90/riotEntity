@@ -1,6 +1,6 @@
-import * as PlayerCheck from './v1/PlayerDTO';
-import * as TeamCheck from './v1/TeamDTO';
-import * as TournamentCheck from './v1/TournamentDTO';
+import * as PlayerCheck from './v1/PlayerChecker';
+import * as TeamCheck from './v1/TeamChecker';
+import * as TournamentCheck from './v1/TournamentChecker';
 
 export namespace Clash {
     export namespace v1 {

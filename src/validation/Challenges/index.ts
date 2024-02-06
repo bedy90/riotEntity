@@ -1,5 +1,5 @@
-import * as ApexPLayerCheck from './v1/ApexPlayerInfoDTO';
-import * as ChallengeConfigCheck from './v1/ChallengeConfigInfoDTO';
+import * as ApexPLayerCheck from './v1/ApexPlayerChecker';
+import * as ChallengeConfigCheck from './v1/ChallengeConfigInfoChecker';
 
 export namespace Challenges {
     export namespace v1 {
