@@ -4,8 +4,8 @@
 name: Bedy90 - Riot Entity - Deploy (Alpha)
 
 on:   
-  release:
-    types: [published]
+  # release:
+  #   types: [published]
 
   # Manual action
   workflow_dispatch:
