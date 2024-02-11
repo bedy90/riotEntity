@@ -51,14 +51,13 @@ jobs:
     #     NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     # TODO: Delete current alpha if exists
-
-    - name: Unpublish if exists
-      run: |
-        PACKAGE_NAME=$(jq -r '.name' package.json)
-        PACKAGE_VERSION=$(jq -r '.version' package.json)
-        if npm show $PACKAGE_NAME@$PACKAGE_VERSION ; then
-          npm unpublish $PACKAGE_NAME@$PACKAGE_VERSION --force
-        fi
+    # - name: Unpublish if exists
+    #   run: |
+    #     PACKAGE_NAME=$(jq -r '.name' package.json)
+    #     PACKAGE_VERSION=$(jq -r '.version' package.json)
+    #     if npm show $PACKAGE_NAME@$PACKAGE_VERSION ; then
+    #       npm unpublish $PACKAGE_NAME@$PACKAGE_VERSION --force
+    #     fi
 
     - uses: JS-DevTools/npm-publish@v3
       id : "publishTag"
