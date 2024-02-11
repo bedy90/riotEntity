@@ -1,4 +1,4 @@
-import { State, Tracking } from '@/declaration';
+import { State, Tracking } from '@/riotentity';
 
 export interface IChallengeConfigInfoDTO {
     id: number;

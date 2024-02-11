@@ -1,7 +1,6 @@
 /* eslint-disable max-len */
 /* eslint-disable no-shadow */
-
-import { KaynChampionTransform } from '@/declaration';
+import { KaynChampionTransform } from '@/riotentity';
 
 
 export interface IMatchDTO {

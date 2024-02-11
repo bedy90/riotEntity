@@ -1,4 +1,4 @@
-import { Interfaces } from '@/index';
+import { Interfaces } from '@/riotentity';
 
 export function isILeagueListDTO(obj: any): obj is Interfaces.League.v4.ILeagueListDTO {
     return (

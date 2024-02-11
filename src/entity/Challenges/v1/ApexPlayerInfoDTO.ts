@@ -1,4 +1,4 @@
-import { Interfaces } from '@/index';
+import { Interfaces } from '@/riotentity';
 
 export class ApexPlayerInfoDTO implements Interfaces.Challenges.v1.IApexPlayerInfoDTO {
     puuid!: string;

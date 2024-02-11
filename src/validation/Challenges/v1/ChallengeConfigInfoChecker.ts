@@ -1,4 +1,4 @@
-import { Interfaces } from '@/index';
+import { Interfaces } from '@/riotentity';
 
 export function isIChallengeConfigInfoDTO(obj: any): obj is Interfaces.Challenges.v1.IChallengeConfigInfoDTO {
     return (

@@ -1,4 +1,4 @@
-import { Interfaces } from '@/index';
+import { Interfaces } from '@/riotentity';
 
 export class LeagueListDTO implements Interfaces.League.v4.ILeagueListDTO {
     leagueId!: string;

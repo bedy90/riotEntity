@@ -1,7 +1,7 @@
-import { Interfaces } from '@/index';
+import { Interfaces } from '@/riotentity';
 
 export function isILeagueEntryDTO(obj: any): obj is Interfaces.League.v4.ILeagueEntryDTO {
-    return (
+    const hasFields = (
         'leagueId' in obj &&
         'summonerId' in obj &&
         'summonerName' in obj &&
@@ -14,6 +14,9 @@ export function isILeagueEntryDTO(obj: any): obj is Interfaces.League.v4.ILeague
         'hotStreak' in obj &&
         'veteran' in obj &&
         'freshBlood' in obj &&
-        'inactive' in obj
+        'inactive' in obj &&
+        Object.keys(obj).length === 13
     );
+
+    return hasFields;
 }

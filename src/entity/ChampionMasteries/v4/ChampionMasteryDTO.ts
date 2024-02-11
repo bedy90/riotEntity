@@ -1,4 +1,4 @@
-import { Interfaces } from '@/index';
+import { Interfaces } from '@/riotentity';
 
 export class ChampionMasteryDTO implements Interfaces.ChampionMasteries.v4.IChampionMasteryDTO {
     championPointsUntilNextLevel!: number;

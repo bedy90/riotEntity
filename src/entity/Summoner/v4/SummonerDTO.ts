@@ -1,4 +1,4 @@
-import { Interfaces } from '@/index';
+import { Interfaces } from '@/riotentity';
 
 export class SummonerDTO implements Interfaces.Summoner.v4.ISummonerDTO {
     accountId!: string;

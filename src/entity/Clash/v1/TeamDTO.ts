@@ -1,4 +1,4 @@
-import { Interfaces } from '@/index';
+import { Interfaces } from '@/riotentity';
 
 export class TeamDTO implements Interfaces.Clash.v1.ITeamDTO {
     id!: string;

@@ -1,4 +1,4 @@
-import { Interfaces } from '@/index';
+import { Interfaces } from '@/riotentity';
 
 export function isITeamDTO(obj: any): obj is Interfaces.Clash.v1.ITeamDTO {
     return (

@@ -1,4 +1,4 @@
-import { Interfaces } from '@/index';
+import { Interfaces } from '@/riotentity';
 
 export class ShardStatus implements Interfaces.Status.v3.IShardStatus {
     locales!: string[];

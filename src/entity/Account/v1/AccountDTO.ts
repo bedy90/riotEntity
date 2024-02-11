@@ -1,9 +1,7 @@
-import { Interfaces } from '@/index';
+import { Interfaces } from '@/riotentity';
 
-// export namespace Account {
 export class AccountDTO implements Interfaces.Account.v1.IAccountDTO {
     puuid!: string;
     gameName!: string;
     tagLine!: string;
 }
-// }

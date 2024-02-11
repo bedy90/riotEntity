@@ -1,4 +1,4 @@
-import { Interfaces } from '@/index';
+import { Interfaces } from '@/riotentity';
 
 export class PlayerDTO implements Interfaces.Clash.v1.IPlayerDTO {
     summonerId!: string;

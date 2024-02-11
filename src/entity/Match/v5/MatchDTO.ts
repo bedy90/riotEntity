@@ -2,7 +2,7 @@
 /* eslint-disable no-shadow */
 
 import { KaynChampionTransform } from '../../../declaration';
-import { Interfaces } from '@/index';
+import { Interfaces } from '@/riotentity';
 
 export class MatchDTO implements Interfaces.Match.v5.IMatchDTO {
     metadata!: Interfaces.Match.v5.IMetadataDTO;

@@ -1,4 +1,4 @@
-import { Interfaces } from '@/index';
+import { Interfaces } from '@/riotentity';
 
 export function isIApexPlayerInfoDTO(obj: any): obj is Interfaces.Challenges.v1.IApexPlayerInfoDTO {
     return (

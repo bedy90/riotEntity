@@ -38,11 +38,12 @@
     "noImplicitAny": true, /* Enable error reporting for expressions and declarations with an implied 'any' type. */
     // "alwaysStrict": true,                             /* Ensure 'use strict' is always emitted. */
     // Test PATH
-    "baseUrl": "./src",
+    "baseUrl": "./",
     "paths": {
-      "@/*": ["*"]
+      "@/*": ["*"],
+      "@/riotentity": ["./src/index"],
+      "@/riotentity/*": ["./src/*"]
     }
-
   },
   "include": [
     "./src"

@@ -1,4 +1,4 @@
-import { Interfaces, Tracking, State } from '@/index';
+import { Interfaces, Tracking, State } from '@/riotentity';
 
 export class ChallengeConfigInfoDTO implements Interfaces.Challenges.v1.IChallengeConfigInfoDTO {
     id!: number;

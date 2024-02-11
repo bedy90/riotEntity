@@ -1,4 +1,3 @@
-
 export interface ILeagueListDTO {
     leagueId: string;
     entries: ILeagueItemDTO[];

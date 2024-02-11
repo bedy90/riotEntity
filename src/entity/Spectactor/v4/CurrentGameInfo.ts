@@ -1,4 +1,4 @@
-import { Interfaces } from '@/index';
+import { Interfaces } from '@/riotentity';
 
 export class CurrentGameInfo implements Interfaces.Spectactor.v4.ICurrentGameInfo {
     gameId!: number;

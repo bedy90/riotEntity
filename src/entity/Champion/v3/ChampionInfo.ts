@@ -1,4 +1,4 @@
-import { Interfaces } from '@/index';
+import { Interfaces } from '@/riotentity';
 
 export class ChampionInfo implements Interfaces.Champion.v3.IChampionInfo {
     maxNewPlayerLevel!: number;

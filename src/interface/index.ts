@@ -10,9 +10,9 @@ export * from './Status';
 export * from './Summoner';
 
 // Current version
-export * from './Account/v1/IAccountDTO'
-export * from './Challenges/v1/IApexPlayerInfoDTO'
-export * from './Challenges/v1/IChallengeConfigInfoDTO'
+export * from './Account/v1/IAccountDTO';
+export * from './Challenges/v1/IApexPlayerInfoDTO';
+export * from './Challenges/v1/IChallengeConfigInfoDTO';
 export * from './Champion/v3/IChampionInfo';
 export * from './ChampionMasteries/v4/IChampionMasteryDTO';
 export { IPlayerDTO as IClashPlayerDTO } from './Clash/v1/IPlayerDTO';

@@ -1,4 +1,4 @@
-import { Interfaces } from '@/index';
+import { Interfaces } from '@/riotentity';
 
 export function isIChampionMasteryDTO(obj: any): obj is Interfaces.ChampionMasteries.v4.IChampionMasteryDTO {
     return (
