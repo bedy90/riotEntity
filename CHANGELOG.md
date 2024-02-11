@@ -33,13 +33,25 @@ Changelog entries are classified using the following labels _(from [keep-a-chang
 
 </details>
 
-## [v2024.1.1] - 2024-01-21
+<details>
+  <summary><strong>Unreleased</strong<</summary>
+</details>
 
+## [2024.2.1] - 2024-02-11
+Version 2024.2.1 alpha
+
+### Added
+- Implementation of a namespace system
+- Separation of files into 3 distinct groupings (Interface, Entities, Validator)
+
+### Fixed
+- ESLINT added to clean up code
+
+## [2024.1.1] - 2024-01-21
 - Project starting, first commit
 - All league of legend dans Teamfight Tactics DTO.
   
 **Breaking Changes**
-
 - Add interface for AccountDTO, SummonerDTO and LeagueEntryDTO
 
 **Non-breaking changes**

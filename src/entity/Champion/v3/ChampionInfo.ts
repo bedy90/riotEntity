@@ -1,22 +1,8 @@
-export interface IChampionInfo {
-    maxNewPlayerLevel: number;
-    freeChampionIdsForNewPlayers: Array<number>;
-    freeChampionIds: Array<number>;
-}
+import { Interfaces } from '@/riotentity';
 
-export class ChampionInfo implements IChampionInfo {
+export class ChampionInfo implements Interfaces.Champion.v3.IChampionInfo {
     maxNewPlayerLevel!: number;
     freeChampionIdsForNewPlayers!: number[];
     freeChampionIds!: number[];
-    
-}
 
-export class ChampionInfoChecker {
-    static isChampionInfoDTO(obj: any): obj is IChampionInfo {
-        return (
-            'maxNewPlayerLevel' in obj &&
-            'freeChampionIdsForNewPlayers' in obj &&
-            'freeChampionIds' in obj
-        );
-    }
 }

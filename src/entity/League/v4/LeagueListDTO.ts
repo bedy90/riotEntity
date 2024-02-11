@@ -1,35 +1,32 @@
-export interface ILeagueListDTO {
-    leagueId: string;
-    entries: Array<ILeagueItemDTO>;
-    tier: string;
-    name: string;
-    queue: string;
+import { Interfaces } from '@/riotentity';
+
+export class LeagueListDTO implements Interfaces.League.v4.ILeagueListDTO {
+    leagueId!: string;
+    entries!: Interfaces.League.v4.ILeagueItemDTO[];
+    tier!: string;
+    name!: string;
+    queue!: string;
+
 }
-export interface ILeagueItemDTO {
-    freshBlood: boolean;
-    /**
-     * 	Winning team on Summoners Rift.
-     */
-    wins: number;
-    summonerName: string;
-    miniSeries: IMiniSeriesDTO;
-    inactive: boolean;
-    veteran: boolean;
-    hotStreak: boolean;
-    rank: string;
-    leaguePoints: number;
-    /**
-     * Losing team on Summoners Rift.
-     */
-    losses: number;
-    /**
-     * Player's encrypted summonerId.
-     */
-    summonerId: string;
+
+export class LeagueItemDTO implements Interfaces.League.v4.ILeagueItemDTO {
+    freshBlood!: boolean;
+    wins!: number;
+    summonerName!: string;
+    miniSeries!: Interfaces.League.v4.IMiniSeriesDTO;
+    inactive!: boolean;
+    veteran!: boolean;
+    hotStreak!: boolean;
+    rank!: string;
+    leaguePoints!: number;
+    losses!: number;
+    summonerId!: string;
+
 }
-export interface IMiniSeriesDTO {
-    losses: number;
-    progress: string;
-    target: number;
-    wins: number;
+
+export class MiniSeriesDTO implements Interfaces.League.v4.IMiniSeriesDTO {
+    losses!: number;
+    progress!: string;
+    target!: number;
+    wins!: number;
 }
