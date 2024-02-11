@@ -1,2 +1,4 @@
 export * from './declaration';
-export * from './entity';
+export * as Entities from './entity';
+export * as Interfaces from './interface';
+export * as Validator from './validation';

@@ -1,61 +1,19 @@
-// --------------------------------------
-// Interface
-// --------------------------------------
-export interface ILeagueListDTO {
-    leagueId: string;
-    entries: Array<ILeagueItemDTO>;
-    tier: string;
-    name: string;
-    queue: string;
-}
+import { Interfaces } from '@/riotentity';
 
-export interface ILeagueItemDTO {
-    freshBlood: boolean;
-    /**
-     * 	Winning team on Summoners Rift.
-     */
-    wins: number;
-    summonerName: string;
-    miniSeries: IMiniSeriesDTO;
-    inactive: boolean;
-    veteran: boolean;
-    hotStreak: boolean;
-    rank: string;
-    leaguePoints: number;
-    /**
-     * Losing team on Summoners Rift.
-     */
-    losses: number;
-    /**
-     * Player's encrypted summonerId.
-     */
-    summonerId: string;
-}
-
-export interface IMiniSeriesDTO {
-    losses: number;
-    progress: string;
-    target: number;
-    wins: number;
-}
-
-// --------------------------------------
-// Class
-// --------------------------------------
-export class LeagueListDTO implements ILeagueListDTO {
+export class LeagueListDTO implements Interfaces.League.v4.ILeagueListDTO {
     leagueId!: string;
-    entries!: ILeagueItemDTO[];
+    entries!: Interfaces.League.v4.ILeagueItemDTO[];
     tier!: string;
     name!: string;
     queue!: string;
 
 }
 
-export class LeagueItemDTO implements ILeagueItemDTO {
+export class LeagueItemDTO implements Interfaces.League.v4.ILeagueItemDTO {
     freshBlood!: boolean;
     wins!: number;
     summonerName!: string;
-    miniSeries!: IMiniSeriesDTO;
+    miniSeries!: Interfaces.League.v4.IMiniSeriesDTO;
     inactive!: boolean;
     veteran!: boolean;
     hotStreak!: boolean;
@@ -66,48 +24,9 @@ export class LeagueItemDTO implements ILeagueItemDTO {
 
 }
 
-export class MiniSeriesDTO implements IMiniSeriesDTO {
+export class MiniSeriesDTO implements Interfaces.League.v4.IMiniSeriesDTO {
     losses!: number;
     progress!: string;
     target!: number;
     wins!: number;
-}
-
-// --------------------------------------
-// Checker
-// --------------------------------------
-export class LeagueListChecker {
-    static isLeagueListDTO(obj: any): obj is ILeagueListDTO {
-        return (
-            'leagueId' in obj &&
-            'entries' in obj &&
-            'tier' in obj &&
-            'name' in obj &&
-            'queue' in obj
-        );
-    }
-    static isLeagueItemDTO(obj: any): obj is ILeagueItemDTO {
-        return (
-            'freshBlood' in obj &&
-            'wins' in obj &&
-            'summonerName' in obj &&
-            'miniSeries' in obj &&
-            'inactive' in obj &&
-            'veteran' in obj &&
-            'hotStreak' in obj &&
-            'rank' in obj &&
-            'leaguePoints' in obj &&
-            'losses' in obj &&
-            'summonerId' in obj
-        );
-    }
-
-    static isMiniSeriesDTO(obj: any): obj is IMiniSeriesDTO {
-        return (
-            'losses' in obj &&
-            'progress' in obj &&
-            'target' in obj &&
-            'wins' in obj
-        );
-    }
 }

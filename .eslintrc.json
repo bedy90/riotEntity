@@ -1,18 +1,25 @@
 {
-	"extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
+	"extends": [
+		"eslint:recommended", 
+		"plugin:@typescript-eslint/recommended",
+		"plugin:@typescript-eslint/stylistic"],
 	"parser": "@typescript-eslint/parser",
-	"plugins": ["@typescript-eslint"],
+	"plugins": [
+		"@typescript-eslint"
+	],
 	"env": {
 		"node": true,
 		"es6": true
 	},
 	"parserOptions": {
-		"ecmaVersion": 2022
+		"ecmaVersion": 2022,
+		"sourceType": "module"
 	},
 	"ignorePatterns": ["/build/**", "/test/*"],
 	"rules": {
 		"@typescript-eslint/no-explicit-any": "off",
 		"@typescript-eslint/no-non-null-assertion": "off",
+		"@typescript-eslint/no-namespace": "off",
 		"quotes": ["error", "single"],
 		"no-var": "error",
 		"prefer-const": "error",
