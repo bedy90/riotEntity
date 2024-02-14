@@ -1,6 +1,6 @@
 {
   "name": "@bedy90/riotentity",
-  "version": "2024.2.1",
+  "version": "2024.2.2",
   "description": "Bedy90 - Riot Entity",
   "main": "build/index.js",
   "types": "./build/index.d.ts",
@@ -14,6 +14,7 @@
     "npm:refreshLock": "npm i --package-lock-only",
     "npm:unUsedPackage": "npm prune",
     "npm:cleanDevPackage": "npm prune --production",
+    "== Pack ==": "",
     "npm:pack": "npm pack",
     "local:pack": "npm run compile:npx && npm pack",
     "local:cleanPack": "npm run compile:rim && npm pack",

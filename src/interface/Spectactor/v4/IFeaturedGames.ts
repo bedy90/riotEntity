@@ -1,3 +1,5 @@
+import { GameMode, GameType } from "@/src/declaration";
+
 export interface IFeaturedGames {
     /**
      * The list of featured games
@@ -13,7 +15,7 @@ export interface IFeaturedGameInfo {
     /**
      * The game mode (Legal values: CLASSIC, ODIN, ARAM, TUTORIAL, ONEFORALL, ASCENSION, FIRSTBLOOD, KINGPORO)
      */
-    gameMode: string;
+    gameMode: GameMode; // string;
     /**
      * The amount of time in seconds that has passed since the game started
      */
@@ -25,7 +27,7 @@ export interface IFeaturedGameInfo {
     /**
      * The game type (Legal values: CUSTOM_GAME, MATCHED_GAME, TUTORIAL_GAME)
      */
-    gameType: string;
+    gameType: GameType; // string;
     /**
      * Banned champion information
      */

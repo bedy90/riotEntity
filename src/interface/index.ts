@@ -25,5 +25,6 @@ export * from './Match/v5/IMatchDTO';
 export * from './Match/v5/IMatchTimelineDTO';
 export * from './Spectactor/v4/ICurrentGameInfo';
 export * from './Spectactor/v4/IFeaturedGames';
-export * from './Status/v3/IShardStatus';
+// export * from './Status/v3/IShardStatus';
+export * from './Status/v4/IStatus';
 export * from './Summoner/v4/ISummonerDTO';
