@@ -1,5 +1,10 @@
 export interface IChampionMasteryDTO {
     /**
+    * Player Universal Unique Identifier
+    * Length : 78
+    */
+    puuid: string;
+    /**
      * Number of points needed to achieve next level. Zero if player reached maximum champion level for this champion.
      */
     championPointsUntilNextLevel: number;

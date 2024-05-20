@@ -15,7 +15,7 @@
 		"ecmaVersion": 2022,
 		"sourceType": "module"
 	},
-	"ignorePatterns": ["/build/**", "/test/*"],
+	"ignorePatterns": ["/build/**", "/test/*", "/distPackage/**"],
 	"rules": {
 		"@typescript-eslint/no-explicit-any": "off",
 		"@typescript-eslint/no-non-null-assertion": "off",

@@ -22,4 +22,6 @@ export interface IAccountDTO {
      * [Any Unicode letter is supported]
      */
     tagLine: string;
+
+    // validate(): boolean;
 }

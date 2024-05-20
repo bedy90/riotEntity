@@ -1,4 +1,4 @@
-import { Interfaces } from '@/riotentity';
+import { Interfaces, GameMode, GameType } from '@/riotentity';
 
 export class FeaturedGames implements Interfaces.Spectactor.v4.IFeaturedGames {
     gameList!: Interfaces.Spectactor.v4.IFeaturedGameInfo[];
@@ -6,10 +6,10 @@ export class FeaturedGames implements Interfaces.Spectactor.v4.IFeaturedGames {
 }
 
 export class FeaturedGameInfo implements Interfaces.Spectactor.v4.IFeaturedGameInfo {
-    gameMode!: string;
+    gameMode!: GameMode;
     gameLength!: number;
     mapId!: number;
-    gameType!: string;
+    gameType!: GameType;
     bannedChampions!: Interfaces.Spectactor.v4.IBannedChampion[];
     gameId!: number;
     observers!: Interfaces.Spectactor.v4.IObserver;
