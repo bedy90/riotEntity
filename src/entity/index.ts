@@ -13,8 +13,8 @@ export * from './Summoner';
 // Current version
 export * from './Account/v1/AccountDTO';
 // TODO: Why not working
-// export * from './LoL_Challenges/v1/ApexPlayerInfoDTO';
-// export * from './LoL_Challenges/v1/ChallengeConfigInfoDTO';
+export * from './LOL_Challenges/v1/ApexPlayerInfoDTO';
+export * from './LOL_Challenges/v1/ChallengeConfigInfoDTO';
 export * from './Champion/v3/ChampionInfo';
 export * from './ChampionMasteries/v4/ChampionMasteryDTO';
 export { PlayerDTO as ClashPlayerDTO } from './Clash/v1/PlayerDTO';
