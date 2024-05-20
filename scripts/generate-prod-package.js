@@ -30,4 +30,12 @@ try {
 
 // Écrire le package-prod.json
 fs.writeFileSync(filePath, JSON.stringify(prodPackage, null, 2), 'utf8');
-console.log('package-prod.json généré avec succès');
+console.log('(PROD) package.json généré avec succès dans le répertoire build');
+
+try {
+  fs.existsSync(filePath);
+  console.log('Le fichier « build/package.json » existe.')
+} catch (e) {
+  console.error('Erreur lors de la validation du fichier (PROD) package.json :', e);
+  process.exit(1);
+}
