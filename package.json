@@ -1,12 +1,13 @@
 {
   "name": "@bedy90/riotentity",
-  "version": "2024.5.1",
+  "version": "2024.5.2",
   "description": "Bedy90 - Riot Entity",
   "main": "build/index.js",
   "types": "./build/index.d.ts",
   "scripts": {
     "== Run ==": "",
     "run:test": "npx ts-node src/manual_test.ts",
+    "build:packageProd": "node scripts/generate-prod-package.js",
     "== Compile ==": "",
     "compile:npx": "npx tsc",
     "compile:rim": "rimraf ./build && tsc",
@@ -26,8 +27,9 @@
     "eslintFix": "npx eslint . --fix"
   },
   "files": [
-    "build/**",
-    "changelog.md"
+    "build/**/*",
+    "changelog.md",
+    "readme.md"
   ],
   "engines": {
     "node": ">=18.0.0"
@@ -50,6 +52,7 @@
     "@typescript-eslint/eslint-plugin": "^6.20.0",
     "@typescript-eslint/parser": "^6.20.0",
     "eslint": "^8.56.0",
+    "path": "^0.12.7",
     "rimraf": "^5.0.5",
     "ts-node": "^10.9.2",
     "tsup": "^8.0.2",

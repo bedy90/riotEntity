@@ -37,11 +37,14 @@ Changelog entries are classified using the following labels _(from [keep-a-chang
   <summary><strong>Unreleased</strong<</summary>
 </details>
 
-## [2024.5.1] - 2024-05-20
-Version 2024.5.1 alpha
+## [2024.5.2] - 2024-05-20
+Version 2024.5.2 alpha
 
 ### Added
 - Fix Interface name, Class name, Validation Name
+
+### Changed
+ - Package compilation for remove « build » folder on tarball archives
 
 ### Fixed
 - ESLINT added to clean up code
