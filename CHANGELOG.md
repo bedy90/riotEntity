@@ -37,6 +37,15 @@ Changelog entries are classified using the following labels _(from [keep-a-chang
   <summary><strong>Unreleased</strong<</summary>
 </details>
 
+## [2024.5.1] - 2024-05-20
+Version 2024.5.1 alpha
+
+### Added
+- Fix Interface name, Class name, Validation Name
+
+### Fixed
+- ESLINT added to clean up code
+- 
 ## [2024.2.1] - 2024-02-11
 Version 2024.2.1 alpha
 

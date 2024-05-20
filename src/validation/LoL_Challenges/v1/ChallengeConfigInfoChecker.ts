@@ -1,6 +1,6 @@
 import { Interfaces } from '@/riotentity';
 
-export function isIChallengeConfigInfoDTO(obj: any): obj is Interfaces.Challenges.v1.IChallengeConfigInfoDTO {
+export function isIChallengeConfigInfoDTO(obj: any): obj is Interfaces.LoL_Challenges.v1.IChallengeConfigInfoDTO {
     return (
         'id' in obj &&
         'localizedNames' in obj &&

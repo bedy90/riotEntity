@@ -1,4 +1,4 @@
-import { Level } from "@/src/declaration";
+import { Level } from '@/src/declaration';
 
 // TODO: A tester
 
@@ -16,20 +16,14 @@ export interface ChallengePercentiles {
     percentiles : ChallengePercentilesType
 }
 
-type ChallengePercentilesType = {
-    // Map[Long, Map[Integer, Map[Level, Double]]]
-    [key: string]: Map<number, ChallengePercentileType>
-};
+type ChallengePercentilesType = Record<string, Map<number, ChallengePercentileType>>;
 
 /**
- * Challenge percentile for a specific challenge 
+ * Challenge percentile for a specific challenge
  */
-type ChallengePercentileType = {
-    // Map[Long, Map[Integer, Map[Level, Double]]]
-    [key: string]: Map<Level, number>
-};
+type ChallengePercentileType = Record<string, Map<Level, number>>;
 /*
-    Long = bigint 
+    Long = bigint
     Integer = number
     Double = number
 */

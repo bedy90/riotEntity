@@ -1,6 +1,6 @@
 {
   "name": "@bedy90/riotentity",
-  "version": "2024.2.2",
+  "version": "2024.5.1",
   "description": "Bedy90 - Riot Entity",
   "main": "build/index.js",
   "types": "./build/index.d.ts",
@@ -10,6 +10,7 @@
     "== Compile ==": "",
     "compile:npx": "npx tsc",
     "compile:rim": "rimraf ./build && tsc",
+    "ts:package": "tsup --config tsup.config.ts",
     "== DEV ==": "",
     "npm:refreshLock": "npm i --package-lock-only",
     "npm:unUsedPackage": "npm prune",
@@ -51,6 +52,7 @@
     "eslint": "^8.56.0",
     "rimraf": "^5.0.5",
     "ts-node": "^10.9.2",
+    "tsup": "^8.0.2",
     "typescript": "^5.3.3"
   }
 }

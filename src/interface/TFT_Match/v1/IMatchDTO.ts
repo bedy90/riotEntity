@@ -58,7 +58,7 @@ export interface IParticipantDTO {
     /**
      * 	Participant's companion.
      */
-    companion: ICompanionDto;
+    companion: ICompanionDTO;
     /**
      * Gold left after participant was eliminated.
      */
@@ -91,21 +91,21 @@ export interface IParticipantDTO {
     /**
      * A complete list of traits for the participant's active units.
      */
-    traits: ITraitDto[];
+    traits: ITraitDTO[];
     /**
      * A list of active units for the participant.
      */
-    units: IUnitDto[];
+    units: IUnitDTO[];
 }
 
-export interface ICompanionDto {
+export interface ICompanionDTO {
     content_ID: string;
     item_ID: number;
     skin_ID: number;
     species: string;
 }
 
-export interface ITraitDto {
+export interface ITraitDTO {
     /**
      * 	Trait name.
      */
@@ -129,7 +129,7 @@ export interface ITraitDto {
 
 }
 
-export interface IUnitDto {
+export interface IUnitDTO {
     /**
      * A list of the unit's items. Please refer to the Teamfight Tactics documentation for item ids.
      */

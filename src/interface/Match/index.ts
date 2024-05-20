@@ -17,7 +17,7 @@ export namespace Match {
         export import IPerkStyleDTO = PerksInterface.IPerkStyleDTO;
         export import IPerkStyleSelectionDTO = PerksInterface.IPerkStyleSelectionDTO;
         export import IPerksDTO = PerksInterface.IPerksDTO;
-    
+
         export import IMatchTimelineDto = TimeLineInterface.IMatchTimelineDto;
     }
 }

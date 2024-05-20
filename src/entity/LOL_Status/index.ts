@@ -1,6 +1,6 @@
 import * as Shards from './v3/ShardStatus';
 
-export namespace Status {
+export namespace LoL_Status {
     export namespace v3 {
         export import Incident = Shards.Incident;
         export import Message = Shards.Message;

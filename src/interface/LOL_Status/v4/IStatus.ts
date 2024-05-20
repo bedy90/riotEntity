@@ -1,4 +1,4 @@
-import { MaintenanceStatus, IncidentSeverity, Platforms, PublishLocations } from "@/src/declaration";
+import { MaintenanceStatus, IncidentSeverity, Platforms, PublishLocations } from '@/src/declaration';
 
 export interface IPlatformDataDto {
     id: string,

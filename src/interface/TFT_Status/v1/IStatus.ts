@@ -1,6 +1,6 @@
-import { MaintenanceStatus, IncidentSeverity, Platforms, PublishLocations } from "@/src/declaration";
+import { MaintenanceStatus, IncidentSeverity, Platforms, PublishLocations } from '@/src/declaration';
 
-export interface IPlatformDataDto {
+export interface IPlatformDataDTO {
     id: string,
     name: string,
     locales: string[],
@@ -18,8 +18,8 @@ export interface IStatusDTO {
      * (Legal values: info, warning, critical)
      */
     incident_severity: IncidentSeverity, // string,
-    titles: IContentDto[],
-    updates: IUpdateDto[],
+    titles: IContentDTO[],
+    updates: IUpdateDTO[],
     created_at: string,
     archive_at: string,
     updated_at: string,
@@ -29,12 +29,12 @@ export interface IStatusDTO {
     platforms: Platforms[] // string[]
 }
 
-export interface IContentDto {
+export interface IContentDTO {
     local: string,
     content: string
 }
 
-export interface IUpdateDto {
+export interface IUpdateDTO {
     id: number;
     author: string,
     publish: boolean,
@@ -42,7 +42,7 @@ export interface IUpdateDto {
      * (Legal values: riotclient, riotstatus, game)
      */
     publish_locations: PublishLocations[], // string[]
-    translations: IContentDto[],
+    translations: IContentDTO[],
     created_at: string,
     updated_at: string
 }

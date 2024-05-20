@@ -1,6 +1,6 @@
 import { Interfaces, Tracking, State } from '@/riotentity';
 
-export class ChallengeConfigInfoDTO implements Interfaces.Challenges.v1.IChallengeConfigInfoDTO {
+export class ChallengeConfigInfoDTO implements Interfaces.LoL_Challenges.v1.IChallengeConfigInfoDTO {
     id!: number;
     localizedNames!: Map<string, Map<string, string>>;
     state!: State;
@@ -9,5 +9,4 @@ export class ChallengeConfigInfoDTO implements Interfaces.Challenges.v1.IChallen
     endTimestamp!: number;
     leaderboard!: boolean;
     thresholds!: Map<string, number>;
-
 }

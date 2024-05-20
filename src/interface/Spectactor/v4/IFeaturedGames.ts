@@ -1,4 +1,4 @@
-import { GameMode, GameType } from "@/src/declaration";
+import { GameMode, GameType } from '@/src/declaration';
 
 export interface IFeaturedGames {
     /**

@@ -1,4 +1,3 @@
-
 export interface IMiniSeriesDTO {
     losses: number;
     progress: string;
