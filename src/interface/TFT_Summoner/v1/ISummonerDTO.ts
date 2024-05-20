@@ -13,6 +13,7 @@ export interface ISummonerDTO {
     revisionDate?: number;
     /**
      * Summoner name.
+     * @deprecated November 20, 2023
      */
     name: string;
     /**
