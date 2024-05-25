@@ -27,7 +27,7 @@ const leagueSummonerInterface: Interfaces.Summoner.v4.ISummonerDTO = {
     profileIconId: 1,
     summonerLevel: 1,
     puuid: 'abc',
-    revisionDate: 111,
+    revisionDate: 111
 };
 
 const invalidObj = {
@@ -43,11 +43,11 @@ accEntity.puuid = 'b';
 accEntity.tagLine = 'c';
 
 const accSummoner: Entities.Summoner.v4.SummonerDTO = new Entities.Summoner.v4.SummonerDTO();
-accSummoner.accountId = '111a';
-accSummoner.id = 'avavaa';
-accSummoner.profileIconId = 1;
-accSummoner.summonerLevel = 1;
-accSummoner.puuid = 'abc';
+accSummoner.accountId= '111a';
+accSummoner.id= 'avavaa';
+accSummoner.profileIconId= 1;
+accSummoner.summonerLevel= 1;
+accSummoner.puuid= 'abc';
 accSummoner.revisionDate = 111;
 
 console.log(`accEntity : ${JSON.stringify(accEntity)}`);

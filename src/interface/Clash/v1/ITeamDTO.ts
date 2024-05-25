@@ -1,12 +1,5 @@
-import { Interfaces } from '@/riotentity';
+import { IPlayerDTO } from './IPlayerDTO';
 
-/**
- * Interface ITeamDTO
- *
- * @namespace Clash
- * @version v1
- * @name ITeamDTO
- */
 export interface ITeamDTO {
     id: string;
 
@@ -28,5 +21,5 @@ export interface ITeamDTO {
     /**
      * 	Team members.
      */
-    players: Interfaces.Clash.v1.IPlayerDTO[];
+    players: IPlayerDTO[];
 }

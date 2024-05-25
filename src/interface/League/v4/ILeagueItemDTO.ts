@@ -1,12 +1,5 @@
-import { Interfaces } from '@/riotentity';
+import { IMiniSeriesDTO } from './IMiniSeriesDTO';
 
-/**
- * Interface ILeagueItemDTO
- *
- * @namespace League
- * @version v4
- * @name ILeagueItemDTO
- */
 export interface ILeagueItemDTO {
     freshBlood: boolean;
 
@@ -15,7 +8,7 @@ export interface ILeagueItemDTO {
      */
     wins: number;
 
-    miniSeries: Interfaces.League.v4.IMiniSeriesDTO;
+    miniSeries: IMiniSeriesDTO;
 
     inactive: boolean;
 
@@ -37,3 +30,4 @@ export interface ILeagueItemDTO {
      */
     summonerId: string;
 }
+

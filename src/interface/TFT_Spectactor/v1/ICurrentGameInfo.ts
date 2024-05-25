@@ -6,52 +6,42 @@ export interface ICurrentGameInfo {
      * The ID of the game
      */
     gameId: number;
-    
     /**
      * The game type
      */
     gameType: string;
-
     /**
      * The game start time represented in epoch milliseconds
      */
     gameStartTime: number;
-
     /**
      * 	The ID of the map
      */
     mapId: number;
-
     /**
      * 	The amount of time in seconds that has passed since the game started
      */
     gameLength: number;
-
     /**
      * The ID of the platform on which the game is being played
      */
     platformId: string;
-
     /**
      * The game mode
      */
     gameMode: string;
-
     /**
      * 	Banned champion information
      */
     bannedChampions: IBannedChampion[];
-
     /**
      * The queue type (queue types are documented on the Game Constants page)
      */
     gameQueueConfigId: number;
-
     /**
      * 	The observer information
      */
     observers: IObserver;
-
     /**
      * 	The participant information
      */
@@ -77,7 +67,7 @@ export interface ICurrentGameParticipant {
     /**
      * 	Flag indicating whether or not this participant is a bot
      */
-    bot: boolean;
+    // bot: boolean;
 
     /**
      * The team ID of this participant, indicating the participant's team
@@ -93,6 +83,7 @@ export interface ICurrentGameParticipant {
      * 	The encrypted puuid of this participant
      */
     puuid: string;
+
 
     /**
      * 	The ID of the first summoner spell used by this participant
@@ -132,7 +123,7 @@ export interface IGameCustomizationObject {
      * Category identifier for Game Customization
      */
     category: string;
-
+    
     /**
      * 	Game Customization content
      */

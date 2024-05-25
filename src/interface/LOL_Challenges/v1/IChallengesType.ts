@@ -1,3 +1,6 @@
+/**
+ * @NotImplemented
+ */
 import { Level } from '@/src/declaration';
 
 /**

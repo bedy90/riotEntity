@@ -1,11 +1,5 @@
-import { Interfaces } from '@/riotentity';
-/**
- * Interface ITournamentDTO
- *
- * @namespace Clash
- * @version v1
- * @name ITournamentDTO
- */
+import { ITournamentPhaseDTO } from './ITournamentPhaseDTO';
+
 export interface ITournamentDTO {
     id: number;
 
@@ -18,5 +12,5 @@ export interface ITournamentDTO {
     /**
      * 	Tournament phase
      */
-    schedule: Interfaces.Clash.v1.ITournamentPhaseDTO[];
+    schedule: ITournamentPhaseDTO[];
 }
