@@ -5,11 +5,10 @@ export function isISummonerDTO(obj: any): obj is Interfaces.Summoner.v4.ISummone
         'accountId' in obj &&
         'profileIconId' in obj &&
         'revisionDate' in obj &&
-        'name' in obj &&
         'id' in obj &&
         'puuid' in obj &&
         'summonerLevel' in obj &&
-        Object.keys(obj).length === 7
+        Object.keys(obj).length === 6
     );
 
     return hasFields;

@@ -1,6 +1,6 @@
 import { Interfaces } from '@/riotentity';
 
-export function isIChampionMasteryDTO(obj: any): obj is Interfaces.ChampionMasteries.v4.IChampionMasteryDTO {
+export function isIChampionMasteryDTO(obj: any): obj is Interfaces.ChampionMastery.v4.IChampionMasteryDTO {
     return (
         'championPointsUntilNextLevel' in obj &&
         'chestGranted' in obj &&

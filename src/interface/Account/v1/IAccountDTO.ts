@@ -8,13 +8,15 @@ export interface IAccountDTO {
      * Length : 78
      */
     puuid: string;
+
     /**
      * MinLength : 3
      * MaxLength : 16
      * This field may be excluded from the response if the account doesn't have a gameName.
-     *  Do not use the # symbol. This is the separator between Game Name and Tagline.
+     * Do not use the # symbol. This is the separator between Game Name and Tagline.
      */
     gameName: string;
+
     /**
      * MinLength : 3
      * MaxLength : 5
@@ -22,6 +24,4 @@ export interface IAccountDTO {
      * [Any Unicode letter is supported]
      */
     tagLine: string;
-
-    // validate(): boolean;
 }

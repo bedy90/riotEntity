@@ -12,12 +12,12 @@ delete prodPackage.devDependencies;
 
 // Autres modifications souhaitées, par exemple :
 prodPackage.scripts = {
-  start: 'node index.js'
+  start: 'node index.js',
 };
 
-prodPackage.main = "index.js";
-prodPackage.types = "index.d.ts";
-prodPackage.files = ["**", "changelog.md", "readme.md"];
+prodPackage.main = 'index.js';
+prodPackage.types = 'index.d.ts';
+prodPackage.files = ['**', 'changelog.md', 'readme.md'];
 
 // Créer le fichier s'il n'existe pas
 try {
@@ -38,7 +38,7 @@ try {
 
 try {
   fs.existsSync(filePath);
-  console.log('Le fichier « build/package.json » existe.')
+  console.log('Le fichier « build/package.json » existe.');
 } catch (e) {
   console.error('Erreur lors de la validation du fichier (PROD) package.json :', e);
   process.exit(1);
@@ -48,15 +48,15 @@ try {
 try {
   let destinationFolder = path.join(__dirname, '..', 'build', 'README.md');
   let markdownFile = path.join(__dirname, '..', 'README.md');
-  fs.copyFileSync(markdownFile, destinationFolder)
+  fs.copyFileSync(markdownFile, destinationFolder);
   fs.existsSync(markdownFile);
-  console.log('Copie du fichier « README.md ».')
+  console.log('Copie du fichier « README.md ».');
 
   destinationFolder = path.join(__dirname, '..', 'build', 'CHANGELOG.md');
   markdownFile = path.join(__dirname, '..', 'CHANGELOG.md');
-  fs.copyFileSync(markdownFile, destinationFolder)
+  fs.copyFileSync(markdownFile, destinationFolder);
   fs.existsSync(markdownFile);
-  console.log('Copie du fichier « CHANGELOG.md ».')
+  console.log('Copie du fichier « CHANGELOG.md ».');
 
 } catch (e) {
   console.error('Erreur lors de la copie des fichiers Markdown :', e);

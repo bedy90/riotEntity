@@ -14,7 +14,7 @@ export interface IFeaturedGames {
 
 export interface IFeaturedGameInfo {
     /**
-     * The game mode (Legal values: CLASSIC, ODIN, ARAM, TUTORIAL, ONEFORALL, ASCENSION, FIRSTBLOOD, KINGPORO)
+     * The game mode (Legal values: CLASSIC, ODIN, ARAM, TUTORIAL, ONEFORALL, ASCENSION, FIRSTBLOOD, KINGPORO, TFT)
      */
     gameMode: GameMode | string;
 
@@ -53,15 +53,16 @@ export interface IFeaturedGameInfo {
      */
     gameQueueConfigId: number;
 
-    // /**
-    //  * The game start time represented in epoch milliseconds
-    //  */
+    /**
+     * The game start time represented in epoch milliseconds
+     */
     // gameStartTime: number;
 
     /**
      * 	The participant information
      */
     participants: IParticipant[];
+
     /**
      * The ID of the platform on which the game is being played
      */
@@ -96,7 +97,7 @@ export interface IParticipant {
     /**
      * Flag indicating whether or not this participant is a bot
      */
-    bot: boolean;
+    // bot: boolean;
 
     /**
      * The ID of the second summoner spell used by this participant
@@ -127,7 +128,7 @@ export interface IParticipant {
      * The team ID of this participant, indicating the participant's team
      */
     teamId: number;
-    
+
     /**
      * The ID of the first summoner spell used by this participant
      */

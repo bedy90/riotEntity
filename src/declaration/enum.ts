@@ -85,7 +85,7 @@ export enum Platforms {
     IOS = 'ios',
     PS4 = 'ps4',
     XBOX_ONE = 'xbone',
-    SWITCH= 'switch'
+    SWITCH = 'switch'
 }
 
 export enum PublishLocations {
@@ -97,18 +97,28 @@ export enum PublishLocations {
 export enum GameMode {
     CLASSIC = 'CLASSIC',
     ODIN = 'ODIN',
-    ARAM ='ARAM',
+    ARAM = 'ARAM',
     TUTORIAL = 'TUTORIAL',
-    ONEFORALL ='ONEFORALL',
-    ASCENSION='ASCENSION',
-    FIRSTBLOOD='FIRSTBLOOD',
-    KINGPORO ='KINGPORO'
+    ONEFORALL = 'ONEFORALL',
+    ASCENSION = 'ASCENSION',
+    FIRSTBLOOD = 'FIRSTBLOOD',
+    KINGPORO = 'KINGPORO',
+    TFT = 'TFT'
 }
 
 export enum GameType {
     CUSTOM_GAME = 'CUSTOM_GAME',
     MATCHED_GAME = 'MATCHED_GAME',
     TUTORIAL_GAME = 'TUTORIAL_GAME'
+}
+
+export enum QueueType {
+    UNRANKED = 'Unranked',
+    RANKED_SOLO = 'RANKED_SOLO_5x5',
+    RANKED_TEAM = 'RANKED_TEAM_5x5',
+    RANKED_TFT = 'RANKED_TFT',
+    RANKED_FLEX_SOLO = 'RANKED_FLEX_SR',
+    RANKED_FLEX_TEAM = 'RANKED_FLEX_TT'
 }
 
 export enum TraitStyle {
