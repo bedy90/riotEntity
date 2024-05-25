@@ -1,5 +1,13 @@
+/**
+ * @NotImplemented
+ */
 export interface IActiveShardDTO {
-    puuid: number,
-    game: string,
-    activeShard: string
+    puuid: number;
+
+    /**
+     * lor or val
+     */
+    game: string;
+
+    activeShard: string;
 }
