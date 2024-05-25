@@ -1,4 +1,3 @@
-// export * from './v4/ISummonerDTO';
 import * as SummonerInterface from './v1/ISummonerDTO';
 
 export namespace TFT_Summoner {
