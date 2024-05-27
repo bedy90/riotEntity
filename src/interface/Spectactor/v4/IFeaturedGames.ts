@@ -1,135 +1,28 @@
-import { GameMode, GameType } from '@/src/declaration';
+import { IFeaturedGameInfo_Global } from '../../_Global/IFeaturedGameInfo_Global';
+import { IFeaturedGames_Global } from '../../_Global/IFeaturedGames_Global';
+import { IBannedChampion_Global } from '../../_Global/IBannedChampion_Global';
+import { IObserver_Global } from '../../_Global/IObserver_Global';
+import { IParticipant_Global } from '../../_Global/IParticipant_Global';
 
-export interface IFeaturedGames {
-    /**
-     * The list of featured games
-     */
-    gameList: IFeaturedGameInfo[];
+export interface IFeaturedGames extends IFeaturedGames_Global  {
 
-    /**
-     * 	The suggested interval to wait before requesting FeaturedGames again
-     */
-    clientRefreshInterval: number;
 }
 
-export interface IFeaturedGameInfo {
-    /**
-     * The game mode (Legal values: CLASSIC, ODIN, ARAM, TUTORIAL, ONEFORALL, ASCENSION, FIRSTBLOOD, KINGPORO)
-     */
-    gameMode: GameMode | string;
+export interface IFeaturedGameInfo extends IFeaturedGameInfo_Global {
 
-    /**
-     * The amount of time in seconds that has passed since the game started
-     */
-    gameLength: number;
-
-    /**
-     * The ID of the map
-     */
-    mapId: number;
-
-    /**
-     * The game type (Legal values: CUSTOM_GAME, MATCHED_GAME, TUTORIAL_GAME)
-     */
-    gameType: GameType | string;
-
-    /**
-     * Banned champion information
-     */
-    bannedChampions: IBannedChampion[];
-
-    /**
-     * The ID of the game
-     */
-    gameId: number;
-
-    /**
-     * The observer information
-     */
-    observers: IObserver;
-
-    /**
-     * The queue type (queue types are documented on the Game Constants page)
-     */
-    gameQueueConfigId: number;
-
-    // /**
-    //  * The game start time represented in epoch milliseconds
-    //  */
-    // gameStartTime: number;
-
-    /**
-     * 	The participant information
-     */
-    participants: IParticipant[];
-    /**
-     * The ID of the platform on which the game is being played
-     */
-    platformId: string;
 }
 
-export interface IBannedChampion {
-    /**
-     * 	The turn during which the champion was banned
-     */
-    pickTurn: number;
+export interface IBannedChampion extends IBannedChampion_Global {
 
-    /**
-     * The ID of the banned champion
-     */
-    championId: number;
-
-    /**
-     * The ID of the team that banned the champion
-     */
-    teamId: number;
 }
 
-export interface IObserver {
-    /**
-     * Key used to decrypt the spectator grid game data for playback
-     */
-    encryptionKey: string;
+export interface IObserver extends IObserver_Global {
+
 }
 
-export interface IParticipant {
+export interface IParticipant extends IParticipant_Global {
     /**
      * Flag indicating whether or not this participant is a bot
      */
     bot: boolean;
-
-    /**
-     * The ID of the second summoner spell used by this participant
-     */
-    spell2Id: number;
-
-    /**
-     * The ID of the profile icon used by this participant
-     */
-    profileIconId: number;
-
-    /**
-     * Encrypted summoner ID of this participant
-     */
-    summonerId: string;
-
-    /**
-     * 	Encrypted puuid of this participant
-     */
-    puuid: string;
-
-    /**
-     * The ID of the champion played by this participant
-     */
-    championId: number;
-
-    /**
-     * The team ID of this participant, indicating the participant's team
-     */
-    teamId: number;
-    
-    /**
-     * The ID of the first summoner spell used by this participant
-     */
-    spell1Id: number;
 }

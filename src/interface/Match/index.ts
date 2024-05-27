@@ -4,6 +4,7 @@ import * as PerksInterface from './v5/IPerksDTO';
 
 export namespace Match {
     export namespace v5 {
+        // TODO: Generate global interface
         export import IBanDTO = MatchInterface.IBanDTO;
         export import IInfoDTO = MatchInterface.IInfoDTO;
         export import IMatchDTO = MatchInterface.IMatchDTO;
