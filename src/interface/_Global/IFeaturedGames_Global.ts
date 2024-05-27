@@ -1,12 +1,5 @@
-import { IFeaturedGameInfo_Global } from './IFeaturedGameInfo_Global';
+import { IFeaturedGameInfo_Global } from "./IFeaturedGameInfo_Global";
 
-/**
- * Interface IFeaturedGames_Global
- *
- * @namespace Global
- * @version v1
- * @name IFeaturedGames_Global
- */
 export interface IFeaturedGames_Global {
     /**
      * The list of featured games

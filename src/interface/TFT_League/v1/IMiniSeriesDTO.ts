@@ -1,9 +1,5 @@
-export interface IMiniSeriesDTO {
-    losses: number;
+import { IMiniSeriesDTO_Global } from "../../_Global/IMiniSeriesDTO_global";
 
-    progress: string;
+export interface IMiniSeriesDTO extends IMiniSeriesDTO_Global {
 
-    target: number;
-    
-    wins: number;
 }

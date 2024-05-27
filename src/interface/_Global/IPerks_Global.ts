@@ -1,10 +1,3 @@
-/**
- * Interface IPerks_Global
- *
- * @namespace Global
- * @version v1
- * @name IPerks_Global
- */
 export interface IPerks_Global {
     /**
      * IDs of the perks/runes assigned.

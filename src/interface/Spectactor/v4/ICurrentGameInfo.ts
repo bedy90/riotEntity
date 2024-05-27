@@ -1,140 +1,20 @@
-import { IBannedChampion, IObserver } from './IFeaturedGames';
+import { ICurrentGameInfo_Global } from '../../_Global/ICurrentGameInfo_Global';
+import { ICurrentGameParticipant_Global } from '../../_Global/ICurrentGameParticipant_Global';
+import { IGameCustomizationObject_Global } from '../../_Global/IGameCustomizationObject_Global';
+import { IPerks_Global } from '../../_Global/IPerks_Global';
 
-
-export interface ICurrentGameInfo {
-    /**
-     * The ID of the game
-     */
-    gameId: number;
-    
-    /**
-     * The game type
-     */
-    gameType: string;
-
-    /**
-     * The game start time represented in epoch milliseconds
-     */
-    gameStartTime: number;
-
-    /**
-     * 	The ID of the map
-     */
-    mapId: number;
-
-    /**
-     * 	The amount of time in seconds that has passed since the game started
-     */
-    gameLength: number;
-
-    /**
-     * The ID of the platform on which the game is being played
-     */
-    platformId: string;
-
-    /**
-     * The game mode
-     */
-    gameMode: string;
-
-    /**
-     * 	Banned champion information
-     */
-    bannedChampions: IBannedChampion[];
-
-    /**
-     * The queue type (queue types are documented on the Game Constants page)
-     */
-    gameQueueConfigId: number;
-
-    /**
-     * 	The observer information
-     */
-    observers: IObserver;
-
-    /**
-     * 	The participant information
-     */
-    participants: ICurrentGameParticipant[];
+export interface ICurrentGameInfo extends ICurrentGameInfo_Global {
+ 
 }
 
-export interface ICurrentGameParticipant {
-    /**
-     * 	The ID of the champion played by this participant
-     */
-    championId: number;
-
-    /**
-     * Perks / Runes Reforged Information
-     */
-    perks: IPerks;
-
-    /**
-     * The ID of the profile icon used by this participant
-     */
-    profileIconId: number;
-
-    /**
-     * 	Flag indicating whether or not this participant is a bot
-     */
+export interface ICurrentGameParticipant extends ICurrentGameParticipant_Global {
     bot: boolean;
-
-    /**
-     * The team ID of this participant, indicating the participant's team
-     */
-    teamId: number;
-
-    /**
-     * The encrypted summoner ID of this participant
-     */
-    summonerId: string;
-
-    /**
-     * 	The encrypted puuid of this participant
-     */
-    puuid: string;
-
-    /**
-     * 	The ID of the first summoner spell used by this participant
-     */
-    spell1Id: number;
-
-    /**
-     * The ID of the second summoner spell used by this participant
-     */
-    spell2Id: number;
-
-    /**
-     * List of Game Customizations
-     */
-    gameCustomizationObjects: IGameCustomizationObject[];
 }
 
-export interface IPerks {
-    /**
-     * IDs of the perks/runes assigned.
-     */
-    perkIds: number[];
+export interface IPerks extends IPerks_Global {
 
-    /**
-     * Primary runes path
-     */
-    perkStyle: number;
-
-    /**
-     * Secondary runes path
-     */
-    perkSubStyle: number;
 }
 
-export interface IGameCustomizationObject {
-    /**
-     * Category identifier for Game Customization
-     */
-    category: string;
+export interface IGameCustomizationObject extends IGameCustomizationObject_Global {
 
-    /**
-     * 	Game Customization content
-     */
-    content: string;
 }

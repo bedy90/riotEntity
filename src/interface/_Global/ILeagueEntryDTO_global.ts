@@ -1,3 +1,5 @@
+import { IMiniSeriesDTO_Global } from "./IMiniSeriesDTO_global";
+
 export interface ILeagueEntryDTO_Global {
     leagueId: string;
 
@@ -34,4 +36,6 @@ export interface ILeagueEntryDTO_Global {
     freshBlood: boolean;
 
     inactive: boolean;
+
+    miniSeries: IMiniSeriesDTO_Global;
 }
