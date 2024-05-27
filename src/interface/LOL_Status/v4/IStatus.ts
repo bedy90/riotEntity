@@ -1,67 +1,18 @@
-import { MaintenanceStatus, IncidentSeverity, Platforms, PublishLocations } from '@/src/declaration';
+import { IContentDTO_Global } from '../../_Global/IContentDTO_Global';
+import { IPlatformDataDTO_Global } from '../../_Global/IPlatformDataDTO_global';
+import { IStatusDTO_Global } from '../../_Global/IStatusDTO_global';
+import { IUpdateDTO_Global } from '../../_Global/IUpdateDTO_Global';
 
-export interface IPlatformDataDto {
-    id: string;
-
-    name: string;
-
-    locales: string[];
-
-    maintenances: IStatusDTO[];
-
-    incidents: IStatusDTO[];
+export interface IPlatformDataDTO extends IPlatformDataDTO_Global {
 }
 
-export interface IStatusDTO {
-    id: number;
-
-    /**
-     * (Legal values: scheduled; in_progress; complete)
-     */
-    maintenance_status: MaintenanceStatus | string;
-
-    /**
-     * (Legal values: info; warning; critical)
-     */
-    incident_severity: IncidentSeverity | string;
-
-    titles: IContentDto[];
-
-    updates: IUpdateDto[];
-
-    created_at: string;
-
-    archive_at: string;
-
-    updated_at: string;
-
-    /**
-     * (Legal values: windows; macos; android; ios; ps4; xbone; switch)
-     */
-    platforms: Platforms[] | string[];
+export interface IStatusDTO  extends IStatusDTO_Global {
 }
 
-export interface IContentDto {
-    local: string;
-    content: string;
+export interface IContentDTO extends IContentDTO_Global {
 }
 
-export interface IUpdateDto {
-    id: number;
+export interface IUpdateDTO extends IUpdateDTO_Global {
 
-    author: string;
-
-    publish: boolean;
-
-    /**
-     * (Legal values: riotclient; riotstatus; game)
-     */
-    publish_locations: PublishLocations[] | string[];
-
-    translations: IContentDto[];
-
-    created_at: string;
-
-    updated_at: string
 }
 

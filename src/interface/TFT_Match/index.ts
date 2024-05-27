@@ -2,6 +2,7 @@ import * as MatchInterface from './v1/IMatchDTO';
 
 export namespace TFT_Match {
     export namespace v1 {
+        // TODO: Generate global interface
         export import ICompanionDTO = MatchInterface.ICompanionDTO;
         export import IInfoDTO = MatchInterface.IInfoDTO;
         export import IMatchDTO = MatchInterface.IMatchDTO;

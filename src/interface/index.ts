@@ -58,11 +58,9 @@ export * from './Spectactor/v4/IFeaturedGames';
 
 export * from './Summoner/v4/ISummonerDTO';
 
-
 export { ILeagueEntryDTO as TFT_ILeagueEntryDTO } from './TFT_League/v1/ILeagueEntryDTO';
 export { ILeagueListDTO as TFT_ILeagueListDTO } from './TFT_League/v1/ILeagueListDTO';
 export { IMiniSeriesDTO as TFT_IMiniSeriesDTO } from './TFT_League/v1/IMiniSeriesDTO';
-
 
 export { ICompanionDTO as TFT_ICompanionDTO } from './TFT_Match/v1/IMatchDTO';
 export { IInfoDTO as TFT_IInfoDTO } from './TFT_Match/v1/IMatchDTO';
