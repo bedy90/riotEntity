@@ -7,7 +7,6 @@ export class ChampionMasteryDTO implements Interfaces.ChampionMastery.v4.IChampi
     championId!: number;
     lastPlayTime!: number;
     championLevel!: number;
-    summonerId!: string;
     championPoints!: number;
     championPointsSinceLastLevel!: number;
     tokensEarned!: number;

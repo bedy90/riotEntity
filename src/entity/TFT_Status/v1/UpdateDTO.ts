@@ -2,13 +2,6 @@ import { Interfaces } from '@/riotentity';
 import { PublishLocations } from '@/riotentity';
 import { IContentDTO_Global } from '@/src/interface/_Global/IContentDTO_Global';
 
-/**
- * Class UpdateDTO
- *
- * @namespace TFT_Status
- * @version v1
- * @name IUpdateDTO
- */
 export class UpdateDTO implements Interfaces.TFT_Status.v1.IUpdateDTO {
     id!: number;
     author!: string;

@@ -1,3 +1,4 @@
+import { Interfaces } from "@/riotentity";
 
 /**
  * Interface IPerksDTO
@@ -7,8 +8,8 @@
  * @name IPerksDTO
  */
 export interface IPerksDTO {
-    statPerks: IPerkStatsDTO;
-    styles: IPerkStyleDTO[];
+    statPerks: Interfaces.Match.v5.IPerkStatsDTO;
+    styles: Interfaces.Match.v5.IPerkStyleDTO[];
 }
 
 /**
@@ -33,7 +34,7 @@ export interface IPerkStatsDTO {
  */
 export interface IPerkStyleDTO {
     description: string;
-    selections: IPerkStyleSelectionDTO[];
+    selections: Interfaces.Match.v5.IPerkStyleSelectionDTO[];
     style: number;
 }
 

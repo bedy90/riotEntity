@@ -2,13 +2,6 @@ import { Interfaces } from '@/riotentity';
 import { PublishLocations } from '@/riotentity';
 import { IContentDTO_Global } from '@/src/interface/_Global/IContentDTO_Global';
 
-/**
- * Class UpdateDTO
- *
- * @namespace LoL_Status
- * @version v4
- * @name IUpdateDTO
- */
 export class UpdateDTO implements Interfaces.LoL_Status.v4.IUpdateDTO {
     id!: number;
     author!: string;

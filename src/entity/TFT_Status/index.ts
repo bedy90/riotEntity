@@ -1,13 +1,13 @@
-import * as UpdateDTOCls from './v1/UpdateDTO';
-import * as StatusDTOCls from './v1/StatusDTO';
-import * as PlatformDataDTOCls from './v1/PlatformDataDTO';
-import * as ContentDTOCls from './v1/ContentDTO';
+import * as Content from './v1/ContentDTO';
+import * as PlatformData from './v1/PlatformDataDTO';
+import * as Status from './v1/StatusDTO';
+import * as Update from './v1/UpdateDTO';
 
 export namespace TFT_Status {
-  export namespace v1 {
-    export import UpdateDTO = UpdateDTOCls.UpdateDTO;
-    export import StatusDTO = StatusDTOCls.StatusDTO;
-    export import PlatformDataDTO = PlatformDataDTOCls.PlatformDataDTO;
-    export import ContentDTO = ContentDTOCls.ContentDTO;
-  }
+    export namespace v1 {
+        export import ContentDTO = Content.ContentDTO;
+        export import PlatformDataDTO = PlatformData.PlatformDataDTO;
+        export import StatusDTO = Status.StatusDTO;
+        export import UpdateDTO = Update.UpdateDTO;
+    }
 }

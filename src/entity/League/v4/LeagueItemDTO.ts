@@ -12,4 +12,3 @@ export class LeagueItemDTO implements Interfaces.League.v4.ILeagueItemDTO {
     losses!: number;
     summonerId!: string;
 }
-

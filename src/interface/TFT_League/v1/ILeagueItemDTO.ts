@@ -1,4 +1,4 @@
-import { IMiniSeriesDTO } from './IMiniSeriesDTO';
+import { Interfaces } from "@/riotentity";
 
 /**
  * Interface TFT - ILeagueItemDTO
@@ -15,7 +15,7 @@ export interface ILeagueItemDTO {
      */
     wins: number;
 
-    miniSeries: IMiniSeriesDTO;
+    miniSeries: Interfaces.TFT_League.v1.IMiniSeriesDTO;
 
     inactive: boolean;
 

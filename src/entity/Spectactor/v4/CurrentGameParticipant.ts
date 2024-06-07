@@ -1,14 +1,7 @@
 import { Interfaces } from '@/riotentity';
-import { IPerks_Global } from '@/src/interface/_Global/IPerks_Global';
 import { IGameCustomizationObject_Global } from '@/src/interface/_Global/IGameCustomizationObject_Global';
+import { IPerks_Global } from '@/src/interface/_Global/IPerks_Global';
 
-/**
- * Class CurrentGameParticipant
- *
- * @namespace Spectactor
- * @version v4
- * @name ICurrentGameParticipant
- */
 export class CurrentGameParticipant implements Interfaces.Spectactor.v4.ICurrentGameParticipant {
     bot!: boolean;
     championId!: number;

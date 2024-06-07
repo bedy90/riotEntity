@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 /* eslint-disable no-shadow */
-import { TraitStyle } from '@/riotentity';
+import { TraitStyle, Interfaces } from '@/riotentity';
 
 /**
  * Interface TFT - IMatchDTO
@@ -13,12 +13,12 @@ export interface IMatchDTO {
     /**
      * Match metadata.
      */
-    metadata: IMetadataDTO;
+    metadata: Interfaces.TFT_Match.v1.IMetadataDTO;
 
     /**
      * Match info.
      */
-    info: IInfoDTO;
+    info: Interfaces.TFT_Match.v1.IInfoDTO;
 }
 
 /**
@@ -70,7 +70,7 @@ export interface IInfoDTO {
 
     game_version: string;
 
-    participants: IParticipantDTO[];
+    participants: Interfaces.TFT_Match.v1.IParticipantDTO[];
 
     /**
      * 	Please refer to the League of Legends documentation.
@@ -94,7 +94,7 @@ export interface IParticipantDTO {
     /**
      * 	Participant's companion.
      */
-    companion: ICompanionDTO;
+    companion: Interfaces.TFT_Match.v1.ICompanionDTO;
 
     /**
      * Gold left after participant was eliminated.
@@ -136,12 +136,12 @@ export interface IParticipantDTO {
     /**
      * A complete list of traits for the participant's active units.
      */
-    traits: ITraitDTO[];
+    traits: Interfaces.TFT_Match.v1.ITraitDTO[];
 
     /**
      * A list of active units for the participant.
      */
-    units: IUnitDTO[];
+    units: Interfaces.TFT_Match.v1.IUnitDTO[];
 }
 
 /**
