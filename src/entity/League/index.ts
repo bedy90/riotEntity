@@ -1,5 +1,7 @@
 import * as LeagueEntry from './v4/LeagueEntryDTO';
 import * as LeagueList from './v4/LeagueListDTO';
+import * as LeagueItem from './v4/LeagueItemDTO';
+import * as MiniSeries from './v4/MiniSeriesDTO';
 // export * from './v4/PlayerInfoDTO';
 
 export namespace League {
@@ -7,7 +9,7 @@ export namespace League {
         export import LeagueEntryDTO = LeagueEntry.LeagueEntryDTO;
 
         export import LeagueListDTO = LeagueList.LeagueListDTO;
-        export import LeagueItemDTO = LeagueList.LeagueItemDTO;
-        export import MiniSeriesDTO = LeagueList.MiniSeriesDTO;
+        export import LeagueItemDTO = LeagueItem.LeagueItemDTO;
+        export import MiniSeriesDTO = MiniSeries.MiniSeriesDTO;
     }
 }

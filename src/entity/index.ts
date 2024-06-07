@@ -27,6 +27,6 @@ export * from './Match/v5/MatchDTO';
 // export * from './Match/v5/MatchTimelineDTO';
 export * from './Spectactor/v4/CurrentGameInfo';
 export * from './Spectactor/v4/FeaturedGames';
-export * from './LOL_Status/v3/ShardStatus';
+// export * from './LOL_Status/v4/ShardStatus';
 export * from './Summoner/v4/SummonerDTO';
 

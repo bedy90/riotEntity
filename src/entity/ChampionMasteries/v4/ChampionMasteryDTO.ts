@@ -1,6 +1,6 @@
 import { Interfaces } from '@/riotentity';
 
-export class ChampionMasteryDTO implements Interfaces.ChampionMasteries.v4.IChampionMasteryDTO {
+export class ChampionMasteryDTO implements Interfaces.ChampionMastery.v4.IChampionMasteryDTO {
     puuid!: string;
     championPointsUntilNextLevel!: number;
     chestGranted!: boolean;
@@ -11,5 +11,4 @@ export class ChampionMasteryDTO implements Interfaces.ChampionMasteries.v4.ICham
     championPoints!: number;
     championPointsSinceLastLevel!: number;
     tokensEarned!: number;
-
 }
