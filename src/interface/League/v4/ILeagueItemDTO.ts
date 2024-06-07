@@ -1,4 +1,4 @@
-import { IMiniSeriesDTO } from './IMiniSeriesDTO';
+import { Interfaces } from "@/riotentity";
 
 /**
  * Interface ILeagueItemDTO
@@ -15,7 +15,7 @@ export interface ILeagueItemDTO {
      */
     wins: number;
 
-    miniSeries: IMiniSeriesDTO;
+    miniSeries: Interfaces.League.v4.IMiniSeriesDTO;
 
     inactive: boolean;
 

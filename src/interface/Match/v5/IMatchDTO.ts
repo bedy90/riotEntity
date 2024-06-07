@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 /* eslint-disable no-shadow */
-import { KaynChampionTransform } from '@/riotentity';
+import { Interfaces, KaynChampionTransform } from '@/riotentity';
 import { IPerksDTO } from './IPerksDTO';
 
 /**
@@ -14,11 +14,11 @@ export interface IMatchDTO {
     /**
      * Match metadata.
      */
-    metadata: IMetadataDTO;
+    metadata: Interfaces.Match.v5.IMetadataDTO;
     /**
      * Match info.
      */
-    info: IInfoDTO;
+    info: Interfaces.Match.v5.IInfoDTO;
 }
 
 /**
@@ -97,7 +97,7 @@ export interface IInfoDTO {
      */
     mapId: number;
 
-    participants: IParticipantDTO[];
+    participants: Interfaces.Match.v5.IParticipantDTO[];
 
     /**
      * Platform where the match was played.
@@ -109,7 +109,7 @@ export interface IInfoDTO {
      */
     queueId: number;
 
-    teams: ITeamDTO[];
+    teams: Interfaces.Match.v5.ITeamDTO[];
 
     /**
      * Tournament code used to generate the match. This field was added to match-v5 in patch 11.13 on June 23rd, 2021.
@@ -364,9 +364,9 @@ export interface IParticipantDTO {
  * @name ITeamDTO
  */
 export interface ITeamDTO {
-    bans: IBanDTO[];
+    bans: Interfaces.Match.v5.IBanDTO[];
 
-    objectives: IObjectivesDTO;
+    objectives: Interfaces.Match.v5.IObjectivesDTO;
 
     teamId: number;
 
@@ -394,17 +394,17 @@ export interface IBanDTO {
  * @name IObjectivesDTO
  */
 export interface IObjectivesDTO {
-    baron: IObjectiveDTO;
+    baron: Interfaces.Match.v5.IObjectiveDTO;
 
-    champion: IObjectiveDTO;
+    champion: Interfaces.Match.v5.IObjectiveDTO;
 
-    dragon: IObjectiveDTO;
+    dragon: Interfaces.Match.v5.IObjectiveDTO;
 
-    inhibitor: IObjectiveDTO;
+    inhibitor: Interfaces.Match.v5.IObjectiveDTO;
 
-    riftHerald: IObjectiveDTO;
+    riftHerald: Interfaces.Match.v5.IObjectiveDTO;
 
-    tower: IObjectiveDTO;
+    tower: Interfaces.Match.v5.IObjectiveDTO;
 }
 
 /**

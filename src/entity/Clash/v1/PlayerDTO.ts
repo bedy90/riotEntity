@@ -1,4 +1,5 @@
-import { ClashRole, ClashPosition, Interfaces } from '@/riotentity';
+import { Interfaces } from '@/riotentity';
+import { ClashPosition, ClashRole } from '@/riotentity';
 
 export class PlayerDTO implements Interfaces.Clash.v1.IPlayerDTO {
     summonerId!: string;

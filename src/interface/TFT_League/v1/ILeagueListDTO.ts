@@ -1,4 +1,4 @@
-import { ILeagueItemDTO } from './ILeagueItemDTO';
+import { Interfaces } from '@/riotentity';
 
 /**
  * Interface TFT - ILeagueListDTO
@@ -10,7 +10,7 @@ import { ILeagueItemDTO } from './ILeagueItemDTO';
 export interface ILeagueListDTO {
     leagueId: string;
 
-    entries: ILeagueItemDTO[];
+    entries: Interfaces.TFT_League.v1.ILeagueItemDTO[];
 
     tier: string;
 

@@ -1,5 +1,4 @@
-import { ITournamentPhaseDTO } from './ITournamentPhaseDTO';
-
+import { Interfaces } from "@/riotentity";
 /**
  * Interface ITournamentDTO
  * 
@@ -19,5 +18,5 @@ export interface ITournamentDTO {
     /**
      * 	Tournament phase
      */
-    schedule: ITournamentPhaseDTO[];
+    schedule: Interfaces.Clash.v1.ITournamentPhaseDTO[];
 }
