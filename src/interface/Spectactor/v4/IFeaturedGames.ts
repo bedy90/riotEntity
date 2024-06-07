@@ -9,7 +9,7 @@ import { IParticipant_Global } from '../../_Global/IParticipant_Global';
  * 
  * @namespace Spectactor
  * @version v4
- * @name ICurrentGaIFeaturedGameseInfo
+ * @name IFeaturedGames
  */
 export interface IFeaturedGames extends IFeaturedGames_Global  {
 }
