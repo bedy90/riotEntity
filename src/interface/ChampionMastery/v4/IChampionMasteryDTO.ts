@@ -1,3 +1,10 @@
+/**
+ * Interface IChampionMasteryDTO
+ * 
+ * @namespace ChampionMastery
+ * @version v4
+ * @name IChampionMasteryDTO
+ */
 export interface IChampionMasteryDTO {
     /**
     * Player Universal Unique Identifier

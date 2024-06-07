@@ -4,41 +4,41 @@ import { IGameCustomizationObject_Global } from '../../_Global/IGameCustomizatio
 import { IPerks_Global } from '../../_Global/IPerks_Global';
 
 /**
- * Interface ICurrentGameInfo
+ * Interface TFT - ICurrentGameInfo
  * 
- * @namespace Spectactor
- * @version v4
+ * @namespace TFT_Spectactor
+ * @version v5
  * @name ICurrentGameInfo
  */
 export interface ICurrentGameInfo extends ICurrentGameInfo_Global {
 }
 
+
 /**
- * Interface ICurrentGameParticipant
+ * Interface TFT - ICurrentGameParticipant
  * 
- * @namespace Spectactor
- * @version v4
+ * @namespace TFT_Spectactor
+ * @version v5
  * @name ICurrentGameParticipant
  */
 export interface ICurrentGameParticipant extends ICurrentGameParticipant_Global {
-    bot: boolean;
 }
 
 /**
- * Interface IPerks
+ * Interface TFT - IPerks
  * 
- * @namespace Spectactor
- * @version v4
+ * @namespace TFT_Spectactor
+ * @version v5
  * @name IPerks
  */
 export interface IPerks extends IPerks_Global {
 }
 
 /**
- * Interface IGameCustomizationObject
+ * Interface TFT - IGameCustomizationObject
  * 
- * @namespace Spectactor
- * @version v4
+ * @namespace TFT_Spectactor
+ * @version v5
  * @name IGameCustomizationObject
  */
 export interface IGameCustomizationObject extends IGameCustomizationObject_Global {

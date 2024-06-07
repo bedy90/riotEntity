@@ -2,6 +2,14 @@
     ! : assertion de non-nullabilité
     ? : propriété optionnelle, peut être "null" ou "undefined".
 */
+
+/**
+ * Interface IAccountDTO
+ * 
+ * @namespace Account
+ * @version v1
+ * @name IAccountDTO
+ */
 export interface IAccountDTO {
     /**
      * Player Universal Unique Identifier

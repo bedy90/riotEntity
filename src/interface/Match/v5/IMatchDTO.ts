@@ -3,6 +3,13 @@
 import { KaynChampionTransform } from '@/riotentity';
 import { IPerksDTO } from './IPerksDTO';
 
+/**
+ * Interface IMatchDTO
+ * 
+ * @namespace Match
+ * @version v5
+ * @name IMatchDTO
+ */
 export interface IMatchDTO {
     /**
      * Match metadata.
@@ -14,6 +21,13 @@ export interface IMatchDTO {
     info: IInfoDTO;
 }
 
+/**
+ * Interface IMetadataDTO
+ * 
+ * @namespace Match
+ * @version v5
+ * @name IMetadataDTO
+ */
 export interface IMetadataDTO {
     /**
      * 	Match data version.
@@ -29,6 +43,13 @@ export interface IMetadataDTO {
     participants: string[];
 }
 
+/**
+ * Interface IInfoDTO
+ * 
+ * @namespace Match
+ * @version v5
+ * @name IInfoDTO
+ */
 export interface IInfoDTO {
     /**
      * Unix timestamp for when the game is created on the game server (i.e., the loading screen).
@@ -96,6 +117,13 @@ export interface IInfoDTO {
     tournamentCode: string;
 }
 
+/**
+ * Interface IParticipantDTO
+ * 
+ * @namespace Match
+ * @version v5
+ * @name IParticipantDTO
+ */
 export interface IParticipantDTO {
     assists: number;
 
@@ -262,6 +290,7 @@ export interface IParticipantDTO {
 
     summonerLevel: number;
 
+    // Why not removed Rito
     summonerName: string;
 
     teamEarlySurrendered: boolean;
@@ -327,7 +356,13 @@ export interface IParticipantDTO {
     win: boolean;
 }
 
-
+/**
+ * Interface ITeamDTO
+ * 
+ * @namespace Match
+ * @version v5
+ * @name ITeamDTO
+ */
 export interface ITeamDTO {
     bans: IBanDTO[];
 
@@ -338,12 +373,26 @@ export interface ITeamDTO {
     win: boolean;
 }
 
+/**
+ * Interface IBanDTO
+ * 
+ * @namespace Match
+ * @version v5
+ * @name IBanDTO
+ */
 export interface IBanDTO {
     championId: number;
 
     pickTurn: number;
 }
 
+/**
+ * Interface IObjectivesDTO
+ * 
+ * @namespace Match
+ * @version v5
+ * @name IObjectivesDTO
+ */
 export interface IObjectivesDTO {
     baron: IObjectiveDTO;
 
@@ -358,6 +407,13 @@ export interface IObjectivesDTO {
     tower: IObjectiveDTO;
 }
 
+/**
+ * Interface IObjectiveDTO
+ * 
+ * @namespace Match
+ * @version v5
+ * @name IObjectiveDTO
+ */
 export interface IObjectiveDTO {
     first: boolean;
 

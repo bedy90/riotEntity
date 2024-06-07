@@ -1,4 +1,9 @@
 /**
+ * Interface IPlayerInfoDTO
+ * 
+ * @namespace LeagueExp
+ * @version v1
+ * @name IPlayerInfoDTO
  * @NotImplemented
  */
 export interface IPlayerInfoDTO {
@@ -11,12 +16,29 @@ export interface IPlayerInfoDTO {
     categoryPoints: Map<string, IChallengePoint>;
 }
 
+/**
+ * Interface IChallengePoint
+ * 
+ * @namespace LeagueExp
+ * @version v1
+ * @name IChallengePoint
+ * @NotImplemented
+ */
 export interface IChallengePoint {
     level: string;
     current: number;
     max: number;
     percentile: number;
 }
+
+/**
+ * Interface IChallengeInfo
+ * 
+ * @namespace LeagueExp
+ * @version v1
+ * @name IChallengeInfo
+ * @NotImplemented
+ */
 export interface IChallengeInfo {
     challengeId: number; // Ex: 0
     percentile: number; //  0.006;
@@ -25,6 +47,14 @@ export interface IChallengeInfo {
     achievedTime: number; // 1706668297146
 }
 
+/**
+ * Interface IPlayerClientPreference
+ * 
+ * @namespace LeagueExp
+ * @version v1
+ * @name IPlayerClientPreference
+ * @NotImplemented
+ */
 export interface IPlayerClientPreference {
     /*
       "bannerAccent": "2";
