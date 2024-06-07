@@ -2,6 +2,12 @@ import { MaintenanceStatus, IncidentSeverity, Platforms } from '@/src/declaratio
 import { IContentDTO_Global } from './IContentDTO_Global';
 import { IUpdateDTO_Global } from './IUpdateDTO_Global';
 
+/**
+ * Interface IStatusDTO_Global
+ *
+ * @namespace Global
+ * @name IStatusDTO_Global
+ */
 export interface IStatusDTO_Global {
     id: number;
 

@@ -1,6 +1,12 @@
 import { PublishLocations } from '@/src/declaration';
 import { IContentDTO_Global } from './IContentDTO_Global';
 
+/**
+ * Interface IUpdateDTO_Global
+ *
+ * @namespace Global
+ * @name IUpdateDTO_Global
+ */
 export interface IUpdateDTO_Global {
     id: number;
 
