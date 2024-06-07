@@ -1,11 +1,10 @@
-import * as Shards from './v3/ShardStatus';
+import * as Status from './v4/Status';
 
 export namespace LoL_Status {
-    export namespace v3 {
-        export import Incident = Shards.Incident;
-        export import Message = Shards.Message;
-        export import Service = Shards.Service;
-        export import ShardStatus = Shards.ShardStatus;
-        export import Translation = Shards.Translation;
+    export namespace v4 {
+        export import ContentDTO = Status.ContentDTO;
+        export import PlatformDataDTO = Status.PlatformDataDTO;
+        export import StatusDTO = Status.StatusDTO;
+        export import UpdateDTO = Status.UpdateDTO;
     }
 }

@@ -30,10 +30,11 @@ export class Observer implements Interfaces.Spectactor.v4.IObserver {
 }
 
 export class Participant implements Interfaces.Spectactor.v4.IParticipant {
+    puuid!: string;
     bot!: boolean;
     spell2Id!: number;
     profileIconId!: number;
-    summonerName!: string;
+    summonerId!: string;
     championId!: number;
     teamId!: number;
     spell1Id!: number;
