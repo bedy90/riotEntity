@@ -8,13 +8,3 @@
 # Déclaration
     ! : assertion de non-nullabilité
     ? : propriété optionnelle, peut être "null" ou "undefined".
-
-
-# TODO
-- Generator entité
-  - si le type contient « I_Global» alors ajouté import
-  - si le type contient « I_» ne pas ajouté import.
-  - Exclude si « Map »
-
-- Voir si ça serait possible de générer le « index.ts » de Nv1
-- Voir si possible de générer les validateur
