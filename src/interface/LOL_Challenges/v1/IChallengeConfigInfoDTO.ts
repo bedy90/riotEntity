@@ -3,7 +3,7 @@ import { State, Tracking } from '@/riotentity';
 /**
  * Interface IChallengeConfigInfoDTO
  * 
- * @namespace LeagueExp
+ * @namespace LoL_Challenges
  * @version v1
  * @name IChallengeConfigInfoDTO
  */

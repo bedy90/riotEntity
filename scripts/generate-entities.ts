@@ -44,6 +44,43 @@ function extractJsDocInfo(iface: InterfaceDeclaration) {
   return { namespace, version, name, NotImplemented };
 }
 
+function extractJsDocInfo2(iface: InterfaceDeclaration) {
+  const jsDoc = iface.getJsDocs()[0]?.getInnerText() || '';
+  const namespaceMatch = /@namespace\s+(\S+)/.exec(jsDoc);
+  const versionMatch = /@version\s+(\S+)/.exec(jsDoc);
+  const nameMatch = /@name\s+(\S+)/.exec(jsDoc);
+  const notImplementedMatch = /@NotImplemented\s+(\S+)/.exec(jsDoc);
+
+  return {
+    namespace: namespaceMatch ? namespaceMatch[1] : null,
+    version: versionMatch ? versionMatch[1] : null,
+    name: nameMatch ? nameMatch[1] : null,
+    notImplemented: notImplementedMatch ? true : false,
+  };
+}
+
+// Fonction pour extraire les types personnalisés des propriétés d'une interface
+function getCustomTypes(properties: PropertySignature[]): Set<string> {
+  const customTypes = new Set<string>();
+
+  properties.forEach(property => {
+    const propType = property.getTypeNode()?.getText() || '';
+    const matches = propType.match(/\b[A-Z][a-zA-Z0-9]*\b/g);
+    if (matches) {
+      matches.forEach(type => {
+        // Exclure les types primitifs et globaux
+        if (!['string', 'number', 'boolean', 'any', 'undefined', 'null', 'void', 'never', 'object', 'unknown', 'Map'].includes(type)) {
+          customTypes.add(type);
+        }
+      });
+    }
+  });
+
+  return customTypes;
+}
+
+
+// Process
 function processInterfaceToClass() {
 
   // Read all interface files
@@ -65,11 +102,6 @@ function processInterfaceToClass() {
       if (interfaceName.startsWith("I")) {
         const className = interfaceName.substring(1);
 
-        // JDoc
-        // const namespace1 = iface.getJsDocs()[0]?.getTags()[0]?.getComment() || "Unknown";
-        // const version1 = iface.getJsDocs()[0]?.getTags()[1]?.getComment() || "Unknown";
-        // const name1 = iface.getJsDocs()[0]?.getTags()[2]?.getComment() || "Unknown";
-
         // Extraire les informations JSDoc
         const { namespace, version, name, NotImplemented } = extractJsDocInfo(iface);
         if (!namespace || !version || !name) {
@@ -81,21 +113,30 @@ function processInterfaceToClass() {
           return;
         }
 
-        // GEt Properties (basic)
-        // const properties = iface.getProperties();
-
         // Obtenir toutes les propriétés (y compris héritées)
         const properties = getAllProperties(iface);
 
-        // Générer le contenu de la classe
-        let classContent = `import { Interfaces } from '@/riotentity';\n\n`;
-        classContent += `export class ${className} implements Interfaces.${namespace}.${version}.${name} {\n`;
+        // Obtenir les types personnalisés
+        const customTypes = getCustomTypes(properties);
 
+        // Générer le contenu de la classe
+        let classContent = `import { Interfaces } from '@/riotentity';\n`;
+        if (customTypes.size > 0) {
+          classContent += `import { ${[...customTypes].join(', ')} } from '@/riotentity';\n`;
+        }
+
+        // Declare export header
+        classContent += `\nexport class ${className} implements Interfaces.${namespace}.${version}.${name} {\n`;
+
+        // Declare properties
         properties.forEach((property: PropertySignature) => {
           const propName = property.getName();
-          classContent += `  ${propName}!: ${property.getType().getText()};\n`;
-        });
+          const propType = property.getTypeNode()?.getText() || 'any';
+          const propTypeBasic = property.getType().getText();
 
+          // classContent += `\t${propName}!: ${property.getType().getText()};\n`;
+          classContent += `    ${propName}!: ${propType};\n`;
+        });
         classContent += `}\n`;
 
         // Déterminer le chemin de sortie

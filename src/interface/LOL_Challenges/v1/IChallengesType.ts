@@ -4,7 +4,7 @@ import { Level } from '@/src/declaration';
  * Interface IChallengePercentile
  * Challenge percentile for a specific challenge (without Key)
  * 
- * @namespace LeagueExp
+ * @namespace LoL_Challenges
  * @version v1
  * @name IChallengePercentile
  * @NotImplemented
@@ -17,7 +17,7 @@ export interface IChallengePercentile {
  * Interface IChallengePercentiles
  * All challenges percentile
  * 
- * @namespace LeagueExp
+ * @namespace LoL_Challenges
  * @version v1
  * @name IChallengePercentiles
  * @NotImplemented
