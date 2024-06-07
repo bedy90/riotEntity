@@ -1,13 +1,15 @@
-import * as MiniSeriesDTOCls from './v4/MiniSeriesDTO';
-import * as LeagueListDTOCls from './v4/LeagueListDTO';
-import * as LeagueItemDTOCls from './v4/LeagueItemDTO';
-import * as LeagueEntryDTOCls from './v4/LeagueEntryDTO';
+import * as LeagueEntry from './v4/LeagueEntryDTO';
+import * as LeagueList from './v4/LeagueListDTO';
+import * as LeagueItem from './v4/LeagueItemDTO';
+import * as MiniSeries from './v4/MiniSeriesDTO';
+// export * from './v4/PlayerInfoDTO';
 
 export namespace League {
-  export namespace v4 {
-    export import MiniSeriesDTO = MiniSeriesDTOCls.MiniSeriesDTO;
-    export import LeagueListDTO = LeagueListDTOCls.LeagueListDTO;
-    export import LeagueItemDTO = LeagueItemDTOCls.LeagueItemDTO;
-    export import LeagueEntryDTO = LeagueEntryDTOCls.LeagueEntryDTO;
-  }
+    export namespace v4 {
+        export import LeagueEntryDTO = LeagueEntry.LeagueEntryDTO;
+
+        export import LeagueListDTO = LeagueList.LeagueListDTO;
+        export import LeagueItemDTO = LeagueItem.LeagueItemDTO;
+        export import MiniSeriesDTO = MiniSeries.MiniSeriesDTO;
+    }
 }

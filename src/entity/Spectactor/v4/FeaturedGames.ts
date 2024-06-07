@@ -1,14 +1,41 @@
-import { Interfaces } from '@/riotentity';
-import { IFeaturedGameInfo_Global } from '@/src/interface/_Global/IFeaturedGameInfo_Global';
+import { Interfaces, GameMode, GameType } from '@/riotentity';
 
-/**
- * Class FeaturedGames
- *
- * @namespace Spectactor
- * @version v4
- * @name IFeaturedGames
- */
 export class FeaturedGames implements Interfaces.Spectactor.v4.IFeaturedGames {
-    gameList!: IFeaturedGameInfo_Global[];
+    gameList!: Interfaces.Spectactor.v4.IFeaturedGameInfo[];
     clientRefreshInterval!: number;
+}
+
+export class FeaturedGameInfo implements Interfaces.Spectactor.v4.IFeaturedGameInfo {
+    gameMode!: GameMode;
+    gameLength!: number;
+    mapId!: number;
+    gameType!: GameType;
+    bannedChampions!: Interfaces.Spectactor.v4.IBannedChampion[];
+    gameId!: number;
+    observers!: Interfaces.Spectactor.v4.IObserver;
+    gameQueueConfigId!: number;
+    gameStartTime!: number;
+    participants!: Interfaces.Spectactor.v4.IParticipant[];
+    platformId!: string;
+}
+
+export class BannedChampion implements Interfaces.Spectactor.v4.IBannedChampion {
+    pickTurn!: number;
+    championId!: number;
+    teamId!: number;
+}
+
+export class Observer implements Interfaces.Spectactor.v4.IObserver {
+    encryptionKey!: string;
+}
+
+export class Participant implements Interfaces.Spectactor.v4.IParticipant {
+    puuid!: string;
+    bot!: boolean;
+    spell2Id!: number;
+    profileIconId!: number;
+    summonerId!: string;
+    championId!: number;
+    teamId!: number;
+    spell1Id!: number;
 }

@@ -1,9 +1,10 @@
-import * as MiniSeriesDTOCls from './v4/MiniSeriesDTO';
-import * as LeagueEntryDTOCls from './v4/LeagueEntryDTO';
+import * as LeagueEntryInterface from './v4/LeagueEntryDTO';
+import * as LeagueListInterface from './v4/MiniSeriesDTO';
 
 export namespace LeagueExp {
-  export namespace v4 {
-    export import MiniSeriesDTO = MiniSeriesDTOCls.MiniSeriesDTO;
-    export import LeagueEntryDTO = LeagueEntryDTOCls.LeagueEntryDTO;
-  }
+    export namespace v4 {
+        export import LeagueEntryDTO = LeagueEntryInterface.LeagueEntryDTO;
+        export import MiniSeriesDTO = LeagueListInterface.MiniSeriesDTO;
+    }
 }
+
