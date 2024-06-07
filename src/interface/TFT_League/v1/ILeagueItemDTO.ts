@@ -1,8 +1,8 @@
-import { Interfaces } from "@/riotentity";
+import { Interfaces } from '@/riotentity';
 
 /**
  * Interface TFT - ILeagueItemDTO
- * 
+ *
  * @namespace TFT_League
  * @version v1
  * @name ILeagueItemDTO

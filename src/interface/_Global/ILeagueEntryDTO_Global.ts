@@ -1,5 +1,11 @@
-import { IMiniSeriesDTO_Global } from "./IMiniSeriesDTO_global";
+import { IMiniSeriesDTO_Global } from './IMiniSeriesDTO_Global';
 
+/**
+ * Interface ILeagueEntryDTO_Global
+ *
+ * @namespace Global
+ * @name ILeagueEntryDTO_Global
+ */
 export interface ILeagueEntryDTO_Global {
     leagueId: string;
 

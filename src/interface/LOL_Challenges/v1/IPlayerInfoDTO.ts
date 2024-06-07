@@ -1,6 +1,6 @@
 /**
  * Interface IPlayerInfoDTO
- * 
+ *
  * @namespace LoL_Challenges
  * @version v1
  * @name IPlayerInfoDTO
@@ -18,7 +18,7 @@ export interface IPlayerInfoDTO {
 
 /**
  * Interface IChallengePoint
- * 
+ *
  * @namespace LoL_Challenges
  * @version v1
  * @name IChallengePoint
@@ -33,7 +33,7 @@ export interface IChallengePoint {
 
 /**
  * Interface IChallengeInfo
- * 
+ *
  * @namespace LoL_Challenges
  * @version v1
  * @name IChallengeInfo
@@ -49,7 +49,7 @@ export interface IChallengeInfo {
 
 /**
  * Interface IPlayerClientPreference
- * 
+ *
  * @namespace LoL_Challenges
  * @version v1
  * @name IPlayerClientPreference

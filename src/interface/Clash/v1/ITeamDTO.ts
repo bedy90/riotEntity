@@ -2,7 +2,7 @@ import { Interfaces } from '@/riotentity';
 
 /**
  * Interface ITeamDTO
- * 
+ *
  * @namespace Clash
  * @version v1
  * @name ITeamDTO

@@ -2,12 +2,18 @@ import { IBannedChampion_Global } from './IBannedChampion_Global';
 import { ICurrentGameParticipant_Global } from './ICurrentGameParticipant_Global';
 import { IObserver_Global } from './IObserver_Global';
 
+/**
+ * Interface ICurrentGameInfo_Global
+ *
+ * @namespace Global
+ * @name ICurrentGameInfo_Global
+ */
 export interface ICurrentGameInfo_Global {
     /**
      * The ID of the game
      */
     gameId: number;
-    
+
     /**
      * The game type
      */

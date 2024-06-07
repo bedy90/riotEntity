@@ -4,7 +4,7 @@ import { TraitStyle, Interfaces } from '@/riotentity';
 
 /**
  * Interface TFT - IMatchDTO
- * 
+ *
  * @namespace TFT_Match
  * @version v1
  * @name IMatchDTO
@@ -23,7 +23,7 @@ export interface IMatchDTO {
 
 /**
  * Interface TFT - IMetadataDTO
- * 
+ *
  * @namespace TFT_Match
  * @version v1
  * @name IMetadataDTO
@@ -47,7 +47,7 @@ export interface IMetadataDTO {
 
 /**
  * Interface TFT - IInfoDTO
- * 
+ *
  * @namespace TFT_Match
  * @version v1
  * @name IInfoDTO
@@ -85,7 +85,7 @@ export interface IInfoDTO {
 
 /**
  * Interface TFT - IParticipantDTO
- * 
+ *
  * @namespace TFT_Match
  * @version v1
  * @name IParticipantDTO
@@ -146,7 +146,7 @@ export interface IParticipantDTO {
 
 /**
  * Interface TFT - ICompanionDTO
- * 
+ *
  * @namespace TFT_Match
  * @version v1
  * @name ICompanionDTO
@@ -163,7 +163,7 @@ export interface ICompanionDTO {
 
 /**
  * Interface TFT - ITraitDTO
- * 
+ *
  * @namespace TFT_Match
  * @version v1
  * @name ITraitDTO
@@ -196,7 +196,7 @@ export interface ITraitDTO {
 
 /**
  * Interface TFT - IUnitDTO
- * 
+ *
  * @namespace TFT_Match
  * @version v1
  * @name IUnitDTO

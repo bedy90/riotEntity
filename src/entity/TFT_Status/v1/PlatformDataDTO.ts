@@ -1,5 +1,5 @@
 import { Interfaces } from '@/riotentity';
-import { IStatusDTO_Global } from '@/src/interface/_Global/IStatusDTO_global';
+import { IStatusDTO_Global } from '@/src/interface/_Global/IStatusDTO_Global';
 
 export class PlatformDataDTO implements Interfaces.TFT_Status.v1.IPlatformDataDTO {
     id!: string;

@@ -8,7 +8,7 @@
     "== Run ==": "",
     "run:test": "npx ts-node src/manual_test.ts",
     "build:packageProd": "node scripts/generate-prod-package.js",
-    "generate:class": "npx ts-node scripts/generate-entities.ts",
+    "generate:class": "npx rimraf ./generate && npx ts-node scripts/generate-entities.ts",
     "== Compile ==": "",
     "compile:npx": "npx tsc",
     "compile:rim": "rimraf ./build && tsc",

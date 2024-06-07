@@ -3,7 +3,12 @@ import { IBannedChampion_Global } from './IBannedChampion_Global';
 import { IObserver_Global } from './IObserver_Global';
 import { IParticipant_Global } from './IParticipant_Global';
 
-
+/**
+ * Interface IFeaturedGameInfo_Global
+ *
+ * @namespace Global
+ * @name IFeaturedGameInfo_Global
+ */
 export interface IFeaturedGameInfo_Global {
     /**
      * The game mode (Legal values: CLASSIC, ODIN, ARAM, TUTORIAL, ONEFORALL, ASCENSION, FIRSTBLOOD, KINGPORO)
@@ -49,7 +54,7 @@ export interface IFeaturedGameInfo_Global {
      * 	The participant information
      */
     participants: IParticipant_Global[];
-    
+
     /**
      * The ID of the platform on which the game is being played
      */

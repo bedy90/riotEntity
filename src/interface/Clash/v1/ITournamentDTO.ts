@@ -1,7 +1,7 @@
-import { Interfaces } from "@/riotentity";
+import { Interfaces } from '@/riotentity';
 /**
  * Interface ITournamentDTO
- * 
+ *
  * @namespace Clash
  * @version v1
  * @name ITournamentDTO

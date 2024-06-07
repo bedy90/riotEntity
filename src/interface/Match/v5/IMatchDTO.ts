@@ -1,11 +1,10 @@
 /* eslint-disable max-len */
 /* eslint-disable no-shadow */
 import { Interfaces, KaynChampionTransform } from '@/riotentity';
-import { IPerksDTO } from './IPerksDTO';
 
 /**
  * Interface IMatchDTO
- * 
+ *
  * @namespace Match
  * @version v5
  * @name IMatchDTO
@@ -23,7 +22,7 @@ export interface IMatchDTO {
 
 /**
  * Interface IMetadataDTO
- * 
+ *
  * @namespace Match
  * @version v5
  * @name IMetadataDTO
@@ -45,7 +44,7 @@ export interface IMetadataDTO {
 
 /**
  * Interface IInfoDTO
- * 
+ *
  * @namespace Match
  * @version v5
  * @name IInfoDTO
@@ -119,7 +118,7 @@ export interface IInfoDTO {
 
 /**
  * Interface IParticipantDTO
- * 
+ *
  * @namespace Match
  * @version v5
  * @name IParticipantDTO
@@ -248,7 +247,7 @@ export interface IParticipantDTO {
 
     pentaKills: number;
 
-    perks: IPerksDTO;
+    perks: Interfaces.Match.v5.IPerksDTO;
 
     physicalDamageDealt: number;
 
@@ -358,7 +357,7 @@ export interface IParticipantDTO {
 
 /**
  * Interface ITeamDTO
- * 
+ *
  * @namespace Match
  * @version v5
  * @name ITeamDTO
@@ -375,7 +374,7 @@ export interface ITeamDTO {
 
 /**
  * Interface IBanDTO
- * 
+ *
  * @namespace Match
  * @version v5
  * @name IBanDTO
@@ -388,7 +387,7 @@ export interface IBanDTO {
 
 /**
  * Interface IObjectivesDTO
- * 
+ *
  * @namespace Match
  * @version v5
  * @name IObjectivesDTO
@@ -409,7 +408,7 @@ export interface IObjectivesDTO {
 
 /**
  * Interface IObjectiveDTO
- * 
+ *
  * @namespace Match
  * @version v5
  * @name IObjectiveDTO

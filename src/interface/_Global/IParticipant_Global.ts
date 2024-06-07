@@ -1,3 +1,9 @@
+/**
+ * Interface IParticipant_Global
+ *
+ * @namespace Global
+ * @name IParticipant_Global
+ */
 export interface IParticipant_Global {
     /**
      * The ID of the second summoner spell used by this participant
@@ -28,7 +34,7 @@ export interface IParticipant_Global {
      * The team ID of this participant, indicating the participant's team
      */
     teamId: number;
-    
+
     /**
      * The ID of the first summoner spell used by this participant
      */
