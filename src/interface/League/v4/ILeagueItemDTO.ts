@@ -1,5 +1,12 @@
 import { IMiniSeriesDTO } from './IMiniSeriesDTO';
 
+/**
+ * Interface ILeagueItemDTO
+ * 
+ * @namespace League
+ * @version v4
+ * @name ILeagueItemDTO
+ */
 export interface ILeagueItemDTO {
     freshBlood: boolean;
 
@@ -30,4 +37,3 @@ export interface ILeagueItemDTO {
      */
     summonerId: string;
 }
-
