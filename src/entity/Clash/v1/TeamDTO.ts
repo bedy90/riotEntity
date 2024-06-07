@@ -9,6 +9,4 @@ export class TeamDTO implements Interfaces.Clash.v1.ITeamDTO {
     captain!: string;
     abbreviation!: string;
     players!: Interfaces.Clash.v1.IPlayerDTO[];
-
 }
-

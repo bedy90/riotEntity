@@ -4,5 +4,4 @@ export class ApexPlayerInfoDTO implements Interfaces.LoL_Challenges.v1.IApexPlay
     puuid!: string;
     value!: number;
     position!: number;
-
 }
