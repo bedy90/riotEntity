@@ -2,6 +2,13 @@
 /* eslint-disable no-shadow */
 import { TraitStyle } from '@/riotentity';
 
+/**
+ * Interface TFT - IMatchDTO
+ * 
+ * @namespace TFT_Match
+ * @version v1
+ * @name IMatchDTO
+ */
 export interface IMatchDTO {
     /**
      * Match metadata.
@@ -14,6 +21,13 @@ export interface IMatchDTO {
     info: IInfoDTO;
 }
 
+/**
+ * Interface TFT - IMetadataDTO
+ * 
+ * @namespace TFT_Match
+ * @version v1
+ * @name IMetadataDTO
+ */
 export interface IMetadataDTO {
     /**
      * 	Match data version.
@@ -31,6 +45,13 @@ export interface IMetadataDTO {
     participants: string[];
 }
 
+/**
+ * Interface TFT - IInfoDTO
+ * 
+ * @namespace TFT_Match
+ * @version v1
+ * @name IInfoDTO
+ */
 export interface IInfoDTO {
     /**
      * 	Unix timestamp.
@@ -62,6 +83,13 @@ export interface IInfoDTO {
     tft_set_number: number;
 }
 
+/**
+ * Interface TFT - IParticipantDTO
+ * 
+ * @namespace TFT_Match
+ * @version v1
+ * @name IParticipantDTO
+ */
 export interface IParticipantDTO {
     /**
      * 	Participant's companion.
@@ -116,6 +144,13 @@ export interface IParticipantDTO {
     units: IUnitDTO[];
 }
 
+/**
+ * Interface TFT - ICompanionDTO
+ * 
+ * @namespace TFT_Match
+ * @version v1
+ * @name ICompanionDTO
+ */
 export interface ICompanionDTO {
     content_ID: string;
 
@@ -126,6 +161,13 @@ export interface ICompanionDTO {
     species: string;
 }
 
+/**
+ * Interface TFT - ITraitDTO
+ * 
+ * @namespace TFT_Match
+ * @version v1
+ * @name ITraitDTO
+ */
 export interface ITraitDTO {
     /**
      * 	Trait name.
@@ -152,6 +194,13 @@ export interface ITraitDTO {
 
 }
 
+/**
+ * Interface TFT - IUnitDTO
+ * 
+ * @namespace TFT_Match
+ * @version v1
+ * @name IUnitDTO
+ */
 export interface IUnitDTO {
     /**
      * A list of the unit's items. Please refer to the Teamfight Tactics documentation for item ids.

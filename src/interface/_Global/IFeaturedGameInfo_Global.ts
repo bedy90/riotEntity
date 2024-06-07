@@ -45,15 +45,11 @@ export interface IFeaturedGameInfo_Global {
      */
     gameQueueConfigId: number;
 
-    // /**
-    //  * The game start time represented in epoch milliseconds
-    //  */
-    // gameStartTime: number;
-
     /**
      * 	The participant information
      */
     participants: IParticipant_Global[];
+    
     /**
      * The ID of the platform on which the game is being played
      */
