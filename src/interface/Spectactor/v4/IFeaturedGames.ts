@@ -6,47 +6,59 @@ import { IParticipant_Global } from '../../_Global/IParticipant_Global';
 
 /**
  * Interface IFeaturedGames
- * 
+ *
  * @namespace Spectactor
  * @version v4
  * @name IFeaturedGames
  */
+export type IFeaturedGames = IFeaturedGames_Global
+/*
 export interface IFeaturedGames extends IFeaturedGames_Global  {
 }
+*/
 
 /**
  * Interface IFeaturedGameInfo
- * 
+ *
  * @namespace Spectactor
  * @version v4
  * @name IFeaturedGameInfo
  */
+export type IFeaturedGameInfo = IFeaturedGameInfo_Global
+/*
 export interface IFeaturedGameInfo extends IFeaturedGameInfo_Global {
 }
+*/
 
 /**
  * Interface IBannedChampion
- * 
+ *
  * @namespace Spectactor
  * @version v4
  * @name IBannedChampion
  */
+export type IBannedChampion = IBannedChampion_Global
+/*
 export interface IBannedChampion extends IBannedChampion_Global {
 }
+*/
 
 /**
  * Interface IObserver
- * 
+ *
  * @namespace Spectactor
  * @version v4
  * @name IObserver
  */
+export type IObserver = IObserver_Global
+/*
 export interface IObserver extends IObserver_Global {
 }
+*/
 
 /**
  * Interface IParticipant
- * 
+ *
  * @namespace Spectactor
  * @version v4
  * @name IParticipant

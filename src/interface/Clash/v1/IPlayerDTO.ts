@@ -2,7 +2,7 @@ import { ClashPosition, ClashRole } from '@/src/declaration';
 
 /**
  * Interface IPlayerDTO
- * 
+ *
  * @namespace Clash
  * @version v1
  * @name IPlayerDTO

@@ -10,7 +10,7 @@ export namespace League {
         export import LeagueListDTO = LeagueList.LeagueListDTO;
 
         export import LeagueItemDTO = LeagueItem.LeagueItemDTO;
-        
+
         export import MiniSeriesDTO = MiniSeries.MiniSeriesDTO;
     }
 }

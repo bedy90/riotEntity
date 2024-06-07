@@ -1,8 +1,8 @@
-import { ILeagueItemDTO } from './ILeagueItemDTO';
+import { Interfaces } from '@/riotentity';
 
 /**
  * Interface ILeagueListDTO
- * 
+ *
  * @namespace League
  * @version v4
  * @name ILeagueListDTO
@@ -10,7 +10,7 @@ import { ILeagueItemDTO } from './ILeagueItemDTO';
 export interface ILeagueListDTO {
     leagueId: string;
 
-    entries: ILeagueItemDTO[];
+    entries: Interfaces.League.v4.ILeagueItemDTO[];
 
     tier: string;
 

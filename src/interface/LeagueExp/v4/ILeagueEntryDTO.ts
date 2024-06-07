@@ -1,11 +1,13 @@
-import { ILeagueEntryDTO_Global } from '../../_Global/ILeagueEntryDTO_global';
+import { ILeagueEntryDTO_Global } from '../../_Global/ILeagueEntryDTO_Global';
 
 /**
  * Interface ILeagueEntryDTO
- * 
+ *
  * @namespace LeagueExp
  * @version v4
  * @name ILeagueEntryDTO
  */
-export interface ILeagueEntryDTO extends ILeagueEntryDTO_Global {
-}
+export type ILeagueEntryDTO = ILeagueEntryDTO_Global
+
+// export interface ILeagueEntryDTO extends ILeagueEntryDTO_Global {
+// }

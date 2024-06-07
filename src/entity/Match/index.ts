@@ -12,7 +12,6 @@ import * as PerkStyleSelection from './v5/PerkStyleSelectionDTO';
 import * as Team from './v5/TeamDTO';
 
 
-
 export namespace Match {
     export namespace v5 {
         export import BanDTO = Ban.BanDTO;
@@ -24,14 +23,14 @@ export namespace Match {
         export import ObjectivesDTO = Objectives.ObjectivesDTO;
 
         export import ParticipantDTO = Participant.ParticipantDTO;
-       
+
         export import PerksDTO = Perks.PerksDTO;
         export import PerkStatsDTO = PerkStats.PerkStatsDTO;
         export import PerkStyleDTO = PerkStyle.PerkStyleDTO;
         export import PerkStyleSelectionDTO = PerkStyleSelection.PerkStyleSelectionDTO;
-        
+
         export import TeamDTO = Team.TeamDTO;
-     
+
 
     }
 }

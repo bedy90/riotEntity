@@ -8,7 +8,7 @@ export namespace League {
         export import ILeagueEntryDTO = LeagueEntryInterface.ILeagueEntryDTO;
 
         export import ILeagueItemDTO = LeagueListItemInterface.ILeagueItemDTO;
-        
+
         export import ILeagueListDTO = LeagueListInterface.ILeagueListDTO;
 
         export import IMiniSeriesDTO = MiniSeriesInterface.IMiniSeriesDTO;

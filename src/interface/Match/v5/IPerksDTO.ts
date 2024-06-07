@@ -1,8 +1,8 @@
-import { Interfaces } from "@/riotentity";
+import { Interfaces } from '@/riotentity';
 
 /**
  * Interface IPerksDTO
- * 
+ *
  * @namespace Match
  * @version v5
  * @name IPerksDTO
@@ -14,7 +14,7 @@ export interface IPerksDTO {
 
 /**
  * Interface IPerkStatsDTO
- * 
+ *
  * @namespace Match
  * @version v5
  * @name IPerkStatsDTO
@@ -27,7 +27,7 @@ export interface IPerkStatsDTO {
 
 /**
  * Interface IPerkStyleDTO
- * 
+ *
  * @namespace Match
  * @version v5
  * @name IPerkStyleDTO
@@ -40,7 +40,7 @@ export interface IPerkStyleDTO {
 
 /**
  * Interface IPerkStyleSelectionDTO
- * 
+ *
  * @namespace Match
  * @version v5
  * @name IPerkStyleSelectionDTO

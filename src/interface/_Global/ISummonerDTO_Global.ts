@@ -1,3 +1,9 @@
+/**
+ * Interface ISummonerDTO_Global
+ *
+ * @namespace Global
+ * @name ISummonerDTO_Global
+ */
 export interface ISummonerDTO_Global {
     /**
      * 	Encrypted account ID. Max length 56 characters.

@@ -1,8 +1,8 @@
-import { Interfaces } from "@/riotentity";
+import { Interfaces } from '@/riotentity';
 
 /**
  * Interface ILeagueItemDTO
- * 
+ *
  * @namespace League
  * @version v4
  * @name ILeagueItemDTO
