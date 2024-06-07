@@ -1,5 +1,5 @@
 import { Interfaces } from '@/riotentity';
-import { IMiniSeriesDTO_Global } from '@/src/interface/_Global/IMiniSeriesDTO_global';
+import { IMiniSeriesDTO_Global } from '@/src/interface/_Global/IMiniSeriesDTO_Global';
 
 export class LeagueEntryDTO implements Interfaces.League.v4.ILeagueEntryDTO {
     leagueId!: string;

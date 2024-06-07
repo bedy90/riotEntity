@@ -1,6 +1,12 @@
-import { IGameCustomizationObject_Global } from "./IGameCustomizationObject_Global";
-import { IPerks_Global } from "./IPerks_Global";
+import { IGameCustomizationObject_Global } from './IGameCustomizationObject_Global';
+import { IPerks_Global } from './IPerks_Global';
 
+/**
+ * Interface ICurrentGameParticipant_Global
+ *
+ * @namespace Global
+ * @name ICurrentGameParticipant_Global
+ */
 export interface ICurrentGameParticipant_Global {
     /**
      * 	The ID of the champion played by this participant

@@ -1,6 +1,6 @@
 /**
  * Interface IActiveShardDTO
- * 
+ *
  * @NotImplemented
  * @namespace Account
  * @version v1

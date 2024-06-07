@@ -2,7 +2,7 @@ import { Interfaces } from '@/riotentity';
 
 /**
  * Interface TFT - ILeagueListDTO
- * 
+ *
  * @namespace TFT_League
  * @version v1
  * @name ILeagueListDTO
@@ -15,6 +15,6 @@ export interface ILeagueListDTO {
     tier: string;
 
     name: string;
-    
+
     queue: string;
 }

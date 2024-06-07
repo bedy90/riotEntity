@@ -32,8 +32,8 @@ export * from './League/v4/LeagueItemDTO';
 export * from './League/v4/LeagueListDTO';
 export * from './League/v4/MiniSeriesDTO';
 
-export { LeagueEntryDTO as Exp_LeagueEntryDTO }  from './LeagueExp/v4/LeagueEntryDTO';
-export { MiniSeriesDTO as Exp_MiniSeriesDTO }  from './LeagueExp/v4/MiniSeriesDTO';
+export { LeagueEntryDTO as Exp_LeagueEntryDTO } from './LeagueExp/v4/LeagueEntryDTO';
+export { MiniSeriesDTO as Exp_MiniSeriesDTO } from './LeagueExp/v4/MiniSeriesDTO';
 
 export * from './LOL_Challenges/v1/ApexPlayerInfoDTO';
 export * from './LOL_Challenges/v1/ChallengeConfigInfoDTO';
@@ -75,7 +75,7 @@ export { LeagueListDTO as TFT_LeagueListDTO } from './TFT_League/v1/LeagueListDT
 export { MiniSeriesDTO as TFT_MiniSeriesDTO } from './TFT_League/v1/MiniSeriesDTO';
 
 export { CompanionDTO as TFT_CompanionDTO } from './TFT_Match/v1/CompanionDTO';
-export { InfoDTO as TFT_InfoDTO} from './TFT_Match/v1/InfoDTO';
+export { InfoDTO as TFT_InfoDTO } from './TFT_Match/v1/InfoDTO';
 export { MatchDTO as TFT_MatchDTO } from './TFT_Match/v1/MatchDTO';
 export { MetadataDTO as TFT_MetadataDTO } from './TFT_Match/v1/MetadataDTO';
 export { ParticipantDTO as TFT_ParticipantDTO } from './TFT_Match/v1/ParticipantDTO';
@@ -97,4 +97,4 @@ export { PlatformDataDTO as TFT_PlatformDataDTO } from './TFT_Status/v1/Platform
 export { StatusDTO as TFT_StatusDTO } from './TFT_Status/v1/StatusDTO';
 export { UpdateDTO as TFT_UpdateDTO } from './TFT_Status/v1/UpdateDTO';
 
-export { SummonerDTO as TFT_SummonerDTO }  from './TFT_Summoner/v1/SummonerDTO';
+export { SummonerDTO as TFT_SummonerDTO } from './TFT_Summoner/v1/SummonerDTO';

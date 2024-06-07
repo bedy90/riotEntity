@@ -1,6 +1,6 @@
 import { Interfaces } from '@/riotentity';
-import { IGameCustomizationObject_Global } from '@/src/interface/_Global/IGameCustomizationObject_Global';
 import { IPerks_Global } from '@/src/interface/_Global/IPerks_Global';
+import { IGameCustomizationObject_Global } from '@/src/interface/_Global/IGameCustomizationObject_Global';
 
 export class CurrentGameParticipant implements Interfaces.Spectactor.v4.ICurrentGameParticipant {
     bot!: boolean;
