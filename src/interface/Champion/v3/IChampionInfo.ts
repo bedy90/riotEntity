@@ -1,6 +1,6 @@
 /**
  * Interface IChampionInfo
- *
+ * 
  * @namespace Champion
  * @version v3
  * @name IChampionInfo

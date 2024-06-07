@@ -1,5 +1,12 @@
 import { IPlayerDTO } from './IPlayerDTO';
 
+/**
+ * Interface ITeamDTO
+ * 
+ * @namespace Clash
+ * @version v1
+ * @name ITeamDTO
+ */
 export interface ITeamDTO {
     id: string;
 

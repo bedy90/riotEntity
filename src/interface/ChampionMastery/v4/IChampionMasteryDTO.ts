@@ -1,6 +1,6 @@
 /**
  * Interface IChampionMasteryDTO
- *
+ * 
  * @namespace ChampionMastery
  * @version v4
  * @name IChampionMasteryDTO

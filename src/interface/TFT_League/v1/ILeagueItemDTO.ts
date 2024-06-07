@@ -1,5 +1,12 @@
 import { IMiniSeriesDTO } from './IMiniSeriesDTO';
 
+/**
+ * Interface TFT - ILeagueItemDTO
+ * 
+ * @namespace TFT_League
+ * @version v1
+ * @name ILeagueItemDTO
+ */
 export interface ILeagueItemDTO {
     freshBlood: boolean;
 

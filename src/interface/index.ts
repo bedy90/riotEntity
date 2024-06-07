@@ -70,15 +70,15 @@ export { IParticipantDTO as TFT_IParticipantDTO } from './TFT_Match/v1/IMatchDTO
 export { ITraitDTO as TFT_ITraitDTO } from './TFT_Match/v1/IMatchDTO';
 export { IUnitDTO as TFT_IUnitDTO } from './TFT_Match/v1/IMatchDTO';
 
-export  { ICurrentGameInfo as TFT_ICurrentGameInfo } from './TFT_Spectactor/v1/ICurrentGameInfo';
-export  { ICurrentGameParticipant as TFT_ICurrentGameParticipant } from './TFT_Spectactor/v1/ICurrentGameInfo';
-export  { IGameCustomizationObject as TFT_IGameCustomizationObject } from './TFT_Spectactor/v1/ICurrentGameInfo';
-export  { IPerks as TFT_IPerks } from './TFT_Spectactor/v1/ICurrentGameInfo';
-export  { IBannedChampion as TFT_IBannedChampion } from './TFT_Spectactor/v1/IFeaturedGames';
-export  { IFeaturedGameInfo as TFT_IFeaturedGameInfo } from './TFT_Spectactor/v1/IFeaturedGames';
-export  { IFeaturedGames as TFT_IFeaturedGames } from './TFT_Spectactor/v1/IFeaturedGames';
-export  { IObserver as TFT_IObserver } from './TFT_Spectactor/v1/IFeaturedGames';
-export  { IParticipant as TFT_IParticipant } from './TFT_Spectactor/v1/IFeaturedGames';
+export  { ICurrentGameInfo as TFT_ICurrentGameInfo } from './TFT_Spectactor/v5/ICurrentGameInfo';
+export  { ICurrentGameParticipant as TFT_ICurrentGameParticipant } from './TFT_Spectactor/v5/ICurrentGameInfo';
+export  { IGameCustomizationObject as TFT_IGameCustomizationObject } from './TFT_Spectactor/v5/ICurrentGameInfo';
+export  { IPerks as TFT_IPerks } from './TFT_Spectactor/v5/ICurrentGameInfo';
+export  { IBannedChampion as TFT_IBannedChampion } from './TFT_Spectactor/v5/IFeaturedGames';
+export  { IFeaturedGameInfo as TFT_IFeaturedGameInfo } from './TFT_Spectactor/v5/IFeaturedGames';
+export  { IFeaturedGames as TFT_IFeaturedGames } from './TFT_Spectactor/v5/IFeaturedGames';
+export  { IObserver as TFT_IObserver } from './TFT_Spectactor/v5/IFeaturedGames';
+export  { IParticipant as TFT_IParticipant } from './TFT_Spectactor/v5/IFeaturedGames';
 
 export { IContentDTO as TFT_IContentDTO } from './TFT_Status/v1/IStatus';
 export { IPlatformDataDTO as TFT_IPlatformDataDTO } from './TFT_Status/v1/IStatus';

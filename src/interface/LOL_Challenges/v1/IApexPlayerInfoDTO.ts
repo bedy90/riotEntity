@@ -1,7 +1,8 @@
+
 /**
  * Interface IApexPlayerInfoDTO
- *
- * @namespace LoL_Challenges
+ * 
+ * @namespace LeagueExp
  * @version v1
  * @name IApexPlayerInfoDTO
  */

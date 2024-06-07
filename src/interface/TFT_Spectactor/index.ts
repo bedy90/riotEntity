@@ -1,8 +1,8 @@
-import * as GameInfointerface from './v1/ICurrentGameInfo';
-import * as FeatureInterfae from './v1/IFeaturedGames';
+import * as GameInfointerface from './v5/ICurrentGameInfo';
+import * as FeatureInterfae from './v5/IFeaturedGames';
 
-export namespace SpectactorTFT {
-    export namespace v4 {
+export namespace TFT_Spectactor {
+    export namespace v5 {
         export import ICurrentGameInfo = GameInfointerface.ICurrentGameInfo;
         export import ICurrentGameParticipant = GameInfointerface.ICurrentGameParticipant;
         export import IGameCustomizationObject = GameInfointerface.IGameCustomizationObject;
