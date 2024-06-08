@@ -1,6 +1,3 @@
-// Current version
-// export * from './v1/IAccountDTO';
-
 // Namespace version
 import * as AccountInterfaces from './v1/IAccountDTO';
 // import { IAccountDTO } from './v1/IAccountDTO';
