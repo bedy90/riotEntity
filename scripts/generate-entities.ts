@@ -191,11 +191,6 @@ function processTypeAliases(typeAliases: TypeAliasDeclaration[], filePath: strin
       // Obtenir les types personnalisés
       const { customTypes, globalTypes } = getCustomAndGlobalTypes(properties);
 
-
-      // Calculer le chemin relatif pour les importations
-      // const relativePath = path.relative("src/interface", filePath);
-      // const depth = relativePath.split(path.sep).length - 1;
-
       // Générer le contenu de la classe
       let classContent = `import { Interfaces } from '@/riotentity';\n`;
 
@@ -210,10 +205,6 @@ function processTypeAliases(typeAliases: TypeAliasDeclaration[], filePath: strin
         });
       }
 
-      // const globalImportPath = '../'.repeat(depth) + `interface/_Global/${globalType}`;
-      // const globalImportPath = `@/src/interface/_Global/${globalType}`;
-      // classContent += `import { ${globalType} } from '${globalImportPath}';\n`;
-
       classContent += `\nexport class ${className} implements Interfaces.${namespace}.${version}.${name} {\n`;
 
       properties.forEach((property: PropertySignature) => {
@@ -226,7 +217,7 @@ function processTypeAliases(typeAliases: TypeAliasDeclaration[], filePath: strin
 
       // Déterminer le chemin de sortie
       const relativePath = path.relative("src/interface", filePath);
-      const outputPath = path.join("generate", "entity", relativePath); // path.join("src/generate", relativePath);
+      const outputPath = path.join("generate", "entity", relativePath);
       const outputDir = path.dirname(outputPath);
       const outputFile = path.join(outputDir, `${className}.ts`);
 
