@@ -1,5 +1,12 @@
 import { Interfaces } from '@/riotentity';
 
+/**
+ * Class LeagueItemDTO
+ *
+ * @namespace TFT_League
+ * @version v1
+ * @name ILeagueItemDTO
+ */
 export class LeagueItemDTO implements Interfaces.TFT_League.v1.ILeagueItemDTO {
     freshBlood!: boolean;
     wins!: number;

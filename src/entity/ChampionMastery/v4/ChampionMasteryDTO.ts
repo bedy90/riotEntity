@@ -1,5 +1,12 @@
 import { Interfaces } from '@/riotentity';
 
+/**
+ * Class ChampionMasteryDTO
+ *
+ * @namespace ChampionMastery
+ * @version v4
+ * @name IChampionMasteryDTO
+ */
 export class ChampionMasteryDTO implements Interfaces.ChampionMastery.v4.IChampionMasteryDTO {
     puuid!: string;
     championPointsUntilNextLevel!: number;

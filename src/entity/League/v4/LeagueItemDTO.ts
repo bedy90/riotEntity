@@ -1,5 +1,12 @@
 import { Interfaces } from '@/riotentity';
 
+/**
+ * Class LeagueItemDTO
+ *
+ * @namespace League
+ * @version v4
+ * @name ILeagueItemDTO
+ */
 export class LeagueItemDTO implements Interfaces.League.v4.ILeagueItemDTO {
     freshBlood!: boolean;
     wins!: number;
