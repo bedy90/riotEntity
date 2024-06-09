@@ -4,6 +4,13 @@ import { IBannedChampion_Global } from '@/src/interface/_Global/IBannedChampion_
 import { IObserver_Global } from '@/src/interface/_Global/IObserver_Global';
 import { IParticipant_Global } from '@/src/interface/_Global/IParticipant_Global';
 
+/**
+ * Class FeaturedGameInfo
+ *
+ * @namespace Spectactor
+ * @version v4
+ * @name IFeaturedGameInfo
+ */
 export class FeaturedGameInfo implements Interfaces.Spectactor.v4.IFeaturedGameInfo {
     gameMode!: GameMode | string;
     gameLength!: number;

@@ -1,7 +1,7 @@
-import * as ChampMastery from './v4/ChampionMasteryDTO';
+import * as ChampionMasteryDTOCls from './v4/ChampionMasteryDTO';
 
 export namespace ChampionMastery {
-    export namespace v4 {
-        export import ChampionMasteryDTO = ChampMastery.ChampionMasteryDTO;
-    }
+  export namespace v4 {
+    export import ChampionMasteryDTO = ChampionMasteryDTOCls.ChampionMasteryDTO;
+  }
 }
