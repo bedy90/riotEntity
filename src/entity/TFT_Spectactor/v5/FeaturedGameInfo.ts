@@ -4,6 +4,13 @@ import { IBannedChampion_Global } from '@/src/interface/_Global/IBannedChampion_
 import { IObserver_Global } from '@/src/interface/_Global/IObserver_Global';
 import { IParticipant_Global } from '@/src/interface/_Global/IParticipant_Global';
 
+/**
+ * Class FeaturedGameInfo
+ *
+ * @namespace TFT_Spectactor
+ * @version v5
+ * @name IFeaturedGameInfo
+ */
 export class FeaturedGameInfo implements Interfaces.TFT_Spectactor.v5.IFeaturedGameInfo {
     gameMode!: GameMode | string;
     gameLength!: number;

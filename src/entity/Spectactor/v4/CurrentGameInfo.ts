@@ -3,6 +3,13 @@ import { IBannedChampion_Global } from '@/src/interface/_Global/IBannedChampion_
 import { IObserver_Global } from '@/src/interface/_Global/IObserver_Global';
 import { ICurrentGameParticipant_Global } from '@/src/interface/_Global/ICurrentGameParticipant_Global';
 
+/**
+ * Class CurrentGameInfo
+ *
+ * @namespace Spectactor
+ * @version v4
+ * @name ICurrentGameInfo
+ */
 export class CurrentGameInfo implements Interfaces.Spectactor.v4.ICurrentGameInfo {
     gameId!: number;
     gameType!: string;
