@@ -1,14 +1,13 @@
-// import * as Status from './v4/Status';
-import * as Content from './v4/ContentDTO';
-import * as PlatformData from './v4/PlatformDataDTO';
-import * as Status from './v4/StatusDTO';
-import * as Update from './v4/UpdateDTO';
+import * as UpdateDTOCls from './v4/UpdateDTO';
+import * as StatusDTOCls from './v4/StatusDTO';
+import * as PlatformDataDTOCls from './v4/PlatformDataDTO';
+import * as ContentDTOCls from './v4/ContentDTO';
 
 export namespace LoL_Status {
-    export namespace v4 {
-        export import ContentDTO = Content.ContentDTO;
-        export import PlatformDataDTO = PlatformData.PlatformDataDTO;
-        export import StatusDTO = Status.StatusDTO;
-        export import UpdateDTO = Update.UpdateDTO;
-    }
+  export namespace v4 {
+    export import UpdateDTO = UpdateDTOCls.UpdateDTO;
+    export import StatusDTO = StatusDTOCls.StatusDTO;
+    export import PlatformDataDTO = PlatformDataDTOCls.PlatformDataDTO;
+    export import ContentDTO = ContentDTOCls.ContentDTO;
+  }
 }

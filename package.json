@@ -10,6 +10,7 @@
     "build:packageProd": "node scripts/generate-prod-package.js",
     "generate:class": "npx rimraf ./generate/entity && npx ts-node scripts/generate-entities.ts class",
     "generate:interfaceIndex": "npx rimraf ./generate/interface && npx ts-node scripts/generate-entities.ts intIndex",
+    "generate:classIndex": "npx rimraf ./generate/entity && npx ts-node scripts/generate-entities.ts clsIndex",
     "== Compile ==": "",
     "compile:npx": "npx tsc",
     "compile:rim": "rimraf ./build && tsc",

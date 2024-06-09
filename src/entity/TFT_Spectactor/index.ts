@@ -1,24 +1,23 @@
-import * as BannedChampions from './v5/BannedChampion';
-import * as CurrentGameInfos from './v5/CurrentGameInfo';
-import * as CurrentGameParticipants from './v5/CurrentGameParticipant';
-import * as FeaturedGameInfos from './v5/FeaturedGameInfo';
-import * as FeaturedGame from './v5/FeaturedGames';
-import * as GameCustomizationObjects from './v5/GameCustomizationObject';
-import * as Observers from './v5/Observer';
-import * as Participants from './v5/Participant';
-import * as Perk from './v5/Perks';
+import * as PerksCls from './v5/Perks';
+import * as ParticipantCls from './v5/Participant';
+import * as ObserverCls from './v5/Observer';
+import * as GameCustomizationObjectCls from './v5/GameCustomizationObject';
+import * as FeaturedGamesCls from './v5/FeaturedGames';
+import * as FeaturedGameInfoCls from './v5/FeaturedGameInfo';
+import * as CurrentGameParticipantCls from './v5/CurrentGameParticipant';
+import * as CurrentGameInfoCls from './v5/CurrentGameInfo';
+import * as BannedChampionCls from './v5/BannedChampion';
 
 export namespace TFT_Spectactor {
-    export namespace v5 {
-        export import CurrentGameInfo = CurrentGameInfos.CurrentGameInfo;
-        export import CurrentGameParticipant = CurrentGameParticipants.CurrentGameParticipant;
-        export import GameCustomizationObject = GameCustomizationObjects.GameCustomizationObject;
-        export import Perks = Perk.Perks;
-
-        export import BannedChampion = BannedChampions.BannedChampion;
-        export import FeaturedGameInfo = FeaturedGameInfos.FeaturedGameInfo;
-        export import FeaturedGames = FeaturedGame.FeaturedGames;
-        export import Observer = Observers.Observer;
-        export import Participant = Participants.Participant;
-    }
+  export namespace v5 {
+    export import Perks = PerksCls.Perks;
+    export import Participant = ParticipantCls.Participant;
+    export import Observer = ObserverCls.Observer;
+    export import GameCustomizationObject = GameCustomizationObjectCls.GameCustomizationObject;
+    export import FeaturedGames = FeaturedGamesCls.FeaturedGames;
+    export import FeaturedGameInfo = FeaturedGameInfoCls.FeaturedGameInfo;
+    export import CurrentGameParticipant = CurrentGameParticipantCls.CurrentGameParticipant;
+    export import CurrentGameInfo = CurrentGameInfoCls.CurrentGameInfo;
+    export import BannedChampion = BannedChampionCls.BannedChampion;
+  }
 }
