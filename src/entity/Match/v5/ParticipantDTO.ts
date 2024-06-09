@@ -1,6 +1,13 @@
 import { Interfaces } from '@/riotentity';
 import { KaynChampionTransform } from '@/riotentity';
 
+/**
+ * Class ParticipantDTO
+ *
+ * @namespace Match
+ * @version v5
+ * @name IParticipantDTO
+ */
 export class ParticipantDTO implements Interfaces.Match.v5.IParticipantDTO {
     assists!: number;
     baronKills!: number;

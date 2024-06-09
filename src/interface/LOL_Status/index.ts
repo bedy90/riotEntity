@@ -1,10 +1,13 @@
-import * as StatusInterface_v4 from './v4/IStatus';
+import * as UpdateDTOInterface from './v4/IUpdateDTO';
+import * as StatusDTOInterface from './v4/IStatusDTO';
+import * as PlatformDataDTOInterface from './v4/IPlatformDataDTO';
+import * as ContentDTOInterface from './v4/IContentDTO';
 
 export namespace LoL_Status {
-    export namespace v4 {
-        export import IContentDTO = StatusInterface_v4.IContentDTO;
-        export import IPlatformDataDTO = StatusInterface_v4.IPlatformDataDTO;
-        export import IStatusDTO = StatusInterface_v4.IStatusDTO;
-        export import IUpdateDTO = StatusInterface_v4.IUpdateDTO;
-    }
+  export namespace v4 {
+    export import IUpdateDTO = UpdateDTOInterface.IUpdateDTO;
+    export import IStatusDTO = StatusDTOInterface.IStatusDTO;
+    export import IPlatformDataDTO = PlatformDataDTOInterface.IPlatformDataDTO;
+    export import IContentDTO = ContentDTOInterface.IContentDTO;
+  }
 }
