@@ -1,14 +1,19 @@
-import * as MatchInterface from './v1/IMatchDTO';
+import * as UnitDTOInterface from './v1/IUnitDTO';
+import * as TraitDTOInterface from './v1/ITraitDTO';
+import * as ParticipantDTOInterface from './v1/IParticipantDTO';
+import * as MetadataDTOInterface from './v1/IMetadataDTO';
+import * as MatchDTOInterface from './v1/IMatchDTO';
+import * as InfoDTOInterface from './v1/IInfoDTO';
+import * as CompanionDTOInterface from './v1/ICompanionDTO';
 
 export namespace TFT_Match {
-    export namespace v1 {
-        // TODO: Generate global interface
-        export import ICompanionDTO = MatchInterface.ICompanionDTO;
-        export import IInfoDTO = MatchInterface.IInfoDTO;
-        export import IMatchDTO = MatchInterface.IMatchDTO;
-        export import IMetadataDTO = MatchInterface.IMetadataDTO;
-        export import IParticipantDTO = MatchInterface.IParticipantDTO;
-        export import ITraitDTO = MatchInterface.ITraitDTO;
-        export import IUnitDTO = MatchInterface.IUnitDTO;
-    }
+  export namespace v1 {
+    export import IUnitDTO = UnitDTOInterface.IUnitDTO;
+    export import ITraitDTO = TraitDTOInterface.ITraitDTO;
+    export import IParticipantDTO = ParticipantDTOInterface.IParticipantDTO;
+    export import IMetadataDTO = MetadataDTOInterface.IMetadataDTO;
+    export import IMatchDTO = MatchDTOInterface.IMatchDTO;
+    export import IInfoDTO = InfoDTOInterface.IInfoDTO;
+    export import ICompanionDTO = CompanionDTOInterface.ICompanionDTO;
+  }
 }

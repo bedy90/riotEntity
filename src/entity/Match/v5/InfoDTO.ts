@@ -1,5 +1,12 @@
 import { Interfaces } from '@/riotentity';
 
+/**
+ * Class InfoDTO
+ *
+ * @namespace Match
+ * @version v5
+ * @name IInfoDTO
+ */
 export class InfoDTO implements Interfaces.Match.v5.IInfoDTO {
     gameCreation!: number;
     gameDuration!: number;
