@@ -48,6 +48,7 @@
   ],
   "exclude": [
     "node_modules",
+    "./scripts",
     "./lib",
     "src/manual_test.ts"
   ]
