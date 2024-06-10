@@ -2,6 +2,9 @@ import { Project, InterfaceDeclaration, PropertySignature, TypeAliasDeclaration,
 import * as glob from "glob";
 import * as fs from "fs-extra";
 import * as path from "path";
+import './logger';
+import { logType } from './logger';
+import { InterfaceData } from './entities/interfaceData';
 
 export enum ImportTypes {
   GLOBAL = 0,
@@ -17,7 +20,7 @@ export enum NamespaceIndexTypes {
 export class Generator {
   project: Project;
   namespaceVersions: { [key: string]: { [key: string]: string[] } };
-  entitiesData: { [key: string]: { className: string, filePath: string, content: string } }
+  entitiesData: { [key: string]: { [key: string]: InterfaceData } }
 
   constructor() {
     this.project = new Project();
@@ -67,41 +70,41 @@ export class Generator {
     return { namespace, version, name, NotImplemented };
   }
 
-  /**
-   * Fonction pour extraire les types personnalisés des propriétés d'une interface
-   * @param properties 
-   * @returns 
-   */
-  #getCustomAndGlobalTypes(properties: PropertySignature[]): { customTypes: Set<string>, globalTypes: Set<string> } {
-    const customTypes = new Set<string>();
-    const globalTypes = new Set<string>();
+  // /**
+  //  * Fonction pour extraire les types personnalisés des propriétés d'une interface
+  //  * @param properties 
+  //  * @returns 
+  //  */
+  // #getCustomAndGlobalTypes(properties: PropertySignature[]): { customTypes: Set<string>, globalTypes: Set<string> } {
+  //   const customTypes = new Set<string>();
+  //   const globalTypes = new Set<string>();
 
-    properties.forEach(property => {
-      const propType = property.getTypeNode()?.getText() || '';
-      const matches = propType.match(/\b[A-Z][a-zA-Z0-9_]*\b/g);
+  //   properties.forEach(property => {
+  //     const propType = property.getTypeNode()?.getText() || '';
+  //     const matches = propType.match(/\b[A-Z][a-zA-Z0-9_]*\b/g);
 
-      if (matches) {
-        matches.forEach(type => {
-          // Exclure les types contenant « Interfaces » ainsi que les types primitifs et globaux
-          if (!propType.includes('Interfaces.') && !['string', 'number', 'boolean', 'any', 'undefined', 'null', 'void', 'never', 'object', 'unknown', 'map'].includes(type.toLowerCase())) {
-            // Split customType and globalTypes
-            if (type.toLowerCase().includes("_global")) {
-              globalTypes.add(type);
-            } else {
-              customTypes.add(type);
-            }
-          }
-        });
-      }
-    });
+  //     if (matches) {
+  //       matches.forEach(type => {
+  //         // Exclure les types contenant « Interfaces » ainsi que les types primitifs et globaux
+  //         if (!propType.includes('Interfaces.') && !['string', 'number', 'boolean', 'any', 'undefined', 'null', 'void', 'never', 'object', 'unknown', 'map'].includes(type.toLowerCase())) {
+  //           // Split customType and globalTypes
+  //           if (type.toLowerCase().includes("_global")) {
+  //             globalTypes.add(type);
+  //           } else {
+  //             customTypes.add(type);
+  //           }
+  //         }
+  //       });
+  //     }
+  //   });
 
-    return { customTypes, globalTypes };
-  }
+  //   return { customTypes, globalTypes };
+  // }
 
   /**
    * Generate JDOC header for classContent
    */
-  #generateClassHeader(className: string, namespace: string, version: string, name: string) : string {
+  #generateClassHeader(className: string, namespace: string, version: string, name: string): string {
     let header: string = '';
 
     header += `\n/**\n`
@@ -111,68 +114,71 @@ export class Generator {
     header += ` * @version ${version}\n`
     header += ` * @name ${name}\n`
     header += ` */`
-    
+
     return header;
   }
 
-  /**
-   * Generate all imports from types list
-   * @param types 
-   * @param importType 
-   * @returns 
-   */
-  #generateImport(types: Set<string>, importType: ImportTypes): string {
-    let imports: string = '';
+  // /**
+  //  * Generate all imports from types list
+  //  * @param types 
+  //  * @param importType 
+  //  * @returns 
+  //  */
+  // #generateImport(types: Set<string>, importType: ImportTypes): string {
+  //   let imports: string = '';
 
-    if (types && types.size > 0) {
-      switch (importType) {
-        case ImportTypes.CUSTOM:
-          imports += `import { ${[...types].join(', ')} } from '@/riotentity';\n`;
-          break;
+  //   if (types && types.size > 0) {
+  //     switch (importType) {
+  //       case ImportTypes.CUSTOM:
+  //         imports += `import { ${[...types].join(', ')} } from '@/riotentity';\n`;
+  //         break;
 
-        case ImportTypes.GLOBAL:
-          types.forEach(globalType => {
-            const globalImportPath = `@/src/interface/_Global/${globalType}`;
-            imports += `import { ${globalType} } from '${globalImportPath}';\n`;
-          });
-          break;
-      }
-    }
+  //       case ImportTypes.GLOBAL:
+  //         types.forEach(globalType => {
+  //           const globalImportPath = `@/src/interface/_Global/${globalType}`;
+  //           imports += `import { ${globalType} } from '${globalImportPath}';\n`;
+  //         });
+  //         break;
+  //     }
+  //   }
 
-    return imports;
-  }
+  //   return imports;
+  // }
 
-  /**
-   * Generate all properties
-   * @param properties 
-   * @returns 
-   */
-  #generateProperties(properties: PropertySignature[]): string {
-    let classContent: string = '';
+  // /**
+  //  * Generate all properties
+  //  * @param properties 
+  //  * @returns 
+  //  */
+  // #generateProperties(properties: PropertySignature[]): string {
+  //   let classContent: string = '';
 
-    if (properties && properties.length > 0) {
-      properties.forEach((property: PropertySignature) => {
-        const propName = property.getName();
-        const propType = property.getTypeNode()?.getText() || 'any';
+  //   if (properties && properties.length > 0) {
+  //     properties.forEach((property: PropertySignature) => {
+  //       const propName = property.getName();
+  //       const propType = property.getTypeNode()?.getText() || 'any';
 
-        classContent += `    ${propName}!: ${propType};\n`;
-      });
-    }
-    return classContent;
-  }
+  //       classContent += `    ${propName}!: ${propType};\n`;
+  //     });
+  //   }
+  //   return classContent;
+  // }
 
-  #writeFile(filePath: string, className: string, classContent: string): void {
+  #writeFile(basePath: string, orignalFilePath: string, fileName: string, fileContent: string): void {
     // Déterminer le chemin de sortie
-    const relativePath = path.relative("src/interface", filePath);
+    // basePath = "src/interface"
+    // path.relative("src/interface", orignalFilePath);
+
+    const relativePath = path.relative(basePath, orignalFilePath);
     const outputPath = path.join("generate", "entity", relativePath);
     const outputDir = path.dirname(outputPath);
-    const outputFile = path.join(outputDir, `${className}.ts`);
+    const outputFile = path.join(outputDir, `${fileName}.ts`);
 
     // Créer le répertoire de sortie si nécessaire
     fs.ensureDirSync(outputDir);
 
     // Écrire le fichier de classe
-    fs.writeFileSync(outputFile, classContent);
+    fs.writeFileSync(outputFile, fileContent);
   }
 
   #addNamespace(namespace: string, version: string, interfaceName: string): void {
@@ -190,10 +196,18 @@ export class Generator {
     this.namespaceVersions[namespace][version].push(interfaceName);
   }
 
-  // TOO: Ad
-  // #addEntities(className: string, filePath: string, content: string): void {
-  //   this.entitiesData
-  // }
+  #addEntities(namespace: string, version: string, data: InterfaceData): void {
+    if (data) {
+      if (!this.entitiesData[namespace]) {
+        this.entitiesData[namespace] = {};
+      }
+
+      // Ajouter la version dans le namespaceVersions, si elle n'existe pas
+      if (!this.entitiesData[namespace][version]) {
+        this.entitiesData[namespace][version] = data;
+      }
+    }
+  }
 
   // ****************************************
   //  Process function
@@ -212,7 +226,7 @@ export class Generator {
         // Extraire les informations JSDoc
         const { namespace, version, name, NotImplemented } = this.#extractJsDocInfoByDeclaration(cls);
         if (NotImplemented) {
-          console.warn(`[WARN] Class ${className} isn't implemented.`)
+          console.warn(`Class ${className} isn't implemented.`)
           return;
         }
 
@@ -243,43 +257,35 @@ export class Generator {
         // TODO : Move validation on extractJsDocInfoByDeclaration and THROW Exception (required Try..catch)
         const { namespace, version, name, NotImplemented } = this.#extractJsDocInfoByDeclaration(iface);
         if (!namespace || !version || !name) {
-          console.warn(`[WARN] Interface ${interfaceName} can't be transformed into a class, as its JDOC is not declared.`)
+          console.warn(`Interface ${interfaceName} can't be transformed into a class, as its JDOC is not declared.`)
           return;
         }
         if (NotImplemented) {
-          console.warn(`[WARN] Interface ${interfaceName} isn't implemented.`)
+          console.warn(`Interface ${interfaceName} isn't implemented.`)
           return;
         }
 
         // Préparation du namespace (index)
         this.#addNamespace(namespace, version, interfaceName);
 
+        // Prepare interfaceData
+        let data: InterfaceData = new InterfaceData(filePath, className, iface);
+        data.addHeader(namespace, version, name);
+        // data.addProperties(this.#getAllPropertiesByInterfaceDeclaration(iface));
+        // // data.addType(this.#getCustomAndGlobalTypes(data.properties));
+       
+        // data.addImport(`import { Interfaces } from '@/riotentity';`)
+        // data.addImportTypes(data.customTypes, ImportTypes.CUSTOM)
+        // data.addImportTypes(data.globalTypes, ImportTypes.GLOBAL)
+        // // data.addImport(this.#generateImport(data.customTypes, ImportTypes.CUSTOM))
+        // // data.addImport(this.#generateImport(data.globalTypes, ImportTypes.GLOBAL))
+        data.addJDOC(this.#generateClassHeader(className, namespace, version, name));
+        this.#addEntities(namespace, version, data);
+
         if (generateFile) {
-          // Obtenir toutes les propriétés (y compris héritées)
-          const properties = this.#getAllPropertiesByInterfaceDeclaration(iface);
+          this.#writeFile( "src/interface", filePath, className, data.classContent());
 
-          // Obtenir les types personnalisés
-          const { customTypes, globalTypes } = this.#getCustomAndGlobalTypes(properties);
-
-          // Générer le contenu de la classe
-          let classContent = `import { Interfaces } from '@/riotentity';\n`;
-          classContent += this.#generateImport(customTypes, ImportTypes.CUSTOM);
-          classContent += this.#generateImport(globalTypes, ImportTypes.GLOBAL);
-
-          // Declare export header
-          classContent += this.#generateClassHeader(className, namespace, version, name);
-          classContent += `\nexport class ${className} implements Interfaces.${namespace}.${version}.${name} {\n`;
-
-          // Declare properties
-          classContent += this.#generateProperties(properties);
-
-          // End class 
-          classContent += `}\n`;
-
-          // Déterminer le chemin de sortie
-          this.#writeFile(filePath, className, classContent);
-
-          console.log(`[SUCCESS] Class ${className} has been generated from the interface.`)
+          console.log(logType.CLASS, `Classes ${className} has been generated from the interface.`)
         }
       } // End if startsWith("I")
     });
@@ -301,43 +307,40 @@ export class Generator {
         // Extraire les informations JSDoc
         const { namespace, version, name, NotImplemented } = this.#extractJsDocInfoByDeclaration(typeAlias);
         if (!namespace || !version || !name) {
-          console.warn(`[WARN] Types ${typeName} can't be transformed into a class, as its JDOC is not declared.`)
+          console.warn(`Types ${typeName} can't be transformed into a class, as its JDOC is not declared.`)
           return;
         }
         if (NotImplemented) {
-          console.warn(`[WARN] Types ${typeName} isn't implemented.`)
+          console.warn(`Types ${typeName} isn't implemented.`)
           return;
         }
 
         // Préparation du namespace (index)
         this.#addNamespace(namespace, version, typeName);
 
+        const globalInterface: InterfaceDeclaration = this.project.getSourceFileOrThrow(path.join("src/interface/", "_Global/" + globalType + ".ts")).getInterfaceOrThrow(globalType.replace(/<.*>$/, ''));
+        // const properties = this.#getAllPropertiesByInterfaceDeclaration(globalInterface);
+
+        // Prepare interfaceData
+        let data: InterfaceData = new InterfaceData(filePath, className, globalInterface);
+        data.addHeader(namespace, version, name);
+        // data.addProperties(properties);
+        // // data.addType(this.#getCustomAndGlobalTypes(data.properties));
+        
+        // data.addImport(`import { Interfaces } from '@/riotentity';`)
+        // data.addImportTypes(data.customTypes, ImportTypes.CUSTOM)
+        // data.addImportTypes(data.globalTypes, ImportTypes.GLOBAL)
+       
+        // // data.addImport(this.#generateImport(data.customTypes, ImportTypes.CUSTOM))
+        // // data.addImport(this.#generateImport(data.globalTypes, ImportTypes.GLOBAL))
+        data.addJDOC(this.#generateClassHeader(className, namespace, version, name));
+        this.#addEntities(namespace, version, data);
+
+
         if (generateFile) {
-          // Type est juste un alias, nous devons générer les propriétés de l'interface globale
-          const globalInterface = this.project.getSourceFileOrThrow(path.join("src/interface/", "_Global/" + globalType + ".ts")).getInterfaceOrThrow(globalType.replace(/<.*>$/, ''));
-          const properties = this.#getAllPropertiesByInterfaceDeclaration(globalInterface);
+          this.#writeFile( "src/interface", filePath, className, data.classContent());
 
-          // Obtenir les types personnalisés
-          const { customTypes, globalTypes } = this.#getCustomAndGlobalTypes(properties);
-
-          // Générer le contenu de la classe
-          let classContent = `import { Interfaces } from '@/riotentity';\n`;
-          classContent += this.#generateImport(customTypes, ImportTypes.CUSTOM);
-          classContent += this.#generateImport(globalTypes, ImportTypes.GLOBAL);
-
-          classContent += this.#generateClassHeader(className, namespace, version, name);
-          classContent += `\nexport class ${className} implements Interfaces.${namespace}.${version}.${name} {\n`;
-
-          // Declare properties
-          classContent += this.#generateProperties(properties);
-
-          // End class 
-          classContent += `}\n`;
-
-          // Déterminer le chemin de sortie
-          this.#writeFile(filePath, className, classContent);
-
-          console.log(`[SUCCESS] Class ${className} has been generated from the type.`)
+          console.log(logType.CLASS, `Classes ${className} has been generated from the type.`)
         }
       }
     });
@@ -402,7 +405,7 @@ export class Generator {
 
         let indexContent = '';
         classes.forEach(className => {
-          const importName = className; //.substring(1);
+          const importName = className;
 
           const classPath = `./${version}/${className}`;
           indexContent += `import * as ${importName}Cls from '${classPath}';\n`;
@@ -412,7 +415,7 @@ export class Generator {
         indexContent += `  export namespace ${version} {\n`;
 
         classes.forEach(className => {
-          const importName = className; //.substring(1);
+          const importName = className;
           indexContent += `    export import ${className} = ${importName}Cls.${className};\n`;
         });
 
@@ -509,30 +512,32 @@ switch (firstArgs) {
   case '1':
   case 'entity':
   case 'class':
-    console.log('Génération des class a partir des interfaces')
+    console.log(logType.CLASS, `Generate entity classes from interfaces`)
     mainGenerator.processInterfaceToClass();
+    console.log(logType.CLASS, `Generation of entity classes from interfaces is now complete`)
+
     break;
 
   case '2':
   case 'interfaceIndex':
   case 'intIndex':
-    console.log('Génération des namespace Index pour les interfaces')
+    console.log(logType.INDEX, `Generating index interfaces from nain interfaces`)
     mainGenerator.processIndexNamespace("src/interface/**/*.ts", NamespaceIndexTypes.INTERFACE);
     break;
 
   case '3':
   case 'classIndex':
   case 'clsIndex':
-    console.log('Génération des namespace Index pour les class')
+    console.log(logType.INDEX, `Generating index class from main class`)
     mainGenerator.processIndexNamespace("src/entity/**/*.ts", NamespaceIndexTypes.ENTITY);
     break;
 
   case '4':
   case 'validator':
-    console.log('Génération des validateur a partir des interfaces')
+    console.log(logType.VALIDATOR, `Generating validation classes from interfaces`)
     break;
 
   default:
-    console.log(`Paramètre invalide : "${firstArgs}"`);
+    console.log(logType.INFORMATION, `Invalid parameters : "${firstArgs}"`)
     break;
 }

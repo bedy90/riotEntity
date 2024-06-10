@@ -170,7 +170,7 @@ console.log = function (type: logType, message?: any, ...params: any[]) {
         }
 
         default: {
-            if (typeof (type) == 'string') {
+            if (typeof(type) == "string") {
                 exLog.apply(this, [prefixMessage(logPrefix.verbose, formatOrignalString(type, message))]);
             } else {
                 exLog.apply(this, [prefixMessage(logPrefix.verbose, formatOrignalString(message, params))]);
