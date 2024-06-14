@@ -4,7 +4,8 @@ import { IPerks_Global } from './IPerks_Global';
 /**
  * Interface ICurrentGameParticipant_Global
  *
- * @namespace Global
+ * @namespace Global 
+ * @version 1
  * @name ICurrentGameParticipant_Global
  */
 export interface ICurrentGameParticipant_Global {
