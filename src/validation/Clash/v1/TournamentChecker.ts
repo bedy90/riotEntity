@@ -1,21 +1,26 @@
 import { Interfaces } from '@/riotentity';
 
 export function isITournamentDTO(obj: any): obj is Interfaces.Clash.v1.ITournamentDTO {
-    return (
-        'id' in obj &&
-        'themeId' in obj &&
-        'nameKey' in obj &&
-        'nameKeySecondary' in obj &&
-        'schedule' in obj
-    );
-}
+    if (typeof obj !== 'object' || obj === null) {
+        return false;
+    }
 
+    const entityDTO = obj as Interfaces.Clash.v1.ITournamentDTO;
 
-export function isITournamentPhaseDTO(obj: any): obj is Interfaces.Clash.v1.ITournamentPhaseDTO {
-    return (
-        'id' in obj &&
-        'registrationTime' in obj &&
-        'startTime' in obj &&
-        'cancelled' in obj
+    const hasFieldsIn: boolean = 'id' in entityDTO &&
+        'themeId' in entityDTO &&
+        'nameKey' in entityDTO &&
+        'nameKeySecondary' in entityDTO &&
+        'schedule' in entityDTO;
+    const hasFieldCount: boolean = Object.keys(entityDTO).length === 5;
+
+    const hasFieldType: boolean = (
+        typeof entityDTO.id === 'number' &&
+        typeof entityDTO.themeId === 'number' &&
+        typeof entityDTO.nameKey === 'string' &&
+        typeof entityDTO.nameKeySecondary === 'string' &&
+        Array.isArray(entityDTO.schedule)
     );
+
+    return hasFieldsIn && hasFieldCount && hasFieldType;
 }
