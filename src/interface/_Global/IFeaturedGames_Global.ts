@@ -3,7 +3,8 @@ import { IFeaturedGameInfo_Global } from './IFeaturedGameInfo_Global';
 /**
  * Interface IFeaturedGames_Global
  *
- * @namespace Global
+ * @namespace Global 
+ * @version 1
  * @name IFeaturedGames_Global
  */
 export interface IFeaturedGames_Global {
