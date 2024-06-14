@@ -19,7 +19,9 @@ export class InterfaceData {
     imports: Array<string>;
     jdocHeader!: string;
 
-    constructor(public filePath: string, public className: string, 
+    constructor(public filePath: string,
+                 public originalName: string,
+                 public className: string, 
                 public iface: InterfaceDeclaration | null = null,
                 public typeAlias: TypeAliasDeclaration | null = null) {
         this.headerInfo = null;

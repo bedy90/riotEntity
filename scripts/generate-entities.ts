@@ -1,4 +1,4 @@
-import { Project, InterfaceDeclaration, PropertySignature, TypeAliasDeclaration, ClassDeclaration } from 'ts-morph';
+import { Project, InterfaceDeclaration, PropertySignature, TypeAliasDeclaration, ClassDeclaration, StructureKind, SourceFile } from 'ts-morph';
 import * as glob from "glob";
 import * as fs from "fs-extra";
 import * as path from "path";
@@ -17,10 +17,24 @@ export enum NamespaceIndexTypes {
   VALIDATOR = 2
 }
 
+export enum ValidationTypes {
+  GENERIC = 1,
+  GENERIC_ARRAY = 2,
+
+  CUSTOM_TYPE = 5,
+  CUSTOM_TYPE_ARRAY = 6,
+
+  ENUM = 8,
+  ENUM_ARRAY = 9,
+
+  GLOBAL_TYPE = 12,
+  GLOBAL_TYPE_ARRAY = 13,
+}
+
 export class Generator {
   project: Project;
   namespaceVersions: { [key: string]: { [key: string]: string[] } };
-  entitiesData: { [key: string]: { [key: string]: InterfaceData } }
+  entitiesData: { [key: string]: { [key: string]: InterfaceData[] } }
 
   constructor() {
     this.project = new Project();
@@ -70,37 +84,6 @@ export class Generator {
     return { namespace, version, name, NotImplemented };
   }
 
-  // /**
-  //  * Fonction pour extraire les types personnalisés des propriétés d'une interface
-  //  * @param properties 
-  //  * @returns 
-  //  */
-  // #getCustomAndGlobalTypes(properties: PropertySignature[]): { customTypes: Set<string>, globalTypes: Set<string> } {
-  //   const customTypes = new Set<string>();
-  //   const globalTypes = new Set<string>();
-
-  //   properties.forEach(property => {
-  //     const propType = property.getTypeNode()?.getText() || '';
-  //     const matches = propType.match(/\b[A-Z][a-zA-Z0-9_]*\b/g);
-
-  //     if (matches) {
-  //       matches.forEach(type => {
-  //         // Exclure les types contenant « Interfaces » ainsi que les types primitifs et globaux
-  //         if (!propType.includes('Interfaces.') && !['string', 'number', 'boolean', 'any', 'undefined', 'null', 'void', 'never', 'object', 'unknown', 'map'].includes(type.toLowerCase())) {
-  //           // Split customType and globalTypes
-  //           if (type.toLowerCase().includes("_global")) {
-  //             globalTypes.add(type);
-  //           } else {
-  //             customTypes.add(type);
-  //           }
-  //         }
-  //       });
-  //     }
-  //   });
-
-  //   return { customTypes, globalTypes };
-  // }
-
   /**
    * Generate JDOC header for classContent
    */
@@ -117,52 +100,6 @@ export class Generator {
 
     return header;
   }
-
-  // /**
-  //  * Generate all imports from types list
-  //  * @param types 
-  //  * @param importType 
-  //  * @returns 
-  //  */
-  // #generateImport(types: Set<string>, importType: ImportTypes): string {
-  //   let imports: string = '';
-
-  //   if (types && types.size > 0) {
-  //     switch (importType) {
-  //       case ImportTypes.CUSTOM:
-  //         imports += `import { ${[...types].join(', ')} } from '@/riotentity';\n`;
-  //         break;
-
-  //       case ImportTypes.GLOBAL:
-  //         types.forEach(globalType => {
-  //           const globalImportPath = `@/src/interface/_Global/${globalType}`;
-  //           imports += `import { ${globalType} } from '${globalImportPath}';\n`;
-  //         });
-  //         break;
-  //     }
-  //   }
-
-  //   return imports;
-  // }
-
-  // /**
-  //  * Generate all properties
-  //  * @param properties 
-  //  * @returns 
-  //  */
-  // #generateProperties(properties: PropertySignature[]): string {
-  //   let classContent: string = '';
-
-  //   if (properties && properties.length > 0) {
-  //     properties.forEach((property: PropertySignature) => {
-  //       const propName = property.getName();
-  //       const propType = property.getTypeNode()?.getText() || 'any';
-
-  //       classContent += `    ${propName}!: ${propType};\n`;
-  //     });
-  //   }
-  //   return classContent;
-  // }
 
   #writeFile(basePath: string, orignalFilePath: string, fileName: string, fileContent: string): void {
     // Déterminer le chemin de sortie
@@ -204,8 +141,10 @@ export class Generator {
 
       // Ajouter la version dans le namespaceVersions, si elle n'existe pas
       if (!this.entitiesData[namespace][version]) {
-        this.entitiesData[namespace][version] = data;
+        this.entitiesData[namespace][version] = []; // data;
       }
+
+      this.entitiesData[namespace][version].push(data)
     }
   }
 
@@ -241,12 +180,12 @@ export class Generator {
    * @param interfaces 
    * @param filePath 
    */
-  #readAllInterface(interfaces: InterfaceDeclaration[], filePath: string, generateFile: boolean = false): void {
+  #readAllInterface(interfaces: InterfaceDeclaration[], filePath: string, generateFile: boolean = false, includeGlobal: boolean = false): void {
     interfaces.forEach((iface: InterfaceDeclaration) => {
       const interfaceName = iface.getName();
       const baseName = iface?.getSourceFile()?.getBaseName() || null;
 
-      if (!baseName || baseName.toLowerCase().includes('index.ts') || baseName.toLowerCase().includes('_global')) {
+      if (!baseName || baseName.toLowerCase().includes('index.ts') || (!includeGlobal && baseName.toLowerCase().includes('_global'))) {
         return;
       }
 
@@ -269,21 +208,13 @@ export class Generator {
         this.#addNamespace(namespace, version, interfaceName);
 
         // Prepare interfaceData
-        let data: InterfaceData = new InterfaceData(filePath, className, iface);
+        let data: InterfaceData = new InterfaceData(filePath, interfaceName, className, iface);
         data.addHeader(namespace, version, name);
-        // data.addProperties(this.#getAllPropertiesByInterfaceDeclaration(iface));
-        // // data.addType(this.#getCustomAndGlobalTypes(data.properties));
-       
-        // data.addImport(`import { Interfaces } from '@/riotentity';`)
-        // data.addImportTypes(data.customTypes, ImportTypes.CUSTOM)
-        // data.addImportTypes(data.globalTypes, ImportTypes.GLOBAL)
-        // // data.addImport(this.#generateImport(data.customTypes, ImportTypes.CUSTOM))
-        // // data.addImport(this.#generateImport(data.globalTypes, ImportTypes.GLOBAL))
         data.addJDOC(this.#generateClassHeader(className, namespace, version, name));
         this.#addEntities(namespace, version, data);
 
         if (generateFile) {
-          this.#writeFile( "src/interface", filePath, className, data.classContent());
+          this.#writeFile("src/interface", filePath, className, data.classContent());
 
           console.log(logType.CLASS, `Classes ${className} has been generated from the interface.`)
         }
@@ -296,12 +227,12 @@ export class Generator {
    * @param typeAliases 
    * @param filePath 
    */
-  #readAllTypeAliases(typeAliases: TypeAliasDeclaration[], filePath: string, generateFile: boolean = false): void {
+  #readAllTypeAliases(typeAliases: TypeAliasDeclaration[], filePath: string, generateFile: boolean = false, includeGlobal: boolean = false): void {
     typeAliases.forEach((typeAlias: TypeAliasDeclaration) => {
       const typeName = typeAlias.getName();
       const globalType = typeAlias.getTypeNode()?.getText();
 
-      if ((globalType && globalType.length > 0) && (typeName.startsWith("I") && typeAlias.getTypeNode()?.getText()?.includes("_Global"))) {
+      if ((globalType && globalType.length > 0) && (typeName.startsWith("I") && (!includeGlobal && typeAlias.getTypeNode()?.getText()?.includes("_Global")))) {
         const className = typeName.substring(1);
 
         // Extraire les informations JSDoc
@@ -322,23 +253,14 @@ export class Generator {
         // const properties = this.#getAllPropertiesByInterfaceDeclaration(globalInterface);
 
         // Prepare interfaceData
-        let data: InterfaceData = new InterfaceData(filePath, className, globalInterface);
+        let data: InterfaceData = new InterfaceData(filePath, typeName, className, globalInterface);
         data.addHeader(namespace, version, name);
-        // data.addProperties(properties);
-        // // data.addType(this.#getCustomAndGlobalTypes(data.properties));
-        
-        // data.addImport(`import { Interfaces } from '@/riotentity';`)
-        // data.addImportTypes(data.customTypes, ImportTypes.CUSTOM)
-        // data.addImportTypes(data.globalTypes, ImportTypes.GLOBAL)
-       
-        // // data.addImport(this.#generateImport(data.customTypes, ImportTypes.CUSTOM))
-        // // data.addImport(this.#generateImport(data.globalTypes, ImportTypes.GLOBAL))
         data.addJDOC(this.#generateClassHeader(className, namespace, version, name));
         this.#addEntities(namespace, version, data);
 
 
         if (generateFile) {
-          this.#writeFile( "src/interface", filePath, className, data.classContent());
+          this.#writeFile("src/interface", filePath, className, data.classContent());
 
           console.log(logType.CLASS, `Classes ${className} has been generated from the type.`)
         }
@@ -502,7 +424,379 @@ export class Generator {
     }
   }
 
+  test(filesFolderPath: string = "src/interface/**/*.ts", type: NamespaceIndexTypes = NamespaceIndexTypes.INTERFACE) {
+    // Read all interface files
+    const sourceFiles = glob.sync(filesFolderPath);
+    this.namespaceVersions = {};
+
+    // Process
+    sourceFiles.forEach((filePath: string) => {
+      const sourceFile = this.project.addSourceFileAtPath(filePath);
+      const interfaces: InterfaceDeclaration[] = sourceFile.getInterfaces();
+      const typeAliases: TypeAliasDeclaration[] = sourceFile.getTypeAliases();
+      const classes: ClassDeclaration[] = sourceFile.getClasses();
+
+      if (type == NamespaceIndexTypes.INTERFACE) {
+        if (interfaces && interfaces.length > 0) {
+          this.#readAllInterface(interfaces, filePath, false, true);
+        }
+
+        if (typeAliases && typeAliases.length > 0) {
+          this.#readAllTypeAliases(typeAliases, filePath, false, true);
+        }
+      }
+
+    });
+
+    // TODO: Load GLOBAL
+    Object.keys(this.entitiesData).forEach(namespace => {
+      const versions = this.entitiesData[namespace];
+
+      Object.keys(versions).forEach(version => {
+        const interfaces: InterfaceData[] = versions[version];
+
+        interfaces.forEach((data: InterfaceData) => {
+          // const data: InterfaceData = versions[version];
+          this.generateValidationFunction(data);
+        });
+      });
+    });
+  }
+
+
+  generateValidationFunction(data: InterfaceData): string {
+    if (data) {
+      const interfaceName = data.originalName;
+      const namespace = data.headerInfo?.namespace;
+      const version = data.headerInfo?.version
+      const properties = data.properties.map((property: PropertySignature) => `${property.getName()}: ${property.getTypeNode()?.getText()}`);
+      // entitiesData: { [key: string]: { [key: string]: InterfaceData[] } }
+
+      // Est-ce que ça serait mieux d'Avoir : TYPE - ValidationTypes au lieu de seulement ValidationTypes
+      let propertiesValidation: Map<string, {
+        propName: string,
+        propType: string,
+        propTypes?: string[],
+        varType: ValidationTypes,
+        isArray: boolean,
+        subValidation?: string
+      }> = new Map<string, {
+        propName: string,
+        propType: string,
+        varType: ValidationTypes,
+        isArray: boolean,
+        subValidation?: string
+      }>();
+      // let arrHasTypes: string[] = [];
+
+      /*
+        name: string          => type 1 : valider le type
+        lstName: string[]     => type 2 : Array.isArray
+        summoner: ISummoner   => type 3 : Call validator
+
+        ENUM :
+         entityDTO.publish_locations.every((location) =>
+          typeof location === 'string' &&
+          (location === PublishLocations.RIOT_CLIENT ||
+            location === PublishLocations.RIOT_STATUS ||
+            location === PublishLocations.GAME)
+        ) &&
+
+        MAP
+             entityDTO.thresholds instanceof Map &&
+            [...entityDTO.thresholds.keys()].every((key) =>
+              typeof key === 'string'
+            ) &&
+            [...entityDTO.thresholds.values()].every((value) =>
+              typeof value === 'number'
+            );
+      */
+
+      // import { Interfaces, Validator } from '@/riotentity';
+      let imports: string[] = [`Interfaces`]
+      // import { ClashPosition, ClashRole } from '@/src/declaration';
+      let declarationImport: string[] = [];
+
+      data.properties.forEach((property: PropertySignature) => {
+        const propertyName: string = property.getName();
+        const propertyType: string = property.getTypeNode()?.getText() || '';
+        const matches = propertyType.match(/\b[A-Z][a-zA-Z0-9_]*\b/g);
+
+        if (matches) {
+          matches.forEach(type => {
+            let typeLowerCase: string = propertyType.toLowerCase(); // type.toLowerCase();
+            let multiType: boolean = propertyType.includes('|');
+            let typeArray: string[] = (multiType ?
+              propertyType.split(' | ').flatMap(part => part.replace(/\[\]\s*/, ''))
+              : []); //propertyType.replace('[]', '').split('|') : []);
+            let isArray: boolean = propertyType.includes('[]');
+
+            // Traitement des cas de bases
+            if (['string', 'number', 'boolean', 'any', 'undefined', 'null', 'void', 'never', 'object', 'unknown', 'map'].includes(typeLowerCase)) {
+              propertiesValidation.set(propertyName, {
+                propName: propertyName,
+                propType: (!multiType ? propertyType : typeArray[0].trim()),
+                propTypes: (multiType ? typeArray : undefined),
+                isArray: isArray,
+                varType: (isArray ? ValidationTypes.GENERIC_ARRAY : ValidationTypes.GENERIC)
+                // isArray: (['array', '[]'].includes(typeLowerCase) ? true : false),
+                // varType: (['array', '[]'].includes(typeLowerCase) ? ValidationTypes.GENERIC_ARRAY : ValidationTypes.GENERIC)
+              });
+            }
+            // else if (['array', '[]'].includes(type.toLowerCase())) {
+            //   propertiesValidation.set(propertyName, {
+            //     propName: propertyName,
+            //     propType: propertyType.replace('[]', ''),
+            //     varType: ValidationTypes.ARRAY
+            //   });
+            // }
+            else if (propertyType.toLowerCase().includes('_global')) {
+              // test
+              // let splitData = propertyType.split('.');
+              // splitData[0] = 'Validator';
+              // splitData[3] = `is${splitData[3]}`
+              // let validatorName: string = splitData.join('.').replace('[]', '');
+
+              let validatorName: string = `Validator.Global.v1.is${propertyType}`.replace('[]', '')
+              // test
+
+              propertiesValidation.set(propertyName, {
+                propName: propertyName,
+                propType: (!multiType ? propertyType : typeArray[0]),
+                propTypes: (multiType ? typeArray : undefined),
+                isArray: isArray,
+                varType: (isArray ? ValidationTypes.GLOBAL_TYPE_ARRAY : ValidationTypes.GLOBAL_TYPE),
+                subValidation: validatorName,
+                // isArray: (['array', '[]'].includes(typeLowerCase) ? true : false),
+                // // varType: ValidationTypes.GLOBAL_TYPE
+                // varType: (['array', '[]'].includes(typeLowerCase) ? ValidationTypes.GLOBAL_TYPE_ARRAY : ValidationTypes.GLOBAL_TYPE)
+              });
+              // TODO: Comment obtenir la route ?
+            }
+            else if (propertyType.toLowerCase().includes('interfaces.')) {
+              // Ex : Interfaces.TFT_Match.v1.ICompanionDTO
+              // Ex : Validator.TFT_Match.v1.isICompanionDTO(accEntity)
+              let splitData = propertyType.split('.');
+              splitData[0] = 'Validator';
+              splitData[3] = `is${splitData[3]}`
+              // let namespace = splitData[1];
+              // // let name = splitData[2];
+              // let version = splitData[2];
+              // let interfaceName = splitData[3];
+
+              // let testAa: string = propertyType.replace('Interface', 'Validator');
+              let validatorName: string = splitData.join('.').replace('[]', ''); // `Validators.${version}.${name}.is${interfaceName}`;
+
+              propertiesValidation.set(propertyName, {
+                propName: propertyName,
+                propType: (!multiType ? propertyType : typeArray[0]),
+                propTypes: (multiType ? typeArray : undefined),
+                isArray: isArray,
+                varType: (isArray ? ValidationTypes.CUSTOM_TYPE_ARRAY : ValidationTypes.CUSTOM_TYPE),
+                // isArray: (['array', '[]'].includes(typeLowerCase) ? true : false),
+                // // varType: ValidationTypes.CUSTOM_TYPE,
+                // varType: (['array', '[]'].includes(typeLowerCase) ? ValidationTypes.CUSTOM_TYPE_ARRAY : ValidationTypes.CUSTOM_TYPE),
+                subValidation: validatorName
+              });
+
+              // TODO: Comment obtenir la route ?
+              if (!imports.includes('Validator')) {
+                imports.push('Validator');
+              }
+
+            }
+            else if (['State', 'Tracking', 'KaynChampionTransform', 'ClashPosition', 'ClashRole', 'Level', 'MaintenanceStatus', 'IncidentSeverity', 'Platforms', 'PublishLocations', 'GameMode', 'GameType', 'QueueType', 'TraitStyle'].includes(type)) {
+              propertiesValidation.set(propertyName, {
+                propName: propertyName,
+                propType: (!multiType ? propertyType : typeArray[0]),
+                propTypes: (multiType ? typeArray : undefined),
+                isArray: isArray,
+                varType: (isArray ? ValidationTypes.ENUM_ARRAY : ValidationTypes.ENUM),
+                // isArray: (['array', '[]'].includes(typeLowerCase) ? true : false),
+                // // varType: ValidationTypes.ENUM
+                // varType: (['array', '[]'].includes(typeLowerCase) ? ValidationTypes.ENUM : ValidationTypes.ENUM_ARRAY)
+              });
+
+              if (!declarationImport.includes(type)) {
+                declarationImport.push(type);
+              }
+            }
+            else {
+              console.error(`Type ${type} for property ${propertyName} isn't supported.`)
+            }
+          }) // End matches.forEach;
+        } else {
+          let typeLowerCase: string = propertyType.toLowerCase(); // type.toLowerCase();
+          let multiType: boolean = propertyType.includes('|');
+          let typeArray: string[] = (multiType ?
+            propertyType.split(' | ').flatMap(part => part.replace(/\[\]\s*/, ''))
+            : []); //propertyType.replace('[]', '').split('|') : []);
+          let isArray: boolean = propertyType.includes('[]');
+
+          propertiesValidation.set(propertyName, {
+            propName: propertyName,
+            propType: (!multiType ? propertyType : typeArray[0]),
+            propTypes: (multiType ? typeArray : undefined),
+            isArray: isArray,
+            varType: (isArray ? ValidationTypes.GENERIC_ARRAY : ValidationTypes.GENERIC),
+            // subValidation: validatorName
+            // isArray: (['array', '[]'].includes(typeLowerCase) ? true : false),
+            // // varType: ValidationTypes.GENERIC
+            // varType: (['array', '[]'].includes(typeLowerCase) ? ValidationTypes.GENERIC_ARRAY : ValidationTypes.GENERIC)
+          });
+        }
+      }); // End data.properties
+
+
+      let objName: string = `${interfaceName.toLowerCase()}`;
+
+      // `import {${[...imports].join(', ')}) from '@/riotentity';
+      let importRow: string[] = [];
+      importRow.push(`import { ${imports.join(', ')} } from '@/riotentity';`);
+      if (declarationImport && declarationImport.length > 0) {
+        importRow.push(`import { ${declarationImport.join(', ')} } from '@/src/declaration';`);
+      }
+      let headerDeclaration: string = `\nexport function is${interfaceName}(obj: any): obj is Interfaces.${namespace}.${version}.${interfaceName} {`
+      importRow.push(headerDeclaration);
+
+      // let code: string = importRow.join("\n");
+
+      importRow.push(`  // Validité que le parametre soit initialisé
+      if (typeof obj !== 'object' || obj === null) {
+        return false;
+      }\n`)
+
+      importRow.push(`  // Casting du parametre en obj du typé a validé
+      const ${objName} = obj as Interfaces.${namespace}.${version}.${interfaceName};\n`);
+
+      importRow.push(`  // Valider le nombre de properties
+      const hasFieldCount: boolean = Object.keys(${objName}).length === ${properties.length};\n`)
+
+      importRow.push(`  // Valider que la variable « obj » contient chacune des propriété ${interfaceName}
+      const hasFieldsIn: boolean = ${properties.map(property => `'${property.split(':')[0]}' in ${objName}`).join(' &&\n    ')};\n`);
+
+      // importRow.push(`      // validé le type de chacune des propriétés de ${interfaceName}
+      // const hasFieldType: boolean = `);
+
+      let validationRow: string[] = [];
+      propertiesValidation.forEach(property => {
+        let varName: string = `${objName}.${property.propName}`;
+
+        switch (property.varType) {
+          case ValidationTypes.GENERIC:
+          case ValidationTypes.GENERIC_ARRAY:
+            if (property.isArray) {
+              validationRow.push(`Array.isArray(${varName})`);
+              validationRow.push(`(${varName}).every(id => typeof id === '${property.propType}')`);
+            } else {
+              validationRow.push(`typeof ${varName} === '${property.propType}'`)
+            }
+
+            break;
+
+          case ValidationTypes.CUSTOM_TYPE:
+          case ValidationTypes.CUSTOM_TYPE_ARRAY:
+            // Call custom validator
+            if (property.isArray) {
+              validationRow.push(`Array.isArray(${varName})`);
+              validationRow.push(`(${varName}).every(val => ${property.subValidation}(val))`);
+
+            } else {
+              validationRow.push(`${property.subValidation}(${varName})`)
+            }
+            break;
+
+          case ValidationTypes.ENUM:
+          case ValidationTypes.ENUM_ARRAY:
+            /*
+            (Object.values(ClashPosition).includes(obj.position) ||
+                          typeof entityDTO.position === 'string') &&
+              */
+
+            // TODO: Gérer le multiple type
+            if (property.isArray) {
+              validationRow.push(`Array.isArray(${varName})`);
+              validationRow.push(`(${varName}).every(val => (typeof val === '${property.propType}') ||
+                                                    (Object.values(${property.propType}).includes(val))`);
+              // validationRow.push(`(Object.values(${property.propType}).includes(${varName}) || typeof ${varName} === 'string')`)
+
+            } else {
+              validationRow.push(`(Object.values(${property.propType}).includes(${varName}) || typeof ${varName} === 'string')`)
+            }
+
+
+            break;
+
+          case ValidationTypes.GLOBAL_TYPE:
+          case ValidationTypes.GLOBAL_TYPE_ARRAY:
+            // Global Validator or get properties ?
+            if (property.isArray) {
+              validationRow.push(`Array.isArray(${varName})`);
+              validationRow.push(`(${varName}).every(val => ${property.subValidation}(val))`);
+
+            } else {
+              validationRow.push(`${property.subValidation}(${varName})`)
+            }
+            break;
+
+        }
+      })
+      importRow.push(`  // Valider le type de chacune des propriétés de ${interfaceName}
+      const hasFieldType: boolean = (${validationRow.join(' &&\n    ')})\n`);
+      // importRow.push(validationRow.join(' &&\t\t\t'));
+
+      importRow.push(`  return hasFieldsIn && hasFieldCount && hasFieldType;`);
+      importRow.push(`}`)
+
+      let code: string = importRow.join(`\n`);
+
+      // const validationFunctionCode = `
+      //       import { Interfaces } from '@/riotentity';
+
+      //       export function is${interfaceName}(obj: any): obj is Interfaces.${namespace}.${version}.${interfaceName} {
+      //           if (typeof obj !== 'object' || obj === null) {
+      //               return false;
+      //           }
+
+      //           const ${interfaceName.toLowerCase()} = obj as Interfaces.${namespace}.${version}.${interfaceName};
+
+      //           // Valider que la variable « obj » contient chacune des propriété AccountDTO
+      //           const hasFieldsIn: boolean = ${properties.map(property => `'${property.split(':')[0]}' in ${interfaceName.toLowerCase()}`).join(' && ')};
+
+      //           // Validité le nombre de propriété
+      //           const hasFieldCount: boolean = Object.keys(${interfaceName.toLowerCase()}).length === ${properties.length};
+
+      //           // validité le type de chacune des propriété
+      //           const hasFieldType: boolean = ${properties.map(property => {
+      //   const propertyName = property.split(':')[0];
+      //   const propertyType = property.split(':')[1].trim();
+      //   return `typeof ${interfaceName.toLowerCase()}.${propertyName} === '${propertyType}'`;
+      // }).join(' && ')};
+
+      //           return hasFieldsIn && hasFieldCount && hasFieldType;
+      //       }
+      //   `;
+
+      // Déterminer le chemin de sortie
+      const outputPath = path.join("generate", "validator", `${namespace}`, `${version}`, `${interfaceName}Checker.ts`);
+      const outputDir = path.dirname(outputPath);
+      const outputFile = path.join(outputDir, `${interfaceName}Checker.ts`);
+
+      // Créer le répertoire de sortie si nécessaire
+      fs.ensureDirSync(outputDir);
+
+      // Écrire le fichier index
+      fs.writeFileSync(outputFile, code);
+
+      // console.log(validationFunctionCode)
+
+      return code; // validationFunctionCode;
+    }
+    return '';
+  }
+
 }
+
 
 let mainGenerator: Generator = new Generator();
 // console.log('Arguments passés:', process.argv.slice(2));
@@ -535,6 +829,7 @@ switch (firstArgs) {
   case '4':
   case 'validator':
     console.log(logType.VALIDATOR, `Generating validation classes from interfaces`)
+    mainGenerator.test("src/interface/**/*.ts", NamespaceIndexTypes.INTERFACE);
     break;
 
   default:
