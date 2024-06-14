@@ -2,6 +2,7 @@
  * Interface IBannedChampion_Global
  *
  * @namespace Global
+ * @version 1
  * @name IBannedChampion_Global
  */
 export interface IBannedChampion_Global {

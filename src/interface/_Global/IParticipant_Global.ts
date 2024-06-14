@@ -1,7 +1,8 @@
 /**
  * Interface IParticipant_Global
  *
- * @namespace Global
+ * @namespace Global 
+ * @version 1
  * @name IParticipant_Global
  */
 export interface IParticipant_Global {
