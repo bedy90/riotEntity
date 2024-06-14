@@ -1,7 +1,8 @@
 /**
  * Interface IGameCustomizationObject_Global
  *
- * @namespace Global
+ * @namespace Global 
+ * @version 1
  * @name IGameCustomizationObject_Global
  */
 export interface IGameCustomizationObject_Global {

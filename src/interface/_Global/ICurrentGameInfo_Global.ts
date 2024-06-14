@@ -4,7 +4,7 @@ import { IObserver_Global } from './IObserver_Global';
 
 /**
  * Interface ICurrentGameInfo_Global
- *
+ * @version 1
  * @namespace Global
  * @name ICurrentGameInfo_Global
  */
