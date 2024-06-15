@@ -44,7 +44,7 @@ jobs:
       run: npm ci
 
     - name: Run lint
-      run: npm run lint
+      run: npm run eslint
       continue-on-error: false  # Arrête le workflow si le lint échoue      
 
   build:
