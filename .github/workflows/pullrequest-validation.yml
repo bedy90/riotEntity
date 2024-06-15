@@ -123,17 +123,18 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Install ACTIONS_github
-        run: npm install @actions/github
+      # - name: Install ACTIONS_github
+      #   run: npm install @actions/github
             
-      - name: Install ACTIONS_exec
-        run: npm install @actions/exec
+      # - name: Install ACTIONS_exec
+      #   run: npm install @actions/exec
         
       - name: Check outdated dependencies
-        if: success()
+        # if: success()
         id: outdated
         run: |
           npm outdated --json || exit 0
+        continue-on-error: true  # Continuer en cas d'erreur pour diagnostiquer
           
       # - name: Run script to comment on Pull Request
       #   if: steps.outdated.outcome == 'success'
@@ -147,73 +148,98 @@ jobs:
           script: |
             async function commentOnPullRequest(github) {
               try {
-                // Exécuter npm outdated --json pour obtenir les dépendances obsolètes
                 const outdated = require('child_process').execSync('npm outdated --json').toString();
-                const result = JSON.parse(outdated);
+                console.log('npm outdated result:', outdated);
 
-                // Organiser les dépendances par niveau de sévérité
-                const updatesBySeverity = {
-                  major: [],
-                  minor: [],
-                  patch: [],
-                };
-
-                Object.keys(result).forEach(depName => {
-                  const depInfo = result[depName];
-                  const currentVersion = depInfo.current;
-                  const wantedVersion = depInfo.wanted;
-                  const latestVersion = depInfo.latest;
-
-                  if (isMajorUpdate(currentVersion, wantedVersion)) {
-                    updatesBySeverity.major.push({ name: depName, current: currentVersion, wanted: wantedVersion, latest: latestVersion });
-                  } else if (isMinorUpdate(currentVersion, wantedVersion)) {
-                    updatesBySeverity.minor.push({ name: depName, current: currentVersion, wanted: wantedVersion, latest: latestVersion });
-                  } else if (isPatchUpdate(currentVersion, wantedVersion)) {
-                    updatesBySeverity.patch.push({ name: depName, current: currentVersion, wanted: wantedVersion, latest: latestVersion });
-                  }
-                });
-
-                // Charger le template Markdown depuis le fichier
-                const templatePath = '.github/template/outdated.md';
-                const templateContent = await github.repos.getContent({
-                  owner: context.repo.owner,
-                  repo: context.repo.repo,
-                  path: templatePath,
-                });
-
-                const templateBody = Buffer.from(templateContent.data.content, 'base64').toString('utf-8');
-
-                // Remplacer les placeholders du template avec les données structurées
-                const finalComment = Mustache.render(templateBody, updatesBySeverity);
+                // Le reste de votre logique de traitement des résultats de npm outdated
 
                 // Créer le commentaire sur la Pull Request
                 await github.issues.createComment({
                   owner: context.repo.owner,
                   repo: context.repo.repo,
                   issue_number: context.payload.pull_request.number,
-                  body: finalComment,
+                  body: 'Votre commentaire ici',
                 });
               } catch (error) {
                 console.error('Error commenting on pull request:', error);
-                process.exit(1);
+                throw error; // Rejeter l'erreur pour la capturer dans le workflow
               }
-            }
-
-            // Fonctions utilitaires pour déterminer le niveau de mise à jour
-            function isMajorUpdate(currentVersion, wantedVersion) {
-              return currentVersion !== wantedVersion && wantedVersion.startsWith('1');
-            }
-
-            function isMinorUpdate(currentVersion, wantedVersion) {
-              return currentVersion !== wantedVersion && wantedVersion.startsWith('0');
-            }
-
-            function isPatchUpdate(currentVersion, wantedVersion) {
-              return currentVersion !== wantedVersion && wantedVersion.startsWith('0.');
             }
 
             commentOnPullRequest(github).catch(error => {
               console.error('Error commenting on pull request:', error);
               process.exit(1);
             });
+          # script: |
+          #   async function commentOnPullRequest(github) {
+          #     try {
+          #       // Exécuter npm outdated --json pour obtenir les dépendances obsolètes
+          #       const outdated = require('child_process').execSync('npm outdated --json').toString();
+          #       const result = JSON.parse(outdated);
+
+          #       // Organiser les dépendances par niveau de sévérité
+          #       const updatesBySeverity = {
+          #         major: [],
+          #         minor: [],
+          #         patch: [],
+          #       };
+
+          #       Object.keys(result).forEach(depName => {
+          #         const depInfo = result[depName];
+          #         const currentVersion = depInfo.current;
+          #         const wantedVersion = depInfo.wanted;
+          #         const latestVersion = depInfo.latest;
+
+          #         if (isMajorUpdate(currentVersion, wantedVersion)) {
+          #           updatesBySeverity.major.push({ name: depName, current: currentVersion, wanted: wantedVersion, latest: latestVersion });
+          #         } else if (isMinorUpdate(currentVersion, wantedVersion)) {
+          #           updatesBySeverity.minor.push({ name: depName, current: currentVersion, wanted: wantedVersion, latest: latestVersion });
+          #         } else if (isPatchUpdate(currentVersion, wantedVersion)) {
+          #           updatesBySeverity.patch.push({ name: depName, current: currentVersion, wanted: wantedVersion, latest: latestVersion });
+          #         }
+          #       });
+
+          #       // Charger le template Markdown depuis le fichier
+          #       const templatePath = '.github/template/outdated.md';
+          #       const templateContent = await github.repos.getContent({
+          #         owner: context.repo.owner,
+          #         repo: context.repo.repo,
+          #         path: templatePath,
+          #       });
+
+          #       const templateBody = Buffer.from(templateContent.data.content, 'base64').toString('utf-8');
+
+          #       // Remplacer les placeholders du template avec les données structurées
+          #       const finalComment = Mustache.render(templateBody, updatesBySeverity);
+
+          #       // Créer le commentaire sur la Pull Request
+          #       await github.issues.createComment({
+          #         owner: context.repo.owner,
+          #         repo: context.repo.repo,
+          #         issue_number: context.payload.pull_request.number,
+          #         body: finalComment,
+          #       });
+          #     } catch (error) {
+          #       console.error('Error commenting on pull request:', error);
+          #       process.exit(1);
+          #     }
+          #   }
+
+          #   // Fonctions utilitaires pour déterminer le niveau de mise à jour
+          #   function isMajorUpdate(currentVersion, wantedVersion) {
+          #     return currentVersion !== wantedVersion && wantedVersion.startsWith('1');
+          #   }
+
+          #   function isMinorUpdate(currentVersion, wantedVersion) {
+          #     return currentVersion !== wantedVersion && wantedVersion.startsWith('0');
+          #   }
+
+          #   function isPatchUpdate(currentVersion, wantedVersion) {
+          #     return currentVersion !== wantedVersion && wantedVersion.startsWith('0.');
+          #   }
+
+          #   commentOnPullRequest(github).catch(error => {
+          #     console.error('Error commenting on pull request:', error);
+          #     process.exit(1);
+          #   });
  
