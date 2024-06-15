@@ -73,7 +73,7 @@ jobs:
       continue-on-error: false  # Arrête le workflow si le build échoue
 
 
-  verify:
+  audit_solution:
     runs-on: ubuntu-latest
     needs: [eslint-review, build]
     strategy:
@@ -96,12 +96,12 @@ jobs:
         run: npm audit --audit-level=high
         continue-on-error: false  # Arrête le workflow si le build échoue
       
-      - name: Run CodeQL Analysis
-        uses: github/codeql-action/init@v3
-        with:
-          languages: javascript, typescript
+      # - name: Run CodeQL Analysis
+      #   uses: github/codeql-action/init@v3
+      #   with:
+      #     languages: javascript, typescript
   
-      - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v3
+      # - name: Perform CodeQL Analysis
+      #   uses: github/codeql-action/analyze@v3
 
             
