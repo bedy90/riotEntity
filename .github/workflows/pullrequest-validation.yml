@@ -91,7 +91,7 @@ jobs:
     
       - name: Install dependencies
         run: npm ci
-          
+ 
       - name: Run audit
         run: npm audit --audit-level=high
         continue-on-error: false  # Arrête le workflow si le build échoue
@@ -123,12 +123,18 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Install ACTIONS_github
+        run: npm install @actions/github
+            
+      - name: Install ACTIONS_exec
+        run: npm install @actions/exec
+        
       - name: Check outdated dependencies
         if: success()
         id: outdated
         run: |
           npm outdated --json || exit 0
-
+          
       - name: Run script to comment on Pull Request
         if: steps.outdated.outcome == 'success'
         run: node .github/scripts/commentOnPR.js
