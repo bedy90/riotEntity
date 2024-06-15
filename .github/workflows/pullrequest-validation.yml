@@ -120,12 +120,13 @@ jobs:
       - name: Install dependencies
         run: npm ci
         
+      # echo "::set-output name=result::$(cat outdated.json)"
       - name: Check outdated dependencies
         id: outdated
         run: |
           npm outdated --json > outdated.json || true
           if [ -s outdated.json ]; then
-            echo "::set-output name=result::$(cat outdated.json)"
+            echo "result=$(cat outdated.json)" >> $GITHUB_OUTPUT
           else
             echo "No outdated dependencies found"
           fi
@@ -135,7 +136,7 @@ jobs:
       - name: Show outdated dependencies
         if: ${{ steps.outdated.outputs.result }}
         run: |  
-          echo "${{ steps.outdated.outputs.result }}"        
+          echo "${{ steps.outdated.outputs.result }}" | jq        
 
       - name: Comment on Pull Request
         if: steps.outdated.outcome == 'success'
