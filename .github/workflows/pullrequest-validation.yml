@@ -148,9 +148,8 @@ jobs:
             async function commentOnPullRequest(github) {
               try {
                 const fs = require('fs');
-                const outdatedT = fs.readFileSync('outdated.json', 'utf8');
-                const resultT = JSON.parse(outdatedT);
-                console.log('npm outdated resultT :', resultT);
+                const outdated = fs.readFileSync('outdated.json', 'utf8');
+                const result = JSON.parse(outdated);
 
                 // Le reste de votre logique de traitement des résultats de npm outdated
                 // Organiser les dépendances par niveau de sévérité
