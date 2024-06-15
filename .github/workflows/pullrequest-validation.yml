@@ -132,13 +132,16 @@ jobs:
           else
             echo "No outdated dependencies found"
           fi
+          cat outdated.json
+          
         shell: bash -e {0}
         continue-on-error: true  # Continuer en cas d'erreur pour diagnostiquer
   
       - name: Show outdated dependencies
         if: ${{ steps.outdated.outputs.result }}
         run: |  
-          echo "${{ steps.outdated.outputs.result }}" | jq        
+          echo "${{ steps.outdated.outputs.result }}" | jq     
+        continue-on-error: true  # Continuer en cas d'erreur pour diagnostiquer   
 
       - name: Comment on Pull Request
         if: steps.outdated.outcome == 'success'
@@ -150,10 +153,33 @@ jobs:
           script: |
             async function commentOnPullRequest(github) {
               try {
-                const outdated = $SELECTED_COLOR
-                console.log('npm outdated result:', outdated);
+                const outdated = $OUTDATED_JSON
+                const result = JSON.parse(outdated);
+                console.log('npm outdated :', outdated);
+                console.log('npm outdated result:', result);
 
                 // Le reste de votre logique de traitement des résultats de npm outdated
+                // Organiser les dépendances par niveau de sévérité
+                const updatesBySeverity = {
+                  major: [],
+                  minor: [],
+                  patch: [],
+                };
+
+                Object.keys(result).forEach(depName => {
+                    const depInfo = result[depName];
+                    const currentVersion = depInfo.current;
+                    const wantedVersion = depInfo.wanted;
+                    const latestVersion = depInfo.latest;
+        
+                    if (currentVersion !== wantedVersion && wantedVersion.startsWith('1')) {
+                      updatesBySeverity.major.push({ name: depName, current: currentVersion, wanted: wantedVersion, latest: latestVersion });
+                    } else if (currentVersion !== wantedVersion && wantedVersion.startsWith('0')) {
+                      updatesBySeverity.minor.push({ name: depName, current: currentVersion, wanted: wantedVersion, latest: latestVersion });
+                    } else if (currentVersion !== wantedVersion && wantedVersion.startsWith('0.')) {
+                      updatesBySeverity.patch.push({ name: depName, current: currentVersion, wanted: wantedVersion, latest: latestVersion });
+                    }
+                });
 
                 // Créer le commentaire sur la Pull Request
                 await github.issues.createComment({
