@@ -1,5 +1,7 @@
 const fs = require('fs');
-const { github, context, exec } = require('@actions/github');
+// const { github, context, exec } = require('@actions/github');
+const { GitHub, context } = require('@actions/github');
+const { exec } = require('@actions/exec');
 
 async function commentOnPullRequest() {
     const { data } = await github.pulls.listFiles({
