@@ -1,8 +1,8 @@
 /**
  * Interface IObserver_Global
  *
- * @namespace Global 
- * @version 1
+ * @namespace Global
+ * @version v1
  * @name IObserver_Global
  */
 export interface IObserver_Global {

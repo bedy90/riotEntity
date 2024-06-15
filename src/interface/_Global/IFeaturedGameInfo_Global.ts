@@ -6,8 +6,8 @@ import { IParticipant_Global } from './IParticipant_Global';
 /**
  * Interface IFeaturedGameInfo_Global
  *
- * @namespace Global 
- * @version 1
+ * @namespace Global
+ * @version v1
  * @name IFeaturedGameInfo_Global
  */
 export interface IFeaturedGameInfo_Global {

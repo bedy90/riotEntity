@@ -3,8 +3,8 @@ import { IStatusDTO_Global } from './IStatusDTO_Global';
 /**
  * Interface IPlatformDataDTO_Global
  *
- * @namespace Global 
- * @version 1
+ * @namespace Global
+ * @version v1
  * @name IPlatformDataDTO_Global
  */
 export interface IPlatformDataDTO_Global {

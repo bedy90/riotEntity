@@ -4,8 +4,8 @@ import { IContentDTO_Global } from './IContentDTO_Global';
 /**
  * Interface IUpdateDTO_Global
  *
- * @namespace Global 
- * @version 1
+ * @namespace Global
+ * @version v1
  * @name IUpdateDTO_Global
  */
 export interface IUpdateDTO_Global {
