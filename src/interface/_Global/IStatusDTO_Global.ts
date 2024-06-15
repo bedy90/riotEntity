@@ -5,8 +5,8 @@ import { IUpdateDTO_Global } from './IUpdateDTO_Global';
 /**
  * Interface IStatusDTO_Global
  *
- * @namespace Global 
- * @version 1
+ * @namespace Global
+ * @version v1
  * @name IStatusDTO_Global
  */
 export interface IStatusDTO_Global {
