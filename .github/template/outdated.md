@@ -1,32 +1,29 @@
 # Mises Outdated Dependencies
 
-{{#if dependencies.major}}
-## Mises à Jour Majeures
-{{#each dependencies.major}}
-- **Package:** {{this.name}}
-  - **Version Actuelle:** {{this.current}}
-  - **Version Souhaitée:** {{this.wanted}}
-  - **Dernière Version:** {{this.latest}}
+{{#if major.length}}
+### Major Updates:
+| Package Name | Current Version | Wanted Version | Latest Version |
+|--------------|-----------------|----------------|----------------|
+{{#each major}}
+| {{this.name}} | {{this.current}} | {{this.wanted}} | {{this.latest}} |
 {{/each}}
 {{/if}}
 
-{{#if dependencies.minor}}
-## Mises à Jour Mineures
-{{#each dependencies.minor}}
-- **Package:** {{this.name}}
-  - **Version Actuelle:** {{this.current}}
-  - **Version Souhaitée:** {{this.wanted}}
-  - **Dernière Version:** {{this.latest}}
+{{#if minor.length}}
+### Minor Updates:
+| Package Name | Current Version | Wanted Version | Latest Version |
+|--------------|-----------------|----------------|----------------|
+{{#each minor}}
+| {{this.name}} | {{this.current}} | {{this.wanted}} | {{this.latest}} |
 {{/each}}
 {{/if}}
 
-{{#if dependencies.patch}}
-## Mises à Jour de Correctifs
-{{#each dependencies.patch}}
-- **Package:** {{this.name}}
-  - **Version Actuelle:** {{this.current}}
-  - **Version Souhaitée:** {{this.wanted}}
-  - **Dernière Version:** {{this.latest}}
+{{#if patch.length}}
+### Patch Updates:
+| Package Name | Current Version | Wanted Version | Latest Version |
+|--------------|-----------------|----------------|----------------|
+{{#each patch}}
+| {{this.name}} | {{this.current}} | {{this.wanted}} | {{this.latest}} |
 {{/each}}
 {{/if}}
 
