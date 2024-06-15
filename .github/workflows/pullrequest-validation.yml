@@ -126,7 +126,9 @@ jobs:
         run: |
           npm outdated --json > outdated.json || true
           if [ -s outdated.json ]; then
-            echo "result=$(cat outdated.json)" >> "$GITHUB_OUTPUT"
+            echo "result<<EOF" >> $GITHUB_OUTPUT
+            cat outdated.json >> $GITHUB_OUTPUT
+            echo "EOF" >> $GITHUB_OUTPUT
           else
             echo "No outdated dependencies found"
           fi
