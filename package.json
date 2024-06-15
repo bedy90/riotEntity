@@ -1,6 +1,6 @@
 {
   "name": "@bedy90/riotentity",
-  "version": "2024.5.2",
+  "version": "2024.6.1",
   "description": "Bedy90 - Riot Entity",
   "main": "build/index.js",
   "types": "./build/index.d.ts",
