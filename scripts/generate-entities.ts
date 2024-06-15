@@ -1,7 +1,7 @@
 import { Project, InterfaceDeclaration, PropertySignature, TypeAliasDeclaration, ClassDeclaration, StructureKind, SourceFile } from 'ts-morph';
-import * as glob from "glob";
-import * as fs from "fs-extra";
-import * as path from "path";
+import * as glob from 'glob';
+import * as fs from 'fs-extra';
+import * as path from 'path';
 import './logger';
 import { logType } from './logger';
 import { InterfaceData } from './entities/interfaceData';
@@ -33,8 +33,8 @@ export enum ValidationTypes {
 
 export class Generator {
   project: Project;
-  namespaceVersions: { [key: string]: { [key: string]: string[] } };
-  entitiesData: { [key: string]: { [key: string]: InterfaceData[] } }
+  namespaceVersions: Record<string, Record<string, string[]>>;
+  entitiesData: Record<string, Record<string, InterfaceData[]>>;
 
   constructor() {
     this.project = new Project();
@@ -44,8 +44,8 @@ export class Generator {
 
   /**
    * Fonction pour extraire les propriétés d'une interface, y compris celles héritées
-   * @param iface 
-   * @returns 
+   * @param iface
+   * @returns
    */
   #getAllPropertiesByInterfaceDeclaration(iface: InterfaceDeclaration): PropertySignature[] {
     const properties: PropertySignature[] = [];
@@ -66,15 +66,15 @@ export class Generator {
 
   /**
    * Fonction pour extraire les informations JSDoc d'une interface
-   * @param iface 
-   * @returns 
+   * @param iface
+   * @returns
    */
   #extractJsDocInfoByDeclaration(iface: InterfaceDeclaration | TypeAliasDeclaration | ClassDeclaration): { namespace?: any, version?: any, name?: any, NotImplemented: boolean } {
     const jsDocTags = iface.getJsDocs().flatMap(doc => doc.getTags());
-    const namespaceTag = jsDocTags.find(tag => tag.getTagName() === "namespace");
-    const versionTag = jsDocTags.find(tag => tag.getTagName() === "version");
-    const nameTag = jsDocTags.find(tag => tag.getTagName() === "name");
-    const NotImplementedTag = jsDocTags.find(tag => tag.getTagName() === "NotImplemented");
+    const namespaceTag = jsDocTags.find(tag => tag.getTagName() === 'namespace');
+    const versionTag = jsDocTags.find(tag => tag.getTagName() === 'version');
+    const nameTag = jsDocTags.find(tag => tag.getTagName() === 'name');
+    const NotImplementedTag = jsDocTags.find(tag => tag.getTagName() === 'NotImplemented');
 
     const namespace = namespaceTag?.getComment() || null;
     const version = versionTag?.getComment() || null;
@@ -88,15 +88,15 @@ export class Generator {
    * Generate JDOC header for classContent
    */
   #generateClassHeader(className: string, namespace: string, version: string, name: string): string {
-    let header: string = '';
+    let header = '';
 
-    header += `\n/**\n`
-    header += ` * Class ${className}\n`
-    header += ` *\n`
-    header += ` * @namespace ${namespace}\n`
-    header += ` * @version ${version}\n`
-    header += ` * @name ${name}\n`
-    header += ` */`
+    header += '\n/**\n';
+    header += ` * Class ${className}\n`;
+    header += ' *\n';
+    header += ` * @namespace ${namespace}\n`;
+    header += ` * @version ${version}\n`;
+    header += ` * @name ${name}\n`;
+    header += ' */';
 
     return header;
   }
@@ -107,7 +107,7 @@ export class Generator {
     // path.relative("src/interface", orignalFilePath);
 
     const relativePath = path.relative(basePath, orignalFilePath);
-    const outputPath = path.join("generate", "entity", relativePath);
+    const outputPath = path.join('generate', 'entity', relativePath);
     const outputDir = path.dirname(outputPath);
     const outputFile = path.join(outputDir, `${fileName}.ts`);
 
@@ -144,14 +144,14 @@ export class Generator {
         this.entitiesData[namespace][version] = []; // data;
       }
 
-      this.entitiesData[namespace][version].push(data)
+      this.entitiesData[namespace][version].push(data);
     }
   }
 
   // ****************************************
   //  Process function
   // ****************************************
-  #readAllClasses(classes: ClassDeclaration[], filePath: string, generateFile: boolean = false): void {
+  #readAllClasses(classes: ClassDeclaration[], filePath: string, generateFile = false): void {
 
     classes.forEach(cls => {
       const className = cls.getName();
@@ -165,7 +165,7 @@ export class Generator {
         // Extraire les informations JSDoc
         const { namespace, version, name, NotImplemented } = this.#extractJsDocInfoByDeclaration(cls);
         if (NotImplemented) {
-          console.warn(`Class ${className} isn't implemented.`)
+          console.warn(`Class ${className} isn't implemented.`);
           return;
         }
 
@@ -177,10 +177,10 @@ export class Generator {
 
   /**
    * Parcourir les interfaces pour générer les classes
-   * @param interfaces 
-   * @param filePath 
+   * @param interfaces
+   * @param filePath
    */
-  #readAllInterface(interfaces: InterfaceDeclaration[], filePath: string, generateFile: boolean = false, includeGlobal: boolean = false): void {
+  #readAllInterface(interfaces: InterfaceDeclaration[], filePath: string, generateFile = false, includeGlobal = false): void {
     interfaces.forEach((iface: InterfaceDeclaration) => {
       const interfaceName = iface.getName();
       const baseName = iface?.getSourceFile()?.getBaseName() || null;
@@ -189,18 +189,18 @@ export class Generator {
         return;
       }
 
-      if (interfaceName.startsWith("I")) {
+      if (interfaceName.startsWith('I')) {
         const className = interfaceName.substring(1);
 
         // Extraire les informations JSDoc
         // TODO : Move validation on extractJsDocInfoByDeclaration and THROW Exception (required Try..catch)
         const { namespace, version, name, NotImplemented } = this.#extractJsDocInfoByDeclaration(iface);
         if (!namespace || !version || !name) {
-          console.warn(`Interface ${interfaceName} can't be transformed into a class, as its JDOC is not declared.`)
+          console.warn(`Interface ${interfaceName} can't be transformed into a class, as its JDOC is not declared.`);
           return;
         }
         if (NotImplemented) {
-          console.warn(`Interface ${interfaceName} isn't implemented.`)
+          console.warn(`Interface ${interfaceName} isn't implemented.`);
           return;
         }
 
@@ -208,15 +208,15 @@ export class Generator {
         this.#addNamespace(namespace, version, interfaceName);
 
         // Prepare interfaceData
-        let data: InterfaceData = new InterfaceData(filePath, interfaceName, className, iface);
+        const data: InterfaceData = new InterfaceData(filePath, interfaceName, className, iface);
         data.addHeader(namespace, version, name);
         data.addJDOC(this.#generateClassHeader(className, namespace, version, name));
         this.#addEntities(namespace, version, data);
 
         if (generateFile) {
-          this.#writeFile("src/interface", filePath, className, data.classContent());
+          this.#writeFile('src/interface', filePath, className, data.classContent());
 
-          console.log(logType.CLASS, `Classes ${className} has been generated from the interface.`)
+          console.log(logType.CLASS, `Classes ${className} has been generated from the interface.`);
         }
       } // End if startsWith("I")
     });
@@ -224,45 +224,45 @@ export class Generator {
 
   /**
    * Parcours les « types » pour générer les classes
-   * @param typeAliases 
-   * @param filePath 
+   * @param typeAliases
+   * @param filePath
    */
-  #readAllTypeAliases(typeAliases: TypeAliasDeclaration[], filePath: string, generateFile: boolean = false, includeGlobal: boolean = false): void {
+  #readAllTypeAliases(typeAliases: TypeAliasDeclaration[], filePath: string, generateFile = false, includeGlobal = false): void {
     typeAliases.forEach((typeAlias: TypeAliasDeclaration) => {
       const typeName = typeAlias.getName();
       const globalType = typeAlias.getTypeNode()?.getText();
 
-      if ((globalType && globalType.length > 0) && (typeName.startsWith("I") && (!includeGlobal && typeAlias.getTypeNode()?.getText()?.includes("_Global")))) {
+      if ((globalType && globalType.length > 0) && (typeName.startsWith('I') && (!includeGlobal && typeAlias.getTypeNode()?.getText()?.includes('_Global')))) {
         const className = typeName.substring(1);
 
         // Extraire les informations JSDoc
         const { namespace, version, name, NotImplemented } = this.#extractJsDocInfoByDeclaration(typeAlias);
         if (!namespace || !version || !name) {
-          console.warn(`Types ${typeName} can't be transformed into a class, as its JDOC is not declared.`)
+          console.warn(`Types ${typeName} can't be transformed into a class, as its JDOC is not declared.`);
           return;
         }
         if (NotImplemented) {
-          console.warn(`Types ${typeName} isn't implemented.`)
+          console.warn(`Types ${typeName} isn't implemented.`);
           return;
         }
 
         // Préparation du namespace (index)
         this.#addNamespace(namespace, version, typeName);
 
-        const globalInterface: InterfaceDeclaration = this.project.getSourceFileOrThrow(path.join("src/interface/", "_Global/" + globalType + ".ts")).getInterfaceOrThrow(globalType.replace(/<.*>$/, ''));
+        const globalInterface: InterfaceDeclaration = this.project.getSourceFileOrThrow(path.join('src/interface/', '_Global/' + globalType + '.ts')).getInterfaceOrThrow(globalType.replace(/<.*>$/, ''));
         // const properties = this.#getAllPropertiesByInterfaceDeclaration(globalInterface);
 
         // Prepare interfaceData
-        let data: InterfaceData = new InterfaceData(filePath, typeName, className, globalInterface);
+        const data: InterfaceData = new InterfaceData(filePath, typeName, className, globalInterface);
         data.addHeader(namespace, version, name);
         data.addJDOC(this.#generateClassHeader(className, namespace, version, name));
         this.#addEntities(namespace, version, data);
 
 
         if (generateFile) {
-          this.#writeFile("src/interface", filePath, className, data.classContent());
+          this.#writeFile('src/interface', filePath, className, data.classContent());
 
-          console.log(logType.CLASS, `Classes ${className} has been generated from the type.`)
+          console.log(logType.CLASS, `Classes ${className} has been generated from the type.`);
         }
       }
     });
@@ -295,13 +295,13 @@ export class Generator {
           indexContent += `    export import ${interfaceName} = ${importName}Interface.${interfaceName};\n`;
         });
 
-        indexContent += `  }\n`;
-        indexContent += `}\n`;
+        indexContent += '  }\n';
+        indexContent += '}\n';
 
         // Déterminer le chemin de sortie
-        const outputPath = path.join("generate", "interface", `${namespace}`, 'index.ts');
+        const outputPath = path.join('generate', 'interface', `${namespace}`, 'index.ts');
         const outputDir = path.dirname(outputPath);
-        const outputFile = path.join(outputDir, "index.ts");
+        const outputFile = path.join(outputDir, 'index.ts');
 
         // Créer le répertoire de sortie si nécessaire
         fs.ensureDirSync(outputDir);
@@ -309,7 +309,7 @@ export class Generator {
         // Écrire le fichier index
         fs.writeFileSync(outputPath, indexContent);
 
-        console.log(`[SUCCESS] Interface namespace Index '${outputFile}' has been generated`)
+        console.log(`[SUCCESS] Interface namespace Index '${outputFile}' has been generated`);
       });
     });
   }
@@ -341,13 +341,13 @@ export class Generator {
           indexContent += `    export import ${className} = ${importName}Cls.${className};\n`;
         });
 
-        indexContent += `  }\n`;
-        indexContent += `}\n`;
+        indexContent += '  }\n';
+        indexContent += '}\n';
 
         // Déterminer le chemin de sortie
-        const outputPath = path.join("generate", "entity", `${namespace}`, 'index.ts');
+        const outputPath = path.join('generate', 'entity', `${namespace}`, 'index.ts');
         const outputDir = path.dirname(outputPath);
-        const outputFile = path.join(outputDir, "index.ts");
+        const outputFile = path.join(outputDir, 'index.ts');
 
         // Créer le répertoire de sortie si nécessaire
         fs.ensureDirSync(outputDir);
@@ -355,7 +355,7 @@ export class Generator {
         // Écrire le fichier index
         fs.writeFileSync(outputPath, indexContent);
 
-        console.log(`[SUCCESS] Classes namespace Index '${outputFile}' has been generated`)
+        console.log(`[SUCCESS] Classes namespace Index '${outputFile}' has been generated`);
       });
     });
   }
@@ -365,7 +365,7 @@ export class Generator {
    */
   processInterfaceToClass() {
     // Read all interface files
-    const interfaceFiles = glob.sync("src/interface/**/*.ts");
+    const interfaceFiles = glob.sync('src/interface/**/*.ts');
 
     // Process
     interfaceFiles.forEach((filePath: string) => {
@@ -383,7 +383,7 @@ export class Generator {
     });
   }
 
-  processIndexNamespace(filesFolderPath: string = "src/interface/**/*.ts", type: NamespaceIndexTypes = NamespaceIndexTypes.INTERFACE) {
+  processIndexNamespace(filesFolderPath = 'src/interface/**/*.ts', type: NamespaceIndexTypes = NamespaceIndexTypes.INTERFACE) {
     // Read all interface files
     const sourceFiles = glob.sync(filesFolderPath);
     this.namespaceVersions = {};
@@ -424,7 +424,7 @@ export class Generator {
     }
   }
 
-  test(filesFolderPath: string = "src/interface/**/*.ts", type: NamespaceIndexTypes = NamespaceIndexTypes.INTERFACE) {
+  test(filesFolderPath = 'src/interface/**/*.ts', type: NamespaceIndexTypes = NamespaceIndexTypes.INTERFACE) {
     // Read all interface files
     const sourceFiles = glob.sync(filesFolderPath);
     this.namespaceVersions = {};
@@ -468,12 +468,12 @@ export class Generator {
     if (data) {
       const interfaceName = data.originalName;
       const namespace = data.headerInfo?.namespace;
-      const version = data.headerInfo?.version
+      const version = data.headerInfo?.version;
       const properties = data.properties.map((property: PropertySignature) => `${property.getName()}: ${property.getTypeNode()?.getText()}`);
       // entitiesData: { [key: string]: { [key: string]: InterfaceData[] } }
 
       // Est-ce que ça serait mieux d'Avoir : TYPE - ValidationTypes au lieu de seulement ValidationTypes
-      let propertiesValidation: Map<string, {
+      const propertiesValidation: Map<string, {
         propName: string,
         propType: string,
         propTypes?: string[],
@@ -513,9 +513,9 @@ export class Generator {
       */
 
       // import { Interfaces, Validator } from '@/riotentity';
-      let imports: string[] = [`Interfaces`]
+      const imports: string[] = ['Interfaces'];
       // import { ClashPosition, ClashRole } from '@/src/declaration';
-      let declarationImport: string[] = [];
+      const declarationImport: string[] = [];
 
       data.properties.forEach((property: PropertySignature) => {
         const propertyName: string = property.getName();
@@ -524,12 +524,12 @@ export class Generator {
 
         if (matches) {
           matches.forEach(type => {
-            let typeLowerCase: string = propertyType.toLowerCase(); // type.toLowerCase();
-            let multiType: boolean = propertyType.includes('|');
-            let typeArray: string[] = (multiType ?
+            const typeLowerCase: string = propertyType.toLowerCase(); // type.toLowerCase();
+            const multiType: boolean = propertyType.includes('|');
+            const typeArray: string[] = (multiType ?
               propertyType.split(' | ').flatMap(part => part.replace(/\[\]\s*/, ''))
-              : []); //propertyType.replace('[]', '').split('|') : []);
-            let isArray: boolean = propertyType.includes('[]');
+              : []); // propertyType.replace('[]', '').split('|') : []);
+            const isArray: boolean = propertyType.includes('[]');
 
             // Traitement des cas de bases
             if (['string', 'number', 'boolean', 'any', 'undefined', 'null', 'void', 'never', 'object', 'unknown', 'map'].includes(typeLowerCase)) {
@@ -538,7 +538,7 @@ export class Generator {
                 propType: (!multiType ? propertyType : typeArray[0].trim()),
                 propTypes: (multiType ? typeArray : undefined),
                 isArray: isArray,
-                varType: (isArray ? ValidationTypes.GENERIC_ARRAY : ValidationTypes.GENERIC)
+                varType: (isArray ? ValidationTypes.GENERIC_ARRAY : ValidationTypes.GENERIC),
                 // isArray: (['array', '[]'].includes(typeLowerCase) ? true : false),
                 // varType: (['array', '[]'].includes(typeLowerCase) ? ValidationTypes.GENERIC_ARRAY : ValidationTypes.GENERIC)
               });
@@ -557,7 +557,7 @@ export class Generator {
               // splitData[3] = `is${splitData[3]}`
               // let validatorName: string = splitData.join('.').replace('[]', '');
 
-              let validatorName: string = `Validator.Global.v1.is${propertyType}`.replace('[]', '')
+              const validatorName: string = `Validator.Global.v1.is${propertyType}`.replace('[]', '');
               // test
 
               propertiesValidation.set(propertyName, {
@@ -572,20 +572,19 @@ export class Generator {
                 // varType: (['array', '[]'].includes(typeLowerCase) ? ValidationTypes.GLOBAL_TYPE_ARRAY : ValidationTypes.GLOBAL_TYPE)
               });
               // TODO: Comment obtenir la route ?
-            }
-            else if (propertyType.toLowerCase().includes('interfaces.')) {
+            } else if (propertyType.toLowerCase().includes('interfaces.')) {
               // Ex : Interfaces.TFT_Match.v1.ICompanionDTO
               // Ex : Validator.TFT_Match.v1.isICompanionDTO(accEntity)
-              let splitData = propertyType.split('.');
+              const splitData = propertyType.split('.');
               splitData[0] = 'Validator';
-              splitData[3] = `is${splitData[3]}`
+              splitData[3] = `is${splitData[3]}`;
               // let namespace = splitData[1];
               // // let name = splitData[2];
               // let version = splitData[2];
               // let interfaceName = splitData[3];
 
               // let testAa: string = propertyType.replace('Interface', 'Validator');
-              let validatorName: string = splitData.join('.').replace('[]', ''); // `Validators.${version}.${name}.is${interfaceName}`;
+              const validatorName: string = splitData.join('.').replace('[]', ''); // `Validators.${version}.${name}.is${interfaceName}`;
 
               propertiesValidation.set(propertyName, {
                 propName: propertyName,
@@ -596,7 +595,7 @@ export class Generator {
                 // isArray: (['array', '[]'].includes(typeLowerCase) ? true : false),
                 // // varType: ValidationTypes.CUSTOM_TYPE,
                 // varType: (['array', '[]'].includes(typeLowerCase) ? ValidationTypes.CUSTOM_TYPE_ARRAY : ValidationTypes.CUSTOM_TYPE),
-                subValidation: validatorName
+                subValidation: validatorName,
               });
 
               // TODO: Comment obtenir la route ?
@@ -604,8 +603,7 @@ export class Generator {
                 imports.push('Validator');
               }
 
-            }
-            else if (['State', 'Tracking', 'KaynChampionTransform', 'ClashPosition', 'ClashRole', 'Level', 'MaintenanceStatus', 'IncidentSeverity', 'Platforms', 'PublishLocations', 'GameMode', 'GameType', 'QueueType', 'TraitStyle'].includes(type)) {
+            } else if (['State', 'Tracking', 'KaynChampionTransform', 'ClashPosition', 'ClashRole', 'Level', 'MaintenanceStatus', 'IncidentSeverity', 'Platforms', 'PublishLocations', 'GameMode', 'GameType', 'QueueType', 'TraitStyle'].includes(type)) {
               propertiesValidation.set(propertyName, {
                 propName: propertyName,
                 propType: (!multiType ? propertyType : typeArray[0]),
@@ -620,18 +618,17 @@ export class Generator {
               if (!declarationImport.includes(type)) {
                 declarationImport.push(type);
               }
+            } else {
+              console.error(`Type ${type} for property ${propertyName} isn't supported.`);
             }
-            else {
-              console.error(`Type ${type} for property ${propertyName} isn't supported.`)
-            }
-          }) // End matches.forEach;
+          }); // End matches.forEach;
         } else {
-          let typeLowerCase: string = propertyType.toLowerCase(); // type.toLowerCase();
-          let multiType: boolean = propertyType.includes('|');
-          let typeArray: string[] = (multiType ?
+          const typeLowerCase: string = propertyType.toLowerCase(); // type.toLowerCase();
+          const multiType: boolean = propertyType.includes('|');
+          const typeArray: string[] = (multiType ?
             propertyType.split(' | ').flatMap(part => part.replace(/\[\]\s*/, ''))
-            : []); //propertyType.replace('[]', '').split('|') : []);
-          let isArray: boolean = propertyType.includes('[]');
+            : []); // propertyType.replace('[]', '').split('|') : []);
+          const isArray: boolean = propertyType.includes('[]');
 
           propertiesValidation.set(propertyName, {
             propName: propertyName,
@@ -648,15 +645,15 @@ export class Generator {
       }); // End data.properties
 
 
-      let objName: string = `${interfaceName.toLowerCase()}`;
+      const objName = `${interfaceName.toLowerCase()}`;
 
       // `import {${[...imports].join(', ')}) from '@/riotentity';
-      let importRow: string[] = [];
+      const importRow: string[] = [];
       importRow.push(`import { ${imports.join(', ')} } from '@/riotentity';`);
       if (declarationImport && declarationImport.length > 0) {
         importRow.push(`import { ${declarationImport.join(', ')} } from '@/src/declaration';`);
       }
-      let headerDeclaration: string = `\nexport function is${interfaceName}(obj: any): obj is Interfaces.${namespace}.${version}.${interfaceName} {`
+      const headerDeclaration = `\nexport function is${interfaceName}(obj: any): obj is Interfaces.${namespace}.${version}.${interfaceName} {`;
       importRow.push(headerDeclaration);
 
       // let code: string = importRow.join("\n");
@@ -664,13 +661,13 @@ export class Generator {
       importRow.push(`  // Validité que le parametre soit initialisé
       if (typeof obj !== 'object' || obj === null) {
         return false;
-      }\n`)
+      }\n`);
 
       importRow.push(`  // Casting du parametre en obj du typé a validé
       const ${objName} = obj as Interfaces.${namespace}.${version}.${interfaceName};\n`);
 
       importRow.push(`  // Valider le nombre de properties
-      const hasFieldCount: boolean = Object.keys(${objName}).length === ${properties.length};\n`)
+      const hasFieldCount: boolean = Object.keys(${objName}).length === ${properties.length};\n`);
 
       importRow.push(`  // Valider que la variable « obj » contient chacune des propriété ${interfaceName}
       const hasFieldsIn: boolean = ${properties.map(property => `'${property.split(':')[0]}' in ${objName}`).join(' &&\n    ')};\n`);
@@ -678,9 +675,9 @@ export class Generator {
       // importRow.push(`      // validé le type de chacune des propriétés de ${interfaceName}
       // const hasFieldType: boolean = `);
 
-      let validationRow: string[] = [];
+      const validationRow: string[] = [];
       propertiesValidation.forEach(property => {
-        let varName: string = `${objName}.${property.propName}`;
+        const varName = `${objName}.${property.propName}`;
 
         switch (property.varType) {
           case ValidationTypes.GENERIC:
@@ -689,7 +686,7 @@ export class Generator {
               validationRow.push(`Array.isArray(${varName})`);
               validationRow.push(`(${varName}).every(id => typeof id === '${property.propType}')`);
             } else {
-              validationRow.push(`typeof ${varName} === '${property.propType}'`)
+              validationRow.push(`typeof ${varName} === '${property.propType}'`);
             }
 
             break;
@@ -702,7 +699,7 @@ export class Generator {
               validationRow.push(`(${varName}).every(val => ${property.subValidation}(val))`);
 
             } else {
-              validationRow.push(`${property.subValidation}(${varName})`)
+              validationRow.push(`${property.subValidation}(${varName})`);
             }
             break;
 
@@ -721,7 +718,7 @@ export class Generator {
               // validationRow.push(`(Object.values(${property.propType}).includes(${varName}) || typeof ${varName} === 'string')`)
 
             } else {
-              validationRow.push(`(Object.values(${property.propType}).includes(${varName}) || typeof ${varName} === 'string')`)
+              validationRow.push(`(Object.values(${property.propType}).includes(${varName}) || typeof ${varName} === 'string')`);
             }
 
 
@@ -735,20 +732,20 @@ export class Generator {
               validationRow.push(`(${varName}).every(val => ${property.subValidation}(val))`);
 
             } else {
-              validationRow.push(`${property.subValidation}(${varName})`)
+              validationRow.push(`${property.subValidation}(${varName})`);
             }
             break;
 
         }
-      })
+      });
       importRow.push(`  // Valider le type de chacune des propriétés de ${interfaceName}
       const hasFieldType: boolean = (${validationRow.join(' &&\n    ')})\n`);
       // importRow.push(validationRow.join(' &&\t\t\t'));
 
-      importRow.push(`  return hasFieldsIn && hasFieldCount && hasFieldType;`);
-      importRow.push(`}`)
+      importRow.push('  return hasFieldsIn && hasFieldCount && hasFieldType;');
+      importRow.push('}');
 
-      let code: string = importRow.join(`\n`);
+      const code: string = importRow.join('\n');
 
       // const validationFunctionCode = `
       //       import { Interfaces } from '@/riotentity';
@@ -778,7 +775,7 @@ export class Generator {
       //   `;
 
       // Déterminer le chemin de sortie
-      const outputPath = path.join("generate", "validator", `${namespace}`, `${version}`, `${interfaceName}Checker.ts`);
+      const outputPath = path.join('generate', 'validator', `${namespace}`, `${version}`, `${interfaceName}Checker.ts`);
       const outputDir = path.dirname(outputPath);
       const outputFile = path.join(outputDir, `${interfaceName}Checker.ts`);
 
@@ -798,41 +795,41 @@ export class Generator {
 }
 
 
-let mainGenerator: Generator = new Generator();
+const mainGenerator: Generator = new Generator();
 // console.log('Arguments passés:', process.argv.slice(2));
 
-let firstArgs: string = process.argv[2];
+const firstArgs: string = process.argv[2];
 switch (firstArgs) {
   case '1':
   case 'entity':
   case 'class':
-    console.log(logType.CLASS, `Generate entity classes from interfaces`)
+    console.log(logType.CLASS, 'Generate entity classes from interfaces');
     mainGenerator.processInterfaceToClass();
-    console.log(logType.CLASS, `Generation of entity classes from interfaces is now complete`)
+    console.log(logType.CLASS, 'Generation of entity classes from interfaces is now complete');
 
     break;
 
   case '2':
   case 'interfaceIndex':
   case 'intIndex':
-    console.log(logType.INDEX, `Generating index interfaces from nain interfaces`)
-    mainGenerator.processIndexNamespace("src/interface/**/*.ts", NamespaceIndexTypes.INTERFACE);
+    console.log(logType.INDEX, 'Generating index interfaces from nain interfaces');
+    mainGenerator.processIndexNamespace('src/interface/**/*.ts', NamespaceIndexTypes.INTERFACE);
     break;
 
   case '3':
   case 'classIndex':
   case 'clsIndex':
-    console.log(logType.INDEX, `Generating index class from main class`)
-    mainGenerator.processIndexNamespace("src/entity/**/*.ts", NamespaceIndexTypes.ENTITY);
+    console.log(logType.INDEX, 'Generating index class from main class');
+    mainGenerator.processIndexNamespace('src/entity/**/*.ts', NamespaceIndexTypes.ENTITY);
     break;
 
   case '4':
   case 'validator':
-    console.log(logType.VALIDATOR, `Generating validation classes from interfaces`)
-    mainGenerator.test("src/interface/**/*.ts", NamespaceIndexTypes.INTERFACE);
+    console.log(logType.VALIDATOR, 'Generating validation classes from interfaces');
+    mainGenerator.test('src/interface/**/*.ts', NamespaceIndexTypes.INTERFACE);
     break;
 
   default:
-    console.log(logType.INFORMATION, `Invalid parameters : "${firstArgs}"`)
+    console.log(logType.INFORMATION, `Invalid parameters : "${firstArgs}"`);
     break;
 }
