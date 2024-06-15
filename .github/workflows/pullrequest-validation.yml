@@ -145,13 +145,8 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const { context, GitHub } = require('@actions/github');
-            const { execSync } = require('child_process');
-
-            async function commentOnPullRequest() {
+            async function commentOnPullRequest(github) {
               try {
-                const github = new GitHub(process.env.GITHUB_TOKEN);
-
                 const { data } = await github.pulls.listFiles({
                   owner: context.repo.owner,
                   repo: context.repo.repo,
@@ -159,7 +154,7 @@ jobs:
                 });
 
                 // Exécuter npm outdated --json pour obtenir les dépendances obsolètes
-                const outdated = execSync('npm outdated --json').toString();
+                const outdated = require('child_process').execSync('npm outdated --json').toString();
                 const result = JSON.parse(outdated);
 
                 // Organiser les dépendances par niveau de sévérité
@@ -249,7 +244,7 @@ jobs:
               return currentVersion !== wantedVersion && wantedVersion.startsWith('0.');
             }
 
-            commentOnPullRequest().catch(error => {
+            commentOnPullRequest(github).catch(error => {
               console.error('Error commenting on pull request:', error);
               process.exit(1);
             });
