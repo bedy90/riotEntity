@@ -29,14 +29,15 @@ jobs:
     strategy:
       matrix:
         node-version: [18.x]
+        language: [ 'javascript', 'typescript' ]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v4
+      uses: actions/checkout@v4.1.7
 
     - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v4.0.2
       with:
         node-version: ${{ matrix.node-version }}
 
@@ -53,10 +54,10 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v4
+      uses: actions/checkout@v4.1.7
 
     - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v4.0.2
       with:
         node-version: ${{ matrix.node-version }}
 
@@ -74,10 +75,10 @@ jobs:
     
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4.1.7
     
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4.0.2
         with:
           node-version: ${{ matrix.node-version }}
     
