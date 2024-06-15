@@ -132,7 +132,6 @@ jobs:
           else
             echo "No outdated dependencies found"
           fi
-          cat outdated.json
           
         shell: bash -e {0}
         continue-on-error: true  # Continuer en cas d'erreur pour diagnostiquer
@@ -142,8 +141,6 @@ jobs:
   
       - name: Comment on Pull Request
         if: steps.outdated.outcome == 'success'
-        env:
-          OUTDATED_JSON: ${{ steps.outdated.outputs.result }}
         uses: actions/github-script@v5
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
@@ -154,11 +151,6 @@ jobs:
                 const outdatedT = fs.readFileSync('outdated.json', 'utf8');
                 const resultT = JSON.parse(outdatedT);
                 console.log('npm outdated resultT :', resultT);
-
-                const outdated = ${{ steps.outdated.outputs.result }}
-                const result = JSON.parse(outdated);
-                console.log('npm outdated :', outdated);
-                console.log('npm outdated result:', result);
 
                 // Le reste de votre logique de traitement des résultats de npm outdated
                 // Organiser les dépendances par niveau de sévérité
@@ -183,12 +175,25 @@ jobs:
                     }
                 });
 
+                // Charger le template Markdown depuis le fichier
+                const templatePath = '.github/template/outdated.md';
+                const templateContent = await github.repos.getContent({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  path: templatePath,
+                });
+      
+                const templateBody = Buffer.from(templateContent.data.content, 'base64').toString('utf-8');
+      
+                // Remplacer les placeholders du template avec les données structurées
+                const finalComment = Mustache.render(templateBody, updatesBySeverity);
+
                 // Créer le commentaire sur la Pull Request
                 await github.issues.createComment({
                   owner: context.repo.owner,
                   repo: context.repo.repo,
                   issue_number: context.payload.pull_request.number,
-                  body: 'Votre commentaire ici',
+                  body: finalComment,
                 });
               } catch (error) {
                 console.error('Error commenting on pull request:', error);
