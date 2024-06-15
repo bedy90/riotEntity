@@ -123,8 +123,13 @@ jobs:
       - name: Check outdated dependencies
         id: outdated
         run: |
-          npm outdated --json > outdated.json
-          echo "::set-output name=result::$(cat outdated.json)"
+          npm outdated --json > outdated.json || true
+          if [ -s outdated.json ]; then
+            echo "::set-output name=result::$(cat outdated.json)"
+          else
+            echo "No outdated dependencies found"
+          fi
+        shell: /usr/bin/bash -e {0}
         continue-on-error: true  # Continuer en cas d'erreur pour diagnostiquer
           
       - name: Comment on Pull Request
