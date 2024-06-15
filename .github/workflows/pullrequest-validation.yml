@@ -129,9 +129,14 @@ jobs:
           else
             echo "No outdated dependencies found"
           fi
-        shell: /usr/bin/bash -e {0}
+        shell: bash -e {0}
         continue-on-error: true  # Continuer en cas d'erreur pour diagnostiquer
-          
+  
+      - name: Show outdated dependencies
+        if: ${{ steps.outdated.outputs.result }}
+        run: |  
+          echo "${{ steps.outdated.outputs.result }}"        
+
       - name: Comment on Pull Request
         if: steps.outdated.outcome == 'success'
         uses: actions/github-script@v5
