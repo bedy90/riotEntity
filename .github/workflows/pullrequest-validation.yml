@@ -133,11 +133,9 @@ jobs:
         # if: success()
         id: outdated
         run: |
-          outdated=$(npm outdated --json)
-          echo "::set-output name=outdated::$outdated"
+          npm outdated --json > outdated.json
+          echo "::set-output name=result::$(cat outdated.json)"
           || exit 0
-        # run: |
-        #  npm outdated --json || exit 0
         continue-on-error: true  # Continuer en cas d'erreur pour diagnostiquer
           
       # - name: Run script to comment on Pull Request
@@ -152,7 +150,7 @@ jobs:
           script: |
             async function commentOnPullRequest(github) {
               try {
-                const outdated = ${{ steps.outdated.outputs.outdated }}
+                const outdated = ${{ steps.outdated.outputs.result }}
                 console.log('npm outdated result:', outdated);
 
                 // Le reste de votre logique de traitement des résultats de npm outdated
