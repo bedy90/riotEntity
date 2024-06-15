@@ -3,8 +3,8 @@ import { IMiniSeriesDTO_Global } from './IMiniSeriesDTO_Global';
 /**
  * Interface ILeagueEntryDTO_Global
  *
- * @namespace Global 
- * @version 1
+ * @namespace Global
+ * @version v1
  * @name ILeagueEntryDTO_Global
  */
 export interface ILeagueEntryDTO_Global {

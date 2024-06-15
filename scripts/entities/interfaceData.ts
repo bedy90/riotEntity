@@ -1,10 +1,10 @@
-import { InterfaceDeclaration, PropertySignature, TypeAliasDeclaration } from "ts-morph";
-import { ImportTypes } from "../generate-entities";
+import { InterfaceDeclaration, PropertySignature, TypeAliasDeclaration } from 'ts-morph';
+import { ImportTypes } from '../generate-entities';
 
 export class HeaderInfo {
 
     constructor(public namespace: string,
-        public version: Number,
+        public version: number,
         public name: string) {
     }
 }
@@ -16,12 +16,12 @@ export class InterfaceData {
     properties: PropertySignature[];
     customTypes: Set<string>;
     globalTypes: Set<string>;
-    imports: Array<string>;
+    imports: string[];
     jdocHeader!: string;
 
     constructor(public filePath: string,
                  public originalName: string,
-                 public className: string, 
+                 public className: string,
                 public iface: InterfaceDeclaration | null = null,
                 public typeAlias: TypeAliasDeclaration | null = null) {
         this.headerInfo = null;
@@ -30,15 +30,15 @@ export class InterfaceData {
         this.globalTypes = new Set<string>();
         this.imports = new Array<string>();
 
-        this.addImport(`import { Interfaces } from '@/riotentity';`)
+        this.addImport('import { Interfaces } from \'@/riotentity\';');
 
         if (iface) {
-            let properties = this.#getAllPropertiesByInterfaceDeclaration(iface);
+            const properties = this.#getAllPropertiesByInterfaceDeclaration(iface);
             this.addProperties(properties);
         }
     }
 
-    addHeader(namespace: string, version: Number, name: string): void {
+    addHeader(namespace: string, version: number, name: string): void {
         this.headerInfo = new HeaderInfo(namespace, version, name);
     }
 
@@ -73,40 +73,40 @@ export class InterfaceData {
 
     classContent(): string {
         if (!this.headerInfo) {
-            throw new Error("HeaderInfo can't be null");
+            throw new Error('HeaderInfo can\'t be null');
         }
-        let classContent: Array<string> = [];
+        const classContent: string[] = [];
         classContent.push(...this.imports);
-        classContent.push(this.jdocHeader)
+        classContent.push(this.jdocHeader);
         classContent.push(`export class ${this.className} implements Interfaces.${this.headerInfo.namespace}.${this.headerInfo.version}.${this.headerInfo.name} {`);
         classContent.push(this.#generateProperties());
-        classContent.push(`}\n`)    // add /n for add a empty line EOF
+        classContent.push('}\n'); // add /n for add a empty line EOF
 
         // Utiliser \r\n pour les fins de ligne Windows CR LF
         // return classContent.join(`\r\n`);
 
         // Utiliser \n pour les fins de ligne Unix LF
-        return classContent.join(`\n`);
+        return classContent.join('\n');
     }
 
     /**
      * Generate all imports from types list
-     * @param types 
-     * @param importType 
-     * @returns 
+     * @param types
+     * @param importType
+     * @returns
      */
     addImportTypes(types: Set<string>, importType: ImportTypes): void {
         if (types && types.size > 0) {
             switch (importType) {
                 case ImportTypes.CUSTOM:
-                    let imports: string = `import { ${[...types].join(', ')} } from '@/riotentity';`; // \n
+                    const imports = `import { ${[...types].join(', ')} } from '@/riotentity';`; // \n
                     this.addImport(imports);
                     break;
 
                 case ImportTypes.GLOBAL:
                     types.forEach(globalType => {
                         const globalImportPath = `@/src/interface/_Global/${globalType}`;
-                        let imports: string = `import { ${globalType} } from '${globalImportPath}';`; // \n
+                        const imports = `import { ${globalType} } from '${globalImportPath}';`; // \n
 
                         this.addImport(imports);
                     });
@@ -117,8 +117,8 @@ export class InterfaceData {
 
     /**
      * Fonction pour extraire les types personnalisés des propriétés d'une interface
-     * @param properties 
-     * @returns 
+     * @param properties
+     * @returns
      */
     addCustomAndGlobalTypes(properties: PropertySignature[]): void {
         const customTypes = new Set<string>();
@@ -133,7 +133,7 @@ export class InterfaceData {
                     // Exclure les types contenant « Interfaces » ainsi que les types primitifs et globaux
                     if (!propType.includes('Interfaces.') && !['string', 'number', 'boolean', 'any', 'undefined', 'null', 'void', 'never', 'object', 'unknown', 'map'].includes(type.toLowerCase())) {
                         // Split customType and globalTypes
-                        if (type.toLowerCase().includes("_global")) {
+                        if (type.toLowerCase().includes('_global')) {
                             globalTypes.add(type);
                         } else {
                             customTypes.add(type);
@@ -153,27 +153,27 @@ export class InterfaceData {
 
     /**
      * Generate all properties
-     * @param properties 
-     * @returns 
+     * @param properties
+     * @returns
      */
     #generateProperties(): string {
-        let propertiesData: string[] = [];
+        const propertiesData: string[] = [];
 
         if (this.properties && this.properties.length > 0) {
             this.properties.forEach((property: PropertySignature) => {
                 const propName = property.getName();
                 const propType = property.getTypeNode()?.getText() || 'any';
 
-                propertiesData.push(`    ${propName}!: ${propType};`)
+                propertiesData.push(`    ${propName}!: ${propType};`);
             });
         }
-        return propertiesData.join(`\n`);
+        return propertiesData.join('\n');
     }
 
     /**
      * Fonction pour extraire les propriétés d'une interface, y compris celles héritées
-     * @param iface 
-     * @returns 
+     * @param iface
+     * @returns
      */
     #getAllPropertiesByInterfaceDeclaration(iface: InterfaceDeclaration): PropertySignature[] {
         const properties: PropertySignature[] = [];
