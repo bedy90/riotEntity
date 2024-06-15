@@ -29,7 +29,7 @@ jobs:
     strategy:
       matrix:
         node-version: [18.x]
-        language: [ 'javascript', 'typescript' ]
+        # language: [ 'javascript', 'typescript' ]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
@@ -51,6 +51,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     needs: eslint-review
+    strategy:
+      matrix:
+        node-version: [18.x]
 
     steps:
     - name: Checkout
@@ -72,6 +75,9 @@ jobs:
   verify:
     runs-on: ubuntu-latest
     needs: [eslint-review, build]
+    strategy:
+      matrix:
+        node-version: [18.x]
     
     steps:
       - name: Checkout
@@ -90,11 +96,11 @@ jobs:
         continue-on-error: false  # Arrête le workflow si le build échoue
       
       - name: Run CodeQL Analysis
-        uses: github/codeql-action/init@v2
+        uses: github/codeql-action/init@v3
         with:
           languages: javascript, typescript
   
       - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v2
+        uses: github/codeql-action/analyze@v3
 
             
