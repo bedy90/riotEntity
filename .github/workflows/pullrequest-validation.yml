@@ -137,12 +137,6 @@ jobs:
         shell: bash -e {0}
         continue-on-error: true  # Continuer en cas d'erreur pour diagnostiquer
   
-      - name: Show outdated dependencies
-        if: ${{ steps.outdated.outputs.result }}
-        run: |  
-          echo "${{ steps.outdated.outputs.result }}" | jq     
-        continue-on-error: true  # Continuer en cas d'erreur pour diagnostiquer   
-
       - name: Comment on Pull Request
         if: steps.outdated.outcome == 'success'
         env:
@@ -153,7 +147,7 @@ jobs:
           script: |
             async function commentOnPullRequest(github) {
               try {
-                const outdated = $OUTDATED_JSON
+                const outdated = ${{ steps.outdated.outputs.result }}
                 const result = JSON.parse(outdated);
                 console.log('npm outdated :', outdated);
                 console.log('npm outdated result:', result);
