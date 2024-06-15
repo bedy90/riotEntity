@@ -136,6 +136,9 @@ jobs:
           
         shell: bash -e {0}
         continue-on-error: true  # Continuer en cas d'erreur pour diagnostiquer
+
+      - name: show detail
+        run: ls -l
   
       - name: Comment on Pull Request
         if: steps.outdated.outcome == 'success'
@@ -147,6 +150,11 @@ jobs:
           script: |
             async function commentOnPullRequest(github) {
               try {
+                const fs = require('fs');
+                const outdatedT = fs.readFileSync('outdated.json', 'utf8');
+                const resultT = JSON.parse(outdatedT);
+                console.log('npm outdated resultT :', resultT);
+
                 const outdated = ${{ steps.outdated.outputs.result }}
                 const result = JSON.parse(outdated);
                 console.log('npm outdated :', outdated);
