@@ -1,31 +1,29 @@
-# Mises Outdated Dependencies
+<!-- outdated-comment -->
+# Outdated Dependencies
 
-{{#if major.length}}
-### Major Updates:
-| Package Name | Current Version | Wanted Version | Latest Version |
-|--------------|-----------------|----------------|----------------|
-{{#each major}}
-| {{this.name}} | {{this.current}} | {{this.wanted}} | {{this.latest}} |
-{{/each}}
-{{/if}}
+This report details the outdated dependencies found in your project.
 
-{{#if minor.length}}
-### Minor Updates:
-| Package Name | Current Version | Wanted Version | Latest Version |
-|--------------|-----------------|----------------|----------------|
-{{#each minor}}
-| {{this.name}} | {{this.current}} | {{this.wanted}} | {{this.latest}} |
-{{/each}}
-{{/if}}
+<details>
+  <summary><strong>Types of depreciation</strong></summary>
 
-{{#if patch.length}}
-### Patch Updates:
-| Package Name | Current Version | Wanted Version | Latest Version |
-|--------------|-----------------|----------------|----------------|
-{{#each patch}}
-| {{this.name}} | {{this.current}} | {{this.wanted}} | {{this.latest}} |
-{{/each}}
-{{/if}}
+Changelog entries are classified using the following labels _(from [keep-a-changelog](http://keepachangelog.com/)_):
+
+- `current`: The current version installed in your project.
+- `wanted`: The version specified in your `package.json` or `package-lock.json`.
+- `latest`: The latest available version on the npm registry.
+
+</details>
+
+<details>
+  <summary><strong>Outdated dependency lists</strong></summary>
+
+| PackageName | Current | Wanted | Latest |
+|---|---|---|---|
+{{#data}}
+| {{name}} | {{current}} | {{wanted}} | {{latest}}
+{{/data}}
+
+<details> 
 
 # Note
 Please consider updating these dependencies.

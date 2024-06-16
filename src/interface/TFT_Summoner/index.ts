@@ -1,8 +1,7 @@
-// export * from './v4/ISummonerDTO';
-import * as SummonerInterface from './v1/ISummonerDTO';
+import * as SummonerDTOInterface from './v1/ISummonerDTO';
 
 export namespace TFT_Summoner {
-    export namespace v1 {
-        export import ISummonerDTO = SummonerInterface.ISummonerDTO;
-    }
+  export namespace v1 {
+    export import ISummonerDTO = SummonerDTOInterface.ISummonerDTO;
+  }
 }

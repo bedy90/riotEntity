@@ -1,20 +1,31 @@
 import { Level } from '@/src/declaration';
 
-// TODO: A tester
-
 /**
+ * Interface IChallengePercentile
  * Challenge percentile for a specific challenge (without Key)
+ *
+ * @namespace LoL_Challenges
+ * @version v1
+ * @name IChallengePercentile
+ * @NotImplemented
  */
-export interface ChallengePercentile {
-    percentile : ChallengePercentileType
+export interface IChallengePercentile {
+    percentile : ChallengePercentileType;
 }
 
 /**
+ * Interface IChallengePercentiles
  * All challenges percentile
+ *
+ * @namespace LoL_Challenges
+ * @version v1
+ * @name IChallengePercentiles
+ * @NotImplemented
  */
-export interface ChallengePercentiles {
-    percentiles : ChallengePercentilesType
+export interface IChallengePercentiles {
+    percentiles : ChallengePercentilesType;
 }
+
 
 type ChallengePercentilesType = Record<string, Map<number, ChallengePercentileType>>;
 

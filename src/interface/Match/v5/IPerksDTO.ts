@@ -1,23 +1,13 @@
+import { Interfaces } from '@/riotentity';
+
+/**
+ * Interface IPerksDTO
+ *
+ * @namespace Match
+ * @version v5
+ * @name IPerksDTO
+ */
 export interface IPerksDTO {
-    statPerks: IPerkStatsDTO;
-    styles: IPerkStyleDTO[];
-}
-
-export interface IPerkStatsDTO {
-    defense: number;
-    flex: number;
-    offense: number;
-}
-
-export interface IPerkStyleDTO {
-    description: string;
-    selections: IPerkStyleSelectionDTO[];
-    style: number;
-}
-
-export interface IPerkStyleSelectionDTO {
-    perk: number;
-    var1: number;
-    var2: number;
-    var3: number;
+    statPerks: Interfaces.Match.v5.IPerkStatsDTO;
+    styles: Interfaces.Match.v5.IPerkStyleDTO[];
 }
