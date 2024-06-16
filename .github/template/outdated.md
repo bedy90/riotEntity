@@ -1,3 +1,4 @@
+<!-- outdated-comment -->
 # Outdated Dependencies
 
 This report details the outdated dependencies found in your project.
@@ -21,13 +22,6 @@ Changelog entries are classified using the following labels _(from [keep-a-chang
 {{#data}}
 | {{name}} | {{current}} | {{wanted}} | {{latest}}
 {{/data}}
-
-
-| PackageName | Current | Wanted | Latest |
-|---|---|---|---|
-{% for dependency in data %}
-| {{ dependency.name }} | {{ dependency.current }} | {{ dependency.wanted }} | {{ dependency.latest }}
-{% endfor %}
 
 <details> 
 

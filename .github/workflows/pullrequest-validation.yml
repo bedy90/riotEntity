@@ -156,11 +156,11 @@ jobs:
             // Read template
             const templatePath = '.github/template/outdated.md';
             const templateFile = fs.readFileSync(templatePath, 'utf8');
-            const commentBody = renderTemplate(templateFile, packageList.data)
+            // const commentBody = renderTemplate(templateFile, packageList.data)
 
             const Mustache = require('mustache');
             const mustacheCommentBody = Mustache.render(templateFile, packageList);
-            console.log(mustacheCommentBody)
+            // console.log(mustacheCommentBody)
 
 
             // Trouver le commentaire existant
@@ -196,15 +196,15 @@ jobs:
               throw error;
             }
 
-            function renderTemplate(template, data) {
-              const parts = template.split('{% for dependency in data %}');
-              const header = parts[0];
-              const footer = parts[1].split('{% endfor %}')[1];
-              const body = data.map(dependency => {
-                return `| ${dependency.name} | ${dependency.current} | ${dependency.wanted} | ${dependency.latest} |`;
-              }).join('\n');
-              return `${header}\n${body}\n${footer}`;
-            }
+       #    function renderTemplate(template, data) {
+       #      const parts = template.split('{% for dependency in data %}');
+       #      const header = parts[0];
+       #      const footer = parts[1].split('{% endfor %}')[1];
+       #      const body = data.map(dependency => {
+       #        return `| ${dependency.name} | ${dependency.current} | ${dependency.wanted} | ${dependency.latest} |`;
+       #      }).join('\n');
+       #      return `${header}\n${body}\n${footer}`;
+       #    }
 
 
 
