@@ -178,7 +178,8 @@ jobs:
                   owner: context.repo.owner,
                   repo: context.repo.repo,
                   comment_id: commentToUpdate.id,
-                  body: commentBody.replace('<!-- outdated-comment -->', '') + '\n\n<!-- outdated-comment -->'
+                  body: mustacheCommentBody
+                  // body: commentBody.replace('<!-- outdated-comment -->', '') + '\n\n<!-- outdated-comment -->'
                 })
               } else {
                 // Créer un nouveau commentaire
@@ -186,7 +187,8 @@ jobs:
                   owner: context.repo.owner,
                   repo: context.repo.repo,
                   issue_number: context.issue.number,
-                  body: commentBody + '\n\n<!-- outdated-comment -->'
+                  body: mustacheCommentBody
+                  // body: commentBody + '\n\n<!-- outdated-comment -->'
                 })
               }
             } catch (error) {
@@ -201,7 +203,7 @@ jobs:
               const body = data.map(dependency => {
                 return `| ${dependency.name} | ${dependency.current} | ${dependency.wanted} | ${dependency.latest} |`;
               }).join('\n');
-              return `${header}\n{% for dependency in data %}\n${body}\n{% endfor %}\n${footer}`;
+              return `${header}\n${body}\n${footer}`;
             }
 
 
