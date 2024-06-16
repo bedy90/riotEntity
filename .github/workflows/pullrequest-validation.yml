@@ -189,7 +189,7 @@ jobs:
                 await github.rest.issues.createComment({
                   owner: context.repo.owner,
                   repo: context.repo.repo,
-                  issue_number: issueNumber,
+                  issue_number: context.issue.number,
                   body: commentBody + '\n\n<!-- outdated-comment -->'
                 })
               }

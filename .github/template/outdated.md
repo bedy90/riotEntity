@@ -18,6 +18,13 @@ Changelog entries are classified using the following labels _(from [keep-a-chang
 
 | PackageName | Current | Wanted | Latest |
 |---|---|---|---|
+{{#data}}
+| {{name}} | {{current}} | {{wanted}} | {{latest}}
+{{/data}}
+
+
+| PackageName | Current | Wanted | Latest |
+|---|---|---|---|
 {% for dependency in data %}
 | {{ dependency.name }} | {{ dependency.current }} | {{ dependency.wanted }} | {{ dependency.latest }}
 {% endfor %}
