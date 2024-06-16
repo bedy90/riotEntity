@@ -154,7 +154,7 @@ jobs:
                 const wantedVersion = depInfo.wanted;
                 const latestVersion = depInfo.latest;
           
-                packageList.push({name: depInfo, current: currentVersion, wanted: wantedVersion, latest: latestVersion })
+                packageList.data.push({name: depInfo, current: currentVersion, wanted: wantedVersion, latest: latestVersion })
             });
 
             // Read template
