@@ -149,12 +149,8 @@ jobs:
             };
 
             Object.keys(result).forEach(depName => {
-                const depInfo = result[depName];
-                const currentVersion = depInfo.current;
-                const wantedVersion = depInfo.wanted;
-                const latestVersion = depInfo.latest;
-          
-                packageList.data.push({name: depInfo, current: currentVersion, wanted: wantedVersion, latest: latestVersion })
+                const depInfo = result[depName];          
+                packageList.data.push({name: depName, current: depInfo.current, wanted: depInfo.wanted, latest: depInfo.latest })
             });
 
             // Read template
@@ -171,7 +167,7 @@ jobs:
             const existingComments = await github.rest.issues.listComments({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              issue_number: issueNumber
+              issue_number: context.issue.number
             })
             const commentToUpdate = existingComments.data.find(c => c.user.type === 'Bot' && c.body.includes('<!-- outdated-comment -->'))
       
