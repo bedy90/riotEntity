@@ -138,6 +138,8 @@ jobs:
 
       # - name: show detail
       #   run: ls -l
+      - name: Install dependencies
+        run: npm install mustache
   
       - name: Comment on Pull Request
         if: steps.outdated.outcome == 'success'
@@ -148,8 +150,8 @@ jobs:
             async function commentOnPullRequest(github) {
               try {
                 const fs = require('fs');
-                const Mustache = require('https://cdnjs.cloudflare.com/ajax/libs/mustache.js/4.2.0/mustache.min.js');
-                
+                const Mustache = require('mustache');
+
                 const outdated = fs.readFileSync('outdated.json', 'utf8');
                 const result = JSON.parse(outdated);
 
