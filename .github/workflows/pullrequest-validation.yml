@@ -147,72 +147,96 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            async function commentOnPullRequest(github) {
-              try {
-                const fs = require('fs');
-                const Mustache = require('mustache');
+            const fs = require('fs');
+            const outdated = fs.readFileSync('outdated.json', 'utf8');
+            const result = JSON.parse(outdated);
 
-                const outdated = fs.readFileSync('outdated.json', 'utf8');
-                const result = JSON.parse(outdated);
-
-                // Le reste de votre logique de traitement des résultats de npm outdated
-                // Organiser les dépendances par niveau de sévérité
-                const updatesBySeverity = {
-                  major: [],
-                  minor: [],
-                  patch: [],
-                };
-
-                Object.keys(result).forEach(depName => {
-                    const depInfo = result[depName];
-                    const currentVersion = depInfo.current;
-                    const wantedVersion = depInfo.wanted;
-                    const latestVersion = depInfo.latest;
-        
-                    if (currentVersion !== wantedVersion && wantedVersion.startsWith('1')) {
-                      updatesBySeverity.major.push({ name: depName, current: currentVersion, wanted: wantedVersion, latest: latestVersion });
-                    } else if (currentVersion !== wantedVersion && wantedVersion.startsWith('0')) {
-                      updatesBySeverity.minor.push({ name: depName, current: currentVersion, wanted: wantedVersion, latest: latestVersion });
-                    } else if (currentVersion !== wantedVersion && wantedVersion.startsWith('0.')) {
-                      updatesBySeverity.patch.push({ name: depName, current: currentVersion, wanted: wantedVersion, latest: latestVersion });
-                    }
-                });
-
-                // Charger le template Markdown depuis le fichier
-                const templatePath = '.github/template/outdated.md';
-                const templateContent = await github.rest.repos.getContent({
-                  owner: context.repo.owner,
-                  repo: context.repo.repo,
-                  path: templatePath,
-                });
-       
-                const templateBody = Buffer.from(templateContent.data.content, 'base64').toString('utf-8');
-      
-                console.log('step before renderer template preload')
-                // Remplacer les placeholders du template avec les données structurées
-                const finalComment = Mustache.render(templateBody, updatesBySeverity);
-
-                console.log('step after  comment')
-                console.log(context.payload.pull_request.number)
-
-                // Créer le commentaire sur la Pull Request
-                  await github.rest.issues.createComment({
-                  issue_number: context.payload.pull_request.number,
-                  owner: context.repo.owner,
-                  repo: context.repo.repo,
-                  body: finalComment
-                });
-
-              } catch (error) {
-                // console.error('Error commenting on pull request:', error);
-                throw error; // Rejeter l'erreur pour la capturer dans le workflow
-              }
+            let comment = '## Outdated dependencies found:\n\n';
+            for (const [name, info] of Object.entries(result)) {
+              comment += `- ${name} (${info.current} -> ${info.wanted} -> ${info.latest})\n`;
             }
 
-            commentOnPullRequest(github).catch(error => {
+            try {
+              await github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: comment
+              });
+            } catch (error) {
               console.error('Error commenting on pull request:', error);
-              process.exit(1);
-            });
+              throw error;
+            }
+
+
+
+          # script: |
+            # async function commentOnPullRequest(github) {
+            #   try {
+            #     const fs = require('fs');
+            #     const Mustache = require('mustache');
+
+            #     const outdated = fs.readFileSync('outdated.json', 'utf8');
+            #     const result = JSON.parse(outdated);
+
+            #     // Le reste de votre logique de traitement des résultats de npm outdated
+            #     // Organiser les dépendances par niveau de sévérité
+            #     const updatesBySeverity = {
+            #       major: [],
+            #       minor: [],
+            #       patch: [],
+            #     };
+
+            #     Object.keys(result).forEach(depName => {
+            #         const depInfo = result[depName];
+            #         const currentVersion = depInfo.current;
+            #         const wantedVersion = depInfo.wanted;
+            #         const latestVersion = depInfo.latest;
+        
+            #         if (currentVersion !== wantedVersion && wantedVersion.startsWith('1')) {
+            #           updatesBySeverity.major.push({ name: depName, current: currentVersion, wanted: wantedVersion, latest: latestVersion });
+            #         } else if (currentVersion !== wantedVersion && wantedVersion.startsWith('0')) {
+            #           updatesBySeverity.minor.push({ name: depName, current: currentVersion, wanted: wantedVersion, latest: latestVersion });
+            #         } else if (currentVersion !== wantedVersion && wantedVersion.startsWith('0.')) {
+            #           updatesBySeverity.patch.push({ name: depName, current: currentVersion, wanted: wantedVersion, latest: latestVersion });
+            #         }
+            #     });
+
+            #     // Charger le template Markdown depuis le fichier
+            #     const templatePath = '.github/template/outdated.md';
+            #     const templateContent = await github.rest.repos.getContent({
+            #       owner: context.repo.owner,
+            #       repo: context.repo.repo,
+            #       path: templatePath,
+            #     });
+       
+            #     const templateBody = Buffer.from(templateContent.data.content, 'base64').toString('utf-8');
+      
+            #     console.log('step before renderer template preload')
+            #     // Remplacer les placeholders du template avec les données structurées
+            #     const finalComment = Mustache.render(templateBody, updatesBySeverity);
+
+            #     console.log('step after  comment')
+            #     console.log(context.payload.pull_request.number)
+
+            #     // Créer le commentaire sur la Pull Request
+            #       await github.rest.issues.createComment({
+            #       issue_number: context.payload.pull_request.number,
+            #       owner: context.repo.owner,
+            #       repo: context.repo.repo,
+            #       body: finalComment
+            #     });
+
+            #   } catch (error) {
+            #     // console.error('Error commenting on pull request:', error);
+            #     throw error; // Rejeter l'erreur pour la capturer dans le workflow
+            #   }
+            # }
+
+            # commentOnPullRequest(github).catch(error => {
+            #   console.error('Error commenting on pull request:', error);
+            #   process.exit(1);
+            # });
 
           # script: |
           #   async function commentOnPullRequest(github) {
