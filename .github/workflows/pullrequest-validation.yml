@@ -187,15 +187,25 @@ jobs:
                 // Remplacer les placeholders du template avec les données structurées
                 const finalComment = Mustache.render(templateBody, updatesBySeverity);
 
+                console.log(context);
+
                 // Créer le commentaire sur la Pull Request
-                await github.issues.createComment({
+                // await github.rest.issues.createComment({
+                //   owner: context.repo.owner,
+                //   repo: context.repo.repo,
+                //   issue_number: context.payload.pull_request.number,
+                //   body: finalComment,
+                // });
+
+                await github.rest.issues.createComment({
+                  issue_number: context.issue.number,
                   owner: context.repo.owner,
                   repo: context.repo.repo,
-                  issue_number: context.payload.pull_request.number,
-                  body: finalComment,
+                  body: finalComment
                 });
+
               } catch (error) {
-                console.error('Error commenting on pull request:', error);
+                // console.error('Error commenting on pull request:', error);
                 throw error; // Rejeter l'erreur pour la capturer dans le workflow
               }
             }
@@ -204,6 +214,7 @@ jobs:
               console.error('Error commenting on pull request:', error);
               process.exit(1);
             });
+
           # script: |
           #   async function commentOnPullRequest(github) {
           #     try {
