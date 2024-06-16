@@ -125,19 +125,19 @@ jobs:
         id: outdated
         run: |
           npm outdated --json > outdated.json || true
-          if [ -s outdated.json ]; then
-            echo "result<<EOF" >> $GITHUB_OUTPUT
-            cat outdated.json >> $GITHUB_OUTPUT
-            echo "EOF" >> $GITHUB_OUTPUT
-          else
-            echo "No outdated dependencies found"
-          fi
+       #   if [ -s outdated.json ]; then
+       #     echo "result<<EOF" >> $GITHUB_OUTPUT
+       #     cat outdated.json >> $GITHUB_OUTPUT
+       #     echo "EOF" >> $GITHUB_OUTPUT
+       #   else
+       #     echo "No outdated dependencies found"
+       #   fi
           
         shell: bash -e {0}
         continue-on-error: true  # Continuer en cas d'erreur pour diagnostiquer
 
-      - name: show detail
-        run: ls -l
+      # - name: show detail
+      #   run: ls -l
   
       - name: Comment on Pull Request
         if: steps.outdated.outcome == 'success'
@@ -148,6 +148,8 @@ jobs:
             async function commentOnPullRequest(github) {
               try {
                 const fs = require('fs');
+                const Mustache = require('https://cdnjs.cloudflare.com/ajax/libs/mustache.js/4.2.0/mustache.min.js');
+                
                 const outdated = fs.readFileSync('outdated.json', 'utf8');
                 const result = JSON.parse(outdated);
 
@@ -175,32 +177,25 @@ jobs:
                 });
 
                 // Charger le template Markdown depuis le fichier
-                console.log('step preload')
                 const templatePath = '.github/template/outdated.md';
                 const templateContent = await github.rest.repos.getContent({
                   owner: context.repo.owner,
                   repo: context.repo.repo,
                   path: templatePath,
                 });
-                console.log('step after preload')
-      
+       
                 const templateBody = Buffer.from(templateContent.data.content, 'base64').toString('utf-8');
       
+                console.log('step before renderer template preload')
                 // Remplacer les placeholders du template avec les données structurées
                 const finalComment = Mustache.render(templateBody, updatesBySeverity);
 
-                console.log(context);
+                console.log('step after  comment')
+                console.log(context.payload.pull_request.number)
 
                 // Créer le commentaire sur la Pull Request
-                // await github.rest.issues.createComment({
-                //   owner: context.repo.owner,
-                //   repo: context.repo.repo,
-                //   issue_number: context.payload.pull_request.number,
-                //   body: finalComment,
-                // });
-
-                await github.rest.issues.createComment({
-                  issue_number: context.issue.number,
+                  await github.rest.issues.createComment({
+                  issue_number: context.payload.pull_request.number,
                   owner: context.repo.owner,
                   repo: context.repo.repo,
                   body: finalComment
