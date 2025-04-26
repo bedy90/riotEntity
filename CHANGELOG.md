@@ -37,6 +37,19 @@ Changelog entries are classified using the following labels _(from [keep-a-chang
   <summary><strong>Unreleased</strong></summary>
 </details>
 
+## [2025.1.1] - 2025-04-21
+<details>
+  <summary>Version 2025.1.1</summary>
+
+### Added
+
+### Changed
+- Update dependencies
+
+### Fixed
+
+</details>
+
 ## [2024.6.1] - 2024-06-15
 <details>
   <summary>Version 2024.6.1</summary>
@@ -74,7 +87,6 @@ Changelog entries are classified using the following labels _(from [keep-a-chang
 ## [2024.2.1] - 2024-02-11
 <details>
   <summary>Version 2024.2.1 alpha</summary>
-
 
 ### Added
 - Implementation of a namespace system

@@ -8,7 +8,7 @@ import { IUpdateDTO_Global } from '../../_Global/IUpdateDTO_Global';
  * @version v4
  * @name IUpdateDTO
  */
-export type IUpdateDTO = IUpdateDTO_Global
+export type IUpdateDTO_v4 = IUpdateDTO_Global
 /*
 export interface IUpdateDTO extends IUpdateDTO_Global {
 }

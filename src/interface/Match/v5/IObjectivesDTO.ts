@@ -1,5 +1,5 @@
-/* eslint-disable max-len */
-/* eslint-disable no-shadow */
+// eslint-disable max-len
+// eslint-disable no-shadow
 import { Interfaces } from '@/riotentity';
 
 /**
@@ -9,16 +9,17 @@ import { Interfaces } from '@/riotentity';
  * @version v5
  * @name IObjectivesDTO
  */
-export interface IObjectivesDTO {
-    baron: Interfaces.Match.v5.IObjectiveDTO;
+export interface IObjectivesDTO_v5 {
+    baron: Interfaces.IObjectiveDTO_v5;
 
-    champion: Interfaces.Match.v5.IObjectiveDTO;
+    champion: Interfaces.IObjectiveDTO_v5;
 
-    dragon: Interfaces.Match.v5.IObjectiveDTO;
+    dragon: Interfaces.IObjectiveDTO_v5;
 
-    inhibitor: Interfaces.Match.v5.IObjectiveDTO;
+    inhibitor: Interfaces.IObjectiveDTO_v5;
 
-    riftHerald: Interfaces.Match.v5.IObjectiveDTO;
+    riftHerald: Interfaces.IObjectiveDTO_v5;
 
-    tower: Interfaces.Match.v5.IObjectiveDTO;
+    tower: Interfaces.IObjectiveDTO_v5;
+
 }

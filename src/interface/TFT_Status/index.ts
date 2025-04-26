@@ -1,13 +1,14 @@
-import * as UpdateDTOInterface from './v1/IUpdateDTO';
-import * as StatusDTOInterface from './v1/IStatusDTO';
-import * as PlatformDataDTOInterface from './v1/IPlatformDataDTO';
-import * as ContentDTOInterface from './v1/IContentDTO';
+import { IContentDTO_v1 as TFT_IContentDTO_v1 } from './v1/IContentDTO';
+import { IPlatformDataDTO_v1 as TFT_IPlatformDataDTO_v1 } from './v1/IPlatformDataDTO';
+import { IStatusDTO_v1 as TFT_IStatusDTO_v1 } from './v1/IStatusDTO';
+import { IUpdateDTO_v1 as TFT_IUpdateDTO_v1 } from './v1/IUpdateDTO';
 
-export namespace TFT_Status {
-  export namespace v1 {
-    export import IUpdateDTO = UpdateDTOInterface.IUpdateDTO;
-    export import IStatusDTO = StatusDTOInterface.IStatusDTO;
-    export import IPlatformDataDTO = PlatformDataDTOInterface.IPlatformDataDTO;
-    export import IContentDTO = ContentDTOInterface.IContentDTO;
-  }
-}
+export {
+  TFT_IContentDTO_v1, TFT_IPlatformDataDTO_v1,
+  TFT_IStatusDTO_v1, TFT_IUpdateDTO_v1,
+};
+
+export type TFT_IContentDTO = TFT_IContentDTO_v1;
+export type TFT_IPlatformDataDTO = TFT_IPlatformDataDTO_v1;
+export type TFT_IStatusDTO = TFT_IStatusDTO_v1;
+export type TFT_IUpdateDTO = TFT_IUpdateDTO_v1;

@@ -5,7 +5,7 @@
  * @version v3
  * @name IChampionInfo
  */
-export interface IChampionInfo {
+export interface IChampionInfo_v3 {
     /**
      * The maximum level required to be considered a "newPlayer".
      */

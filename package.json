@@ -1,9 +1,9 @@
 {
   "name": "@bedy90/riotentity",
-  "version": "2024.6.1",
+  "version": "2025.1.1",
   "description": "Bedy90 - Riot Entity",
   "main": "build/index.js",
-  "types": "./build/index.d.ts",
+  "types": "build/index.d.ts",
   "scripts": {
     "== Run ==": "",
     "run:test": "npx ts-node src/manual_test.ts",
@@ -27,7 +27,11 @@
     "local:cleanPackCopy": "npm run compile:rim && npm pack && copy.bat",
     "== Eslint ==": "",
     "eslint": "npx eslint .",
-    "eslintFix": "npx eslint . --fix"
+    "eslintFix": "npx eslint . --fix",
+    "== 2025 ==": "",
+    "build:ts": "npx tsc",
+    "build:ts_rim": "rimraf ./build && tsc",
+    "build:pack": "tsup --config tsup.config.ts"
   },
   "files": [
     "build/**/*",
@@ -51,20 +55,25 @@
   },
   "homepage": "https://github.com/bedy90/riotEntity#readme",
   "devDependencies": {
+    "@eslint/js": "^9.25.1",
     "@types/fs-extra": "^11.0.4",
-    "@types/node": "^20.11.7",
-    "@typescript-eslint/eslint-plugin": "^6.20.0",
-    "@typescript-eslint/parser": "^6.20.0",
+    "@types/node": "^22.14.1",
+    "@typescript-eslint/eslint-plugin": "^8.31.0",
+    "@typescript-eslint/parser": "^8.31.0",
     "chalk": "^4.1.2",
-    "eslint": "^8.56.0",
-    "fs-extra": "^11.2.0",
-    "glob": "^10.4.1",
+    "eslint": "^9.25.1",
+    "eslint-define-config": "^2.1.0",
+    "fs-extra": "^11.3.0",
+    "glob": "^11.0.1",
+    "globals": "^16.0.0",
     "moment": "^2.30.1",
     "path": "^0.12.7",
-    "rimraf": "^5.0.5",
-    "ts-morph": "^22.0.0",
+    "rimraf": "^6.0.1",
+    "ts-morph": "^25.0.1",
     "ts-node": "^10.9.2",
-    "tsup": "^8.0.2",
-    "typescript": "^5.3.3"
+    "tsup": "^8.4.0",
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.31.0",
+    "undici": "^7.8.0"
   }
 }

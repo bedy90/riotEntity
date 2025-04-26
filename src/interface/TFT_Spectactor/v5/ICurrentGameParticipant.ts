@@ -7,7 +7,7 @@ import { ICurrentGameParticipant_Global } from '../../_Global/ICurrentGamePartic
  * @version v5
  * @name ICurrentGameParticipant
  */
-export type ICurrentGameParticipant = ICurrentGameParticipant_Global
+export type ICurrentGameParticipant_v5 = ICurrentGameParticipant_Global
 /*
 export interface ICurrentGameParticipant extends ICurrentGameParticipant_Global {
 }

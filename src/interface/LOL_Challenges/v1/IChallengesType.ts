@@ -9,8 +9,8 @@ import { Level } from '@/src/declaration';
  * @name IChallengePercentile
  * @NotImplemented
  */
-export interface IChallengePercentile {
-    percentile : ChallengePercentileType;
+export interface IChallengePercentile_v1 {
+    percentile : ChallengePercentileType_v1;
 }
 
 /**
@@ -22,17 +22,17 @@ export interface IChallengePercentile {
  * @name IChallengePercentiles
  * @NotImplemented
  */
-export interface IChallengePercentiles {
-    percentiles : ChallengePercentilesType;
+export interface IChallengePercentiles_v1 {
+    percentiles : ChallengePercentilesType_v1;
 }
 
 
-type ChallengePercentilesType = Record<string, Map<number, ChallengePercentileType>>;
+export type ChallengePercentilesType_v1 = Record<string, Map<number, ChallengePercentileType_v1>>;
 
 /**
  * Challenge percentile for a specific challenge
  */
-type ChallengePercentileType = Record<string, Map<Level, number>>;
+export type ChallengePercentileType_v1 = Record<string, Map<Level, number>>;
 /*
     Long = bigint
     Integer = number

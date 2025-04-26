@@ -7,6 +7,6 @@ import { ICurrentGameParticipant_Global } from '../../_Global/ICurrentGamePartic
  * @version v4
  * @name ICurrentGameParticipant
  */
-export interface ICurrentGameParticipant extends ICurrentGameParticipant_Global {
+export interface ICurrentGameParticipant_v4 extends ICurrentGameParticipant_Global {
     bot: boolean;
 }

@@ -1,13 +1,14 @@
-import * as MiniSeriesDTOInterface from './v4/IMiniSeriesDTO';
-import * as LeagueListDTOInterface from './v4/ILeagueListDTO';
-import * as LeagueItemDTOInterface from './v4/ILeagueItemDTO';
-import * as LeagueEntryDTOInterface from './v4/ILeagueEntryDTO';
+import { ILeagueEntryDTO_v4 } from './v4/ILeagueEntryDTO';
+import { ILeagueItemDTO_v4 } from './v4/ILeagueItemDTO';
+import { ILeagueListDTO_v4 } from './v4/ILeagueListDTO';
+import { IMiniSeriesDTO_v4 } from './v4/IMiniSeriesDTO';
 
-export namespace League {
-  export namespace v4 {
-    export import IMiniSeriesDTO = MiniSeriesDTOInterface.IMiniSeriesDTO;
-    export import ILeagueListDTO = LeagueListDTOInterface.ILeagueListDTO;
-    export import ILeagueItemDTO = LeagueItemDTOInterface.ILeagueItemDTO;
-    export import ILeagueEntryDTO = LeagueEntryDTOInterface.ILeagueEntryDTO;
-  }
-}
+export { ILeagueEntryDTO_v4 } from './v4/ILeagueEntryDTO';
+export { ILeagueItemDTO_v4 } from './v4/ILeagueItemDTO';
+export { ILeagueListDTO_v4 } from './v4/ILeagueListDTO';
+export { IMiniSeriesDTO_v4 } from './v4/IMiniSeriesDTO';
+
+export type ILeagueEntryDTO = ILeagueEntryDTO_v4;
+export type ILeagueItemDTO = ILeagueItemDTO_v4;
+export type ILeagueListDTO = ILeagueListDTO_v4;
+export type IMiniSeriesDTO = IMiniSeriesDTO_v4;

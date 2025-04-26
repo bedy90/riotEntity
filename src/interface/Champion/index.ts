@@ -1,7 +1,5 @@
-import * as ChampionInfoInterface from './v3/IChampionInfo';
+import { IChampionInfo_v3 } from './v3/IChampionInfo';
 
-export namespace Champion {
-  export namespace v3 {
-    export import IChampionInfo = ChampionInfoInterface.IChampionInfo;
-  }
-}
+export { IChampionInfo_v3 } from './v3/IChampionInfo';
+
+export type IChampionInfo = IChampionInfo_v3;

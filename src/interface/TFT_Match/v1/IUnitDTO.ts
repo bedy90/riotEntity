@@ -5,7 +5,7 @@
  * @version v1
  * @name IUnitDTO
  */
-export interface IUnitDTO {
+export interface IUnitDTO_v1 {
     /**
      * A list of the unit's items. Please refer to the Teamfight Tactics documentation for item ids.
      */

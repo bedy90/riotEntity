@@ -1,5 +1,5 @@
-/* eslint-disable max-len */
-/* eslint-disable no-shadow */
+// eslint-disable max-len
+// eslint-disable no-shadow
 import { Interfaces } from '@/riotentity';
 
 /**
@@ -9,7 +9,7 @@ import { Interfaces } from '@/riotentity';
  * @version v5
  * @name IInfoDTO
  */
-export interface IInfoDTO {
+export interface IInfoDTO_v5 {
     /**
      * Unix timestamp for when the game is created on the game server (i.e., the loading screen).
      */
@@ -56,7 +56,7 @@ export interface IInfoDTO {
      */
     mapId: number;
 
-    participants: Interfaces.Match.v5.IParticipantDTO[];
+    participants: Interfaces.IParticipantDTO_v5[];
 
     /**
      * Platform where the match was played.
@@ -68,7 +68,7 @@ export interface IInfoDTO {
      */
     queueId: number;
 
-    teams: Interfaces.Match.v5.ITeamDTO[];
+    teams: Interfaces.ITeamDTO_v5[];
 
     /**
      * Tournament code used to generate the match. This field was added to match-v5 in patch 11.13 on June 23rd, 2021.

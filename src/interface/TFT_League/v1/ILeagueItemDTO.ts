@@ -7,7 +7,7 @@ import { Interfaces } from '@/riotentity';
  * @version v1
  * @name ILeagueItemDTO
  */
-export interface ILeagueItemDTO {
+export interface ILeagueItemDTO_v1 {
     freshBlood: boolean;
 
     /**
@@ -15,7 +15,7 @@ export interface ILeagueItemDTO {
      */
     wins: number;
 
-    miniSeries: Interfaces.TFT_League.v1.IMiniSeriesDTO;
+    miniSeries: Interfaces.TFT_IMiniSeriesDTO_v1;
 
     inactive: boolean;
 

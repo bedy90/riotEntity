@@ -5,7 +5,7 @@
  * @version v5
  * @name IMetadataDTO
  */
-export interface IMetadataDTO {
+export interface IMetadataDTO_v5 {
     /**
      * 	Match data version.
      */

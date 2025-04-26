@@ -7,7 +7,7 @@ import { Interfaces } from '@/riotentity';
  * @version v5
  * @name IPerksDTO
  */
-export interface IPerksDTO {
-    statPerks: Interfaces.Match.v5.IPerkStatsDTO;
-    styles: Interfaces.Match.v5.IPerkStyleDTO[];
+export interface IPerksDTO_v5 {
+    statPerks: Interfaces.IPerkStatsDTO_v5;
+    styles: Interfaces.IPerkStyleDTO_v5[];
 }

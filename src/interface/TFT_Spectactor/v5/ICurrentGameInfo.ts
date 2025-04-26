@@ -7,7 +7,7 @@ import { ICurrentGameInfo_Global } from '../../_Global/ICurrentGameInfo_Global';
  * @version v5
  * @name ICurrentGameInfo
  */
-export type ICurrentGameInfo = ICurrentGameInfo_Global
+export type ICurrentGameInfo_v5 = ICurrentGameInfo_Global
 /*
 export interface ICurrentGameInfo extends ICurrentGameInfo_Global {
 }

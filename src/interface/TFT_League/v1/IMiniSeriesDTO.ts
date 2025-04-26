@@ -7,7 +7,7 @@ import { IMiniSeriesDTO_Global } from '../../_Global/IMiniSeriesDTO_Global';
  * @version v1
  * @name IMiniSeriesDTO
  */
-export type IMiniSeriesDTO = IMiniSeriesDTO_Global
+export type IMiniSeriesDTO_v1 = IMiniSeriesDTO_Global
 /*
 export interface IMiniSeriesDTO extends IMiniSeriesDTO_Global {
 }

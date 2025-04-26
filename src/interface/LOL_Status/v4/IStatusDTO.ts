@@ -7,7 +7,7 @@ import { IStatusDTO_Global } from '../../_Global/IStatusDTO_Global';
  * @version v4
  * @name IStatusDTO
  */
-export type IStatusDTO = IStatusDTO_Global
+export type IStatusDTO_v4 = IStatusDTO_Global
 /*
 export interface IStatusDTO  extends IStatusDTO_Global {
 }

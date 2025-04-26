@@ -7,7 +7,7 @@ import { IFeaturedGames_Global } from '../../_Global/IFeaturedGames_Global';
  * @version v4
  * @name IFeaturedGames
  */
-export type IFeaturedGames = IFeaturedGames_Global
+export type IFeaturedGames_v4 = IFeaturedGames_Global
 /*
 export interface IFeaturedGames extends IFeaturedGames_Global  {
 }

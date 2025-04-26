@@ -7,7 +7,7 @@ import { TraitStyle } from '@/riotentity';
  * @version v1
  * @name ITraitDTO
  */
-export interface ITraitDTO {
+export interface ITraitDTO_v1 {
     /**
      * 	Trait name.
      */

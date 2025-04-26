@@ -1,19 +1,21 @@
-import * as UnitDTOInterface from './v1/IUnitDTO';
-import * as TraitDTOInterface from './v1/ITraitDTO';
-import * as ParticipantDTOInterface from './v1/IParticipantDTO';
-import * as MetadataDTOInterface from './v1/IMetadataDTO';
-import * as MatchDTOInterface from './v1/IMatchDTO';
-import * as InfoDTOInterface from './v1/IInfoDTO';
-import * as CompanionDTOInterface from './v1/ICompanionDTO';
+import { ICompanionDTO_v1 as TFT_ICompanionDTO_v1 } from './v1/ICompanionDTO';
+import { IInfoDTO_v1 as TFT_IInfoDTO_v1 } from './v1/IInfoDTO';
+import { IMatchDTO_v1 as TFT_IMatchDTO_v1 } from './v1/IMatchDTO';
+import { IMetadataDTO_v1 as TFT_IMetadataDTO_v1 } from './v1/IMetadataDTO';
+import { IParticipantDTO_v1 as TFT_IParticipantDTO_v1 } from './v1/IParticipantDTO';
+import { ITraitDTO_v1 as TFT_ITraitDTO_v1 } from './v1/ITraitDTO';
+import { IUnitDTO_v1 as TFT_IUnitDTO_v1 } from './v1/IUnitDTO';
 
-export namespace TFT_Match {
-  export namespace v1 {
-    export import IUnitDTO = UnitDTOInterface.IUnitDTO;
-    export import ITraitDTO = TraitDTOInterface.ITraitDTO;
-    export import IParticipantDTO = ParticipantDTOInterface.IParticipantDTO;
-    export import IMetadataDTO = MetadataDTOInterface.IMetadataDTO;
-    export import IMatchDTO = MatchDTOInterface.IMatchDTO;
-    export import IInfoDTO = InfoDTOInterface.IInfoDTO;
-    export import ICompanionDTO = CompanionDTOInterface.ICompanionDTO;
-  }
-}
+export {
+  TFT_ICompanionDTO_v1, TFT_IInfoDTO_v1, TFT_IMatchDTO_v1,
+  TFT_IMetadataDTO_v1, TFT_IParticipantDTO_v1, TFT_ITraitDTO_v1,
+  TFT_IUnitDTO_v1,
+};
+
+export type TFT_ICompanionDTO = TFT_ICompanionDTO_v1;
+export type TFT_IInfoDTO = TFT_IInfoDTO_v1;
+export type TFT_IMatchDTO = TFT_IMatchDTO_v1;
+export type TFT_IMetadataDTO = TFT_IMetadataDTO_v1;
+export type TFT_IParticipantDTO = TFT_IParticipantDTO_v1;
+export type TFT_ITraitDTO = TFT_ITraitDTO_v1;
+export type TFT_IUnitDTO = TFT_IUnitDTO_v1;

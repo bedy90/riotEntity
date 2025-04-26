@@ -7,7 +7,7 @@ import { IContentDTO_Global } from '../../_Global/IContentDTO_Global';
  * @version v4
  * @name IContentDTO
  */
-export type IContentDTO = IContentDTO_Global
+export type IContentDTO_v4 = IContentDTO_Global
 /*
 export interface IContentDTO extends IContentDTO_Global {
 }

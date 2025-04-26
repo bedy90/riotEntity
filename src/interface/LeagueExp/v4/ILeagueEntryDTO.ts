@@ -7,7 +7,7 @@ import { ILeagueEntryDTO_Global } from '../../_Global/ILeagueEntryDTO_Global';
  * @version v4
  * @name ILeagueEntryDTO
  */
-export type ILeagueEntryDTO = ILeagueEntryDTO_Global
+export type ILeagueEntryDTO_v4 = ILeagueEntryDTO_Global
 
 // export interface ILeagueEntryDTO extends ILeagueEntryDTO_Global {
 // }

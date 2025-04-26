@@ -1,5 +1,5 @@
-/* eslint-disable max-len */
-/* eslint-disable no-shadow */
+// eslint-disable max-len
+// eslint-disable no-shadow
 import { Interfaces } from '@/riotentity';
 
 /**
@@ -9,14 +9,14 @@ import { Interfaces } from '@/riotentity';
  * @version v1
  * @name IMatchDTO
  */
-export interface IMatchDTO {
+export interface IMatchDTO_v1 {
     /**
      * Match metadata.
      */
-    metadata: Interfaces.TFT_Match.v1.IMetadataDTO;
+    metadata: Interfaces.TFT_IMetadataDTO_v1;
 
     /**
      * Match info.
      */
-    info: Interfaces.TFT_Match.v1.IInfoDTO;
+    info: Interfaces.TFT_IInfoDTO_v1;
 }

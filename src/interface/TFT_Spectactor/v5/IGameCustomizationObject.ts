@@ -8,7 +8,7 @@ import { IGameCustomizationObject_Global } from '../../_Global/IGameCustomizatio
  * @version v5
  * @name IGameCustomizationObject
  */
-export type IGameCustomizationObject = IGameCustomizationObject_Global
+export type IGameCustomizationObject_v5 = IGameCustomizationObject_Global
 /*
 export interface IGameCustomizationObject extends IGameCustomizationObject_Global {
 }

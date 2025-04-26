@@ -6,7 +6,7 @@ import { Interfaces } from '@/riotentity';
  * @version v1
  * @name ITournamentDTO
  */
-export interface ITournamentDTO {
+export interface ITournamentDTO_v1 {
     id: number;
 
     themeId: number;
@@ -18,5 +18,5 @@ export interface ITournamentDTO {
     /**
      * 	Tournament phase
      */
-    schedule: Interfaces.Clash.v1.ITournamentPhaseDTO[];
+    schedule: Interfaces.Clash_ITournamentPhaseDTO_v1[];
 }

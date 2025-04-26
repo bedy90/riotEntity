@@ -5,7 +5,7 @@
  * @version v4
  * @name IChampionMasteryDTO
  */
-export interface IChampionMasteryDTO {
+export interface IChampionMasteryDTO_v4 {
     /**
     * Player Universal Unique Identifier
     * Length : 78

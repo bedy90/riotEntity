@@ -1,13 +1,14 @@
-import * as MiniSeriesDTOInterface from './v1/IMiniSeriesDTO';
-import * as LeagueListDTOInterface from './v1/ILeagueListDTO';
-import * as LeagueItemDTOInterface from './v1/ILeagueItemDTO';
-import * as LeagueEntryDTOInterface from './v1/ILeagueEntryDTO';
+import { ILeagueEntryDTO_v1 as TFT_ILeagueEntryDTO_v1 } from './v1/ILeagueEntryDTO';
+import { ILeagueItemDTO_v1 as TFT_ILeagueItemDTO_v1 } from './v1/ILeagueItemDTO';
+import { ILeagueListDTO_v1 as TFT_ILeagueListDTO_v1 } from './v1/ILeagueListDTO';
+import { IMiniSeriesDTO_v1 as TFT_IMiniSeriesDTO_v1 } from './v1/IMiniSeriesDTO';
 
-export namespace TFT_League {
-  export namespace v1 {
-    export import IMiniSeriesDTO = MiniSeriesDTOInterface.IMiniSeriesDTO;
-    export import ILeagueListDTO = LeagueListDTOInterface.ILeagueListDTO;
-    export import ILeagueItemDTO = LeagueItemDTOInterface.ILeagueItemDTO;
-    export import ILeagueEntryDTO = LeagueEntryDTOInterface.ILeagueEntryDTO;
-  }
-}
+export {
+    TFT_ILeagueEntryDTO_v1, TFT_ILeagueItemDTO_v1,
+    TFT_ILeagueListDTO_v1, TFT_IMiniSeriesDTO_v1,
+};
+
+export type TFT_ILeagueEntryDTO = TFT_ILeagueEntryDTO_v1;
+export type TFT_ILeagueItemDTO = TFT_ILeagueItemDTO_v1;
+export type TFT_ILeagueListDTO = TFT_ILeagueListDTO_v1;
+export type TFT_IMiniSeriesDTO = TFT_IMiniSeriesDTO_v1;

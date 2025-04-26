@@ -6,7 +6,7 @@ import { IBannedChampion_Global } from '../../_Global/IBannedChampion_Global';
  * @version v5
  * @name IBannedChampion
  */
-export type IBannedChampion = IBannedChampion_Global
+export type IBannedChampion_v5 = IBannedChampion_Global
 /*
 export interface IBannedChampion extends IBannedChampion_Global {
 }

@@ -7,7 +7,7 @@ import { State, Tracking } from '@/riotentity';
  * @version v1
  * @name IChallengeConfigInfoDTO
  */
-export interface IChallengeConfigInfoDTO {
+export interface IChallengeConfigInfoDTO_v1 {
     id: number;
 
     localizedNames: Map<string, Map<string, string>>;

@@ -7,7 +7,7 @@ import { IPerks_Global } from '../../_Global/IPerks_Global';
  * @version v4
  * @name IPerks
  */
-export type IPerks = IPerks_Global
+export type IPerks_v4 = IPerks_Global
 /*
 export interface IPerks extends IPerks_Global {
 }

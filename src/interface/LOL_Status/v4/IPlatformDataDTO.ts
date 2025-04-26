@@ -7,7 +7,7 @@ import { IPlatformDataDTO_Global } from '../../_Global/IPlatformDataDTO_Global';
  * @version v4
  * @name IPlatformDataDTO
  */
-export type IPlatformDataDTO = IPlatformDataDTO_Global
+export type IPlatformDataDTO_v4 = IPlatformDataDTO_Global
 /*
 export interface IPlatformDataDTO extends IPlatformDataDTO_Global {
 }

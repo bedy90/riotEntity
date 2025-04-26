@@ -5,7 +5,7 @@
  * @version v1
  * @name ITournamentPhaseDTO
  */
-export interface ITournamentPhaseDTO {
+export interface ITournamentPhaseDTO_v1 {
     id: number;
 
     registrationTime: number;

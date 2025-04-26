@@ -7,8 +7,8 @@ import { Interfaces } from '@/riotentity';
  * @version v5
  * @name IPerkStyleDTO
  */
-export interface IPerkStyleDTO {
+export interface IPerkStyleDTO_v5 {
     description: string;
-    selections: Interfaces.Match.v5.IPerkStyleSelectionDTO[];
+    selections: Interfaces.IPerkStyleSelectionDTO_v5[];
     style: number;
 }

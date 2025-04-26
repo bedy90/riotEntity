@@ -1,7 +1,5 @@
-import * as SummonerDTOInterface from './v4/ISummonerDTO';
+import { ISummonerDTO_v4 } from './v4/ISummonerDTO';
 
-export namespace Summoner {
-  export namespace v4 {
-    export import ISummonerDTO = SummonerDTOInterface.ISummonerDTO;
-  }
-}
+export { ISummonerDTO_v4 } from './v4/ISummonerDTO';
+
+export type ISummonerDTO = ISummonerDTO_v4;

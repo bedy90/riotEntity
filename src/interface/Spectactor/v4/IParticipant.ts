@@ -7,7 +7,7 @@ import { IParticipant_Global } from '../../_Global/IParticipant_Global';
  * @version v4
  * @name IParticipant
  */
-export interface IParticipant extends IParticipant_Global {
+export interface IParticipant_v4 extends IParticipant_Global {
     /**
      * Flag indicating whether or not this participant is a bot
      */

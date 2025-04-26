@@ -1,5 +1,5 @@
-/* eslint-disable max-len */
-/* eslint-disable no-shadow */
+// eslint-disable max-len
+// eslint-disable no-shadow
 import { Interfaces, KaynChampionTransform } from '@/riotentity';
 
 /**
@@ -9,7 +9,7 @@ import { Interfaces, KaynChampionTransform } from '@/riotentity';
  * @version v5
  * @name IParticipantDTO
  */
-export interface IParticipantDTO {
+export interface IParticipantDTO_v5 {
     assists: number;
 
     baronKills: number;
@@ -133,7 +133,7 @@ export interface IParticipantDTO {
 
     pentaKills: number;
 
-    perks: Interfaces.Match.v5.IPerksDTO;
+    perks: Interfaces.IPerksDTO_v5;
 
     physicalDamageDealt: number;
 

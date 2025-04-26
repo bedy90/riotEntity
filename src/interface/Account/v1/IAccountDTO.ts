@@ -5,7 +5,7 @@
  * @version v1
  * @name IAccountDTO
  */
-export interface IAccountDTO {
+export interface IAccountDTO_v1 {
     /**
      * Player Universal Unique Identifier
      * Length : 78

@@ -5,7 +5,7 @@
  * @version v1
  * @name ICompanionDTO
  */
-export interface ICompanionDTO {
+export interface ICompanionDTO_v1 {
     content_ID: string;
 
     item_ID: number;

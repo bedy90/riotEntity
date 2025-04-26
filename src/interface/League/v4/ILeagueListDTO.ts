@@ -7,10 +7,10 @@ import { Interfaces } from '@/riotentity';
  * @version v4
  * @name ILeagueListDTO
  */
-export interface ILeagueListDTO {
+export interface ILeagueListDTO_v4 {
     leagueId: string;
 
-    entries: Interfaces.League.v4.ILeagueItemDTO[];
+    entries: Interfaces.ILeagueItemDTO_v4[];
 
     tier: string;
 

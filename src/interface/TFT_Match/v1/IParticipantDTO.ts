@@ -1,5 +1,5 @@
-/* eslint-disable max-len */
-/* eslint-disable no-shadow */
+// eslint-disable max-len
+// eslint-disable no-shadow
 import { Interfaces } from '@/riotentity';
 
 /**
@@ -9,11 +9,11 @@ import { Interfaces } from '@/riotentity';
  * @version v1
  * @name IParticipantDTO
  */
-export interface IParticipantDTO {
+export interface IParticipantDTO_v1 {
     /**
      * 	Participant's companion.
      */
-    companion: Interfaces.TFT_Match.v1.ICompanionDTO;
+    companion: Interfaces.TFT_ICompanionDTO_v1;
 
     /**
      * Gold left after participant was eliminated.
@@ -55,10 +55,10 @@ export interface IParticipantDTO {
     /**
      * A complete list of traits for the participant's active units.
      */
-    traits: Interfaces.TFT_Match.v1.ITraitDTO[];
+    traits: Interfaces.TFT_ITraitDTO_v1[];
 
     /**
      * A list of active units for the participant.
      */
-    units: Interfaces.TFT_Match.v1.IUnitDTO[];
+    units: Interfaces.TFT_IUnitDTO_v1[];
 }

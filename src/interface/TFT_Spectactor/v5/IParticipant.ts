@@ -7,7 +7,7 @@ import { IParticipant_Global } from '../../_Global/IParticipant_Global';
  * @version v5
  * @name IParticipant
  */
-export type IParticipant = IParticipant_Global
+export type IParticipant_v5 = IParticipant_Global
 /*
 export interface IParticipant extends IParticipant_Global {
 }

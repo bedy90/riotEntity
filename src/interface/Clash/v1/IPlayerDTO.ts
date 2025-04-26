@@ -7,7 +7,7 @@ import { ClashPosition, ClashRole } from '@/src/declaration';
  * @version v1
  * @name IPlayerDTO
  */
-export interface IPlayerDTO {
+export interface IPlayerDTO_v1 {
     summonerId: string;
 
     teamId: string;

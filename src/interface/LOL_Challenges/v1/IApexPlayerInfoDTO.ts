@@ -5,7 +5,7 @@
  * @version v1
  * @name IApexPlayerInfoDTO
  */
-export interface IApexPlayerInfoDTO {
+export interface IApexPlayerInfoDTO_v1 {
     puuid: string;
 
     value: number;
