@@ -1,14 +1,14 @@
 import { Interfaces } from '@/riotentity';
-import { IStatusDTO_Global } from '@/src/interface/_Global/IStatusDTO_Global';
+import { IStatusDTO_Global } from '@/interface/_Global/IStatusDTO_Global';
 
 /**
- * Class PlatformDataDTO
+ * Class PlatformDataDTO_v4
  *
  * @namespace LoL_Status
  * @version v4
  * @name IPlatformDataDTO
  */
-export class PlatformDataDTO implements Interfaces.LoL_Status.v4.IPlatformDataDTO {
+export class PlatformDataDTO_v4 implements Interfaces.IPlatformDataDTO_v4 {
     id!: string;
     name!: string;
     locales!: string[];

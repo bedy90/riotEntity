@@ -1,4 +1,5 @@
-import { Level } from '@/src/declaration';
+// import { Level } from '@/riotentity';
+import { Level } from '@/declaration';
 
 /**
  * Interface IChallengePercentile

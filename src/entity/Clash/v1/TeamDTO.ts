@@ -1,13 +1,13 @@
 import { Interfaces } from '@/riotentity';
 
 /**
- * Class TeamDTO
+ * Class TeamDTO_v1
  *
  * @namespace Clash
  * @version v1
  * @name ITeamDTO
  */
-export class TeamDTO implements Interfaces.Clash.v1.ITeamDTO {
+export class TeamDTO_v1 implements Interfaces.Clash_ITeamDTO_v1 {
     id!: string;
     tournamentId!: number;
     name!: string;
@@ -15,5 +15,5 @@ export class TeamDTO implements Interfaces.Clash.v1.ITeamDTO {
     tier!: number;
     captain!: string;
     abbreviation!: string;
-    players!: Interfaces.Clash.v1.IPlayerDTO[];
+    players!: Interfaces.Clash_IPlayerDTO_v1[];
 }

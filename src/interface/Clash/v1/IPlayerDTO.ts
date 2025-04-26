@@ -1,4 +1,4 @@
-import { ClashPosition, ClashRole } from '@/src/declaration';
+import { ClashPosition, ClashRole } from '@/declaration';
 
 /**
  * Interface IPlayerDTO

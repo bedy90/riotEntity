@@ -1,6 +1,8 @@
 node_modules
 src
 tsconfig.json
+_temp/
+
 # README.md
 *.tgz
 *.txt

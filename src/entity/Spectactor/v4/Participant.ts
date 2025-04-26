@@ -1,13 +1,13 @@
 import { Interfaces } from '@/riotentity';
 
 /**
- * Class Participant
+ * Class Participant_v4
  *
  * @namespace Spectactor
  * @version v4
  * @name IParticipant
  */
-export class Participant implements Interfaces.Spectactor.v4.IParticipant {
+export class Participant_v4 implements Interfaces.IParticipant_v4 {
     bot!: boolean;
     spell2Id!: number;
     profileIconId!: number;

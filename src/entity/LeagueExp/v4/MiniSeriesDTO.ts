@@ -1,13 +1,13 @@
 import { Interfaces } from '@/riotentity';
 
 /**
- * Class MiniSeriesDTO
+ * Class MiniSeriesDTO_v4
  *
  * @namespace LeagueExp
  * @version v4
  * @name IMiniSeriesDTO
  */
-export class MiniSeriesDTO implements Interfaces.LeagueExp.v4.IMiniSeriesDTO {
+export class MiniSeriesDTO_v4 implements Interfaces.IMiniSeriesDTO_v4 {
     losses!: number;
     progress!: string;
     target!: number;

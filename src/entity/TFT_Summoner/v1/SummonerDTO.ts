@@ -1,13 +1,13 @@
 import { Interfaces } from '@/riotentity';
 
 /**
- * Class SummonerDTO
+ * Class SummonerDTO_v1
  *
  * @namespace TFT_Summoner
  * @version v1
  * @name ISummonerDTO
  */
-export class SummonerDTO implements Interfaces.TFT_Summoner.v1.ISummonerDTO {
+export class SummonerDTO_v1 implements Interfaces.TFT_ISummonerDTO_v1 {
     accountId!: string;
     profileIconId!: number;
     revisionDate!: number;

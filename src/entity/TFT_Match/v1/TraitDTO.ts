@@ -2,13 +2,13 @@ import { Interfaces } from '@/riotentity';
 import { TraitStyle } from '@/riotentity';
 
 /**
- * Class TraitDTO
+ * Class TraitDTO_v1
  *
  * @namespace TFT_Match
  * @version v1
  * @name ITraitDTO
  */
-export class TraitDTO implements Interfaces.TFT_Match.v1.ITraitDTO {
+export class TraitDTO_v1 implements Interfaces.TFT_ITraitDTO_v1 {
     name!: string;
     num_units!: number;
     style!: TraitStyle | number;

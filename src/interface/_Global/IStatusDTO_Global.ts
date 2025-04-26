@@ -1,4 +1,4 @@
-import { MaintenanceStatus, IncidentSeverity, Platforms } from '@/src/declaration';
+import { MaintenanceStatus, IncidentSeverity, Platforms } from '@/declaration';
 import { IContentDTO_Global } from './IContentDTO_Global';
 import { IUpdateDTO_Global } from './IUpdateDTO_Global';
 

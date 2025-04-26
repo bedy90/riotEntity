@@ -1,4 +1,4 @@
-import { PublishLocations } from '@/src/declaration';
+import { PublishLocations } from '@/declaration';
 import { IContentDTO_Global } from './IContentDTO_Global';
 
 /**

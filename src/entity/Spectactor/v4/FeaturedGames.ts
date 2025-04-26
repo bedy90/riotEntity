@@ -1,14 +1,14 @@
 import { Interfaces } from '@/riotentity';
-import { IFeaturedGameInfo_Global } from '@/src/interface/_Global/IFeaturedGameInfo_Global';
+import { IFeaturedGameInfo_Global } from '@/interface/_Global/IFeaturedGameInfo_Global';
 
 /**
- * Class FeaturedGames
+ * Class FeaturedGames_v4
  *
  * @namespace Spectactor
  * @version v4
  * @name IFeaturedGames
  */
-export class FeaturedGames implements Interfaces.Spectactor.v4.IFeaturedGames {
+export class FeaturedGames_v4 implements Interfaces.IFeaturedGames_v4 {
     gameList!: IFeaturedGameInfo_Global[];
     clientRefreshInterval!: number;
 }

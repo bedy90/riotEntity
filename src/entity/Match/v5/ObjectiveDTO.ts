@@ -1,13 +1,13 @@
 import { Interfaces } from '@/riotentity';
 
 /**
- * Class ObjectiveDTO
+ * Class ObjectiveDTO_v5
  *
  * @namespace Match
  * @version v5
  * @name IObjectiveDTO
  */
-export class ObjectiveDTO implements Interfaces.Match.v5.IObjectiveDTO {
+export class ObjectiveDTO_v5 implements Interfaces.IObjectiveDTO_v5 {
     first!: boolean;
     kills!: number;
 }

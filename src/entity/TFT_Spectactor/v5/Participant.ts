@@ -1,13 +1,13 @@
 import { Interfaces } from '@/riotentity';
 
 /**
- * Class Participant
+ * Class Participant_v5
  *
  * @namespace TFT_Spectactor
  * @version v5
  * @name IParticipant
  */
-export class Participant implements Interfaces.TFT_Spectactor.v5.IParticipant {
+export class Participant_v5 implements Interfaces.TFT_IParticipant_v5 {
     spell2Id!: number;
     profileIconId!: number;
     summonerId!: string;

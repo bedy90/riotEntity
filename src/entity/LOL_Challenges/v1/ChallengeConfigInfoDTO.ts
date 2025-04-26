@@ -2,13 +2,13 @@ import { Interfaces } from '@/riotentity';
 import { State, Tracking } from '@/riotentity';
 
 /**
- * Class ChallengeConfigInfoDTO
+ * Class ChallengeConfigInfoDTO_v1
  *
  * @namespace LoL_Challenges
  * @version v1
  * @name IChallengeConfigInfoDTO
  */
-export class ChallengeConfigInfoDTO implements Interfaces.LoL_Challenges.v1.IChallengeConfigInfoDTO {
+export class ChallengeConfigInfoDTO_v1 implements Interfaces.IChallengeConfigInfoDTO_v1 {
     id!: number;
     localizedNames!: Map<string, Map<string, string>>;
     state!: State | number;

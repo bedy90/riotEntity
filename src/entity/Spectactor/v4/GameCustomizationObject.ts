@@ -1,13 +1,13 @@
 import { Interfaces } from '@/riotentity';
 
 /**
- * Class GameCustomizationObject
+ * Class GameCustomizationObject_v4
  *
  * @namespace Spectactor
  * @version v4
  * @name IGameCustomizationObject
  */
-export class GameCustomizationObject implements Interfaces.Spectactor.v4.IGameCustomizationObject {
+export class GameCustomizationObject_v4 implements Interfaces.IGameCustomizationObject_v4 {
     category!: string;
     content!: string;
 }

@@ -1,16 +1,16 @@
 import { Interfaces } from '@/riotentity';
 import { MaintenanceStatus, IncidentSeverity, Platforms } from '@/riotentity';
-import { IContentDTO_Global } from '@/src/interface/_Global/IContentDTO_Global';
-import { IUpdateDTO_Global } from '@/src/interface/_Global/IUpdateDTO_Global';
+import { IContentDTO_Global } from '@/interface/_Global/IContentDTO_Global';
+import { IUpdateDTO_Global } from '@/interface/_Global/IUpdateDTO_Global';
 
 /**
- * Class StatusDTO
+ * Class StatusDTO_v4
  *
  * @namespace LoL_Status
  * @version v4
  * @name IStatusDTO
  */
-export class StatusDTO implements Interfaces.LoL_Status.v4.IStatusDTO {
+export class StatusDTO_v4 implements Interfaces.IStatusDTO_v4 {
     id!: number;
     maintenance_status!: MaintenanceStatus | string;
     incident_severity!: IncidentSeverity | string;

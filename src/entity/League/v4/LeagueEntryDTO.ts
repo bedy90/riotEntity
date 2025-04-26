@@ -1,14 +1,14 @@
 import { Interfaces } from '@/riotentity';
-import { IMiniSeriesDTO_Global } from '@/src/interface/_Global/IMiniSeriesDTO_Global';
+import { IMiniSeriesDTO_Global } from '@/interface/_Global/IMiniSeriesDTO_Global';
 
 /**
- * Class LeagueEntryDTO
+ * Class LeagueEntryDTO_v4
  *
  * @namespace League
  * @version v4
  * @name ILeagueEntryDTO
  */
-export class LeagueEntryDTO implements Interfaces.League.v4.ILeagueEntryDTO {
+export class LeagueEntryDTO_v4 implements Interfaces.ILeagueEntryDTO_v4 {
     leagueId!: string;
     summonerId!: string;
     queueType!: string;

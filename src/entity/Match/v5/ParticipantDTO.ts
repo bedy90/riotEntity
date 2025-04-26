@@ -2,13 +2,13 @@ import { Interfaces } from '@/riotentity';
 import { KaynChampionTransform } from '@/riotentity';
 
 /**
- * Class ParticipantDTO
+ * Class ParticipantDTO_v5
  *
  * @namespace Match
  * @version v5
  * @name IParticipantDTO
  */
-export class ParticipantDTO implements Interfaces.Match.v5.IParticipantDTO {
+export class ParticipantDTO_v5 implements Interfaces.IParticipantDTO_v5 {
     assists!: number;
     baronKills!: number;
     bountyLevel!: number;
@@ -64,7 +64,7 @@ export class ParticipantDTO implements Interfaces.Match.v5.IParticipantDTO {
     objectivesStolenAssists!: number;
     participantId!: number;
     pentaKills!: number;
-    perks!: Interfaces.Match.v5.IPerksDTO;
+    perks!: Interfaces.IPerksDTO_v5;
     physicalDamageDealt!: number;
     physicalDamageDealtToChampions!: number;
     physicalDamageTaken!: number;

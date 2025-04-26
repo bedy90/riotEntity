@@ -1,13 +1,13 @@
 import { Interfaces } from '@/riotentity';
 
 /**
- * Class InfoDTO
+ * Class InfoDTO_v5
  *
  * @namespace Match
  * @version v5
  * @name IInfoDTO
  */
-export class InfoDTO implements Interfaces.Match.v5.IInfoDTO {
+export class InfoDTO_v5 implements Interfaces.IInfoDTO_v5 {
     gameCreation!: number;
     gameDuration!: number;
     gameEndTimestamp!: number;
@@ -18,9 +18,9 @@ export class InfoDTO implements Interfaces.Match.v5.IInfoDTO {
     gameType!: string;
     gameVersion!: string;
     mapId!: number;
-    participants!: Interfaces.Match.v5.IParticipantDTO[];
+    participants!: Interfaces.IParticipantDTO_v5[];
     platformId!: string;
     queueId!: number;
-    teams!: Interfaces.Match.v5.ITeamDTO[];
+    teams!: Interfaces.ITeamDTO_v5[];
     tournamentCode!: string;
 }

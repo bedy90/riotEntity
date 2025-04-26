@@ -1,14 +1,14 @@
 import { Interfaces } from '@/riotentity';
-import { IMiniSeriesDTO_Global } from '@/src/interface/_Global/IMiniSeriesDTO_Global';
+import { IMiniSeriesDTO_Global } from '@/interface/_Global/IMiniSeriesDTO_Global';
 
 /**
- * Class LeagueEntryDTO
+ * Class LeagueEntryDTO_v1
  *
  * @namespace TFT_League
  * @version v1
  * @name ILeagueEntryDTO
  */
-export class LeagueEntryDTO implements Interfaces.TFT_League.v1.ILeagueEntryDTO {
+export class LeagueEntryDTO_v1 implements Interfaces.TFT_ILeagueEntryDTO_v1 {
     puuid!: string;
     ratedTier!: string;
     ratedRating!: string;

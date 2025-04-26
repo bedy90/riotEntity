@@ -1,13 +1,13 @@
 import { Interfaces } from '@/riotentity';
 
 /**
- * Class MatchDTO
+ * Class MatchDTO_v5
  *
  * @namespace Match
  * @version v5
  * @name IMatchDTO
  */
-export class MatchDTO implements Interfaces.Match.v5.IMatchDTO {
-    metadata!: Interfaces.Match.v5.IMetadataDTO;
-    info!: Interfaces.Match.v5.IInfoDTO;
+export class MatchDTO_v5 implements Interfaces.IMatchDTO_v5 {
+    metadata!: Interfaces.IMetadataDTO_v5;
+    info!: Interfaces.IInfoDTO_v5;
 }

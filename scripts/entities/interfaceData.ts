@@ -9,7 +9,9 @@ export class HeaderInfo {
     }
 }
 
-
+/**
+ * Classe responsable de la génération des classes d'entités a partir des interfaces
+ */
 export class InterfaceData {
 
     headerInfo!: HeaderInfo | null;
@@ -78,7 +80,7 @@ export class InterfaceData {
         const classContent: string[] = [];
         classContent.push(...this.imports);
         classContent.push(this.jdocHeader);
-        classContent.push(`export class ${this.className} implements Interfaces.${this.headerInfo.namespace}.${this.headerInfo.version}.${this.headerInfo.name} {`);
+        classContent.push(`export class ${this.className} implements Interfaces.${this.headerInfo.name}_${this.headerInfo.version} {`);
         classContent.push(this.#generateProperties());
         classContent.push('}\n'); // add /n for add a empty line EOF
 

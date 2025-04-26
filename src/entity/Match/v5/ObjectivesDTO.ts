@@ -1,17 +1,17 @@
 import { Interfaces } from '@/riotentity';
 
 /**
- * Class ObjectivesDTO
+ * Class ObjectivesDTO_v5
  *
  * @namespace Match
  * @version v5
  * @name IObjectivesDTO
  */
-export class ObjectivesDTO implements Interfaces.Match.v5.IObjectivesDTO {
-    baron!: Interfaces.Match.v5.IObjectiveDTO;
-    champion!: Interfaces.Match.v5.IObjectiveDTO;
-    dragon!: Interfaces.Match.v5.IObjectiveDTO;
-    inhibitor!: Interfaces.Match.v5.IObjectiveDTO;
-    riftHerald!: Interfaces.Match.v5.IObjectiveDTO;
-    tower!: Interfaces.Match.v5.IObjectiveDTO;
+export class ObjectivesDTO_v5 implements Interfaces.IObjectivesDTO_v5 {
+    baron!: Interfaces.IObjectiveDTO_v5;
+    champion!: Interfaces.IObjectiveDTO_v5;
+    dragon!: Interfaces.IObjectiveDTO_v5;
+    inhibitor!: Interfaces.IObjectiveDTO_v5;
+    riftHerald!: Interfaces.IObjectiveDTO_v5;
+    tower!: Interfaces.IObjectiveDTO_v5;
 }
