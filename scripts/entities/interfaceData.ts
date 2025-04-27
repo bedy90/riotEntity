@@ -1,11 +1,21 @@
 import { InterfaceDeclaration, PropertySignature, TypeAliasDeclaration } from 'ts-morph';
-import { ImportTypes } from '../generate-entities';
+import { ImportTypes } from '../common';
+import path from 'path';
 
 export class HeaderInfo {
 
-    constructor(public namespace: string,
-        public version: number,
-        public name: string) {
+    constructor(public namespace: string | (any | undefined),
+        public version: number | (any | undefined),
+        public name: string | (any | undefined),
+        public prefix: string | (any | undefined),
+        public notImplemented: boolean) {
+    }
+
+    isValid(): boolean {
+        if (!this.namespace || !this.version || !this.name) {
+            return false
+        }
+        return true;
     }
 }
 
@@ -22,10 +32,10 @@ export class InterfaceData {
     jdocHeader!: string;
 
     constructor(public filePath: string,
-                 public originalName: string,
-                 public className: string,
-                public iface: InterfaceDeclaration | null = null,
-                public typeAlias: TypeAliasDeclaration | null = null) {
+        public originalName: string,
+        public className: string,
+        public iface: InterfaceDeclaration | null = null,
+        public typeAlias: TypeAliasDeclaration | null = null) {
         this.headerInfo = null;
         this.properties = [];
         this.customTypes = new Set<string>();
@@ -40,8 +50,12 @@ export class InterfaceData {
         }
     }
 
-    addHeader(namespace: string, version: number, name: string): void {
-        this.headerInfo = new HeaderInfo(namespace, version, name);
+    // addHeader(namespace: string, version: number, name: string, prefix: string, notImplemented: boolean): void {
+    //     this.headerInfo = new HeaderInfo(namespace, version, name, prefix, notImplemented);
+    // }
+
+    addHeader(header: HeaderInfo): void {
+        this.headerInfo = header;
     }
 
     addProperties(properties: PropertySignature[]): void {
@@ -71,6 +85,31 @@ export class InterfaceData {
         if (jdocData) {
             this.jdocHeader = jdocData;
         }
+    }
+
+    getFileName(): string {
+        return path.parse(this.filePath).name; 
+    }
+
+    getExportPath(): string {
+        return `./${this.headerInfo?.version}/${this.getFileName()}`;
+    }
+
+    getExportAlias(): string {
+        // if (this.headerInfo?.prefix) {
+        //     return `_${this.headerInfo?.prefix}` ?? '';
+        // }
+        // return '';
+
+        return (this.headerInfo?.prefix ? `${this.headerInfo?.prefix}${this.originalName}` : '');
+    }
+
+    getPrefix(): string {
+        return (this.headerInfo?.prefix ? this.headerInfo?.prefix : '');
+    }
+
+    getNameWithoutVersion(): string {
+        return this.originalName.substring(0, this.originalName.lastIndexOf("_"));
     }
 
     classContent(): string {
@@ -107,6 +146,8 @@ export class InterfaceData {
 
                 case ImportTypes.GLOBAL:
                     types.forEach(globalType => {
+                        // TODO: Now we can `import { Interfaces } from '@/riotentity'`;
+                        // And use : Interfaces.Shared.IGLOBALXYZ
                         const globalImportPath = `@/src/interface/_Global/${globalType}`;
                         const imports = `import { ${globalType} } from '${globalImportPath}';`; // \n
 

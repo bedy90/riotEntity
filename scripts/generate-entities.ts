@@ -4,36 +4,45 @@ import * as fs from 'fs-extra';
 import * as path from 'path';
 import './logger';
 import { logType } from './logger';
-import { InterfaceData } from './entities/interfaceData';
+import { InterfaceData, HeaderInfo } from './entities/interfaceData';
+import { NamespaceIndexTypes, ValidationTypes, ImportTypes } from './common';
+import { GenerateIndex } from './generate-index';
 
-export enum ImportTypes {
-  GLOBAL = 0,
-  CUSTOM = 1,
-}
+// //#region Enum
+// export enum ImportTypes {
+//   GLOBAL = 0,
+//   CUSTOM = 1,
+// }
 
-export enum NamespaceIndexTypes {
-  INTERFACE = 0,
-  ENTITY = 1,
-  VALIDATOR = 2
-}
+// export enum NamespaceIndexTypes {
+//   INTERFACE = 0,
+//   ENTITY = 1,
+//   VALIDATOR = 2
+// }
 
-export enum ValidationTypes {
-  GENERIC = 1,
-  GENERIC_ARRAY = 2,
+// export enum ValidationTypes {
+//   GENERIC = 1,
+//   GENERIC_ARRAY = 2,
 
-  CUSTOM_TYPE = 5,
-  CUSTOM_TYPE_ARRAY = 6,
+//   CUSTOM_TYPE = 5,
+//   CUSTOM_TYPE_ARRAY = 6,
 
-  ENUM = 8,
-  ENUM_ARRAY = 9,
+//   ENUM = 8,
+//   ENUM_ARRAY = 9,
 
-  GLOBAL_TYPE = 12,
-  GLOBAL_TYPE_ARRAY = 13,
-}
+//   GLOBAL_TYPE = 12,
+//   GLOBAL_TYPE_ARRAY = 13,
+// }
+// //#endregion
+
 
 export class Generator {
+
   project: Project;
+  // <[namespace], <[version], [interfaceName]>
   namespaceVersions: Record<string, Record<string, string[]>>;
+
+  // <[namespace], <[version], [InterfaceData]>
   entitiesData: Record<string, Record<string, InterfaceData[]>>;
 
   constructor() {
@@ -69,25 +78,27 @@ export class Generator {
    * @param iface
    * @returns
    */
-  #extractJsDocInfoByDeclaration(iface: InterfaceDeclaration | TypeAliasDeclaration | ClassDeclaration): { namespace?: any, version?: any, name?: any, NotImplemented: boolean } {
+  #extractJsDocInfoByDeclaration(iface: InterfaceDeclaration | TypeAliasDeclaration | ClassDeclaration): HeaderInfo {
     const jsDocTags = iface.getJsDocs().flatMap(doc => doc.getTags());
     const namespaceTag = jsDocTags.find(tag => tag.getTagName() === 'namespace');
     const versionTag = jsDocTags.find(tag => tag.getTagName() === 'version');
     const nameTag = jsDocTags.find(tag => tag.getTagName() === 'name');
     const NotImplementedTag = jsDocTags.find(tag => tag.getTagName() === 'NotImplemented');
+    const prefixTag = jsDocTags.find(tag => tag.getTagName() === 'prefix');
 
     const namespace = namespaceTag?.getComment() || null;
     const version = versionTag?.getComment() || null;
     const name = nameTag?.getComment() || null;
     const NotImplemented = (NotImplementedTag != null ? true : false);
+    const prefix = prefixTag?.getComment() || null; // (prefixTag != null ? prefixTag : null);
 
-    return { namespace, version, name, NotImplemented };
+    return new HeaderInfo(namespace, version, name, prefix, NotImplemented);
   }
 
   /**
    * Generate JDOC header for classContent
    */
-  #generateClassHeader(className: string, namespace: string, version: string, name: string): string {
+  #generateClassHeader(className: string, namespace: string, version: string, name: string, prefix: string): string {
     let header = '';
 
     header += '\n/**\n';
@@ -96,6 +107,7 @@ export class Generator {
     header += ` * @namespace ${namespace}\n`;
     header += ` * @version ${version}\n`;
     header += ` * @name ${name}\n`;
+    header += ` * @prefix ${prefix}\n`;
     header += ' */';
 
     return header;
@@ -118,6 +130,12 @@ export class Generator {
     fs.writeFileSync(outputFile, fileContent);
   }
 
+  /**
+   * Grouping interface by namespace
+   * @param namespace 
+   * @param version 
+   * @param interfaceName 
+   */
   #addNamespace(namespace: string, version: string, interfaceName: string): void {
     // Ajouter l'interface à la structure namespaceVersions, si elle n'existe pas
     if (!this.namespaceVersions[namespace]) {
@@ -163,14 +181,16 @@ export class Generator {
 
       if (className) {
         // Extraire les informations JSDoc
-        const { namespace, version, name, NotImplemented } = this.#extractJsDocInfoByDeclaration(cls);
-        if (NotImplemented) {
+        // const { namespace, version, name, prefix, NotImplemented } = this.#extractJsDocInfoByDeclaration(cls);
+        const jsDocInfo: HeaderInfo = this.#extractJsDocInfoByDeclaration(cls);
+
+        if (jsDocInfo.notImplemented) {
           console.warn(`Class ${className} isn't implemented.`);
           return;
         }
 
         // Préparation du namespace (index)
-        this.#addNamespace(namespace, version, className);
+        this.#addNamespace(jsDocInfo.namespace, jsDocInfo.version, className);
       }
     });
   }
@@ -191,30 +211,45 @@ export class Generator {
 
       if (interfaceName.startsWith('I')) {
         const className = interfaceName.substring(1);
+        const newFileName = className.substring(0, className.lastIndexOf("_"));
+
+        // Regex pattern
+        /*
+        const match = interfaceName.match(/^I(.*)_v\d+$/);
+        const newFileName = match ? match[1] : "";
+        */
 
         // Extraire les informations JSDoc
         // TODO : Move validation on extractJsDocInfoByDeclaration and THROW Exception (required Try..catch)
-        const { namespace, version, name, NotImplemented } = this.#extractJsDocInfoByDeclaration(iface);
-        if (!namespace || !version || !name) {
+        // const { namespace, version, name, prefix, NotImplemented } = this.#extractJsDocInfoByDeclaration(iface);
+        const jsDocInfo: HeaderInfo = this.#extractJsDocInfoByDeclaration(iface);
+
+        // if (!jsDocInfo.namespace || !jsDocInfo.version || !jsDocInfo.name) {
+        //   console.warn(`Interface ${interfaceName} can't be transformed into a class, as its JDOC is not declared.`);
+        //   return;
+        // }
+        if (!jsDocInfo.isValid()) {
           console.warn(`Interface ${interfaceName} can't be transformed into a class, as its JDOC is not declared.`);
           return;
         }
-        if (NotImplemented) {
+
+        if (jsDocInfo.notImplemented) {
           console.warn(`Interface ${interfaceName} isn't implemented.`);
           return;
         }
 
         // Préparation du namespace (index)
-        this.#addNamespace(namespace, version, interfaceName);
+        this.#addNamespace(jsDocInfo.namespace, jsDocInfo.version, interfaceName);
 
         // Prepare interfaceData
         const data: InterfaceData = new InterfaceData(filePath, interfaceName, className, iface);
-        data.addHeader(namespace, version, name);
-        data.addJDOC(this.#generateClassHeader(className, namespace, version, name));
-        this.#addEntities(namespace, version, data);
+        // data.addHeader(jsDocInfo.namespace, jsDocInfo.version, jsDocInfo.name, jsDocInfo.prefix);
+        data.addHeader(jsDocInfo);
+        data.addJDOC(this.#generateClassHeader(className, jsDocInfo.namespace, jsDocInfo.version, jsDocInfo.name, jsDocInfo.prefix));
+        this.#addEntities(jsDocInfo.namespace, jsDocInfo.version, data);
 
         if (generateFile) {
-          this.#writeFile('src/interface', filePath, className, data.classContent());
+          this.#writeFile('src/interface', filePath, newFileName, data.classContent());
 
           console.log(logType.CLASS, `Classes ${className} has been generated from the interface.`);
         }
@@ -234,33 +269,41 @@ export class Generator {
 
       if ((globalType && globalType.length > 0) && (typeName.startsWith('I') && (!includeGlobal && typeAlias.getTypeNode()?.getText()?.includes('_Global')))) {
         const className = typeName.substring(1);
+        const newFileName = className.substring(0, className.lastIndexOf("_"));
 
         // Extraire les informations JSDoc
-        const { namespace, version, name, NotImplemented } = this.#extractJsDocInfoByDeclaration(typeAlias);
-        if (!namespace || !version || !name) {
+        // const { namespace, version, name, prefix, NotImplemented } = this.#extractJsDocInfoByDeclaration(typeAlias);
+        const jsDocInfo: HeaderInfo = this.#extractJsDocInfoByDeclaration(typeAlias);
+
+        // if (!namespace || !version || !name) {
+        //   console.warn(`Types ${typeName} can't be transformed into a class, as its JDOC is not declared.`);
+        //   return;
+        // }
+        if (!jsDocInfo.isValid()) {
           console.warn(`Types ${typeName} can't be transformed into a class, as its JDOC is not declared.`);
           return;
         }
-        if (NotImplemented) {
+        if (jsDocInfo.notImplemented) {
           console.warn(`Types ${typeName} isn't implemented.`);
           return;
         }
 
         // Préparation du namespace (index)
-        this.#addNamespace(namespace, version, typeName);
+        this.#addNamespace(jsDocInfo.namespace, jsDocInfo.version, typeName);
 
         const globalInterface: InterfaceDeclaration = this.project.getSourceFileOrThrow(path.join('src/interface/', '_Global/' + globalType + '.ts')).getInterfaceOrThrow(globalType.replace(/<.*>$/, ''));
         // const properties = this.#getAllPropertiesByInterfaceDeclaration(globalInterface);
 
         // Prepare interfaceData
         const data: InterfaceData = new InterfaceData(filePath, typeName, className, globalInterface);
-        data.addHeader(namespace, version, name);
-        data.addJDOC(this.#generateClassHeader(className, namespace, version, name));
-        this.#addEntities(namespace, version, data);
+        // data.addHeader(jsDocInfo.namespace, jsDocInfo.version, jsDocInfo.name, jsDocInfo.prefix);
+        data.addHeader(jsDocInfo);
+        data.addJDOC(this.#generateClassHeader(className, jsDocInfo.namespace, jsDocInfo.version, jsDocInfo.name, jsDocInfo.prefix));
+        this.#addEntities(jsDocInfo.namespace, jsDocInfo.version, data);
 
 
         if (generateFile) {
-          this.#writeFile('src/interface', filePath, className, data.classContent());
+          this.#writeFile('src/interface', filePath, newFileName, data.classContent());
 
           console.log(logType.CLASS, `Classes ${className} has been generated from the type.`);
         }
@@ -272,31 +315,62 @@ export class Generator {
    * Génére l'index.ts des interfaces a partir du namespaceVersions
    */
   #processInterfaceIndexNamespace() {
-    // Générer les fichiers index.ts pour chaque namespace et version
-    Object.keys(this.namespaceVersions).forEach(namespace => {
-      const versions = this.namespaceVersions[namespace];
+    // TODO: Load GLOBAL
+    Object.keys(this.entitiesData).forEach((namespace: string) => {
+      const data: Record<string, InterfaceData[]> = this.entitiesData[namespace];
 
-      Object.keys(versions).forEach(version => {
-        const interfaces = versions[version];
+      Object.keys(data).forEach((version: string) => {
+        const interfaces: InterfaceData[] = data[version];
+        let arrImports: Record<string, string> = {};
 
-        let indexContent = '';
-        interfaces.forEach(interfaceName => {
-          const importName = interfaceName.substring(1);
+        let fileContent: string = '';
 
-          const interfacePath = `./${version}/${interfaceName}`;
-          indexContent += `import * as ${importName}Interface from '${interfacePath}';\n`;
+        // Write Import
+        interfaces.forEach((intData: InterfaceData) => {
+          const interfaceName: string = intData.originalName;
+
+          let alias: string = intData.getExportAlias();
+          if (intData.headerInfo?.prefix) {
+            fileContent += `import { ${interfaceName} as ${alias} } from '${intData.getExportPath()}';\n`;
+          } else {
+            fileContent += `import { ${interfaceName} } from '${intData.getExportPath()}';\n`;
+            alias = interfaceName; // We don't have a alias, we use interfaceName
+          }
+
+          arrImports[intData.getNameWithoutVersion()] = alias;
         });
 
-        indexContent += `\nexport namespace ${namespace} {\n`;
-        indexContent += `  export namespace ${version} {\n`;
+        // Write Export and prepare Union
+        let nbItem: number = 0;
+        let arrExportType: string[] = [];
 
-        interfaces.forEach(interfaceName => {
-          const importName = interfaceName.substring(1);
-          indexContent += `    export import ${interfaceName} = ${importName}Interface.${interfaceName};\n`;
+        fileContent += `\nexport {\n`
+        Object.entries(arrImports).forEach(([key, value]) => {
+          // Add initial tab
+          if (nbItem == 0) {
+            fileContent += `\t`;
+          }
+
+          fileContent += `${value}, `;
+          nbItem += 1;
+
+          // Add EOF 
+          if (nbItem == 3) {
+            fileContent += `\n`;
+            nbItem = 0;
+          }
+
+          // TODO: Revoir quand il aura du multiversion pour ajouter V1 | V2 | ...
+          // TODO : Revoir le pattern pour « key » avec prefix
+          arrExportType.push(`\nexport type ${key} = ${value};`);
         });
+        fileContent = fileContent.trimEnd();
+        fileContent += `\n};\n`;
 
-        indexContent += '  }\n';
-        indexContent += '}\n';
+        // Add export type (Union) 
+        arrExportType.forEach(expType => {
+          fileContent += `${expType}`;
+        });
 
         // Déterminer le chemin de sortie
         const outputPath = path.join('generate', 'interface', `${namespace}`, 'index.ts');
@@ -307,15 +381,90 @@ export class Generator {
         fs.ensureDirSync(outputDir);
 
         // Écrire le fichier index
-        fs.writeFileSync(outputPath, indexContent);
+        fs.writeFileSync(outputPath, fileContent);
 
         console.log(`[SUCCESS] Interface namespace Index '${outputFile}' has been generated`);
       });
     });
   }
 
+  // #processInterfaceIndexNamespaceOld() {
+  //   // Générer les fichiers index.ts pour chaque namespace et version
+  //   Object.keys(this.namespaceVersions).forEach(namespace => {
+  //     const versions = this.namespaceVersions[namespace];
+
+  //     Object.keys(versions).forEach(version => {
+  //       const interfaces = versions[version];
+
+  //       let arrImports: Record<string, string> = {};
+  //       let indexContent: string = '';
+
+  //       // Add Import
+  //       interfaces.forEach(interfaceName => {
+  //         const importName = interfaceName.substring(1);
+  //         const fileName = importName.substring(0, importName.lastIndexOf("_"));
+
+  //         const interfacePath = `./${version}/${fileName}`;
+  //         // TODO: Gestion pour savoir si on doit inclure ou pas le namespace dans le nom de alias
+  //         //       ou changer le nom pour inclure par défaut
+  //         const alias = `${namespace}_${importName}`;
+
+  //         indexContent += `import { ${importName} as ${alias} } from '${interfacePath}';\n`;
+
+  //         arrImports[fileName] = alias;
+  //       });
+
+  //       // Add Export and prepare export type
+  //       let nbItem: number = 0;
+  //       let arrExportType: string[] = [];
+
+  //       indexContent += `\nexport { \n`
+  //       Object.entries(arrImports).forEach(([key, value]) => {
+  //         // Add initial tab
+  //         if (nbItem == 0) {
+  //           indexContent += `\t`;
+  //         }
+
+  //         indexContent += `${value}, `;
+  //         nbItem += 1;
+
+  //         // Add EOF 
+  //         if (nbItem == 3) {
+  //           indexContent += `\n`;
+  //           nbItem = 0;
+  //         }
+
+  //         // TODO: Revoir quand il aura du multiversion pour ajouter V1 | V2 | ...
+  //         // TODO : Revoir le pattern pour « key » avec prefix
+  //         arrExportType.push(`export type ${key} = ${value}`);
+  //       });
+  //       indexContent += `\n }\n`;
+
+  //       // Add Export type
+  //       arrExportType.forEach(expType => {
+  //         indexContent += `${expType}\n`;
+  //       });
+
+
+  //       // Déterminer le chemin de sortie
+  //       const outputPath = path.join('generate', 'interface', `${namespace}`, 'index.ts');
+  //       const outputDir = path.dirname(outputPath);
+  //       const outputFile = path.join(outputDir, 'index.ts');
+
+  //       // Créer le répertoire de sortie si nécessaire
+  //       fs.ensureDirSync(outputDir);
+
+  //       // Écrire le fichier index
+  //       fs.writeFileSync(outputPath, indexContent);
+
+  //       console.log(`[SUCCESS] Interface namespace Index '${outputFile}' has been generated`);
+  //     });
+  //   });
+  // }
+
   /**
    * Génére l'index.ts des classes a partir du namespaceVersions
+   * TODO: Appliquer le même process que interface
    */
   #processClassIndexNamespace() {
     // Générer les fichiers index.ts pour chaque namespace et version
@@ -325,24 +474,56 @@ export class Generator {
       Object.keys(versions).forEach(version => {
         const classes = versions[version];
 
+        let arrImports: Record<string, string> = {};
         let indexContent = '';
-        classes.forEach(className => {
-          const importName = className;
-
-          const classPath = `./${version}/${className}`;
-          indexContent += `import * as ${importName}Cls from '${classPath}';\n`;
-        });
-
-        indexContent += `\nexport namespace ${namespace} {\n`;
-        indexContent += `  export namespace ${version} {\n`;
 
         classes.forEach(className => {
           const importName = className;
-          indexContent += `    export import ${className} = ${importName}Cls.${className};\n`;
+          const fileName = importName.substring(0, importName.lastIndexOf("_"));
+
+          const classPath = `./${version}/${fileName}`;
+          // TODO: Gestion pour savoir si on doit inclure ou pas le namespace dans le nom de alias
+          //       ou changer le nom pour inclure par défaut
+          const alias = `${namespace}_${importName}`;
+
+          indexContent += `import { ${importName} as ${alias} } from '${classPath}';\n`;
+
+          arrImports[fileName] = alias;
+
+          // indexContent += `import * as ${importName}Cls from '${classPath}';\n`;
         });
 
-        indexContent += '  }\n';
-        indexContent += '}\n';
+        // Add Export and prepare export type
+        let nbItem: number = 0;
+        let arrExportType: string[] = [];
+
+        indexContent += `\nexport { \n`
+        Object.entries(arrImports).forEach(([key, value]) => {
+          // Add initial tab
+          if (nbItem == 0) {
+            indexContent += `\t`;
+          }
+
+          indexContent += `${value}, `;
+          nbItem += 1;
+
+          // Add EOF 
+          if (nbItem == 3) {
+            indexContent += `\n`;
+            nbItem = 0;
+          }
+
+          // TODO: Revoir quand il aura du multiversion pour ajouter V1 | V2 | ...
+          // TODO : Revoir le pattern pour « key » avec prefix
+          arrExportType.push(`export type ${key} = ${value}`)
+        });
+        indexContent += `\n }\n`;
+
+        // Add Export type
+        arrExportType.forEach(expType => {
+          indexContent += `${expType}\n`;
+        });
+
 
         // Déterminer le chemin de sortie
         const outputPath = path.join('generate', 'entity', `${namespace}`, 'index.ts');
@@ -358,6 +539,7 @@ export class Generator {
         console.log(`[SUCCESS] Classes namespace Index '${outputFile}' has been generated`);
       });
     });
+
   }
 
   /**
@@ -383,6 +565,11 @@ export class Generator {
     });
   }
 
+  /**
+   * Generate Index files from interfaces or classes
+   * @param filesFolderPath 
+   * @param type 
+   */
   processIndexNamespace(filesFolderPath = 'src/interface/**/*.ts', type: NamespaceIndexTypes = NamespaceIndexTypes.INTERFACE) {
     // Read all interface files
     const sourceFiles = glob.sync(filesFolderPath);
@@ -390,10 +577,15 @@ export class Generator {
 
     // Process
     sourceFiles.forEach((filePath: string) => {
+      const fileName = path.basename(filePath);
+      if (fileName.toLowerCase() == "index.ts") {
+        return;
+      }
+
       const sourceFile = this.project.addSourceFileAtPath(filePath);
       const interfaces: InterfaceDeclaration[] = sourceFile.getInterfaces();
       const typeAliases: TypeAliasDeclaration[] = sourceFile.getTypeAliases();
-      const classes: ClassDeclaration[] = sourceFile.getClasses();
+      const classes: ClassDeclaration[] = sourceFile.getClasses(); // Only true if NamespaceIndexTypes = ENTITY (CLASSES)
 
       if (type == NamespaceIndexTypes.INTERFACE) {
         if (interfaces && interfaces.length > 0) {
@@ -413,17 +605,21 @@ export class Generator {
 
     });
 
-    switch (type) {
-      case NamespaceIndexTypes.INTERFACE:
-        this.#processInterfaceIndexNamespace();
-        break;
+    let generator : GenerateIndex = new GenerateIndex(this.entitiesData);
+    generator.processIndexNamespace(type);
 
-      case NamespaceIndexTypes.ENTITY:
-        this.#processClassIndexNamespace();
-        break;
-    }
+    // switch (type) {
+    //   case NamespaceIndexTypes.INTERFACE:
+    //     this.#processInterfaceIndexNamespace();
+    //     break;
+
+    //   case NamespaceIndexTypes.ENTITY:
+    //     this.#processClassIndexNamespace();
+    //     break;
+    // }
   }
 
+  // Not used
   test(filesFolderPath = 'src/interface/**/*.ts', type: NamespaceIndexTypes = NamespaceIndexTypes.INTERFACE) {
     // Read all interface files
     const sourceFiles = glob.sync(filesFolderPath);
@@ -463,7 +659,7 @@ export class Generator {
     });
   }
 
-
+  // TODO: Incomplete
   generateValidationFunction(data: InterfaceData): string {
     if (data) {
       const interfaceName = data.originalName;
@@ -514,6 +710,7 @@ export class Generator {
 
       // import { Interfaces, Validator } from '@/riotentity';
       const imports: string[] = ['Interfaces'];
+
       // import { ClashPosition, ClashRole } from '@/src/declaration';
       const declarationImport: string[] = [];
 
@@ -603,7 +800,9 @@ export class Generator {
                 imports.push('Validator');
               }
 
-            } else if (['State', 'Tracking', 'KaynChampionTransform', 'ClashPosition', 'ClashRole', 'Level', 'MaintenanceStatus', 'IncidentSeverity', 'Platforms', 'PublishLocations', 'GameMode', 'GameType', 'QueueType', 'TraitStyle'].includes(type)) {
+            } else if (['State', 'Tracking', 'KaynChampionTransform', 'ClashPosition', 'ClashRole', 'Level', 'MaintenanceStatus',
+              'IncidentSeverity', 'Platforms', 'PublishLocations', 'GameMode', 'GameType', 'QueueType', 'TraitStyle'].includes(type)) {
+
               propertiesValidation.set(propertyName, {
                 propName: propertyName,
                 propType: (!multiType ? propertyType : typeArray[0]),
@@ -651,7 +850,7 @@ export class Generator {
       const importRow: string[] = [];
       importRow.push(`import { ${imports.join(', ')} } from '@/riotentity';`);
       if (declarationImport && declarationImport.length > 0) {
-        importRow.push(`import { ${declarationImport.join(', ')} } from '@/src/declaration';`);
+        importRow.push(`import { ${declarationImport.join(', ')} } from '@/declaration';`);
       }
       const headerDeclaration = `\nexport function is${interfaceName}(obj: any): obj is Interfaces.${namespace}.${version}.${interfaceName} {`;
       importRow.push(headerDeclaration);
@@ -812,7 +1011,7 @@ switch (firstArgs) {
   case '2':
   case 'interfaceIndex':
   case 'intIndex':
-    console.log(logType.INDEX, 'Generating index interfaces from nain interfaces');
+    console.log(logType.INDEX, 'Generating index interfaces from main interfaces');
     mainGenerator.processIndexNamespace('src/interface/**/*.ts', NamespaceIndexTypes.INTERFACE);
     break;
 
