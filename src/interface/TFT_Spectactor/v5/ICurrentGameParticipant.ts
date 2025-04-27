@@ -1,4 +1,4 @@
-import { ICurrentGameParticipant_Global } from '../../_Global/ICurrentGameParticipant_Global';
+import { Interfaces } from '@/riotentity';
 
 /**
  * Interface TFT - ICurrentGameParticipant
@@ -6,9 +6,8 @@ import { ICurrentGameParticipant_Global } from '../../_Global/ICurrentGamePartic
  * @namespace TFT_Spectactor
  * @version v5
  * @name ICurrentGameParticipant
+ * @prefix TFT_
  */
-export type ICurrentGameParticipant_v5 = ICurrentGameParticipant_Global
-/*
-export interface ICurrentGameParticipant extends ICurrentGameParticipant_Global {
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+export interface ICurrentGameParticipant_v5 extends Interfaces.Shared.ICurrentGameParticipant_Global {
 }
-*/

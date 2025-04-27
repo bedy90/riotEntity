@@ -1,4 +1,4 @@
-import { IStatusDTO_Global } from '../../_Global/IStatusDTO_Global';
+import { Interfaces } from '@/riotentity';
 
 /**
  * Interface TFT - IStatusDTO
@@ -6,9 +6,8 @@ import { IStatusDTO_Global } from '../../_Global/IStatusDTO_Global';
  * @namespace TFT_Status
  * @version v1
  * @name IStatusDTO
+ * @prefix TFT_
  */
-export type IStatusDTO_v1 = IStatusDTO_Global
-/*
-export interface IStatusDTO extends IStatusDTO_Global {
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+export interface IStatusDTO_v1 extends Interfaces.Shared.IStatusDTO_Global {
 }
-*/

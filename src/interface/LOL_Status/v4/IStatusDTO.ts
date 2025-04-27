@@ -1,5 +1,4 @@
-import { IStatusDTO_Global } from '../../_Global/IStatusDTO_Global';
-
+import { Interfaces } from '@/riotentity';
 /**
  * Interface IStatusDTO
  *
@@ -7,8 +6,6 @@ import { IStatusDTO_Global } from '../../_Global/IStatusDTO_Global';
  * @version v4
  * @name IStatusDTO
  */
-export type IStatusDTO_v4 = IStatusDTO_Global
-/*
-export interface IStatusDTO  extends IStatusDTO_Global {
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+export interface IStatusDTO_v4 extends Interfaces.Shared.IStatusDTO_Global {
 }
-*/

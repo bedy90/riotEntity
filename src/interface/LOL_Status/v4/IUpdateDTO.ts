@@ -1,5 +1,4 @@
-import { IUpdateDTO_Global } from '../../_Global/IUpdateDTO_Global';
-
+import { Interfaces } from '@/riotentity';
 
 /**
  * Interface IUpdateDTO
@@ -8,9 +7,6 @@ import { IUpdateDTO_Global } from '../../_Global/IUpdateDTO_Global';
  * @version v4
  * @name IUpdateDTO
  */
-export type IUpdateDTO_v4 = IUpdateDTO_Global
-/*
-export interface IUpdateDTO extends IUpdateDTO_Global {
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+export interface IUpdateDTO_v4 extends Interfaces.Shared.IUpdateDTO_Global {
 }
-*/
-

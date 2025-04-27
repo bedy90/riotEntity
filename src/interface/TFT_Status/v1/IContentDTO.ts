@@ -1,4 +1,4 @@
-import { IContentDTO_Global } from '../../_Global/IContentDTO_Global';
+import { Interfaces } from '@/riotentity';
 
 /**
  * Interface TFT - IContentDTO
@@ -6,9 +6,8 @@ import { IContentDTO_Global } from '../../_Global/IContentDTO_Global';
  * @namespace TFT_Status
  * @version v1
  * @name IContentDTO
+ * @prefix TFT_
  */
-export type IContentDTO_v1 = IContentDTO_Global
-/*
-export interface IContentDTO extends IContentDTO_Global  {
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+export interface IContentDTO_v1 extends Interfaces.Shared.IContentDTO_Global {
 }
-*/

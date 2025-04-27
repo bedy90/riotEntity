@@ -1,4 +1,4 @@
-import { ICurrentGameInfo_Global } from '../../_Global/ICurrentGameInfo_Global';
+import { Interfaces } from '@/riotentity';
 
 /**
  * Interface ICurrentGameInfo
@@ -7,8 +7,6 @@ import { ICurrentGameInfo_Global } from '../../_Global/ICurrentGameInfo_Global';
  * @version v4
  * @name ICurrentGameInfo
  */
-export type ICurrentGameInfo_v4 = ICurrentGameInfo_Global
-/*
-export interface ICurrentGameInfo extends ICurrentGameInfo_Global {
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+export interface ICurrentGameInfo_v4 extends Interfaces.Shared.ICurrentGameInfo_Global {
 }
-*/

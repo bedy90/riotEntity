@@ -1,5 +1,4 @@
-import { IBannedChampion_Global } from '../../_Global/IBannedChampion_Global';
-
+import { Interfaces } from '@/riotentity';
 
 /**
  * Interface IBannedChampion
@@ -8,8 +7,6 @@ import { IBannedChampion_Global } from '../../_Global/IBannedChampion_Global';
  * @version v4
  * @name IBannedChampion
  */
-export type IBannedChampion_v4 = IBannedChampion_Global
-/*
-export interface IBannedChampion extends IBannedChampion_Global {
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+export interface IBannedChampion_v4 extends Interfaces.Shared.IBannedChampion_Global {
 }
-*/

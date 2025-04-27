@@ -1,4 +1,4 @@
-import { IMiniSeriesDTO_Global } from '../../_Global/IMiniSeriesDTO_Global';
+import { Interfaces } from '@/riotentity';
 
 /**
  * Interface IMiniSeriesDTO
@@ -6,9 +6,9 @@ import { IMiniSeriesDTO_Global } from '../../_Global/IMiniSeriesDTO_Global';
  * @namespace LeagueExp
  * @version v4
  * @name IMiniSeriesDTO
+ * @prefix LeagueExp_
  */
-export type IMiniSeriesDTO_v4 = IMiniSeriesDTO_Global
-
-// export interface IMiniSeriesDTO extends IMiniSeriesDTO_Global {
-// }
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+export interface IMiniSeriesDTO_v4 extends Interfaces.Shared.IMiniSeriesDTO_Global {
+}
 

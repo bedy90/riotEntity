@@ -1,0 +1,15 @@
+
+services:
+  app:
+    build:
+      context: ..
+      dockerfile: docker/DockerFile
+    volumes:
+      - ../src:/app/src
+      - ../package.json:/app/package.json
+      - ../package-lock.json:/app/package-lock.json
+      - ../tsconfig.json:/app/tsconfig.json
+      - ../tsup.config.ts:/app/tsup.config.ts
+    working_dir: /app
+    tty: true
+    # command: ["npm", "run", "compile:npx"]

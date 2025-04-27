@@ -1,4 +1,4 @@
-import { ILeagueEntryDTO_Global } from '../../_Global/ILeagueEntryDTO_Global';
+import { Interfaces } from '@/riotentity';
 
 /**
  * Interface ILeagueEntryDTO
@@ -7,8 +7,6 @@ import { ILeagueEntryDTO_Global } from '../../_Global/ILeagueEntryDTO_Global';
  * @version v4
  * @name ILeagueEntryDTO
  */
-export type ILeagueEntryDTO_v4 = ILeagueEntryDTO_Global
-
-// export interface ILeagueEntryDTO extends ILeagueEntryDTO_Global {
-// }
-
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+export interface ILeagueEntryDTO_v4 extends Interfaces.Shared.ILeagueEntryDTO_Global {
+}

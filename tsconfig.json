@@ -30,8 +30,8 @@
     "baseUrl": "./src",
     "paths": {
       "@/*": ["*"],
-      "@/interface/*": ["interface/*"],
-      "@/interfaces/*": ["interface/*"],
+      // "@/interface/*": ["interface/*"],
+      // "@/interfaces/*": ["interface/*"],
       "@/riotentity": ["index"],
       "@/riotentity/*": ["*"]
     }
@@ -39,14 +39,16 @@
   "include": [
     "src/**/*",
     "readme.md"
-
   ],
   "exclude": [
     "node_modules",
     "build",
+    "docker",
     "generate/**/*",
     "./scripts",
     "./lib",
-    "./src/manual_test.ts"
+    "./src/manual_test.ts",
+    "*.ts1",
+    "*.txt"
   ]
 }

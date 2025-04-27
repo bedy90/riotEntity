@@ -8,6 +8,7 @@ import { Interfaces } from '@/riotentity';
  * @namespace TFT_Match
  * @version v1
  * @name IMatchDTO
+ * @prefix TFT_
  */
 export interface IMatchDTO_v1 {
     /**

@@ -1,4 +1,4 @@
-import { ICurrentGameParticipant_Global } from '../../_Global/ICurrentGameParticipant_Global';
+import { Interfaces } from '@/riotentity';
 
 /**
  * Interface ICurrentGameParticipant
@@ -7,6 +7,6 @@ import { ICurrentGameParticipant_Global } from '../../_Global/ICurrentGamePartic
  * @version v4
  * @name ICurrentGameParticipant
  */
-export interface ICurrentGameParticipant_v4 extends ICurrentGameParticipant_Global {
+export interface ICurrentGameParticipant_v4 extends Interfaces.Shared.ICurrentGameParticipant_Global {
     bot: boolean;
 }

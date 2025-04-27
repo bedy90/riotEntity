@@ -1,4 +1,4 @@
-import { ISummonerDTO_Global } from '../../_Global/ISummonerDTO_Global';
+import { Interfaces } from '@/riotentity';
 
 /**
  * Interface TFT - ISummonerDTO
@@ -6,9 +6,8 @@ import { ISummonerDTO_Global } from '../../_Global/ISummonerDTO_Global';
  * @namespace TFT_Summoner
  * @version v1
  * @name ISummonerDTO
+ * @prefix TFT_
  */
-export type ISummonerDTO_v1 = ISummonerDTO_Global
-/*
-export interface ISummonerDTO extends ISummonerDTO_Global {
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+export interface ISummonerDTO_v1 extends Interfaces.Shared.ISummonerDTO_Global {
 }
-*/

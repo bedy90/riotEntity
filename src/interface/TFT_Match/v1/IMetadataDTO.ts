@@ -4,6 +4,7 @@
  * @namespace TFT_Match
  * @version v1
  * @name IMetadataDTO
+ * @prefix TFT_
  */
 export interface IMetadataDTO_v1 {
     /**

@@ -1,4 +1,4 @@
-import { IPlatformDataDTO_Global } from '../../_Global/IPlatformDataDTO_Global';
+import { Interfaces } from '@/riotentity';
 
 /**
  * Interface IPlatformDataDTO
@@ -7,8 +7,7 @@ import { IPlatformDataDTO_Global } from '../../_Global/IPlatformDataDTO_Global';
  * @version v4
  * @name IPlatformDataDTO
  */
-export type IPlatformDataDTO_v4 = IPlatformDataDTO_Global
-/*
-export interface IPlatformDataDTO extends IPlatformDataDTO_Global {
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+export interface IPlatformDataDTO_v4 extends Interfaces.Shared.IPlatformDataDTO_Global {
 }
-*/
+

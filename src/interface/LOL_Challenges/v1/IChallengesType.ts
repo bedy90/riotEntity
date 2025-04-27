@@ -1,5 +1,5 @@
-// import { Level } from '@/riotentity';
-import { Level } from '@/declaration';
+import { Declarations } from '@/riotentity';
+// import { Level } from '@/declaration';
 
 /**
  * Interface IChallengePercentile
@@ -8,10 +8,11 @@ import { Level } from '@/declaration';
  * @namespace LoL_Challenges
  * @version v1
  * @name IChallengePercentile
+ * @prefix LOL_
  * @NotImplemented
  */
 export interface IChallengePercentile_v1 {
-    percentile : ChallengePercentileType_v1;
+    percentile : IChallengePercentileType_v1;
 }
 
 /**
@@ -21,19 +22,33 @@ export interface IChallengePercentile_v1 {
  * @namespace LoL_Challenges
  * @version v1
  * @name IChallengePercentiles
+ * @prefix LOL_
  * @NotImplemented
  */
 export interface IChallengePercentiles_v1 {
-    percentiles : ChallengePercentilesType_v1;
+    percentiles : IChallengePercentilesType_v1;
 }
 
-
-export type ChallengePercentilesType_v1 = Record<string, Map<number, ChallengePercentileType_v1>>;
+/**
+ * Interface IChallengePercentilesType
+ * Challenge percentile
+ * @namespace LoL_Challenges
+ * @version v1
+ * @name ChallengePercentilesType
+ * @prefix LOL_
+ * @NotImplemented
+ */
+export type IChallengePercentilesType_v1 = Record<string, Map<number, IChallengePercentileType_v1>>;
 
 /**
+ * Intercface IChallengePercentileType
  * Challenge percentile for a specific challenge
+ * @namespace LoL_Challenges
+ * @version v1
+ * @name ChallengePercentileType
+ * @prefix LOL_
  */
-export type ChallengePercentileType_v1 = Record<string, Map<Level, number>>;
+export type IChallengePercentileType_v1 = Record<string, Map<Declarations.Level, number>>;
 /*
     Long = bigint
     Integer = number

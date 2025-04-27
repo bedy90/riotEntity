@@ -18,3 +18,6 @@
 
 - Voir si ça serait possible de générer le « index.ts » de Nv1
 - Voir si possible de générer les validateur
+
+# Obtenir arborescensces
+tree /f > arb.txt

@@ -1,5 +1,4 @@
-import { IContentDTO_Global } from '../../_Global/IContentDTO_Global';
-
+import { Interfaces } from '@/riotentity';
 /**
  * Interface IContentDTO
  *
@@ -7,8 +6,6 @@ import { IContentDTO_Global } from '../../_Global/IContentDTO_Global';
  * @version v4
  * @name IContentDTO
  */
-export type IContentDTO_v4 = IContentDTO_Global
-/*
-export interface IContentDTO extends IContentDTO_Global {
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+export interface IContentDTO_v4 extends Interfaces.Shared.IContentDTO_Global {
 }
-*/

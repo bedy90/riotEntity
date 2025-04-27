@@ -6,6 +6,7 @@ import { Interfaces } from '@/riotentity';
  * @namespace TFT_League
  * @version v1
  * @name ILeagueItemDTO
+ * @prefix TFT_
  */
 export interface ILeagueItemDTO_v1 {
     freshBlood: boolean;

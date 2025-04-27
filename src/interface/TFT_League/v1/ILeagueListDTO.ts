@@ -6,6 +6,7 @@ import { Interfaces } from '@/riotentity';
  * @namespace TFT_League
  * @version v1
  * @name ILeagueListDTO
+ * @prefix TFT_
  */
 export interface ILeagueListDTO_v1 {
     leagueId: string;

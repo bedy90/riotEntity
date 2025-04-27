@@ -1,4 +1,4 @@
-import { IParticipant_Global } from '../../_Global/IParticipant_Global';
+import { Interfaces } from '@/riotentity';
 
 /**
  * Interface TFT - IParticipant
@@ -6,9 +6,8 @@ import { IParticipant_Global } from '../../_Global/IParticipant_Global';
  * @namespace TFT_Spectactor
  * @version v5
  * @name IParticipant
+ * @prefix TFT_
  */
-export type IParticipant_v5 = IParticipant_Global
-/*
-export interface IParticipant extends IParticipant_Global {
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+export interface IParticipant_v5 extends Interfaces.Shared.IParticipant_Global {
 }
-*/

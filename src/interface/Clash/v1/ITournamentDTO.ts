@@ -5,6 +5,7 @@ import { Interfaces } from '@/riotentity';
  * @namespace Clash
  * @version v1
  * @name ITournamentDTO
+ * @prefix Clash_
  */
 export interface ITournamentDTO_v1 {
     id: number;

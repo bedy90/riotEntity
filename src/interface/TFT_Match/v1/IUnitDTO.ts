@@ -4,6 +4,7 @@
  * @namespace TFT_Match
  * @version v1
  * @name IUnitDTO
+ * @prefix TFT_
  */
 export interface IUnitDTO_v1 {
     /**

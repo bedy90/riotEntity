@@ -58,7 +58,7 @@ export default defineConfig([globalIgnores([
             allowSingleLine: true,
         }],
 
-        "space-before-blocks": "error",
+        // "space-before-blocks": "error",
         indent: ["off", "tab"],
         "comma-dangle": ["error", "always-multiline"],
         "comma-spacing": "error",

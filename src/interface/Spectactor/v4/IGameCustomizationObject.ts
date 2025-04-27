@@ -1,4 +1,4 @@
-import { IGameCustomizationObject_Global } from '../../_Global/IGameCustomizationObject_Global';
+import { Interfaces } from '@/riotentity';
 
 /**
  * Interface IGameCustomizationObject
@@ -7,8 +7,6 @@ import { IGameCustomizationObject_Global } from '../../_Global/IGameCustomizatio
  * @version v4
  * @name IGameCustomizationObject
  */
-export type IGameCustomizationObject_v4 = IGameCustomizationObject_Global
-/*
-export interface IGameCustomizationObject extends IGameCustomizationObject_Global {
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+export interface IGameCustomizationObject_v4 extends Interfaces.Shared.IGameCustomizationObject_Global {
 }
-*/

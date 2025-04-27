@@ -1,4 +1,4 @@
-import { ICurrentGameInfo_Global } from '../../_Global/ICurrentGameInfo_Global';
+import { Interfaces } from '@/riotentity';
 
 /**
  * Interface TFT - ICurrentGameInfo
@@ -6,9 +6,8 @@ import { ICurrentGameInfo_Global } from '../../_Global/ICurrentGameInfo_Global';
  * @namespace TFT_Spectactor
  * @version v5
  * @name ICurrentGameInfo
+ * @prefix TFT_
  */
-export type ICurrentGameInfo_v5 = ICurrentGameInfo_Global
-/*
-export interface ICurrentGameInfo extends ICurrentGameInfo_Global {
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+export interface ICurrentGameInfo_v5 extends Interfaces.Shared.ICurrentGameInfo_Global {
 }
-*/

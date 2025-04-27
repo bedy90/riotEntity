@@ -11,6 +11,7 @@
     "generate:class": "npx rimraf ./generate/entity && npx ts-node scripts/generate-entities.ts class && npx ts-node scripts/generate-entities.ts clsIndex",
     "generate:interfaceIndex": "npx rimraf ./generate/interface && npx ts-node scripts/generate-entities.ts intIndex",
     "generate:validator": "npx rimraf ./generate/validator && npx ts-node scripts/generate-entities.ts 4",
+    "generate:all": "npm run generate:class && npm run generate:interfaceIndex",
     "== Compile ==": "",
     "compile:npx": "npx tsc",
     "compile:rim": "rimraf ./build && tsc",
@@ -75,5 +76,8 @@
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.31.0",
     "undici": "^7.8.0"
+  },
+  "dependencies": {
+    "@bedy90/riotentity": "file:"
   }
 }

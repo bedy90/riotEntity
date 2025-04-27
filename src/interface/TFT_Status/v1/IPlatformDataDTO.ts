@@ -1,4 +1,4 @@
-import { IPlatformDataDTO_Global } from '../../_Global/IPlatformDataDTO_Global';
+import { Interfaces } from '@/riotentity';
 
 /**
  * Interface TFT - IPlatformDataDTO
@@ -6,9 +6,8 @@ import { IPlatformDataDTO_Global } from '../../_Global/IPlatformDataDTO_Global';
  * @namespace TFT_Status
  * @version v1
  * @name IPlatformDataDTO
+ * @prefix TFT_
  */
-export type IPlatformDataDTO_v1 = IPlatformDataDTO_Global
-/*
-export interface IPlatformDataDTO extends IPlatformDataDTO_Global {
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+export interface IPlatformDataDTO_v1 extends Interfaces.Shared.IPlatformDataDTO_Global {
 }
-*/

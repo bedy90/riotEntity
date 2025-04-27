@@ -1,4 +1,4 @@
-import { ILeagueEntryDTO_Global } from '../../_Global/ILeagueEntryDTO_Global';
+import { Interfaces } from '@/riotentity';
 
 /**
  * Interface TFT - ILeagueEntryDTO
@@ -6,8 +6,9 @@ import { ILeagueEntryDTO_Global } from '../../_Global/ILeagueEntryDTO_Global';
  * @namespace TFT_League
  * @version v1
  * @name ILeagueEntryDTO
+ * @prefix TFT_
  */
-export interface ILeagueEntryDTO_v1 extends ILeagueEntryDTO_Global {
+export interface ILeagueEntryDTO_v1 extends Interfaces.Shared.ILeagueEntryDTO_Global {
     /**
      * 	Player Universal Unique Identifier. Exact length of 78 characters. (Encrypted)
      */

@@ -1,4 +1,4 @@
-import { IPerks_Global } from '../../_Global/IPerks_Global';
+import { Interfaces } from '@/riotentity';
 
 /**
  * Interface IPerks
@@ -7,8 +7,6 @@ import { IPerks_Global } from '../../_Global/IPerks_Global';
  * @version v4
  * @name IPerks
  */
-export type IPerks_v4 = IPerks_Global
-/*
-export interface IPerks extends IPerks_Global {
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+export interface IPerks_v4 extends Interfaces.Shared.IPerks_Global {
 }
-*/

@@ -1,5 +1,4 @@
-import { IObserver_Global } from '../../_Global/IObserver_Global';
-
+import { Interfaces } from '@/riotentity';
 
 /**
  * Interface IObserver
@@ -8,8 +7,6 @@ import { IObserver_Global } from '../../_Global/IObserver_Global';
  * @version v4
  * @name IObserver
  */
-export type IObserver_v4 = IObserver_Global
-/*
-export interface IObserver extends IObserver_Global {
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+export interface IObserver_v4 extends Interfaces.Shared.IObserver_Global {
 }
-*/

@@ -1,5 +1,4 @@
-import { IGameCustomizationObject_Global } from '../../_Global/IGameCustomizationObject_Global';
-
+import { Interfaces } from '@/riotentity';
 
 /**
  * Interface TFT - IGameCustomizationObject
@@ -7,9 +6,8 @@ import { IGameCustomizationObject_Global } from '../../_Global/IGameCustomizatio
  * @namespace TFT_Spectactor
  * @version v5
  * @name IGameCustomizationObject
+ * @prefix TFT_
  */
-export type IGameCustomizationObject_v5 = IGameCustomizationObject_Global
-/*
-export interface IGameCustomizationObject extends IGameCustomizationObject_Global {
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+export interface IGameCustomizationObject_v5 extends Interfaces.Shared.IGameCustomizationObject_Global {
 }
-*/

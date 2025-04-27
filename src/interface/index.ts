@@ -1,6 +1,4 @@
 // Export All
-// export * as GlobalInterface from './_Global';
-
 export * from './Account';
 export * from './Champion';
 export * from './ChampionMastery';
@@ -17,3 +15,7 @@ export * from './TFT_Match';
 export * from './TFT_Spectactor';
 export * from './TFT_Status';
 export * from './TFT_Summoner';
+
+// Export Shared
+import * as Shared from './_Global';
+export { Shared };

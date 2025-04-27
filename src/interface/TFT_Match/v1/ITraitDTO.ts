@@ -1,4 +1,4 @@
-import { TraitStyle } from '@/riotentity';
+import { Declarations } from '@/riotentity';
 
 /**
  * Interface TFT - ITraitDTO
@@ -6,6 +6,7 @@ import { TraitStyle } from '@/riotentity';
  * @namespace TFT_Match
  * @version v1
  * @name ITraitDTO
+ * @prefix TFT_
  */
 export interface ITraitDTO_v1 {
     /**
@@ -21,7 +22,7 @@ export interface ITraitDTO_v1 {
     /**
      * 	Current style for this trait. (0 = No style, 1 = Bronze, 2 = Silver, 3 = Gold, 4 = Chromatic)
      */
-    style: TraitStyle | number;
+    style: Declarations.TraitStyle | number;
     /**
      * 	Current active tier for the trait.
      */

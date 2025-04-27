@@ -1,4 +1,4 @@
-import { IFeaturedGames_Global } from '../../_Global/IFeaturedGames_Global';
+import { Interfaces } from '@/riotentity';
 
 /**
  * Interface IFeaturedGames
@@ -7,8 +7,6 @@ import { IFeaturedGames_Global } from '../../_Global/IFeaturedGames_Global';
  * @version v4
  * @name IFeaturedGames
  */
-export type IFeaturedGames_v4 = IFeaturedGames_Global
-/*
-export interface IFeaturedGames extends IFeaturedGames_Global  {
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+export interface IFeaturedGames_v4 extends Interfaces.Shared.IFeaturedGames_Global {
 }
-*/

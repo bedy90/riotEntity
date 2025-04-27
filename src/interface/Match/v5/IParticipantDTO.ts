@@ -1,6 +1,6 @@
 // eslint-disable max-len
 // eslint-disable no-shadow
-import { Interfaces, KaynChampionTransform } from '@/riotentity';
+import { Interfaces, Declarations } from '@/riotentity';
 
 /**
  * Interface IParticipantDTO
@@ -31,7 +31,7 @@ export interface IParticipantDTO_v5 {
     /**
      * This field is currently only utilized for Kayn's transformations. (Legal values: 0 - None, 1 - Slayer, 2 - Assassin)
      */
-    championTransform: KaynChampionTransform | number;
+    championTransform: Declarations.KaynChampionTransform | number;
 
     consumablesPurchased: number;
 
