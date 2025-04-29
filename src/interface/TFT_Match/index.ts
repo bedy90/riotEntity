@@ -1,21 +1,21 @@
-import { IUnitDTO_v1 as TFT_IUnitDTO_v1 } from './v1/IUnitDTO';
-import { ITraitDTO_v1 as TFT_ITraitDTO_v1 } from './v1/ITraitDTO';
-import { IParticipantDTO_v1 as TFT_IParticipantDTO_v1 } from './v1/IParticipantDTO';
-import { IMetadataDTO_v1 as TFT_IMetadataDTO_v1 } from './v1/IMetadataDTO';
-import { IMatchDTO_v1 as TFT_IMatchDTO_v1 } from './v1/IMatchDTO';
-import { IInfoDTO_v1 as TFT_IInfoDTO_v1 } from './v1/IInfoDTO';
-import { ICompanionDTO_v1 as TFT_ICompanionDTO_v1 } from './v1/ICompanionDTO';
+import { IUnitDTO_v1 as ITFT_UnitDTO_v1 } from './v1/IUnitDTO';
+import { ITraitDTO_v1 as ITFT_TraitDTO_v1 } from './v1/ITraitDTO';
+import { IParticipantDTO_v1 as ITFT_ParticipantDTO_v1 } from './v1/IParticipantDTO';
+import { IMetadataDTO_v1 as ITFT_MetadataDTO_v1 } from './v1/IMetadataDTO';
+import { IMatchDTO_v1 as ITFT_MatchDTO_v1 } from './v1/IMatchDTO';
+import { IInfoDTO_v1 as ITFT_InfoDTO_v1 } from './v1/IInfoDTO';
+import { ICompanionDTO_v1 as ITFT_CompanionDTO_v1 } from './v1/ICompanionDTO';
 
 export {
-	TFT_IUnitDTO_v1, TFT_ITraitDTO_v1, TFT_IParticipantDTO_v1,
-	TFT_IMetadataDTO_v1, TFT_IMatchDTO_v1, TFT_IInfoDTO_v1,
-	TFT_ICompanionDTO_v1,
+	ITFT_UnitDTO_v1, ITFT_TraitDTO_v1, ITFT_ParticipantDTO_v1,
+	ITFT_MetadataDTO_v1, ITFT_MatchDTO_v1, ITFT_InfoDTO_v1,
+	ITFT_CompanionDTO_v1,
 };
 
-export type TFT_IUnitDTO = TFT_IUnitDTO_v1;
-export type TFT_ITraitDTO = TFT_ITraitDTO_v1;
-export type TFT_IParticipantDTO = TFT_IParticipantDTO_v1;
-export type TFT_IMetadataDTO = TFT_IMetadataDTO_v1;
-export type TFT_IMatchDTO = TFT_IMatchDTO_v1;
-export type TFT_IInfoDTO = TFT_IInfoDTO_v1;
-export type TFT_ICompanionDTO = TFT_ICompanionDTO_v1;
+export type ITFT_UnitDTO = ITFT_UnitDTO_v1;
+export type ITFT_TraitDTO = ITFT_TraitDTO_v1;
+export type ITFT_ParticipantDTO = ITFT_ParticipantDTO_v1;
+export type ITFT_MetadataDTO = ITFT_MetadataDTO_v1;
+export type ITFT_MatchDTO = ITFT_MatchDTO_v1;
+export type ITFT_InfoDTO = ITFT_InfoDTO_v1;
+export type ITFT_CompanionDTO = ITFT_CompanionDTO_v1;

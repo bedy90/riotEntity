@@ -2,7 +2,6 @@
 
 import * as glob from 'glob';
 import * as path from 'path';
-import * as fs from 'fs-extra';
 import { Project, InterfaceDeclaration, TypeAliasDeclaration, ClassDeclaration } from 'ts-morph';
 
 import './logger';
@@ -17,7 +16,7 @@ export class InterfaceParser {
         this.interfaces = [];
     }
 
-    ParseFiles(filesFolderPath = 'src/interface/**/*.ts', type: NamespaceIndexTypes = NamespaceIndexTypes.INTERFACE) {
+    ParseFiles(filesFolderPath = 'src/interface/**/*.ts', type: NamespaceIndexTypes = NamespaceIndexTypes.INTERFACE) : void {
         // Read all interface files
         const sourceFiles = glob.sync(filesFolderPath);
 
@@ -43,15 +42,14 @@ export class InterfaceParser {
                 }
             }
 
-            // TODO
             if (type == NamespaceIndexTypes.ENTITY) {
-                const classes: ClassDeclaration[] = sourceFile.getClasses(); // Only true if NamespaceIndexTypes = ENTITY (CLASSES)
+                // Only true if NamespaceIndexTypes = ENTITY (CLASSES)
+                const classes: ClassDeclaration[] = sourceFile.getClasses(); 
 
                 if (classes && classes.length > 0) {
-                    // this.#readAllClasses(classes, filePath, false);
+                    this.#readAllClasses(classes);
                 }
             }
-
         });
     }
 
@@ -145,6 +143,33 @@ export class InterfaceParser {
 
         return returnValues;
     }
+
+    #readAllClasses(classes: ClassDeclaration[]): void {
+
+        classes.forEach(cls => {
+          const className = cls.getName();
+          const baseName = cls?.getSourceFile()?.getBaseName() || null;
+    
+          if (!baseName || baseName.toLowerCase().includes('index.ts')) {
+            return;
+          }
+    
+          if (className) {
+            // Extraire les informations JSDoc
+            const jsDocInfo: HeaderInfo = this.#extractJsDocInfoByDeclaration(cls);
+    
+            if (jsDocInfo.notImplemented) {
+              console.warn(`Class ${className} isn't implemented.`);
+              return;
+            }
+    
+            // Préparation du namespace (index)
+            // this.#addNamespace(jsDocInfo.namespace, jsDocInfo.version, className);
+
+            // TODO: Complete the process
+          }
+        });
+      }
 
     /**
      * Generate JDOC header for classContent

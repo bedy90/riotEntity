@@ -1,9 +1,9 @@
-import { IMiniSeriesDTO_v4 as LeagueExp_IMiniSeriesDTO_v4 } from './v4/IMiniSeriesDTO';
-import { ILeagueEntryDTO_v4 as LeagueExp_ILeagueEntryDTO_v4 } from './v4/ILeagueEntryDTO';
+import { IMiniSeriesDTO_v4 as ILeagueExp_MiniSeriesDTO_v4 } from './v4/IMiniSeriesDTO';
+import { ILeagueEntryDTO_v4 as ILeagueExp_LeagueEntryDTO_v4 } from './v4/ILeagueEntryDTO';
 
 export {
-	LeagueExp_IMiniSeriesDTO_v4, LeagueExp_ILeagueEntryDTO_v4,
+	ILeagueExp_MiniSeriesDTO_v4, ILeagueExp_LeagueEntryDTO_v4,
 };
 
-export type LeagueExp_IMiniSeriesDTO = LeagueExp_IMiniSeriesDTO_v4;
-export type LeagueExp_ILeagueEntryDTO = LeagueExp_ILeagueEntryDTO_v4;
+export type ILeagueExp_MiniSeriesDTO = ILeagueExp_MiniSeriesDTO_v4;
+export type ILeagueExp_LeagueEntryDTO = ILeagueExp_LeagueEntryDTO_v4;

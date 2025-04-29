@@ -11,7 +11,7 @@ import { Interfaces } from '@/riotentity';
 export interface ILeagueListDTO_v1 {
     leagueId: string;
 
-    entries: Interfaces.TFT_ILeagueItemDTO_v1[];
+    entries: Interfaces.ITFT_LeagueItemDTO_v1[];
 
     tier: string;
 

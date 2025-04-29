@@ -88,7 +88,7 @@ export class InterfaceData {
     }
 
     getFileName(): string {
-        return path.parse(this.filePath).name; 
+        return path.parse(this.filePath).name;
     }
 
     getExportPath(): string {
@@ -96,20 +96,18 @@ export class InterfaceData {
     }
 
     getExportAlias(): string {
-        // if (this.headerInfo?.prefix) {
-        //     return `_${this.headerInfo?.prefix}` ?? '';
-        // }
-        // return '';
-
-        return (this.headerInfo?.prefix ? `${this.headerInfo?.prefix}${this.originalName}` : '');
+        return (this.headerInfo?.prefix ? `I${this.headerInfo?.prefix}${this.className}` : '');
     }
 
     getPrefix(): string {
         return (this.headerInfo?.prefix ? this.headerInfo?.prefix : '');
     }
 
-    getNameWithoutVersion(): string {
+    getInterfaceNameWithoutVersion(): string {
         return this.originalName.substring(0, this.originalName.lastIndexOf("_"));
+    }
+    getClassesNameWithoutVersion(): string {
+        return this.className.substring(0, this.className.lastIndexOf("_"));
     }
 
     classContent(): string {
@@ -120,6 +118,7 @@ export class InterfaceData {
         classContent.push(...this.imports);
         classContent.push(this.jdocHeader);
         classContent.push(`export class ${this.className} implements Interfaces.${this.headerInfo.name}_${this.headerInfo.version} {`);
+
         classContent.push(this.#generateProperties());
         classContent.push('}\n'); // add /n for add a empty line EOF
 
@@ -141,6 +140,7 @@ export class InterfaceData {
             switch (importType) {
                 case ImportTypes.CUSTOM:
                     const imports = `import { ${[...types].join(', ')} } from '@/riotentity';`; // \n
+
                     this.addImport(imports);
                     break;
 
@@ -148,8 +148,10 @@ export class InterfaceData {
                     types.forEach(globalType => {
                         // TODO: Now we can `import { Interfaces } from '@/riotentity'`;
                         // And use : Interfaces.Shared.IGLOBALXYZ
-                        const globalImportPath = `@/src/interface/_Global/${globalType}`;
-                        const imports = `import { ${globalType} } from '${globalImportPath}';`; // \n
+                        // const globalImportPath = `@/src/interface/_Global/${globalType}`;
+                        // const imports = `import { ${globalType} } from '${globalImportPath}';`; // \n
+
+                        // Interfaces.Shared.
 
                         this.addImport(imports);
                     });
@@ -174,13 +176,35 @@ export class InterfaceData {
             if (matches) {
                 matches.forEach(type => {
                     // Exclure les types contenant « Interfaces » ainsi que les types primitifs et globaux
-                    if (!propType.includes('Interfaces.') && !['string', 'number', 'boolean', 'any', 'undefined', 'null', 'void', 'never', 'object', 'unknown', 'map'].includes(type.toLowerCase())) {
-                        // Split customType and globalTypes
-                        if (type.toLowerCase().includes('_global')) {
-                            globalTypes.add(type);
-                        } else {
-                            customTypes.add(type);
+                    if (!propType.includes('Interfaces.') &&
+                        !['string', 'number', 'boolean', 'any', 'undefined', 'null', 'void', 'never', 'object', 'unknown', 'map'].includes(type.toLowerCase())) {
+
+                        if (type == 'Declarations' && propType.includes(type)) {
+                            if (!customTypes.has(type)) {
+                                customTypes.add(type);
+                            }
                         }
+
+                        // Split customType and globalTypes
+                        if (type.toLowerCase().includes('_global') || type.toLowerCase().includes('Shared')) {
+                            // globalTypes.add(type);
+                            if (!globalTypes.has(type)) {
+                                globalTypes.add(type);
+                            }
+                        } 
+                        /*else {
+                            if (!customTypes.has(type)) {
+                                customTypes.add(type);
+                            }
+                        }*/
+
+                        // Foreach
+                    } else {
+                        // "Interfaces.TFT_ICompanionDTO_v1"
+                        // "Interfaces.TFT_ITraitDTO_v1[]"
+                        // "Interfaces.TFT_IUnitDTO_v1[]"
+                        // etc.
+                        // console.log('exclude')
                     }
                 });
             }

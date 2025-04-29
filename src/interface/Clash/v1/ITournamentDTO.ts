@@ -19,5 +19,5 @@ export interface ITournamentDTO_v1 {
     /**
      * 	Tournament phase
      */
-    schedule: Interfaces.Clash_ITournamentPhaseDTO_v1[];
+    schedule: Interfaces.IClash_TournamentPhaseDTO_v1[];
 }

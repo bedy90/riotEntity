@@ -16,7 +16,7 @@ export interface ILeagueItemDTO_v1 {
      */
     wins: number;
 
-    miniSeries: Interfaces.TFT_IMiniSeriesDTO_v1;
+    miniSeries: Interfaces.ITFT_MiniSeriesDTO_v1;
 
     inactive: boolean;
 

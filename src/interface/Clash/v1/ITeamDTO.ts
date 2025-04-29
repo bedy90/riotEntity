@@ -29,6 +29,6 @@ export interface ITeamDTO_v1 {
     /**
      * 	Team members.
      */
-    players: Interfaces.Clash_IPlayerDTO_v1[];
+    players: Interfaces.IClash_PlayerDTO_v1[];
 }
 

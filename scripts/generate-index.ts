@@ -53,8 +53,8 @@ export class GenerateIndex {
                     }
 
                     // TODO : Revoir pour la gestion du multiversio. Type Union => V1 | V2 | ...
-                    let key: string = intData.getNameWithoutVersion();
-                    let prefixedKey: string = `${keyPrefix}${key}`;
+                    let key: string = intData.getClassesNameWithoutVersion();
+                    let prefixedKey: string = `I${keyPrefix}${key}`;
                     arrExportType.push(`\nexport type ${prefixedKey} = ${alias};`);
 
                     arrImports[key] = alias;

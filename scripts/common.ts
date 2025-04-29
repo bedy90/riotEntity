@@ -1,3 +1,6 @@
+import * as fs from 'fs-extra';
+import * as path from 'path';
+
 //#region Enum
 export enum ImportTypes {
     GLOBAL = 0,
@@ -24,3 +27,20 @@ export enum ImportTypes {
     GLOBAL_TYPE_ARRAY = 13,
   }
   //#endregion
+
+  export class CommonUtils {
+
+    static writeFile(basePath: string, orignalFilePath: string, fileName: string, fileContent: string): void { 
+      const relativePath = path.relative(basePath, orignalFilePath);
+      const outputPath = path.join('generate', 'entity', relativePath);
+      const outputDir = path.dirname(outputPath);
+      const outputFile = path.join(outputDir, `${fileName}.ts`);
+  
+      // Créer le répertoire de sortie si nécessaire
+      fs.ensureDirSync(outputDir);
+  
+      // Écrire le fichier de classe
+      fs.writeFileSync(outputFile, fileContent);
+    }
+
+  }
