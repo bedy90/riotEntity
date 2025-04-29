@@ -1,7 +1,7 @@
-import { ISummonerDTO_v1 as TFT_ISummonerDTO_v1 } from './v1/ISummonerDTO';
+import { ISummonerDTO_v1 as ITFT_SummonerDTO_v1 } from './v1/ISummonerDTO';
 
 export {
-	TFT_ISummonerDTO_v1,
+	ITFT_SummonerDTO_v1,
 };
 
-export type TFT_ISummonerDTO = TFT_ISummonerDTO_v1;
+export type ITFT_SummonerDTO = ITFT_SummonerDTO_v1;

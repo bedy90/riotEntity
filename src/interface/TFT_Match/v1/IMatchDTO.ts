@@ -14,10 +14,10 @@ export interface IMatchDTO_v1 {
     /**
      * Match metadata.
      */
-    metadata: Interfaces.TFT_IMetadataDTO_v1;
+    metadata: Interfaces.ITFT_MetadataDTO_v1;
 
     /**
      * Match info.
      */
-    info: Interfaces.TFT_IInfoDTO_v1;
+    info: Interfaces.ITFT_InfoDTO_v1;
 }

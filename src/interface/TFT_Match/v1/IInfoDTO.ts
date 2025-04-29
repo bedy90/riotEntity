@@ -28,7 +28,7 @@ export interface IInfoDTO_v1 {
 
     game_version: string;
 
-    participants: Interfaces.TFT_IParticipantDTO_v1[];
+    participants: Interfaces.ITFT_ParticipantDTO_v1[];
 
     /**
      * 	Please refer to the League of Legends documentation.

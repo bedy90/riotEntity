@@ -14,7 +14,7 @@ export interface IParticipantDTO_v1 {
     /**
      * 	Participant's companion.
      */
-    companion: Interfaces.TFT_ICompanionDTO_v1;
+    companion: Interfaces.ITFT_CompanionDTO_v1;
 
     /**
      * Gold left after participant was eliminated.
@@ -56,10 +56,10 @@ export interface IParticipantDTO_v1 {
     /**
      * A complete list of traits for the participant's active units.
      */
-    traits: Interfaces.TFT_ITraitDTO_v1[];
+    traits: Interfaces.ITFT_TraitDTO_v1[];
 
     /**
      * A list of active units for the participant.
      */
-    units: Interfaces.TFT_IUnitDTO_v1[];
+    units: Interfaces.ITFT_UnitDTO_v1[];
 }
