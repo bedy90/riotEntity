@@ -38,7 +38,8 @@
   },
   "include": [
     "src/**/*",
-    "readme.md"
+    "README.md",
+    "CHANGELOG.md"
   ],
   "exclude": [
     "node_modules",

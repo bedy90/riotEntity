@@ -19,9 +19,11 @@
     "eslintFix": "npx eslint . --fix",
     "== 2025 ==": "",
     "pubish_dry": "npm publish --dry-run",
+    "pubish_build_dry": "npm publish ./build --dry-run",
     "build:package": "node scripts/generate-prod-package.js",
     "build:tsc": "npx tsc",
     "build:tsc_rim": "rimraf ./build && tsc",
+    "build:full": "rimraf ./build && tsc && npm run build:package",
     "build:tsup_pack": "tsup --config tsup.config.ts",
     "generate:intIndex": "npx rimraf ./generate/interface && npx ts-node scripts/generate-entities.ts intIndex"
   },
@@ -31,7 +33,7 @@
     "readme.md"
   ],
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=22.0.0"
   },
   "repository": {
     "type": "git",
@@ -67,8 +69,5 @@
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.31.0",
     "undici": "^7.8.0"
-  },
-  "dependencies": {
-    "@bedy90/riotentity": "file:"
   }
 }
