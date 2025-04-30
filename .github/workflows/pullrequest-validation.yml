@@ -69,7 +69,7 @@ jobs:
       run: npm ci
       
     - name: Run build
-      run: npm run compile:npx
+      run: npm run build:tsc
       continue-on-error: false  # Arrête le workflow si le build échoue
 
   # -----------------------------------------
@@ -201,10 +201,6 @@ jobs:
        #      }).join('\n');
        #      return `${header}\n${body}\n${footer}`;
        #    }
-
-
-
-     
 
           # script: |
             # async function commentOnPullRequest(github) {

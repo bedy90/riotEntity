@@ -16,5 +16,5 @@ WORKDIR /app
 # COPY ../src/**/* ./src/
 
 # (Adapter si le point d'entrée diffère)
-# CMD ["npm", "run", "compile:npx"]
+# CMD ["npm", "run", "build:tsc"]
 CMD [ "bash" ]

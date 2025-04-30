@@ -21,7 +21,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [18.x]
+        node-version: [22.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
@@ -38,16 +38,16 @@ jobs:
         scope: '@bedy90'
         
     - name: Install Typescript
-      run: npm install typescript@5.3.3 -g
+      run: npm install typescript@5.8.3 -g
       
     - name: Install dependencies
       run: npm ci
 
     - name: Build
-      run: npm run compile:npx
+      run: npm run build:tsc
 
     - name: Generator prod package
-      run: npm run build:packageProd
+      run: npm run build:package
 
     - name: Publish on Github NPM package
         # ? n'était pas la

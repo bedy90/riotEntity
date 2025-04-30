@@ -12,4 +12,4 @@ services:
       - ../tsup.config.ts:/app/tsup.config.ts
     working_dir: /app
     tty: true
-    # command: ["npm", "run", "compile:npx"]
+    # command: ["npm", "run", "build:tsc"]
