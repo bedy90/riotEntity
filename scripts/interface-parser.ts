@@ -42,8 +42,8 @@ export class InterfaceParser {
                 }
             }
 
-            if (type == NamespaceIndexTypes.ENTITY) {
-                // Only true if NamespaceIndexTypes = ENTITY (CLASSES)
+            if (type == NamespaceIndexTypes.CLASSES) {
+                // TODO: Only true if NamespaceIndexTypes = ENTITY (CLASSES)
                 const classes: ClassDeclaration[] = sourceFile.getClasses(); 
 
                 if (classes && classes.length > 0) {

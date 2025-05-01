@@ -1,14 +1,13 @@
-import { Project, InterfaceDeclaration, PropertySignature, TypeAliasDeclaration, ClassDeclaration } from 'ts-morph';
-import * as glob from 'glob';
+import { Project, InterfaceDeclaration, PropertySignature } from 'ts-morph';
 import * as fs from 'fs-extra';
 import * as path from 'path';
 
 import './logger';
 import { logType } from './logger';
 
-import { InterfaceData, HeaderInfo } from './entities/interfaceData';
-import { NamespaceIndexTypes, ValidationTypes } from './common';
-import { GenerateIndex } from './generate-index';
+import { InterfaceData } from './entities/interfaceData';
+import { NamespaceIndexTypes, ValidationTypes, CommonUtils } from './common';
+import { GenerateIndex } from './index/generate-index';
 import { InterfaceParser } from './interface-parser';
 
 
@@ -49,224 +48,22 @@ export class Generator {
     return properties;
   }
 
-  /**
-   * Fonction pour extraire les informations JSDoc d'une interface
-   * @param iface
-   * @returns
-   */
-  #extractJsDocInfoByDeclaration(iface: InterfaceDeclaration | TypeAliasDeclaration | ClassDeclaration): HeaderInfo {
-    const jsDocTags = iface.getJsDocs().flatMap(doc => doc.getTags());
-    const namespaceTag = jsDocTags.find(tag => tag.getTagName() === 'namespace');
-    const versionTag = jsDocTags.find(tag => tag.getTagName() === 'version');
-    const nameTag = jsDocTags.find(tag => tag.getTagName() === 'name');
-    const NotImplementedTag = jsDocTags.find(tag => tag.getTagName() === 'NotImplemented');
-    const prefixTag = jsDocTags.find(tag => tag.getTagName() === 'prefix');
-
-    const namespace = namespaceTag?.getComment() || null;
-    const version = versionTag?.getComment() || null;
-    const name = nameTag?.getComment() || null;
-    const NotImplemented = (NotImplementedTag != null ? true : false);
-    const prefix = prefixTag?.getComment() || null; // (prefixTag != null ? prefixTag : null);
-
-    return new HeaderInfo(namespace, version, name, prefix, NotImplemented);
-  }
-
-  /**
-   * Generate JDOC header for classContent
-   */
-  #generateClassHeader(className: string, namespace: string, version: string, name: string, prefix: string): string {
-    let header = '';
-
-    header += '\n/**\n';
-    header += ` * Class ${className}\n`;
-    header += ' *\n';
-    header += ` * @namespace ${namespace}\n`;
-    header += ` * @version ${version}\n`;
-    header += ` * @name ${name}\n`;
-    header += ` * @prefix ${prefix}\n`;
-    header += ' */';
-
-    return header;
-  }
-
-  #writeFile(basePath: string, orignalFilePath: string, fileName: string, fileContent: string): void {
-    // Déterminer le chemin de sortie
-    // basePath = "src/interface"
-    // path.relative("src/interface", orignalFilePath);
-
-    const relativePath = path.relative(basePath, orignalFilePath);
-    const outputPath = path.join('generate', 'entity', relativePath);
-    const outputDir = path.dirname(outputPath);
-    const outputFile = path.join(outputDir, `${fileName}.ts`);
-
-    // Créer le répertoire de sortie si nécessaire
-    fs.ensureDirSync(outputDir);
-
-    // Écrire le fichier de classe
-    fs.writeFileSync(outputFile, fileContent);
-  }
-
-  /**
-   * Grouping interface by namespace
-   * @param namespace 
-   * @param version 
-   * @param interfaceName 
-   */
-  #addNamespace(namespace: string, version: string, interfaceName: string): void {
-    // Ajouter l'interface à la structure namespaceVersions, si elle n'existe pas
-    if (!this.namespaceVersions[namespace]) {
-      this.namespaceVersions[namespace] = {};
-    }
-
-    // Ajouter la version dans le namespaceVersions, si elle n'existe pas
-    if (!this.namespaceVersions[namespace][version]) {
-      this.namespaceVersions[namespace][version] = [];
-    }
-
-    // Ajouter l'interface
-    this.namespaceVersions[namespace][version].push(interfaceName);
-  }
-
-  #addEntities(namespace: string, version: string, data: InterfaceData): void {
-    if (data) {
-      if (!this.entitiesData[namespace]) {
-        this.entitiesData[namespace] = {};
-      }
-
-      // Ajouter la version dans le namespaceVersions, si elle n'existe pas
-      if (!this.entitiesData[namespace][version]) {
-        this.entitiesData[namespace][version] = []; // data;
-      }
-
-      this.entitiesData[namespace][version].push(data);
-    }
-  }
-
   // ****************************************
   //  Process function
   // ****************************************
   /**
-   * Parcourir les interfaces pour générer les classes
-   * @param interfaces
-   * @param filePath
-   */
-  #readAllInterface(interfaces: InterfaceDeclaration[], filePath: string, generateFile = false, includeGlobal = false): void {
-    interfaces.forEach((iface: InterfaceDeclaration) => {
-      const interfaceName = iface.getName();
-      const baseName = iface?.getSourceFile()?.getBaseName() || null;
-
-      if (!baseName || baseName.toLowerCase().includes('index.ts') || (!includeGlobal && baseName.toLowerCase().includes('_global'))) {
-        return;
-      }
-
-      if (interfaceName.startsWith('I')) {
-        const className = interfaceName.substring(1);
-        const newFileName = className.substring(0, className.lastIndexOf("_"));
-
-        // Extraire les informations JSDoc
-        // TODO : Move validation on extractJsDocInfoByDeclaration and THROW Exception (required Try..catch)
-        const jsDocInfo: HeaderInfo = this.#extractJsDocInfoByDeclaration(iface);
-
-        if (!jsDocInfo.isValid()) {
-          console.warn(`Interface ${interfaceName} can't be transformed into a class, as its JDOC is not declared.`);
-          return;
-        }
-
-        if (jsDocInfo.notImplemented) {
-          console.warn(`Interface ${interfaceName} isn't implemented.`);
-          return;
-        }
-
-        // Prepare interfaceData
-        const data: InterfaceData = new InterfaceData(filePath, interfaceName, className, iface);
-        // data.addHeader(jsDocInfo.namespace, jsDocInfo.version, jsDocInfo.name, jsDocInfo.prefix);
-        data.addHeader(jsDocInfo);
-        data.addJDOC(this.#generateClassHeader(className, jsDocInfo.namespace, jsDocInfo.version, jsDocInfo.name, jsDocInfo.prefix));
-        this.#addEntities(jsDocInfo.namespace, jsDocInfo.version, data);
-
-        if (generateFile) {
-          this.#writeFile('src/interface', filePath, newFileName, data.classContent());
-
-          console.log(logType.CLASS, `Classes ${className} has been generated from the interface.`);
-        }
-      } // End if startsWith("I")
-    });
-  }
-
-  /**
-   * Parcours les « types » pour générer les classes
-   * @param typeAliases
-   * @param filePath
-   */
-  #readAllTypeAliases(typeAliases: TypeAliasDeclaration[], filePath: string, generateFile = false, includeGlobal = false): void {
-    typeAliases.forEach((typeAlias: TypeAliasDeclaration) => {
-      const typeName = typeAlias.getName();
-      const globalType = typeAlias.getTypeNode()?.getText();
-
-      if ((globalType && globalType.length > 0) && (typeName.startsWith('I') && (!includeGlobal && typeAlias.getTypeNode()?.getText()?.includes('_Global')))) {
-        const className = typeName.substring(1);
-        const newFileName = className.substring(0, className.lastIndexOf("_"));
-
-        // Extraire les informations JSDoc
-        // const { namespace, version, name, prefix, NotImplemented } = this.#extractJsDocInfoByDeclaration(typeAlias);
-        const jsDocInfo: HeaderInfo = this.#extractJsDocInfoByDeclaration(typeAlias);
-
-        // if (!namespace || !version || !name) {
-        //   console.warn(`Types ${typeName} can't be transformed into a class, as its JDOC is not declared.`);
-        //   return;
-        // }
-        if (!jsDocInfo.isValid()) {
-          console.warn(`Types ${typeName} can't be transformed into a class, as its JDOC is not declared.`);
-          return;
-        }
-        if (jsDocInfo.notImplemented) {
-          console.warn(`Types ${typeName} isn't implemented.`);
-          return;
-        }
-
-        // Préparation du namespace (index)
-        this.#addNamespace(jsDocInfo.namespace, jsDocInfo.version, typeName);
-
-        const globalInterface: InterfaceDeclaration = this.project.getSourceFileOrThrow(path.join('src/interface/', '_Global/' + globalType + '.ts')).getInterfaceOrThrow(globalType.replace(/<.*>$/, ''));
-        // const properties = this.#getAllPropertiesByInterfaceDeclaration(globalInterface);
-
-        // Prepare interfaceData
-        const data: InterfaceData = new InterfaceData(filePath, typeName, className, globalInterface);
-        // data.addHeader(jsDocInfo.namespace, jsDocInfo.version, jsDocInfo.name, jsDocInfo.prefix);
-        data.addHeader(jsDocInfo);
-        data.addJDOC(this.#generateClassHeader(className, jsDocInfo.namespace, jsDocInfo.version, jsDocInfo.name, jsDocInfo.prefix));
-        this.#addEntities(jsDocInfo.namespace, jsDocInfo.version, data);
-
-
-        if (generateFile) {
-          this.#writeFile('src/interface', filePath, newFileName, data.classContent());
-
-          console.log(logType.CLASS, `Classes ${className} has been generated from the type.`);
-        }
-      }
-    });
-  }
-
-  /**
    * Generate classes from interfaces/types
    */
-  processInterfaceToClass() {
-    // Read all interface files
-    const interfaceFiles = glob.sync('src/interface/**/*.ts');
+  processInterfaceToClass(filesFolderPath = 'src/interface/**/*.ts', type: NamespaceIndexTypes = NamespaceIndexTypes.INTERFACE) {
+    const parser : InterfaceParser = new InterfaceParser(this.project, this.entitiesData);
+    parser.ParseFiles(filesFolderPath, type);
 
-    // Process
-    interfaceFiles.forEach((filePath: string) => {
-      const sourceFile = this.project.addSourceFileAtPath(filePath);
-      const interfaces: InterfaceDeclaration[] = sourceFile.getInterfaces();
-      const typeAliases: TypeAliasDeclaration[] = sourceFile.getTypeAliases();
+    parser.interfaces.forEach((iface: InterfaceData) => {
+      const newFileName = iface.className.substring(0, iface.className.lastIndexOf("_"));
 
-      if (interfaces && interfaces.length > 0) {
-        this.#readAllInterface(interfaces, filePath, true);
-      }
+      CommonUtils.writeFile('src/interface', iface.filePath, newFileName, iface.classContent());
 
-      if (typeAliases && typeAliases.length > 0) {
-        this.#readAllTypeAliases(typeAliases, filePath, true);
-      }
+      console.log(logType.CLASS, `Classes ${iface.className} has been generated from the interface.`);
     });
   }
 
@@ -284,44 +81,44 @@ export class Generator {
   }
 
   // Not used
-  test(filesFolderPath = 'src/interface/**/*.ts', type: NamespaceIndexTypes = NamespaceIndexTypes.INTERFACE) {
-    // Read all interface files
-    const sourceFiles = glob.sync(filesFolderPath);
-    this.namespaceVersions = {};
+  // test(filesFolderPath = 'src/interface/**/*.ts', type: NamespaceIndexTypes = NamespaceIndexTypes.INTERFACE) {
+  //   // Read all interface files
+  //   const sourceFiles = glob.sync(filesFolderPath);
+  //   this.namespaceVersions = {};
 
-    // Process
-    sourceFiles.forEach((filePath: string) => {
-      const sourceFile = this.project.addSourceFileAtPath(filePath);
-      const interfaces: InterfaceDeclaration[] = sourceFile.getInterfaces();
-      const typeAliases: TypeAliasDeclaration[] = sourceFile.getTypeAliases();
-      const classes: ClassDeclaration[] = sourceFile.getClasses();
+  //   // Process
+  //   sourceFiles.forEach((filePath: string) => {
+  //     const sourceFile = this.project.addSourceFileAtPath(filePath);
+  //     const interfaces: InterfaceDeclaration[] = sourceFile.getInterfaces();
+  //     const typeAliases: TypeAliasDeclaration[] = sourceFile.getTypeAliases();
+  //     const classes: ClassDeclaration[] = sourceFile.getClasses();
 
-      if (type == NamespaceIndexTypes.INTERFACE) {
-        if (interfaces && interfaces.length > 0) {
-          this.#readAllInterface(interfaces, filePath, false, true);
-        }
+  //     if (type == NamespaceIndexTypes.INTERFACE) {
+  //       if (interfaces && interfaces.length > 0) {
+  //         this.#readAllInterface(interfaces, filePath, false, true);
+  //       }
 
-        if (typeAliases && typeAliases.length > 0) {
-          this.#readAllTypeAliases(typeAliases, filePath, false, true);
-        }
-      }
+  //       if (typeAliases && typeAliases.length > 0) {
+  //         this.#readAllTypeAliases(typeAliases, filePath, false, true);
+  //       }
+  //     }
 
-    });
+  //   });
 
-    // TODO: Load GLOBAL
-    Object.keys(this.entitiesData).forEach(namespace => {
-      const versions = this.entitiesData[namespace];
+  //   // TODO: Load GLOBAL
+  //   Object.keys(this.entitiesData).forEach(namespace => {
+  //     const versions = this.entitiesData[namespace];
 
-      Object.keys(versions).forEach(version => {
-        const interfaces: InterfaceData[] = versions[version];
+  //     Object.keys(versions).forEach(version => {
+  //       const interfaces: InterfaceData[] = versions[version];
 
-        interfaces.forEach((data: InterfaceData) => {
-          // const data: InterfaceData = versions[version];
-          this.generateValidationFunction(data);
-        });
-      });
-    });
-  }
+  //       interfaces.forEach((data: InterfaceData) => {
+  //         // const data: InterfaceData = versions[version];
+  //         this.generateValidationFunction(data);
+  //       });
+  //     });
+  //   });
+  // }
 
   // TODO: Incomplete
   generateValidationFunction(data: InterfaceData): string {
@@ -676,30 +473,35 @@ switch (firstArgs) {
   case '1':
   case 'entity':
   case 'class':
-    console.log(logType.CLASS, 'Generate entity classes from interfaces');
-    mainGenerator.processInterfaceToClass();
-    console.log(logType.CLASS, 'Generation of entity classes from interfaces is now complete');
-
+    console.log(logType.CLASS, 'Generation of entity classes from main interfaces.');
+    console.warn('The process has been deactivated, as it is now obsolete.');
+    // mainGenerator.processInterfaceToClass();
+    // console.log(logType.CLASS, 'Generation of entity classes from interfaces is now complete');
     break;
 
   case '2':
   case 'interfaceIndex':
   case 'intIndex':
-    console.log(logType.INDEX, 'Generating index interfaces from main interfaces');
+    console.log(logType.INDEX, 'Generation of interface indexes from main interfaces.');
     mainGenerator.processIndexNamespace('src/interface/**/*.ts', NamespaceIndexTypes.INTERFACE);
     break;
 
   case '3':
   case 'classIndex':
   case 'clsIndex':
-    console.log(logType.INDEX, 'Generating index class from main class');
-    mainGenerator.processIndexNamespace('src/entity/**/*.ts', NamespaceIndexTypes.ENTITY);
+    console.log(logType.INDEX, 'Generation of interface indexes from main classes.');
+    console.warn('The process has been deactivated, as it is now obsolete.');
+    // TODO: Si on le réactive un jour, il faudrait le réviser. Suite au changements il est possible que la génération
+    //      pour le type : `NamespaceIndexTypes.CLASSES` ne soit plus fonctionnel.
+    
+    // mainGenerator.processIndexNamespace('src/entity/**/*.ts', NamespaceIndexTypes.CLASSES);
     break;
 
   case '4':
   case 'validator':
-    console.log(logType.VALIDATOR, 'Generating validation classes from interfaces');
-    mainGenerator.test('src/interface/**/*.ts', NamespaceIndexTypes.INTERFACE);
+    console.log(logType.VALIDATOR, 'Generation of validations classes from main interfaces.');
+    console.warn(logType.CLASS, 'The process has been deactivated.');
+    // mainGenerator.test('src/interface/**/*.ts', NamespaceIndexTypes.INTERFACE);
     break;
 
   default:

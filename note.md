@@ -20,4 +20,20 @@
 - Voir si possible de générer les validateur
 
 # Obtenir arborescensces
-tree /f > arb.txt
+`tree /f > arb.txt`
+
+# Valider le filePath git (case-senstive)
+`git ls-files`
+
+#  Rechercher les fichiers qui diffères aux niveau du Case-sentives
+`git ls-files | sort /I | findstr /I /R /C:"\(.*\)\n\1"`
+
+# consulter la config git
+`git config core.ignorecase`
+Windows : true
+
+## Changer la valeur
+`git config core.ignorecase false`
+
+# Corriger les conflits
+`git mv --cached NomFichier NomFICHIER`

@@ -1,13 +1,10 @@
 
-import * as glob from 'glob';
 import * as path from 'path';
 import * as fs from 'fs-extra';
-import { Project, InterfaceDeclaration, TypeAliasDeclaration, ClassDeclaration } from 'ts-morph';
 
-
-import './logger';
-import { NamespaceIndexTypes } from './common';
-import { InterfaceData } from './entities/interfaceData';
+import '../logger';
+import { NamespaceIndexTypes } from '../common';
+import { InterfaceData } from '../entities/interfaceData';
 
 export class GenerateIndex {
 
@@ -52,7 +49,7 @@ export class GenerateIndex {
                         alias = interfaceName; // We don't have a alias, we use interfaceName
                     }
 
-                    // TODO : Revoir pour la gestion du multiversio. Type Union => V1 | V2 | ...
+                    // TODO : Revoir pour la gestion du multiversion. Type Union => V1 | V2 | ...
                     let key: string = intData.getClassesNameWithoutVersion();
                     let prefixedKey: string = `I${keyPrefix}${key}`;
                     arrExportType.push(`\nexport type ${prefixedKey} = ${alias};`);
@@ -94,7 +91,7 @@ export class GenerateIndex {
                 if (type == NamespaceIndexTypes.INTERFACE) {
                     subFolder = 'interface';
                 }
-                else if (type == NamespaceIndexTypes.ENTITY) {
+                else if (type == NamespaceIndexTypes.CLASSES) {
                     subFolder = 'entity';
                 }
 
@@ -112,7 +109,7 @@ export class GenerateIndex {
                 if (type == NamespaceIndexTypes.INTERFACE) {
                     console.log(`[SUCCESS] Interface namespace Index '${outputFile}' has been generated`);
                 }
-                else if (type == NamespaceIndexTypes.ENTITY) {
+                else if (type == NamespaceIndexTypes.CLASSES) {
                     console.log(`[SUCCESS] Classes namespace Index '${outputFile}' has been generated`);
                 }
             });

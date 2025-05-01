@@ -9,7 +9,7 @@ export enum ImportTypes {
   
   export enum NamespaceIndexTypes {
     INTERFACE = 0,
-    ENTITY = 1,
+    CLASSES = 1,
     VALIDATOR = 2
   }
   
