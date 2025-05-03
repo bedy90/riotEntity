@@ -12,7 +12,8 @@ export enum logType {
     CLASS,
     INTERFACE,
     INDEX,
-    VALIDATOR
+    VALIDATOR,
+    TEST
 }
 
 const showPrefix = (process.env.showPrefix || true);
@@ -34,6 +35,7 @@ const logPrefix = {
     interface: fontColor.chalkGreen('[INTERFACE]'.padEnd(12, ' ')),
     index: chalk.magenta('[INDEX]'.padEnd(12, ' ')),
     validator: chalk.magenta('[VALIDATOR]'.padEnd(12, ' ')),
+    test: chalk.magenta('[TEST]'.padEnd(8, ' ')),
 };
 
 const getCurrentDateFormat = () : string => {
@@ -91,6 +93,10 @@ const formatOrignalString = (message: string, params: any[]) : string => {
             newMessage = util.format(newMessage, params[index]);
         }
     }
+    newMessage = newMessage.replace(/\btrue\b/gi, chalk.green("true"))
+                            .replace(/\bfalse\b/gi, chalk.red("false"));
+
+
     return newMessage;
 };
 
@@ -167,6 +173,10 @@ console.log = function (type: logType, message?: any, ...params: any[]) {
         case logType.VALIDATOR: {
             exLog.apply(this, [prefixMessage(logPrefix.validator, formatOrignalString(message, params))]);
             break;
+        }
+
+        case logType.TEST: {
+            exLog.apply(this, [prefixMessage(logPrefix.test, formatOrignalString(message, params))]);
         }
 
         default: {

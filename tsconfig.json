@@ -20,7 +20,11 @@
     /* Interop Constraints */
     "esModuleInterop": true, /* Emit additional JavaScript to ease support for importing CommonJS modules. This enables 'allowSyntheticDefaultImports' for type compatibility. */
     "forceConsistentCasingInFileNames": true, /* Ensure that casing is correct in imports. */
-    
+   
+    /* Requirement for Jest */
+    "isolatedModules": true, 
+    "allowSyntheticDefaultImports": true,
+
     /* Type Checking */
     "strict": true, /* Enable all strict type-checking options. */
     "noImplicitAny": true, /* Enable error reporting for expressions and declarations with an implied 'any' type. */
@@ -40,10 +44,11 @@
     "src/**/*",
     "README.md",
     "CHANGELOG.md"
-  ],
+, "test"  ],
   "exclude": [
     "node_modules",
     "build",
+    "test/**/*",
     "docker",
     "generate/**/*",
     "./scripts",
