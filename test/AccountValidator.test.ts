@@ -4,20 +4,8 @@ import { Interfaces, Validator } from '../src/index';
 import '../scripts/logger';
 import { logType } from '../scripts/logger';
 
-// const intByUnionType: Interfaces.IAccountDTO = {
-//     gameName: 'gameName',
-//     puuid: 'pDxMtQ0DTUZAxSu3WZz9itOTPphTc-9b9uTIrQXsQGFXxhgnaIIhyfY9NEaoZZGdKD-qgYbMPK42jg',
-//     tagLine: 'tag',
-// };
+describe('Has a valid AccountDTO - Validate using validator', () => {
 
-// const intBySpecificVersion: Interfaces.IAccountDTO_v1 = {
-//     gameName: 'gameName',
-//     puuid: 'pDxMtQ0DTUZAxSu3WZz9itOTPphTc-9b9uTIrQXsQGFXxhgnaIIhyfY9NEaoZZGdKD-qgYbMPK42jg',
-//     tagLine: 'ver1',
-// };
-
-
-describe('Account validator', () => {
     test('Using JSON object is valid', () => {
         const jsonObject = {
             gameName: 'gameName',
@@ -25,12 +13,8 @@ describe('Account validator', () => {
             tagLine: 'tag',
         };
 
-        let result : any = Validator.AccountValidator.validate(jsonObject);
-        // console.log(logType.TEST, `has AccountDTO : ${result.success ? result.success : (result.success + ' => ' + result.error)}`);
-        if (result && !result.success) {
-            console.error(logType.TEST, result.error);
-        }
-        
+        let result: any = Validator.AccountValidator.validate(jsonObject);
+
         expect(result).not.toBeNull;
         expect(result.success).toBe(true);
 
@@ -43,15 +27,10 @@ describe('Account validator', () => {
             tagLine: 'tag',
         };
 
-        let result : any = Validator.AccountValidator.validate(intByUnionType);
-        // console.log(logType.TEST, `has AccountDTO : ${result.success ? result.success : (result.success + ' => ' + result.error)}`);
-        if (result && !result.success) {
-            console.error(logType.TEST, result.error);
-        }
-        
+        let result: any = Validator.AccountValidator.validate(intByUnionType);
+
         expect(result).not.toBeNull;
         expect(result.success).toBe(true);
-
     });
 
     test('Using interface version, is valid', () => {
@@ -61,15 +40,61 @@ describe('Account validator', () => {
             tagLine: 'tag',
         };
 
-        let result : any = Validator.AccountValidator.validate(intBySpecificVersion);
-        // console.log(logType.TEST, `has AccountDTO : ${result.success ? result.success : (result.success + ' => ' + result.error)}`);
-        if (result && !result.success) {
-            console.error(logType.TEST, result.error);
-        }
-        
+        let result: any = Validator.AccountValidator.validate(intBySpecificVersion);
+
         expect(result).not.toBeNull;
         expect(result.success).toBe(true);
     });
+
+});
+
+describe('Has a invalid AccountDTO - Validate using validator', () => {
+
+    test('Using a another interface, invalid data', () => {
+        const summoner: Interfaces.ISummonerDTO_v4 = {
+            accountId: 'abcde',
+            profileIconId: 1,
+            revisionDate: 1,
+            id: 'abc',
+            summonerLevel: 55,
+            puuid: 'pDxMtQ0DTUZAxSu3WZz9itOTPphTc-9b9uTIrQXsQGFXxhgnaIIhyfY9NEaoZZGdKD-qgYbMPK42jg'
+        };
+
+        let result = Validator.AccountValidator.validate(summoner);
+        // console.dir(result?.error?.errors)
+        // console.log(logType.TEST, `\n\n\n\t Error message : ${result.success ? '' : result.error.message}`);
+
+        expect(result).not.toBeNull;
+        expect(result.success).toBe(false);
+        expect(result.error).not.toBeNull;
+    });
+
+    test('Using a another JSON Object struct, invalid data', () => {
+        const jsonObject = {
+            id: 'abc',
+            summonerLevel: 55,
+        };
+
+        let result = Validator.AccountValidator.validate(jsonObject);
+
+        expect(result).not.toBeNull;
+        expect(result.success).toBe(false);
+        expect(result.error).not.toBeNull;
+    });
+
+    test('Using a incomplete JSON Object, invalid data', () => {
+        const jsonObject = {
+            gameName: 'gameName',
+            puuid: 'pDxMtQ0DTUZAxSu3WZz9itOTPphTc-9b9uTIrQXsQGFXxhgnaIIhyfY9NEaoZZGdKD-qgYbMPK42jg'
+        };
+
+        let result = Validator.AccountValidator.validate(jsonObject);
+
+        expect(result).not.toBeNull;
+        expect(result.success).toBe(false);
+        expect(result.error).not.toBeNull;
+    });
+
 
     test('Using union type, invalid tagLine', () => {
         const shortTagLink: Interfaces.IAccountDTO = {
@@ -79,12 +104,13 @@ describe('Account validator', () => {
         };
 
         let result = Validator.AccountValidator.validate(shortTagLink);
+
         expect(result).not.toBeNull;
         expect(result.success).toBe(false);
         expect(result.error).not.toBeNull;
         expect(result.error?.message).toContain('Must be 3 or more characters long');
 
-        
+
         const tooLongTagLine: Interfaces.IAccountDTO = {
             gameName: 'gameName',
             puuid: 'pDxMtQ0DTUZAxSu3WZz9itOTPphTc-9b9uTIrQXsQGFXxhgnaIIhyfY9NEaoZZGdKD-qgYbMPK42jg',
@@ -92,6 +118,7 @@ describe('Account validator', () => {
         };
 
         result = Validator.AccountValidator.validate(tooLongTagLine);
+
         expect(result).toBeDefined();
         expect(result.success).toBe(false);
         expect(result.error).not.toBeNull;
@@ -106,12 +133,12 @@ describe('Account validator', () => {
         };
 
         let result = Validator.AccountValidator.validate(shortGameName);
+
         expect(result).not.toBeNull;
         expect(result.success).toBe(false);
         expect(result.error).not.toBeNull;
         expect(result.error?.message).toContain('Must be 3 or more characters long');
 
-        
         const tooLongGameName: Interfaces.IAccountDTO = {
             gameName: 'ThisIsAnInvalidGameName',
             puuid: 'pDxMtQ0DTUZAxSu3WZz9itOTPphTc-9b9uTIrQXsQGFXxhgnaIIhyfY9NEaoZZGdKD-qgYbMPK42jg',
@@ -119,6 +146,7 @@ describe('Account validator', () => {
         };
 
         result = Validator.AccountValidator.validate(tooLongGameName);
+
         expect(result).toBeDefined();
         expect(result.success).toBe(false);
         expect(result.error).not.toBeNull;
@@ -133,12 +161,13 @@ describe('Account validator', () => {
         };
 
         let result = Validator.AccountValidator.validate(shortPuuid);
+
         expect(result).not.toBeNull;
         expect(result.success).toBe(false);
         expect(result.error).not.toBeNull;
         expect(result.error?.message).toContain('Must be 78 characters long');
 
-        
+
         const tooLongPuid: Interfaces.IAccountDTO = {
             gameName: 'ThisIsAnInvalidGameName',
             puuid: 'pDxMtQ0DTUZAxSu3WZz9itOTPphTc-9b9uTIrQXsQGFXxhgnaIIhyfY9NEaoZZGdKD-qgYbMPK42jgg',
@@ -146,6 +175,7 @@ describe('Account validator', () => {
         };
 
         result = Validator.AccountValidator.validate(tooLongPuid);
+
         expect(result).toBeDefined();
         expect(result.success).toBe(false);
         expect(result.error).not.toBeNull;

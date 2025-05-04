@@ -177,6 +177,7 @@ console.log = function (type: logType, message?: any, ...params: any[]) {
 
         case logType.TEST: {
             exLog.apply(this, [prefixMessage(logPrefix.test, formatOrignalString(message, params))]);
+            break;
         }
 
         default: {
