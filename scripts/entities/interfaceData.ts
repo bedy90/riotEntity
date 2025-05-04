@@ -1,5 +1,5 @@
 import { InterfaceDeclaration, PropertySignature, TypeAliasDeclaration } from 'ts-morph';
-import { ImportTypes } from '../common';
+import { ImportTypes, NamespaceIndexTypes } from '../common';
 import path from 'path';
 
 export class HeaderInfo {
@@ -35,32 +35,33 @@ export class InterfaceData {
         public originalName: string,
         public className: string,
         public iface: InterfaceDeclaration | null = null,
-        public typeAlias: TypeAliasDeclaration | null = null) {
+        public typeAlias: TypeAliasDeclaration | null = null,
+        type: NamespaceIndexTypes) {
+
         this.headerInfo = null;
         this.properties = [];
         this.customTypes = new Set<string>();
         this.globalTypes = new Set<string>();
         this.imports = new Array<string>();
 
-        this.addImport('import { Interfaces } from \'@/riotentity\';');
+        if (type != NamespaceIndexTypes.VALIDATOR) {
+            this.addImport('import { Interfaces } from \'@/riotentity\';');
+        }
 
         if (iface) {
-            const properties = this.#getAllPropertiesByInterfaceDeclaration(iface);
+            const properties: PropertySignature[] = this.#getAllPropertiesByInterfaceDeclaration(iface);
             this.addProperties(properties);
         }
     }
-
-    // addHeader(namespace: string, version: number, name: string, prefix: string, notImplemented: boolean): void {
-    //     this.headerInfo = new HeaderInfo(namespace, version, name, prefix, notImplemented);
-    // }
 
     addHeader(header: HeaderInfo): void {
         this.headerInfo = header;
     }
 
     addProperties(properties: PropertySignature[]): void {
-        if (properties) {
+        if (properties && properties.length > 0) {
             this.properties = properties;
+            // TODO : Ne pas faire pour Validator ? Ou faire avec « Validator » au lieu de « Interface »
             this.addCustomAndGlobalTypes(this.properties);
         }
     }
@@ -109,6 +110,12 @@ export class InterfaceData {
     getClassesNameWithoutVersion(): string {
         return this.className.substring(0, this.className.lastIndexOf("_"));
     }
+    getValidatorClassesName(): string {
+        let className : string = this.className.substring(0, this.className.lastIndexOf("_"));
+        className = className.replace('DTO', '');
+
+        return `${className}Validator`;
+    }
 
     classContent(): string {
         if (!this.headerInfo) {
@@ -121,6 +128,33 @@ export class InterfaceData {
 
         classContent.push(this.#generateProperties());
         classContent.push('}\n'); // add /n for add a empty line EOF
+
+        // Utiliser \r\n pour les fins de ligne Windows CR LF
+        // return classContent.join(`\r\n`);
+
+        // Utiliser \n pour les fins de ligne Unix LF
+        return classContent.join('\n');
+    }
+
+    validatorContent(): string {
+        if (!this.headerInfo) {
+            throw new Error('HeaderInfo can\'t be null');
+        }
+
+        const classContent: string[] = [];
+        classContent.push(...this.imports);
+        classContent.push(this.jdocHeader); // Avoir un Header différent our le validateur
+        classContent.push(`export class ${this.getValidatorClassesName()} {\n`);
+
+        classContent.push(`\tstatic schema = z.object({});\n`);
+        // classContent.push(this.#generateProperties());
+
+        classContent.push(`\tstatic validate(obj: any): SafeParseReturnType<any, any> {`);
+            // classContent.push(`\t\treturn AccountValidator.schema.safeParse(obj);`);
+        classContent.push(`\t\treturn this.schema.safeParse(obj);`);
+        classContent.push(`\t}`);
+
+        classContent.push('\n}\n');
 
         // Utiliser \r\n pour les fins de ligne Windows CR LF
         // return classContent.join(`\r\n`);
@@ -145,6 +179,7 @@ export class InterfaceData {
                     break;
 
                 case ImportTypes.GLOBAL:
+                    // TODO: Now we can `import { Interfaces } from '@/riotentity'`; for Global/Shared
                     types.forEach(globalType => {
                         // TODO: Now we can `import { Interfaces } from '@/riotentity'`;
                         // And use : Interfaces.Shared.IGLOBALXYZ
@@ -153,7 +188,7 @@ export class InterfaceData {
 
                         // Interfaces.Shared.
 
-                        this.addImport(imports);
+                        // this.addImport(imports);
                     });
                     break;
             }
@@ -191,7 +226,7 @@ export class InterfaceData {
                             if (!globalTypes.has(type)) {
                                 globalTypes.add(type);
                             }
-                        } 
+                        }
                         /*else {
                             if (!customTypes.has(type)) {
                                 customTypes.add(type);
@@ -216,7 +251,6 @@ export class InterfaceData {
         this.addImportTypes(customTypes, ImportTypes.CUSTOM);
         this.addImportTypes(globalTypes, ImportTypes.GLOBAL);
     }
-
 
     /**
      * Generate all properties

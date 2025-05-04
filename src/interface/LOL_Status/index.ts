@@ -3,7 +3,7 @@ import { IStatusDTO_v4 } from './v4/IStatusDTO';
 import { IPlatformDataDTO_v4 } from './v4/IPlatformDataDTO';
 import { IContentDTO_v4 } from './v4/IContentDTO';
 
-export {
+export type {
 	IUpdateDTO_v4, IStatusDTO_v4, IPlatformDataDTO_v4,
 	IContentDTO_v4,
 };

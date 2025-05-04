@@ -1,6 +1,6 @@
 import { IChampionInfo_v3 } from './v3/IChampionInfo';
 
-export {
+export type {
 	IChampionInfo_v3,
 };
 

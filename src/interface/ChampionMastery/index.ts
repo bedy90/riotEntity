@@ -1,6 +1,6 @@
 import { IChampionMasteryDTO_v4 } from './v4/IChampionMasteryDTO';
 
-export {
+export type {
 	IChampionMasteryDTO_v4,
 };
 

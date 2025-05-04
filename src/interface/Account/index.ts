@@ -1,7 +1,7 @@
 import { IActiveShardDTO_v1 } from './v1/IActiveShardDTO';
 import { IAccountDTO_v1 } from './v1/IAccountDTO';
 
-export {
+export type {
 	IActiveShardDTO_v1, IAccountDTO_v1,
 };
 

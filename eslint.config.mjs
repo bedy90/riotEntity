@@ -48,9 +48,11 @@ export default defineConfig([globalIgnores([
         "@typescript-eslint/no-explicit-any": "off",
         "@typescript-eslint/no-non-null-assertion": "off",
         "@typescript-eslint/no-namespace": "off",
-        quotes: ["error", "single"],
+
+        quotes: ["warn", "single"],
         "no-var": "error",
         "prefer-const": "error",
+        
         semi: ["error", "always"],
         "no-trailing-spaces": ["error"],
 
@@ -60,6 +62,12 @@ export default defineConfig([globalIgnores([
 
         // "space-before-blocks": "error",
         indent: ["off", "tab"],
+        // "indent": ["warn", 4, {
+        //     "FunctionDeclaration": { "parameters": "first" },
+        //     "FunctionExpression": { "parameters": "first" },
+        //     "CallExpression": { "arguments": "first" }
+        // }],
+
         "comma-dangle": ["error", "always-multiline"],
         "comma-spacing": "error",
         "comma-style": "error",

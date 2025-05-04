@@ -3,7 +3,7 @@ import { ITournamentDTO_v1 as IClash_TournamentDTO_v1 } from './v1/ITournamentDT
 import { ITeamDTO_v1 as IClash_TeamDTO_v1 } from './v1/ITeamDTO';
 import { IPlayerDTO_v1 as IClash_PlayerDTO_v1 } from './v1/IPlayerDTO';
 
-export {
+export type {
 	IClash_TournamentPhaseDTO_v1, IClash_TournamentDTO_v1, IClash_TeamDTO_v1,
 	IClash_PlayerDTO_v1,
 };

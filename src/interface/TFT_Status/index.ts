@@ -3,7 +3,7 @@ import { IStatusDTO_v1 as ITFT_StatusDTO_v1 } from './v1/IStatusDTO';
 import { IPlatformDataDTO_v1 as ITFT_PlatformDataDTO_v1 } from './v1/IPlatformDataDTO';
 import { IContentDTO_v1 as ITFT_ContentDTO_v1 } from './v1/IContentDTO';
 
-export {
+export type {
 	ITFT_UpdateDTO_v1, ITFT_StatusDTO_v1, ITFT_PlatformDataDTO_v1,
 	ITFT_ContentDTO_v1,
 };

@@ -10,7 +10,7 @@
     "test": "npx jest --coverage",
     "== Generator ==": "",
     "generate:interfaceIndex": "npx rimraf ./generate/interface && npx ts-node scripts/generate-entities.ts intIndex",
-    "generate:validator": "npx rimraf ./generate/validator && npx ts-node scripts/generate-entities.ts 4",
+    "generate:validator": "npx rimraf ./generate/validator && npx ts-node scripts/generate-entities.ts validator",
     "generate:all": "npm run generate:validator && npm run generate:interfaceIndex",
     "== DEV ==": "",
     "npm:refreshLock": "npm i --package-lock-only",

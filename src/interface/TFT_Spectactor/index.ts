@@ -8,7 +8,7 @@ import { ICurrentGameParticipant_v5 as ITFT_CurrentGameParticipant_v5 } from './
 import { ICurrentGameInfo_v5 as ITFT_CurrentGameInfo_v5 } from './v5/ICurrentGameInfo';
 import { IBannedChampion_v5 as ITFT_BannedChampion_v5 } from './v5/IBannedChampion';
 
-export {
+export type {
 	ITFT_Perks_v5, ITFT_Participant_v5, ITFT_Observer_v5,
 	ITFT_GameCustomizationObject_v5, ITFT_FeaturedGames_v5, ITFT_FeaturedGameInfo_v5,
 	ITFT_CurrentGameParticipant_v5, ITFT_CurrentGameInfo_v5, ITFT_BannedChampion_v5,

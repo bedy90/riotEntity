@@ -8,7 +8,7 @@ import { ICurrentGameParticipant_v4 } from './v4/ICurrentGameParticipant';
 import { ICurrentGameInfo_v4 } from './v4/ICurrentGameInfo';
 import { IBannedChampion_v4 } from './v4/IBannedChampion';
 
-export {
+export type {
 	IPerks_v4, IParticipant_v4, IObserver_v4,
 	IGameCustomizationObject_v4, IFeaturedGames_v4, IFeaturedGameInfo_v4,
 	ICurrentGameParticipant_v4, ICurrentGameInfo_v4, IBannedChampion_v4,

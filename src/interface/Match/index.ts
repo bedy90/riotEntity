@@ -11,7 +11,7 @@ import { IMatchDTO_v5 } from './v5/IMatchDTO';
 import { IInfoDTO_v5 } from './v5/IInfoDTO';
 import { IBanDTO_v5 } from './v5/IBanDTO';
 
-export {
+export type {
 	ITeamDTO_v5, IPerkStyleSelectionDTO_v5, IPerkStyleDTO_v5,
 	IPerkStatsDTO_v5, IPerksDTO_v5, IParticipantDTO_v5,
 	IObjectivesDTO_v5, IObjectiveDTO_v5, IMetadataDTO_v5,

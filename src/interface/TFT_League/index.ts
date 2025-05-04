@@ -3,7 +3,7 @@ import { ILeagueListDTO_v1 as ITFT_LeagueListDTO_v1 } from './v1/ILeagueListDTO'
 import { ILeagueItemDTO_v1 as ITFT_LeagueItemDTO_v1 } from './v1/ILeagueItemDTO';
 import { ILeagueEntryDTO_v1 as ITFT_LeagueEntryDTO_v1 } from './v1/ILeagueEntryDTO';
 
-export {
+export type {
 	ITFT_MiniSeriesDTO_v1, ITFT_LeagueListDTO_v1, ITFT_LeagueItemDTO_v1,
 	ITFT_LeagueEntryDTO_v1,
 };

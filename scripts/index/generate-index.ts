@@ -60,7 +60,7 @@ export class GenerateIndex {
                 // Write Export and prepare Union
                 let nbItem: number = 0;
 
-                fileContent += `\nexport {\n`
+                fileContent += `\nexport type {\n`
                 Object.entries(arrImports).forEach(([key, value]) => {
                     // Add initial tab
                     if (nbItem == 0) {

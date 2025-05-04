@@ -1,6 +1,6 @@
 import { ISummonerDTO_v1 as ITFT_SummonerDTO_v1 } from './v1/ISummonerDTO';
 
-export {
+export type {
 	ITFT_SummonerDTO_v1,
 };
 

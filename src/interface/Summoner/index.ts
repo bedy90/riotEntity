@@ -1,6 +1,6 @@
 import { ISummonerDTO_v4 } from './v4/ISummonerDTO';
 
-export {
+export type {
 	ISummonerDTO_v4,
 };
 

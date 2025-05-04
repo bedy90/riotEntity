@@ -9,6 +9,7 @@ import { InterfaceData } from './entities/interfaceData';
 import { NamespaceIndexTypes, ValidationTypes, CommonUtils } from './common';
 import { GenerateIndex } from './index/generate-index';
 import { InterfaceParser } from './interface-parser';
+import { GenerateValidator } from './index/generate-validator';
 
 
 export class Generator {
@@ -21,31 +22,11 @@ export class Generator {
   entitiesData: Record<string, Record<string, InterfaceData[]>>;
 
   constructor() {
-    this.project = new Project();
+    this.project = new Project({
+      tsConfigFilePath: path.resolve('tsconfig.json'),
+    });
     this.namespaceVersions = {};
     this.entitiesData = {};
-  }
-
-  /**
-   * Fonction pour extraire les propriétés d'une interface, y compris celles héritées
-   * @param iface
-   * @returns
-   */
-  #getAllPropertiesByInterfaceDeclaration(iface: InterfaceDeclaration): PropertySignature[] {
-    const properties: PropertySignature[] = [];
-
-    // Ajouter les propriétés de l'interface actuelle
-    properties.push(...iface.getProperties());
-
-    // Parcourir les interfaces héritées
-    iface.getExtends().forEach(heritageClause => {
-      const extendedInterface = heritageClause.getType().getSymbol()?.getDeclarations()[0] as InterfaceDeclaration;
-      if (extendedInterface) {
-        properties.push(...this.#getAllPropertiesByInterfaceDeclaration(extendedInterface));
-      }
-    });
-
-    return properties;
   }
 
   // ****************************************
@@ -54,8 +35,9 @@ export class Generator {
   /**
    * Generate classes from interfaces/types
    */
-  processInterfaceToClass(filesFolderPath = 'src/interface/**/*.ts', type: NamespaceIndexTypes = NamespaceIndexTypes.INTERFACE) {
-    const parser : InterfaceParser = new InterfaceParser(this.project, this.entitiesData);
+  processInterfaceToClass(filesFolderPath: string[] = ['src/interface/**/*.ts', '!src/interface/**/index.ts'],
+    type: NamespaceIndexTypes = NamespaceIndexTypes.INTERFACE) {
+    const parser: InterfaceParser = new InterfaceParser(this.project, this.entitiesData);
     parser.ParseFiles(filesFolderPath, type);
 
     parser.interfaces.forEach((iface: InterfaceData) => {
@@ -72,12 +54,28 @@ export class Generator {
    * @param filesFolderPath 
    * @param type 
    */
-  processIndexNamespace(filesFolderPath = 'src/interface/**/*.ts', type: NamespaceIndexTypes = NamespaceIndexTypes.INTERFACE) {
-    const parser : InterfaceParser = new InterfaceParser(this.project, this.entitiesData);
+  processIndexNamespace(filesFolderPath: string[] = ['src/interface/**/*.ts', '!src/interface/**/index.ts'],
+    type: NamespaceIndexTypes = NamespaceIndexTypes.INTERFACE) {
+    const parser: InterfaceParser = new InterfaceParser(this.project, this.entitiesData);
     parser.ParseFiles(filesFolderPath, type);
 
-    let generator : GenerateIndex = new GenerateIndex(this.entitiesData);
+    let generator: GenerateIndex = new GenerateIndex(this.entitiesData);
     generator.processIndexNamespace(type);
+  }
+
+  /**
+   * Generate Validator files from interface
+   * @param filesFolderPath 
+   * @param type 
+   */
+  processValidator(filesFolderPath: string[] = ['src/interface/**/*.ts', '!src/interface/**/index.ts'],
+                   type: NamespaceIndexTypes = NamespaceIndexTypes.VALIDATOR) {
+
+    const parser: InterfaceParser = new InterfaceParser(this.project, this.entitiesData);
+    parser.ParseFiles(filesFolderPath, type, true);
+
+    let generator: GenerateValidator = new GenerateValidator(this.entitiesData);
+    generator.processValidatorFiles(NamespaceIndexTypes.VALIDATOR);
   }
 
   // Not used
@@ -231,7 +229,7 @@ export class Generator {
               });
               // TODO: Comment obtenir la route ?
 
-              
+
             } else if (propertyType.toLowerCase().includes('interfaces.')) {
               // Ex : Interfaces.TFT_Match.v1.ICompanionDTO
               // Ex : Validator.TFT_Match.v1.isICompanionDTO(accEntity)
@@ -483,7 +481,7 @@ switch (firstArgs) {
   case 'interfaceIndex':
   case 'intIndex':
     console.log(logType.INDEX, 'Generation of interface indexes from main interfaces.');
-    mainGenerator.processIndexNamespace('src/interface/**/*.ts', NamespaceIndexTypes.INTERFACE);
+    mainGenerator.processIndexNamespace(['src/interface/**/*.ts', '!src/interface/**/index.ts'], NamespaceIndexTypes.INTERFACE);
     break;
 
   case '3':
@@ -493,15 +491,15 @@ switch (firstArgs) {
     console.warn('The process has been deactivated, as it is now obsolete.');
     // TODO: Si on le réactive un jour, il faudrait le réviser. Suite au changements il est possible que la génération
     //      pour le type : `NamespaceIndexTypes.CLASSES` ne soit plus fonctionnel.
-    
+
     // mainGenerator.processIndexNamespace('src/entity/**/*.ts', NamespaceIndexTypes.CLASSES);
     break;
 
   case '4':
   case 'validator':
     console.log(logType.VALIDATOR, 'Generation of validations classes from main interfaces.');
-    console.warn(logType.CLASS, 'The process has been deactivated.');
-    // mainGenerator.test('src/interface/**/*.ts', NamespaceIndexTypes.INTERFACE);
+    // console.warn(logType.CLASS, 'The process has been deactivated.');
+    mainGenerator.processValidator(['src/interface/**/*.ts', '!src/interface/**/index.ts'], NamespaceIndexTypes.VALIDATOR);
     break;
 
   default:
