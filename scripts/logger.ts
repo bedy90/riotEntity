@@ -13,11 +13,13 @@ export enum logType {
     INTERFACE,
     INDEX,
     VALIDATOR,
+    SCHEMA,
     TEST
 }
 
-const showPrefix = (process.env.showPrefix || true);
-const showDateTime = (process.env.showDateTime || true);
+const showPrefix  : boolean = (process.env.showPrefix === undefined ? true : process.env.showPrefix.toLowerCase() === 'true');
+const showDateTime : boolean = (process.env.showDateTime === undefined ? true : process.env.showDateTime.toLowerCase() === 'true');
+const maxLength: number = 12;
 
 const fontColor = {
     chalkDebug: chalk.hex('##FFB52E'),
@@ -26,16 +28,17 @@ const fontColor = {
 };
 
 const logPrefix = {
-    verbose: chalk.white('[VERBOSE]'.padEnd(12, ' ')),
-    debug: fontColor.chalkDebug('[DEBUG]'.padEnd(12, ' ')),
-    info: chalk.blueBright('[INFO]'.padEnd(12, ' ')),
-    warning: chalk.yellow('[WARN]'.padEnd(12, ' ')),
-    error: chalk.red('[ERROR]'.padEnd(12, ' ')),
-    class: fontColor.chalkGreen('[CLASS]'.padEnd(12, ' ')),
-    interface: fontColor.chalkGreen('[INTERFACE]'.padEnd(12, ' ')),
-    index: chalk.magenta('[INDEX]'.padEnd(12, ' ')),
-    validator: chalk.magenta('[VALIDATOR]'.padEnd(12, ' ')),
-    test: chalk.magenta('[TEST]'.padEnd(8, ' ')),
+    verbose: chalk.white('[VERBOSE]'.padEnd(maxLength, ' ')),
+    debug: fontColor.chalkDebug('[DEBUG]'.padEnd(maxLength, ' ')),
+    info: chalk.blueBright('[INFO]'.padEnd(maxLength, ' ')),
+    warning: chalk.yellow('[WARN]'.padEnd(maxLength, ' ')),
+    error: chalk.red('[ERROR]'.padEnd(maxLength, ' ')),
+    class: fontColor.chalkGreen('[CLASS]'.padEnd(maxLength, ' ')),
+    interface: fontColor.chalkGreen('[INTERFACE]'.padEnd(maxLength, ' ')),
+    index: chalk.magenta('[INDEX]'.padEnd(maxLength, ' ')),
+    validator: chalk.magenta('[VALIDATOR]'.padEnd(maxLength, ' ')),
+    schema: chalk.magenta('[SCHEMA]'.padEnd(maxLength, ' ')),
+    test: chalk.magenta('[TEST]'.padEnd(maxLength, ' ')),
 };
 
 const getCurrentDateFormat = () : string => {
@@ -172,6 +175,11 @@ console.log = function (type: logType, message?: any, ...params: any[]) {
 
         case logType.VALIDATOR: {
             exLog.apply(this, [prefixMessage(logPrefix.validator, formatOrignalString(message, params))]);
+            break;
+        }
+
+        case logType.SCHEMA: {
+            exLog.apply(this, [prefixMessage(logPrefix.schema, formatOrignalString(message, params))]);
             break;
         }
 

@@ -1,4 +1,4 @@
-import { PublishLocations } from '@/declaration';
+import { PublishLocations } from '@/riotentity';
 import { IContentDTO_Global } from './IContentDTO_Global';
 
 /**

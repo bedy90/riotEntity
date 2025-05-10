@@ -1,4 +1,4 @@
-import { GameMode, GameType } from '@/declaration';
+import { GameMode, GameType } from '@/riotentity';
 import { IBannedChampion_Global } from './IBannedChampion_Global';
 import { IObserver_Global } from './IObserver_Global';
 import { IParticipant_Global } from './IParticipant_Global';

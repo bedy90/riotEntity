@@ -44,5 +44,5 @@ export interface ILeagueEntryDTO_Global {
 
     inactive: boolean;
 
-    miniSeries: IMiniSeriesDTO_Global;
+    miniSeries?: IMiniSeriesDTO_Global;
 }

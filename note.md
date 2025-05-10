@@ -37,3 +37,30 @@ Windows : true
 
 # Corriger les conflits
 `git mv --cached NomFichier NomFICHIER`
+
+
+# Gestion jest
+npx jest --config jest.config.js
+
+npx jest --clearCache
+
+npx jest --config=jest.config.js --showConfig
+
+# Fichier INDEX
+
+Pour exporter une Interface, il faut utilisé `export type`
+```ts
+export type IAccountDTO = IAccountDTO_v1;
+```
+
+Pour exporter une classe, il faut utilisé `export const`
+```ts
+export const AccountValidator = AccountValidator_v1;
+```
+
+# build
+`tsc -p tsconfig.build.json`
+
+npx ts-node --show-config
+
+npx ts-node -r tsconfig-paths/register src/manual_test.ts

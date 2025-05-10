@@ -1,5 +1,5 @@
 import { describe, expect, test } from '@jest/globals';
-import { Interfaces, Validator } from '../src/index';
+import { Interfaces, Validators } from '../src/index';
 
 import '../scripts/logger';
 import { logType } from '../scripts/logger';
@@ -13,7 +13,7 @@ describe('Has a valid AccountDTO - Validate using validator', () => {
             tagLine: 'tag',
         };
 
-        let result: any = Validator.AccountValidator.validate(jsonObject);
+        let result: any = Validators.AccountValidator.validate(jsonObject);
 
         expect(result).not.toBeNull;
         expect(result.success).toBe(true);
@@ -27,7 +27,7 @@ describe('Has a valid AccountDTO - Validate using validator', () => {
             tagLine: 'tag',
         };
 
-        let result: any = Validator.AccountValidator.validate(intByUnionType);
+        let result: any = Validators.AccountValidator.validate(intByUnionType);
 
         expect(result).not.toBeNull;
         expect(result.success).toBe(true);
@@ -40,7 +40,7 @@ describe('Has a valid AccountDTO - Validate using validator', () => {
             tagLine: 'tag',
         };
 
-        let result: any = Validator.AccountValidator.validate(intBySpecificVersion);
+        let result: any = Validators.AccountValidator.validate(intBySpecificVersion);
 
         expect(result).not.toBeNull;
         expect(result.success).toBe(true);
@@ -60,7 +60,7 @@ describe('Has a invalid AccountDTO - Validate using validator', () => {
             puuid: 'pDxMtQ0DTUZAxSu3WZz9itOTPphTc-9b9uTIrQXsQGFXxhgnaIIhyfY9NEaoZZGdKD-qgYbMPK42jg'
         };
 
-        let result = Validator.AccountValidator.validate(summoner);
+        let result = Validators.AccountValidator.validate(summoner);
         // console.dir(result?.error?.errors)
         // console.log(logType.TEST, `\n\n\n\t Error message : ${result.success ? '' : result.error.message}`);
 
@@ -75,7 +75,7 @@ describe('Has a invalid AccountDTO - Validate using validator', () => {
             summonerLevel: 55,
         };
 
-        let result = Validator.AccountValidator.validate(jsonObject);
+        let result = Validators.AccountValidator.validate(jsonObject);
 
         expect(result).not.toBeNull;
         expect(result.success).toBe(false);
@@ -88,7 +88,7 @@ describe('Has a invalid AccountDTO - Validate using validator', () => {
             puuid: 'pDxMtQ0DTUZAxSu3WZz9itOTPphTc-9b9uTIrQXsQGFXxhgnaIIhyfY9NEaoZZGdKD-qgYbMPK42jg'
         };
 
-        let result = Validator.AccountValidator.validate(jsonObject);
+        let result = Validators.AccountValidator.validate(jsonObject);
 
         expect(result).not.toBeNull;
         expect(result.success).toBe(false);
@@ -103,7 +103,7 @@ describe('Has a invalid AccountDTO - Validate using validator', () => {
             tagLine: 't',
         };
 
-        let result = Validator.AccountValidator.validate(shortTagLink);
+        let result = Validators.AccountValidator.validate(shortTagLink);
 
         expect(result).not.toBeNull;
         expect(result.success).toBe(false);
@@ -117,7 +117,7 @@ describe('Has a invalid AccountDTO - Validate using validator', () => {
             tagLine: 'tagggg',
         };
 
-        result = Validator.AccountValidator.validate(tooLongTagLine);
+        result = Validators.AccountValidator.validate(tooLongTagLine);
 
         expect(result).toBeDefined();
         expect(result.success).toBe(false);
@@ -132,7 +132,7 @@ describe('Has a invalid AccountDTO - Validate using validator', () => {
             tagLine: 'tagL',
         };
 
-        let result = Validator.AccountValidator.validate(shortGameName);
+        let result = Validators.AccountValidator.validate(shortGameName);
 
         expect(result).not.toBeNull;
         expect(result.success).toBe(false);
@@ -145,7 +145,7 @@ describe('Has a invalid AccountDTO - Validate using validator', () => {
             tagLine: 'tagggg',
         };
 
-        result = Validator.AccountValidator.validate(tooLongGameName);
+        result = Validators.AccountValidator.validate(tooLongGameName);
 
         expect(result).toBeDefined();
         expect(result.success).toBe(false);
@@ -160,7 +160,7 @@ describe('Has a invalid AccountDTO - Validate using validator', () => {
             tagLine: 'tagL',
         };
 
-        let result = Validator.AccountValidator.validate(shortPuuid);
+        let result = Validators.AccountValidator.validate(shortPuuid);
 
         expect(result).not.toBeNull;
         expect(result.success).toBe(false);
@@ -174,7 +174,7 @@ describe('Has a invalid AccountDTO - Validate using validator', () => {
             tagLine: 'tagggg',
         };
 
-        result = Validator.AccountValidator.validate(tooLongPuid);
+        result = Validators.AccountValidator.validate(tooLongPuid);
 
         expect(result).toBeDefined();
         expect(result.success).toBe(false);

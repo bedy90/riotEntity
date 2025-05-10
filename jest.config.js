@@ -1,25 +1,26 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
+// const { pathsToModuleNameMapper } = require('ts-jest');
+// const { compilerOptions } = require('./tsconfig.json');
+
+// console.log(pathsToModuleNameMapper(compilerOptions.paths, { prefix: '<rootDir>/src/' }));
+
+// console.log('Jest moduleNameMapper:', {
+//     '^@/(.*)$': '<rootDir>/src/$1',
+//     '^@/riotentity$': '<rootDir>/src/index',
+// });
+
 /** @type {import('ts-jest').JestConfigWithTsJest} **/
 module.exports = {
     testEnvironment: 'node',
     verbose: false,
     preset: 'ts-jest',
-    // Ajoute ceci pour NodeNext/ESM :
-    extensionsToTreatAsEsm: ['.ts'],
-    globals: {
-        'ts-jest': {
-            useESM: true,
-        },
-    },
+    modulePaths: ['<rootDir>/src'],
+    // roots: ['<rootDir>/src', '<rootDir>/test'],
     moduleNameMapper: {
-        '^(\\.{1,2}/.*)\\.js$': '$1',
+        '^@/riotentity$': '<rootDir>/src/index',
+        '^@/(.*)$': '<rootDir>/src/$1',
     },
-    // Default
-    // transform: {
-    //   "^.+\.tsx?$": ["ts-jest", {}],
-    // },
-    testMatch: [
-        '**/?(*.)+(test).ts',
-    ],
+    // moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, { prefix: '<rootDir>/src/' }),
     coveragePathIgnorePatterns: [
         '/scripts/',
     ],

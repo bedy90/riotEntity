@@ -1,17 +1,23 @@
-// import { Interfaces } from './index'; // Validator,
-// import { IAccountDTO } from './interface';
+import { Interfaces, Validators } from './index';
 
-// const interfaceByInterface: Interfaces.IAccountDTO = {
-//     gameName: 'interface by short namespace',
-//     puuid: 'abc',
-//     tagLine: 'tag',
-// };
+// L'import via ALIAS ne fonctionne pas, car le fichier est « Exclude » dans tsconfig.json
+// import { Interfaces, Validators } from '@/riotentity';
 
-// const interfaceByFolder: IAccountDTO = {
-//     gameName: 'interface by folder',
-//     puuid: 'abc',
-//     tagLine: 'tag',
-// };
+import '../scripts/logger';
+import { logType } from '../scripts/logger';
+
+const interfaceByInterface: Interfaces.IAccountDTO = {
+    gameName: 'gameName',
+    puuid: 'pDxMtQ0DTUZAxSu3WZz9itOTPphTc-9b9uTIrQXsQGFXxhgnaIIhyfY9NEaoZZGdKD-qgYbMPK42jg',
+    tagLine: 'tag',
+};
+
+const interfaceByVersion: Interfaces.IAccountDTO_v1 = {
+    gameName: 'gameName',
+    puuid: 'pDxMtQ0DTUZAxSu3WZz9itOTPphTc-9b9uTIrQXsQGFXxhgnaIIhyfY9NEaoZZGdKD-qgYbMPK42jg',
+    tagLine: 'ver1',
+};
+
 // const fullpathInterface: Interfaces.IAccountDTO_v1 = {
 //     gameName: 'interface by full namespace',
 //     puuid: 'abc',
@@ -51,13 +57,15 @@
 // // console.log(`accEntity has AccountDTO : ${Validator.Account.v1.isIAccountDTO(accEntity)}`);
 // // console.log('');
 
-// console.log(`interfaceByInterface : ${JSON.stringify(interfaceByInterface)}`);
-// console.log(`interfaceByInterface has AccountDTO : ${Validator.Account.v1.isIAccountDTO(interfaceByInterface)}`);
-// console.log('');
+console.log(`interfaceByInterface : ${JSON.stringify(interfaceByInterface)}`);
+let result = Validators.AccountValidator.validate(interfaceByInterface);
+console.log(logType.TEST, `interfaceByInterface has AccountDTO : ${result.success ? result.success : (result.success + ' => ' + result.error)}`);
+console.log('');
 
-// console.log(`interfaceByFolder : ${JSON.stringify(interfaceByFolder)}`);
-// console.log(`interfaceByFolder has AccountDTO : ${Validator.Account.v1.isIAccountDTO(interfaceByFolder)}`);
-// console.log('');
+console.log(`interfaceByVersion : ${JSON.stringify(interfaceByVersion)}`);
+result = Validators.AccountValidator.validate(interfaceByVersion);
+console.log(logType.TEST, `interfaceByFolder has AccountDTO : ${result.success ? result.success : (result.success + ' => ' + result.error)}`);
+console.log('');
 
 // console.log(`fullpathInterface : ${JSON.stringify(fullpathInterface)}`);
 // console.log(`fullpathInterface has AccountDTO : ${Validator.Account.v1.isIAccountDTO(fullpathInterface)}`);

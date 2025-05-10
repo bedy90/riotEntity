@@ -37,7 +37,7 @@ export class GenerateValidator {
                     // TODO: Move autrement
                     intData.addImport(`import { z, SafeParseReturnType } from 'zod';`);
 
-                    const interfaceName: string = intData.originalName;
+                    // const interfaceName: string = intData.originalName;
                     // intData.properties : Is NULL
                     const properties = intData.properties.map((property: PropertySignature) => `${property.getName()}: ${property.getTypeNode()?.getText()}`);
 
