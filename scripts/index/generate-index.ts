@@ -4,7 +4,7 @@ import * as fs from 'fs-extra';
 
 import '../logger';
 import { NamespaceIndexTypes } from '../common';
-import { InterfaceData } from '../entities/interfaceData';
+import { InterfaceData } from '../entities/interfaceData-clean';
 
 export class GenerateIndex {
 
@@ -24,19 +24,25 @@ export class GenerateIndex {
      * Génére l'index.ts des interfaces a partir du namespaceVersions
      */
     #generateIndexFile(type: NamespaceIndexTypes = NamespaceIndexTypes.INTERFACE) {
+        // Browse each namespace
         Object.keys(this.entitiesData).forEach((namespace: string) => {
             const data: Record<string, InterfaceData[]> = this.entitiesData[namespace];
 
+            // Browse each version
             Object.keys(data).forEach((version: string) => {
                 const interfaces: InterfaceData[] = data[version];
+
                 let arrImports: Record<string, string> = {};
+                // Global export => export type { }
+                // let arrGlobalExport: string[];
+                // Union type => export type 
                 let arrExportType: string[] = [];
 
                 let fileContent: string = '';
 
                 // Write Import
                 interfaces.forEach((intData: InterfaceData) => {
-                    const interfaceName: string = intData.originalName;
+                    const interfaceName: string = intData.getInterfaceName(); // originalName;
 
                     let keyPrefix: string = '';
                     let alias: string = intData.getExportAlias();
@@ -75,9 +81,6 @@ export class GenerateIndex {
                         fileContent += `\n`;
                         nbItem = 0;
                     }
-
-                    // // TODO : Revoir pour la gestion du multiversio. Type Union => V1 | V2 | ...
-                    // arrExportType.push(`\nexport type ${key} = ${value};`);
                 });
                 fileContent = fileContent.trimEnd();
                 fileContent += `\n};\n`;
@@ -87,12 +90,16 @@ export class GenerateIndex {
                     fileContent += `${expType}`;
                 });
 
+                // Prepare file generation
                 let subFolder = '';
                 if (type == NamespaceIndexTypes.INTERFACE) {
                     subFolder = 'interface';
                 }
                 else if (type == NamespaceIndexTypes.CLASSES) {
                     subFolder = 'entity';
+                }
+                else if (type == NamespaceIndexTypes.VALIDATOR) {
+                    subFolder = 'validator';
                 }
 
                 // Déterminer le chemin de sortie
@@ -111,6 +118,9 @@ export class GenerateIndex {
                 }
                 else if (type == NamespaceIndexTypes.CLASSES) {
                     console.log(`[SUCCESS] Classes namespace Index '${outputFile}' has been generated`);
+                }
+                else if (type == NamespaceIndexTypes.VALIDATOR) {
+                    console.log(`[SUCCESS] Validators namespace Index '${outputFile}' has been generated`);
                 }
             });
         });

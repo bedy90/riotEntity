@@ -1,63 +1,51 @@
-
-
-import * as glob from 'glob';
+import * as fastGlob from 'fast-glob';
 import * as path from 'path';
-import { Project, InterfaceDeclaration, TypeAliasDeclaration, ClassDeclaration } from 'ts-morph';
+import { Project, InterfaceDeclaration, TypeAliasDeclaration, ClassDeclaration, SourceFile } from 'ts-morph';
 
 import './logger';
 import { NamespaceIndexTypes } from './common';
-import { HeaderInfo, InterfaceData } from './entities/interfaceData';
+import { HeaderInfo } from './entities/headerInfo';
+import { InterfaceData } from './entities/interfaceData-clean';
 
+/**
+ * Classe responsable de la lecture et  de l'extraction du contenu des interfaces
+ */
 export class InterfaceParser {
     interfaces: InterfaceData[];
 
-    // <[namespace], <[version], [InterfaceData]>
-    constructor(public project: Project, public entitiesData: Record<string, Record<string, InterfaceData[]>>) {
+    constructor(public project: Project, 
+                public namespaceType: NamespaceIndexTypes,
+                public entitiesData: Record<string, Record<string, InterfaceData[]>>) {
         this.interfaces = [];
     }
 
-    // glob.sync([filesFolderPath,"!src/interface/**/index.ts"])
-    ParseFiles(filesFolderPaths: string[] = ['src/interface/**/*.ts', '!src/interface/**/index.ts'],
-               type: NamespaceIndexTypes = NamespaceIndexTypes.INTERFACE, initialParse: boolean = false): void {
+    ParseFiles(filesFolderPaths: string[] = ['src/interface/**/*.ts', '!src/interface/**/index.ts']): void {
         // Read all interface files
-        const sourceFiles: string[] = glob.sync(filesFolderPaths);
+        const sourceFiles: string[] = fastGlob.sync(filesFolderPaths);
 
-        if (initialParse) {
-            this.project.addSourceFilesAtPaths(filesFolderPaths);
-        }
+        // Add All sources
+        this.project.addSourceFilesAtPaths(sourceFiles);
 
-        // Process
-        sourceFiles.forEach((filePath: string) => {
-            const fileName = path.basename(filePath);
-            if (fileName.toLowerCase() == "index.ts") {
+        this.project.getSourceFiles().forEach((sourceFile: SourceFile) => {
+            const filePath: string = sourceFile.getFilePath();
+            const fileName : string = sourceFile.getBaseName();
+
+            // Secure: Remove all index files
+            if (fileName && fileName.toLowerCase() == 'index.ts') {
+                this.project.removeSourceFile(sourceFile);
                 return;
             }
 
-            const sourceFile = this.project.addSourceFileAtPath(filePath);
+            const interfaces: InterfaceDeclaration[] = sourceFile.getInterfaces();
+            const typeAliases: TypeAliasDeclaration[] = sourceFile.getTypeAliases();
 
-            if (type == NamespaceIndexTypes.INTERFACE || type == NamespaceIndexTypes.VALIDATOR) {
-                const interfaces: InterfaceDeclaration[] = sourceFile.getInterfaces();
-                const typeAliases: TypeAliasDeclaration[] = sourceFile.getTypeAliases();
-
-                if (interfaces && interfaces.length > 0) {
-                    // , (type == NamespaceIndexTypes.INTERFACE)
-                    this.interfaces.push(...this.#readAllInterfaces(interfaces, filePath, false, type));
-                }
-
-                if (typeAliases && typeAliases.length > 0) {
-                    this.interfaces.push(...this.#readAllTypeAliases(typeAliases, filePath, false, type));
-                }
+            if (interfaces && interfaces?.length > 0) {
+                this.interfaces.push(...this.#readAllInterfaces(interfaces, filePath, false));
             }
 
-            if (type == NamespaceIndexTypes.CLASSES) {
-                // TODO: Only true if NamespaceIndexTypes = ENTITY (CLASSES)
-                const classes: ClassDeclaration[] = sourceFile.getClasses();
-
-                if (classes && classes.length > 0) {
-                    this.#readAllClasses(classes);
-                }
+            if (typeAliases && typeAliases?.length > 0) {
+                this.interfaces.push(...this.#readAllTypeAliases(typeAliases, filePath, false));
             }
-
         });
     }
 
@@ -68,40 +56,40 @@ export class InterfaceParser {
      * @param generateFile 
      * @param includeGlobal 
      */
-    #readAllInterfaces(interfaces: InterfaceDeclaration[], filePath: string, includeGlobal = false, 
-                        type: NamespaceIndexTypes = NamespaceIndexTypes.INTERFACE): InterfaceData[] {
+    #readAllInterfaces(interfaces: InterfaceDeclaration[], filePath: string, includeGlobal = false): InterfaceData[] {
         let returnValues: InterfaceData[] = [];
 
         interfaces.forEach((iface: InterfaceDeclaration) => {
-            const interfaceName = iface.getName();
-            const baseName = iface?.getSourceFile()?.getBaseName() || null;
+            const interfaceName : string = iface.getName(); // Full InterfaceName (IXYZ_Global / IXYZ)
+            const fileName : string | null = iface?.getSourceFile()?.getBaseName() || null; // Full FileName (IAccountDTO.ts)
+            const fileNameWithoutExt : string | null = iface?.getSourceFile()?.getBaseNameWithoutExtension() || null; // Filename without ext (IAccountDTO)
 
-            if (!baseName || baseName.toLowerCase().includes('index.ts') || (!includeGlobal && baseName.toLowerCase().includes('_global'))) {
+            if (!fileName || fileName.toLowerCase().includes('index.ts') || (!includeGlobal && fileName.toLowerCase().includes('_global'))) {
                 return;
             }
 
+            // Prefix filename pattern
             if (interfaceName.startsWith('I')) {
                 const className = interfaceName.substring(1);
 
                 // Extraire les informations JSDoc
-                // TODO : Move validation on extractJsDocInfoByDeclaration and THROW Exception (required Try..catch)
                 const jsDocInfo: HeaderInfo = this.#extractJsDocInfoByDeclaration(iface);
 
                 if (!jsDocInfo.isValid()) {
-                    console.warn(`Interface ${interfaceName} can't be transformed into a class, as its JDOC is not declared.`);
+                    console.warn(`Interface ${interfaceName} can't be processed, as its JDOC is not declared.`);
                     return;
                 }
                 if (jsDocInfo.notImplemented) {
-                    console.warn(`Interface ${interfaceName} isn't implemented.`);
+                    console.warn(`Interface ${interfaceName} can't be processed, because isn't implemented`);
                     return;
                 }
 
                 // Prepare interfaceData
-                const data: InterfaceData = new InterfaceData(filePath, interfaceName, className, iface, null, type);
+                const data: InterfaceData = new InterfaceData(jsDocInfo, interfaceName, filePath, fileName, this.namespaceType, iface, null);
 
-                data.addHeader(jsDocInfo);
-                data.addJDOC(this.#generateClassHeader(className, jsDocInfo.namespace, jsDocInfo.version, jsDocInfo.name, jsDocInfo.prefix));
-                this.#addEntities(jsDocInfo.namespace, jsDocInfo.version, data);
+                // TODO 2025: revoir pour la gestion className/interfaceName/ValidatorName
+                // data.addJDOC(this.#generateJsDocHeader(className, jsDocInfo.namespace, jsDocInfo.version, jsDocInfo.name, jsDocInfo.prefix));
+                this.#addEntities(jsDocInfo, data);
 
 
                 returnValues.push(data);
@@ -116,13 +104,17 @@ export class InterfaceParser {
        * @param typeAliases
        * @param filePath
        */
-    #readAllTypeAliases(typeAliases: TypeAliasDeclaration[], filePath: string, includeGlobal = false, 
-                        type: NamespaceIndexTypes = NamespaceIndexTypes.INTERFACE): InterfaceData[] {
+    #readAllTypeAliases(typeAliases: TypeAliasDeclaration[], filePath: string, includeGlobal = false): InterfaceData[] {
         let returnValues: InterfaceData[] = [];
 
         typeAliases.forEach((typeAlias: TypeAliasDeclaration) => {
             const typeName = typeAlias.getName();
+            const fileName : string | null = typeAlias?.getSourceFile()?.getBaseName() || null;
             const globalType = typeAlias.getTypeNode()?.getText();
+
+            if (!fileName || fileName.toLowerCase().includes('index.ts')) {
+                return;
+            }
 
             if ((globalType && globalType.length > 0) && (typeName.startsWith('I') && (!includeGlobal && typeAlias.getTypeNode()?.getText()?.includes('_Global')))) {
                 const className = typeName.substring(1);
@@ -142,45 +134,16 @@ export class InterfaceParser {
                 const globalInterface: InterfaceDeclaration = this.project.getSourceFileOrThrow(path.join('src/interface/', '_Global/' + globalType + '.ts')).getInterfaceOrThrow(globalType.replace(/<.*>$/, ''));
 
                 // Prepare interfaceData
-                const data: InterfaceData = new InterfaceData(filePath, typeName, className, globalInterface, null, type);
-
-                data.addHeader(jsDocInfo);
-                data.addJDOC(this.#generateClassHeader(className, jsDocInfo.namespace, jsDocInfo.version, jsDocInfo.name, jsDocInfo.prefix));
-                this.#addEntities(jsDocInfo.namespace, jsDocInfo.version, data);
+                const data: InterfaceData = new InterfaceData(jsDocInfo, typeName, filePath, fileName, this.namespaceType, globalInterface, null);
+                 // TODO 2025: revoir pour la gestion className/interfaceName/ValidatorName
+                // data.addJDOC(this.#generateJsDocHeader(className, jsDocInfo.namespace, jsDocInfo.version, jsDocInfo.name, jsDocInfo.prefix));
+                this.#addEntities(jsDocInfo, data);
 
                 returnValues.push(data);
             }
         });
 
         return returnValues;
-    }
-
-
-    #readAllClasses(classes: ClassDeclaration[]): void {
-
-        classes.forEach(cls => {
-            const className = cls.getName();
-            const baseName = cls?.getSourceFile()?.getBaseName() || null;
-
-            if (!baseName || baseName.toLowerCase().includes('index.ts')) {
-                return;
-            }
-
-            if (className) {
-                // Extraire les informations JSDoc
-                const jsDocInfo: HeaderInfo = this.#extractJsDocInfoByDeclaration(cls);
-
-                if (jsDocInfo.notImplemented) {
-                    console.warn(`Class ${className} isn't implemented.`);
-                    return;
-                }
-
-                // Préparation du namespace (index)
-                // this.#addNamespace(jsDocInfo.namespace, jsDocInfo.version, className);
-
-                // TODO: Complete the process
-            }
-        });
     }
 
     /**
@@ -192,16 +155,29 @@ export class InterfaceParser {
      * @param prefix 
      * @returns 
      */
-    #generateClassHeader(className: string, namespace: string, version: string, name: string, prefix: string): string {
+    #generateJsDocHeader(objName: string, namespace: string, version: string, name: string, prefix: string): string {
         let header = '';
 
         header += '\n/**\n';
-        header += ` * Class ${className}\n`;
+        switch (this.namespaceType) {
+            case NamespaceIndexTypes.CLASSES:
+                header += ` * Class ${objName}\n`;
+                break;
+            case NamespaceIndexTypes.VALIDATOR:
+                header += ` * Validator ${objName}\n`;
+                break;
+            default:
+                header += ` * ${objName}\n`;
+                break;
+
+        }
         header += ' *\n';
         header += ` * @namespace ${namespace}\n`;
         header += ` * @version ${version}\n`;
         header += ` * @name ${name}\n`;
-        header += ` * @prefix ${prefix}\n`;
+        if (prefix && prefix !== undefined) {
+            header += ` * @prefix ${prefix}\n`;
+        }
         header += ' */';
 
         return header;
@@ -229,8 +205,11 @@ export class InterfaceParser {
         return new HeaderInfo(namespace, version, name, prefix, NotImplemented);
     }
 
-    #addEntities(namespace: string, version: string, data: InterfaceData): void {
+    #addEntities(header: HeaderInfo, data: InterfaceData): void {
         if (data) {
+            let namespace: string = header.namespace;
+            let version: string = header.version;
+
             if (!this.entitiesData[namespace]) {
                 this.entitiesData[namespace] = {};
             }
