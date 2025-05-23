@@ -20,9 +20,8 @@
     "run:testD": "npx ts-node -r tsconfig-paths/register src/manual_test.ts",
     "test": "npx jest --coverage",
     "== Generator ==": "",
-    "generate:interfaceIndex": "npx rimraf ./generate/interface && npx ts-node scripts/generate-entities.ts intIndex",
-    "generate:test": "npx rimraf ./generate/test && npx ts-node scripts/generate-entities.ts test",
-    "generate:validator": "npx rimraf ./generate/validator && npx ts-node scripts/generate-entities.ts validator",
+    "generate:index": "npx rimraf ./generate/interface && npx ts-node scripts/generate-entities-clean.ts index",
+    "generate:schema": "npx rimraf ./generate/interface && npx ts-node scripts/generate-entities-clean.ts schema",
     "generate:all": "npm run generate:validator && npm run generate:interfaceIndex",
     "== DEV ==": "",
     "npm:refreshLock": "npm i --package-lock-only",
@@ -38,10 +37,7 @@
     "build:tsc": "npx tsc",
     "build:tsc_rim": "rimraf ./build && tsc",
     "build:full": "rimraf ./build && tsc && npm run build:package",
-    "build:tsup_pack": "tsup --config tsup.config.ts",
-    "generate:intIndex": "npx rimraf ./generate/interface && npx ts-node scripts/generate-entities.ts intIndex",
-    "==t==": "",
-    "interfaceIndex": "npx rimraf ./generate/interface && npx ts-node scripts/generate-entities-clean.ts intIndex"
+    "build:tsup_pack": "tsup --config tsup.config.ts"
   },
   "files": [
     "build/**/*",

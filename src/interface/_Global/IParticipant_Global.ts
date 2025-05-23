@@ -22,7 +22,8 @@ export interface IParticipant_Global {
     summonerId: string;
 
     /**
-     * 	Encrypted puuid of this participant
+     * Encrypted puuid of this participant
+     * TODO:
      */
     puuid: string;
 

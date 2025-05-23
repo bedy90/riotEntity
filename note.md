@@ -64,3 +64,27 @@ export const AccountValidator = AccountValidator_v1;
 npx ts-node --show-config
 
 npx ts-node -r tsconfig-paths/register src/manual_test.ts
+
+# Exportation
+
+## Interface
+
+**Note :** Les interfaces sont effacées au runtime, mais accessibles via les fichiers `.d.ts` générés
+
+Exportation d'une interface
+```ts
+export interface IUser {
+
+}
+```
+
+Exportation d'une interface pour qu'elle soit disponible dans d'autre module
+```ts
+export type IUser {
+
+}
+```
+
+## Classe
+
+Export : `export class` permet d’exporter la classe.

@@ -7,7 +7,8 @@
  */
 export interface ISummonerDTO_Global {
     /**
-     * 	Encrypted account ID. Max length 56 characters.
+     * Encrypted account ID. Max length 56 characters.
+     * @maxLength 56
      */
     accountId: string;
 
@@ -17,17 +18,21 @@ export interface ISummonerDTO_Global {
     profileIconId: number;
 
     /**
-     * Date summoner was last modified specified as epoch milliseconds. The following events will update this timestamp: profile icon change, playing the tutorial or advanced tutorial, finishing a game, summoner name change
+     * Date summoner was last modified specified as epoch milliseconds.
+     * The following events will update this timestamp: profile icon change,
+     * playing the tutorial or advanced tutorial, finishing a game, summoner name change
      */
     revisionDate?: number;
 
     /**
      * Encrypted summoner ID. Max length 63 characters.
+     * @maxLength 63
      */
     id: string;
 
     /**
      * Encrypted PUUID. Exact length of 78 characters.
+     * @length 78
      */
     puuid: string;
 

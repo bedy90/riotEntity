@@ -8,7 +8,7 @@
 export interface IChampionMasteryDTO_v4 {
     /**
     * Player Universal Unique Identifier
-    * Length : 78
+    * @length 78
     */
     puuid: string;
 

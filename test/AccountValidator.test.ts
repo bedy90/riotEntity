@@ -1,8 +1,8 @@
 import { describe, expect, test } from '@jest/globals';
 import { Interfaces, Validators } from '../src/index';
 
-import '../scripts/logger';
-import { logType } from '../scripts/logger';
+// import '../scripts/logger';
+// import { logType } from '../scripts/logger';
 
 describe('Has a valid AccountDTO - Validate using validator', () => {
 

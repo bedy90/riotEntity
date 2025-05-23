@@ -11,7 +11,8 @@ export interface ILeagueEntryDTO_Global {
     leagueId: string;
 
     /**
-     * 	Player's summonerId (Encrypted)
+     * Player's summonerId (Encrypted)
+     * TODO:
      */
     summonerId: string;
 

@@ -21,6 +21,7 @@ export interface ITeamDTO_v1 {
 
     /**
      * Summoner ID of the team captain.
+     * TODO
      */
     captain: string;
 

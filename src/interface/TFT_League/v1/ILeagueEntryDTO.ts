@@ -10,7 +10,8 @@ import { Interfaces } from '@/riotentity';
  */
 export interface ILeagueEntryDTO_v1 extends Interfaces.Shared.ILeagueEntryDTO_Global {
     /**
-     * 	Player Universal Unique Identifier. Exact length of 78 characters. (Encrypted)
+     * Player Universal Unique Identifier. Exact length of 78 characters. (Encrypted)
+     * @length 78
      */
     puuid: string;
 

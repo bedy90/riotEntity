@@ -41,6 +41,7 @@ export interface IParticipantDTO_v1 {
      */
     players_eliminated: number;
 
+    // TODO
     puuid: string;
 
     /**

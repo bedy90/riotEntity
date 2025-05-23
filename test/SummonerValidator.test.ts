@@ -2,8 +2,8 @@ import { describe, expect, test } from '@jest/globals';
 import { Interfaces, Validators } from '../src/index';
 
 
-import '../scripts/logger';
-import { logType } from '../scripts/logger';
+// import '../scripts/logger';
+// import { logType } from '../scripts/logger';
 
 describe('Has a valid SummonerDTO - Validate using Validators', () => {
 
@@ -18,7 +18,7 @@ describe('Has a valid SummonerDTO - Validate using Validators', () => {
         };
 
         let result: any = Validators.SummonerValidator.validate(jsonObject);
-        
+
         expect(result).not.toBeNull;
         expect(result.success).toBe(true);
 
@@ -58,138 +58,225 @@ describe('Has a valid SummonerDTO - Validate using Validators', () => {
 
 });
 
-// describe('Has a invalid SummonerDTO - Validate using Validators', () => {
+describe('Has a invalid SummonerDTO - Validate using Validators', () => {
 
-//     test('Using a another interface, invalid data', () => {
-//         const summoner: Interfaces.ISummonerDTO_v4 = {
-//             accountId: 'abcde',
-//             profileIconId: 1,
-//             revisionDate: 1,
-//             id: 'abc',
-//             summonerLevel: 55,
-//             puuid: 'pDxMtQ0DTUZAxSu3WZz9itOTPphTc-9b9uTIrQXsQGFXxhgnaIIhyfY9NEaoZZGdKD-qgYbMPK42jg'
-//         };
+    test('Using a another JSON Object interface, invalid data', () => {
+        const jsonObject = {
+            gameName: 'gameName',
+            puuid: 'pDxMtQ0DTUZAxSu3WZz9itOTPphTc-9b9uTIrQXsQGFXxhgnaIIhyfY9NEaoZZGdKD-qgYbMPK42jg',
+            tagLine: 'tag',
+        };
 
-//         let result = Validators.AccountValidators.validate(summoner);
-//         // console.dir(result?.error?.errors)
-//         // console.log(logType.TEST, `\n\n\n\t Error message : ${result.success ? '' : result.error.message}`);
+        let result = Validators.SummonerValidator.validate(jsonObject);
 
-//         expect(result).not.toBeNull;
-//         expect(result.success).toBe(false);
-//         expect(result.error).not.toBeNull;
-//     });
+        expect(result).not.toBeNull;
+        expect(result.success).toBe(false);
+        expect(result.error).not.toBeNull;
+    });
 
-//     test('Using a another JSON Object struct, invalid data', () => {
-//         const jsonObject = {
-//             id: 'abc',
-//             summonerLevel: 55,
-//         };
+    test('Using a JSON Object interface, id is too long', () => {
+        const jsonObject = {
+            id: "ugo6n4jo5MC4lq28xdh7m4TFNvq3kspmoG2CdNir9eZi8oAm4TFNvq3kspmoG2CdNir9eZi8oA",
+            accountId: "3FSDP47jnDNDlbshophTrGYKvVnGK-TGHCtSVDuP3noLPV8",
+            puuid: "pDxMtQ0DTUoaxSu3WUz9itOTZphTc-9b9uTIrQXsQGFXxhgjjIIhyfY9NEaoZZGdKD-qgYbMPK42jg",
+            profileIconId: 1433,
+            revisionDate: 1745890069000,
+            summonerLevel: 351
+        };
 
-//         let result = Validators.AccountValidators.validate(jsonObject);
+        let result = Validators.SummonerValidator.validate(jsonObject);
+        // console.dir(result?.error?.errors)
+        // console.log(logType.TEST, `\n\n\n\t Error message : ${result.success ? '' : result.error.message}`);
 
-//         expect(result).not.toBeNull;
-//         expect(result.success).toBe(false);
-//         expect(result.error).not.toBeNull;
-//     });
+        expect(result).not.toBeNull;
+        expect(result.success).toBe(false);
+        expect(result.error).not.toBeNull;
+    });
 
-//     test('Using a incomplete JSON Object, invalid data', () => {
-//         const jsonObject = {
-//             gameName: 'gameName',
-//             puuid: 'pDxMtQ0DTUZAxSu3WZz9itOTPphTc-9b9uTIrQXsQGFXxhgnaIIhyfY9NEaoZZGdKD-qgYbMPK42jg'
-//         };
+    test('Using a JSON Object interface, accountId is too long', () => {
+        const jsonObject = {
+            id: "ugo6n4jo5MC4lq28xdh7m4TFNvq3kspmoG2CdNir9eZi8oA",
+            accountId: "3FSDP47jnDNDlbshophTrGYKvVnGK-TGHCtSVDuP3noLPV8-TGHCtSVDuP3noLPV8",
+            puuid: "pDxMtQ0DTUoaxSu3WUz9itOTZphTc-9b9uTIrQXsQGFXxhgjjIIhyfY9NEaoZZGdKD-qgYbMPK42jg",
+            profileIconId: 1433,
+            revisionDate: 1745890069000,
+            summonerLevel: 351
+        };
 
-//         let result = Validators.AccountValidators.validate(jsonObject);
+        let result = Validators.SummonerValidator.validate(jsonObject);
+        // console.dir(result?.error?.errors)
+        // console.log(logType.TEST, `\n\n\n\t Error message : ${result.success ? '' : result.error.message}`);
 
-//         expect(result).not.toBeNull;
-//         expect(result.success).toBe(false);
-//         expect(result.error).not.toBeNull;
-//     });
+        expect(result).not.toBeNull;
+        expect(result.success).toBe(false);
+        expect(result.error).not.toBeNull;
+    });
 
+    test('Using a JSON Object interface, puuid is invalid', () => {
+        // Too short puuid
+        const shortPuuid_jsonObject = {
+            id: "ugo6n4jo5MC4lq28xdh7m4TFNvq3kspmoG2CdNir9eZi8oA",
+            accountId: "3FSDP47jnDNDlbshophTrGYKvVnGK-TGHCtSVDuP3noLPV8",
+            puuid: "pDxMtQ0DTUoaxSu3WUz9itOTZphTc-9b9uTIrQXsQGFXxhgjjIIhyfY9NEaoZZGdKD",
+            profileIconId: 1433,
+            revisionDate: 1745890069000,
+            summonerLevel: 351
+        };
 
-//     test('Using union type, invalid tagLine', () => {
-//         const shortTagLink: Interfaces.IAccountDTO = {
-//             gameName: 'gameName',
-//             puuid: 'pDxMtQ0DTUZAxSu3WZz9itOTPphTc-9b9uTIrQXsQGFXxhgnaIIhyfY9NEaoZZGdKD-qgYbMPK42jg',
-//             tagLine: 't',
-//         };
+        const tooLongPuuid_jsonObject = {
+            id: "ugo6n4jo5MC4lq28xdh7m4TFNvq3kspmoG2CdNir9eZi8oA",
+            accountId: "3FSDP47jnDNDlbshophTrGYKvVnGK-TGHCtSVDuP3noLPV8",
+            puuid: "pDxMtQ0DTUoaxSu3WUz9itOTZphTc-9b9uTIrQXsQGFXxhgjjIIhyfY9NEaoZZGdKD-qgYbMPK42jg-qgYbMPK42jg",
+            profileIconId: 1433,
+            revisionDate: 1745890069000,
+            summonerLevel: 351
+        };
 
-//         let result = Validators.AccountValidators.validate(shortTagLink);
+        let shortResult = Validators.SummonerValidator.validate(shortPuuid_jsonObject);
+        let longResult = Validators.SummonerValidator.validate(tooLongPuuid_jsonObject);
+        // console.dir(result?.error?.errors)
+        // console.log(logType.TEST, `\n\n\n\t Error message : ${result.success ? '' : result.error.message}`);
 
-//         expect(result).not.toBeNull;
-//         expect(result.success).toBe(false);
-//         expect(result.error).not.toBeNull;
-//         expect(result.error?.message).toContain('Must be 3 or more characters long');
+        expect(shortResult).not.toBeNull;
+        expect(shortResult.success).toBe(false);
+        expect(shortResult.error).not.toBeNull;
 
+        expect(longResult).not.toBeNull;
+        expect(longResult.success).toBe(false);
+        expect(longResult.error).not.toBeNull;
+    });
 
-//         const tooLongTagLine: Interfaces.IAccountDTO = {
-//             gameName: 'gameName',
-//             puuid: 'pDxMtQ0DTUZAxSu3WZz9itOTPphTc-9b9uTIrQXsQGFXxhgnaIIhyfY9NEaoZZGdKD-qgYbMPK42jg',
-//             tagLine: 'tagggg',
-//         };
+    test('Using a JSON Object with invalid schema, invalid data', () => {
+        const jsonObject = {
+            accountId: "3FSDP47jnDNDlbshophTrGYKvVnGK-TGHCtSVDuP3noLPV8",
+            profileIconId: 1433,
+            summonerLevel: 351
+        };
 
-//         result = Validators.AccountValidators.validate(tooLongTagLine);
+        let result = Validators.SummonerValidator.validate(jsonObject);
 
-//         expect(result).toBeDefined();
-//         expect(result.success).toBe(false);
-//         expect(result.error).not.toBeNull;
-//         expect(result.error?.message).toContain('Must be 5 or fewer characters long')
-//     });
+        expect(result).not.toBeNull;
+        expect(result.success).toBe(false);
+        expect(result.error).not.toBeNull;
+    });
 
-//     test('Using union type, invalid gameName', () => {
-//         const shortGameName: Interfaces.IAccountDTO = {
-//             gameName: 'ga',
-//             puuid: 'pDxMtQ0DTUZAxSu3WZz9itOTPphTc-9b9uTIrQXsQGFXxhgnaIIhyfY9NEaoZZGdKD-qgYbMPK42jg',
-//             tagLine: 'tagL',
-//         };
+    test('Using a incomplete JSON Object, invalid data', () => {
+        const jsonObject = {
+            gameName: 'gameName',
+            puuid: 'pDxMtQ0DTUZAxSu3WZz9itOTPphTc-9b9uTIrQXsQGFXxhgnaIIhyfY9NEaoZZGdKD-qgYbMPK42jg'
+        };
 
-//         let result = Validators.AccountValidators.validate(shortGameName);
+        let result = Validators.SummonerValidator.validate(jsonObject);
 
-//         expect(result).not.toBeNull;
-//         expect(result.success).toBe(false);
-//         expect(result.error).not.toBeNull;
-//         expect(result.error?.message).toContain('Must be 3 or more characters long');
-
-//         const tooLongGameName: Interfaces.IAccountDTO = {
-//             gameName: 'ThisIsAnInvalidGameName',
-//             puuid: 'pDxMtQ0DTUZAxSu3WZz9itOTPphTc-9b9uTIrQXsQGFXxhgnaIIhyfY9NEaoZZGdKD-qgYbMPK42jg',
-//             tagLine: 'tagggg',
-//         };
-
-//         result = Validators.AccountValidators.validate(tooLongGameName);
-
-//         expect(result).toBeDefined();
-//         expect(result.success).toBe(false);
-//         expect(result.error).not.toBeNull;
-//         expect(result.error?.message).toContain('Must be 16 or fewer characters long')
-//     });
-
-//     test('Using union type, invalid puuid', () => {
-//         const shortPuuid: Interfaces.IAccountDTO = {
-//             gameName: 'gameName',
-//             puuid: 'pDxMtQ0DTUZAxSu3WZz9itOTPphTc',
-//             tagLine: 'tagL',
-//         };
-
-//         let result = Validators.AccountValidators.validate(shortPuuid);
-
-//         expect(result).not.toBeNull;
-//         expect(result.success).toBe(false);
-//         expect(result.error).not.toBeNull;
-//         expect(result.error?.message).toContain('Must be 78 characters long');
+        expect(result).not.toBeNull;
+        expect(result.success).toBe(false);
+        expect(result.error).not.toBeNull;
+    });
 
 
-//         const tooLongPuid: Interfaces.IAccountDTO = {
-//             gameName: 'ThisIsAnInvalidGameName',
-//             puuid: 'pDxMtQ0DTUZAxSu3WZz9itOTPphTc-9b9uTIrQXsQGFXxhgnaIIhyfY9NEaoZZGdKD-qgYbMPK42jgg',
-//             tagLine: 'tagggg',
-//         };
+    test('Using union type, invalid id', () => {
+        const tooLongId: Interfaces.ISummonerDTO = {
+            id: "ugo6n4jo5MC4lq28xdh7m4TFNvq3kspmoG2CdNir9eZi8oA-moG2CdNir9eZi8oA",
+            accountId: "3FSDP47jnDNDlbshophTrGYKvVnGK-TGHCtSVDuP3noLPV8",
+            puuid: "pDxMtQ0DTUoaxSu3WUz9itOTZphTc-9b9uTIrQXsQGFXxhgjjIIhyfY9NEaoZZGdKD-qgYbMPK42jg",
+            profileIconId: 1433,
+            revisionDate: 1745890069000,
+            summonerLevel: 351
+        };
 
-//         result = Validators.AccountValidators.validate(tooLongPuid);
+        let result = Validators.SummonerValidator.validate(tooLongId);
 
-//         expect(result).toBeDefined();
-//         expect(result.success).toBe(false);
-//         expect(result.error).not.toBeNull;
-//         expect(result.error?.message).toContain('Must be 16 or fewer characters long')
-//     });
+        expect(result).not.toBeNull;
+        expect(result.success).toBe(false);
+        expect(result.error).not.toBeNull;
+        expect(result.error?.message).toContain('id : Must be 63 characters long');
 
-// });
+
+        const emptyId: Interfaces.ISummonerDTO = {
+            id: "",
+            accountId: "3FSDP47jnDNDlbshophTrGYKvVnGK-TGHCtSVDuP3noLPV8",
+            puuid: "pDxMtQ0DTUoaxSu3WUz9itOTZphTc-9b9uTIrQXsQGFXxhgjjIIhyfY9NEaoZZGdKD-qgYbMPK42jg",
+            profileIconId: 1433,
+            revisionDate: 1745890069000,
+            summonerLevel: 351
+        };
+
+        result = Validators.SummonerValidator.validate(emptyId);
+
+        expect(result).toBeDefined();
+        expect(result.success).toBe(false);
+        expect(result.error).not.toBeNull;
+        expect(result.error?.message).toContain('id is required')
+    });
+
+    test('Using union type, invalid accountId', () => {
+        const tooLongAccountId: Interfaces.ISummonerDTO = {
+            id: "ugo6n4jo5MC4lq28xdh7m4TFNvq3kspmoG2CdNir9eZi8oA",
+            accountId: "3FSDP47jnDNDlbshophTrGYKvVnGK-TGHCtSVDuP3noLPV8-V88888888",
+            puuid: "pDxMtQ0DTUoaxSu3WUz9itOTZphTc-9b9uTIrQXsQGFXxhgjjIIhyfY9NEaoZZGdKD-qgYbMPK42jg",
+            profileIconId: 1433,
+            revisionDate: 1745890069000,
+            summonerLevel: 351
+        };
+
+        let result = Validators.SummonerValidator.validate(tooLongAccountId);
+
+        expect(result).not.toBeNull;
+        expect(result.success).toBe(false);
+        expect(result.error).not.toBeNull;
+        expect(result.error?.message).toContain('accountId : Must be 56 characters long');
+
+
+        const emptyAccountId: Interfaces.ISummonerDTO = {
+            id: "ugo6n4jo5MC4lq28xdh7m4TFNvq3kspmoG2CdNir9eZi8oA",
+            accountId: "",
+            puuid: "pDxMtQ0DTUoaxSu3WUz9itOTZphTc-9b9uTIrQXsQGFXxhgjjIIhyfY9NEaoZZGdKD-qgYbMPK42jg",
+            profileIconId: 1433,
+            revisionDate: 1745890069000,
+            summonerLevel: 351
+        };
+
+        result = Validators.SummonerValidator.validate(emptyAccountId);
+
+        expect(result).toBeDefined();
+        expect(result.success).toBe(false);
+        expect(result.error).not.toBeNull;
+        expect(result.error?.message).toContain('accountId is required')
+    });
+
+    test('Using union type, invalid puuid', () => {
+        const tooLongPuuid: Interfaces.ISummonerDTO = {
+            id: "ugo6n4jo5MC4lq28xdh7m4TFNvq3kspmoG2CdNir9eZi8oA",
+            accountId: "3FSDP47jnDNDlbshophTrGYKvVnGK-TGHCtSVDuP3noLPV8",
+            puuid: "pDxMtQ0DTUoaxSu3WUz9itOTZphTc-9b9uTIrQXsQGFXxhgjjIIhyfY9NEaoZZGdKD-qgYbMPK42jg-qgYbMPK42jg",
+            profileIconId: 1433,
+            revisionDate: 1745890069000,
+            summonerLevel: 351
+        };
+
+        let result = Validators.SummonerValidator.validate(tooLongPuuid);
+
+        expect(result).not.toBeNull;
+        expect(result.success).toBe(false);
+        expect(result.error).not.toBeNull;
+        expect(result.error?.message).toContain('puuid : Must be 78 characters long');
+
+
+        const emptyPuuid: Interfaces.ISummonerDTO = {
+            id: "ugo6n4jo5MC4lq28xdh7m4TFNvq3kspmoG2CdNir9eZi8oA",
+            accountId: "TGHCtSVDuP3noLPV8",
+            puuid: "",
+            profileIconId: 1433,
+            revisionDate: 1745890069000,
+            summonerLevel: 351
+        };
+
+        result = Validators.SummonerValidator.validate(emptyPuuid);
+
+        expect(result).toBeDefined();
+        expect(result.success).toBe(false);
+        expect(result.error).not.toBeNull;
+        expect(result.error?.message).toContain('puuid is required')
+    });
+
+});

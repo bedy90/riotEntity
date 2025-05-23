@@ -34,6 +34,7 @@ export interface ILeagueItemDTO_v4 {
 
     /**
      * Player's encrypted summonerId.
+     * TODO
      */
     summonerId: string;
 }
