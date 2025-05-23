@@ -69,6 +69,14 @@ jobs:
         token: ${{ secrets.GITHUB_TOKEN }}
         registry: "https://npm.pkg.github.com"
         tag: alpha
+        package: ./build
+
+    # - name: Publish on Github NPM package
+    #   working-directory: build
+    #   run: npm publish
+    #   env:
+    #     NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 
     - if: ${{ steps.publishTag.outputs.type }}
       run: echo "Version ${{ steps.publishTag.outputs.version }} has published !"
