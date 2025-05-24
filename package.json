@@ -31,6 +31,7 @@
     "npm:refreshLock": "npm i --package-lock-only",
     "npm:unUsedPackage": "npm prune",
     "npm:cleanDevPackage": "npm prune --production",
+    "npm:checkDependecy": "npx depcheck",
     "== Eslint ==": "",
     "eslint": "npx eslint .",
     "eslintFix": "npx eslint . --fix",
