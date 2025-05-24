@@ -64,33 +64,6 @@ export class InterfaceData {
         }
     }
 
-    // constructor(public filePath: string,
-    //             public originalName: string,
-    //             public className: string,
-    //             public iface: InterfaceDeclaration | null = null,
-    //             public typeAlias: TypeAliasDeclaration | null = null,
-    //             public namespaceType: NamespaceIndexTypes) {
-
-    //     this.headerInfo = null;
-    //     this.properties = [];
-    //     this.customTypes = new Set<string>();
-    //     this.globalTypes = new Set<string>();
-    //     this.imports = new Array<string>();
-    //     this.intProp = new Array<InterfaceProperties>();
-
-    //     if (this.namespaceType != NamespaceIndexTypes.VALIDATOR) {
-    //         this.addImport('import { Interfaces } from \'@/riotentity\';');
-    //     }
-
-    //     if (iface) {
-    //         const properties: PropertySignature[] = this.#getAllPropertiesByInterfaceDeclaration(iface);
-    //         this.addProperties(properties);
-    //     }
-    //     if (typeAlias) {
-    //         console.log('alias')
-    //     }
-    // }
-
     addHeader(header: HeaderInfo): void {
         this.headerInfo = header;
     }

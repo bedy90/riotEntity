@@ -1,11 +1,13 @@
 
 import * as path from 'path';
 import * as fs from 'fs-extra';
+import { PropertySignature } from 'ts-morph';
 
 import '../logger';
 import { NamespaceIndexTypes } from '../common';
-import { HeaderInfo, InterfaceData } from '../entities/interfaceData';
-import { PropertySignature } from 'ts-morph';
+import { InterfaceData } from '../entities/interfaceData-clean';
+import { HeaderInfo } from '../entities/headerInfo';
+// import { InterfaceProperties } from '../entities/interfaceProperties';
 
 export class GenerateValidator {
 
@@ -39,7 +41,7 @@ export class GenerateValidator {
 
                     // const interfaceName: string = intData.originalName;
                     // intData.properties : Is NULL
-                    const properties = intData.properties.map((property: PropertySignature) => `${property.getName()}: ${property.getTypeNode()?.getText()}`);
+                    // const properties = intData.properties.map((property: PropertySignature) => `${property.getName()}: ${property.getTypeNode()?.getText()}`);
 
                     fileContent = intData.validatorContent();
                     // fileContent += `export class ${intData.getClassesNameWithoutVersion()}Validator {`

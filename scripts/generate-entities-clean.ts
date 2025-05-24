@@ -1,12 +1,10 @@
-import { Project, PropertySignature } from 'ts-morph';
-import * as fs from 'fs-extra';
-import * as path from 'path';
+import { Project } from 'ts-morph';
 
 import './logger';
 import { logType } from './logger';
 
 import { InterfaceData } from './entities/interfaceData-clean';
-import { NamespaceIndexTypes, ValidationTypes } from './common';
+import { NamespaceIndexTypes } from './common';
 import { GenerateIndex } from './index/generate-index';
 import { InterfaceParser } from './interface-parser';
 import { GenerateValidator } from './index/generate-validator';
@@ -66,7 +64,7 @@ export class Generator {
    * @param namespaceType 
    * @param initialParse 
    */
-  #initializeInterfaceParser(folderPath: string[], namespaceType: NamespaceIndexTypes) : void {
+  #initializeInterfaceParser(folderPath: string[], namespaceType: NamespaceIndexTypes): void {
     this.intParser = new InterfaceParser(this.project, namespaceType, this.entitiesData);
     this.intParser.ParseFiles(folderPath);
   }
@@ -78,24 +76,27 @@ const mainGenerator: Generator = new Generator();
 
 const firstArgs: string = process.argv[2];
 switch (firstArgs) {
-  case '2':
+  case '1':
   case 'interfaceIndex':
   case 'intIndex':
+  case 'index':
     console.log(logType.INDEX, 'Generation of interface indexes from main interfaces.');
     mainGenerator.processIndexNamespace(['src/interface/**/*.ts', '!src/interface/**/index.ts'], NamespaceIndexTypes.INTERFACE);
     console.log(logType.INDEX, 'Generation of interface indexes from interfaces is now complete');
     break;
 
-  case '4':
+  case '2':
+  case 'schema':
+    console.log(logType.SCHEMA, 'Generation of validation schemas from main interfaces.');
+    // mainGenerator.processValidator(['src/interface/**/*.ts', '!src/interface/**/index.ts'], NamespaceIndexTypes.VALIDATOR);
+    console.log(logType.SCHEMA, 'Generation of validations classes from interfaces is now complete');
+
+  case '3':
   case 'validator':
     console.log(logType.VALIDATOR, 'Generation of validations classes from main interfaces.');
     // console.warn(logType.CLASS, 'The process has been deactivated.');
     mainGenerator.processValidator(['src/interface/**/*.ts', '!src/interface/**/index.ts'], NamespaceIndexTypes.VALIDATOR);
     console.log(logType.VALIDATOR, 'Generation of validations classes from interfaces is now complete');
-    break;
-
-  case '5':
-  case 'test':
     break;
 
   default:

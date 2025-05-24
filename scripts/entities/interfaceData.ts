@@ -1,295 +1,321 @@
-import { InterfaceDeclaration, PropertySignature, TypeAliasDeclaration } from 'ts-morph';
-import { ImportTypes, NamespaceIndexTypes } from '../common';
-import path from 'path';
+// import { InterfaceDeclaration, PropertySignature, TypeAliasDeclaration } from 'ts-morph';
+// import { ImportTypes, NamespaceIndexTypes } from '../common';
+// import path from 'path';
 
-export class HeaderInfo {
+// export class HeaderInfo {
 
-    constructor(public namespace: string | (any | undefined),
-        public version: number | (any | undefined),
-        public name: string | (any | undefined),
-        public prefix: string | (any | undefined),
-        public notImplemented: boolean) {
-    }
+//     constructor(public namespace: string | (any | undefined),
+//         public version: number | (any | undefined),
+//         public name: string | (any | undefined),
+//         public prefix: string | (any | undefined),
+//         public notImplemented: boolean) {
+//     }
 
-    isValid(): boolean {
-        if (!this.namespace || !this.version || !this.name) {
-            return false
-        }
-        return true;
-    }
-}
+//     isValid(): boolean {
+//         if (!this.namespace || !this.version || !this.name) {
+//             return false
+//         }
+//         return true;
+//     }
+// }
 
-/**
- * Classe responsable de la génération des classes d'entités a partir des interfaces
- */
-export class InterfaceData {
+// export class InterfaceProperties {
 
-    headerInfo!: HeaderInfo | null;
-    properties: PropertySignature[];
-    customTypes: Set<string>;
-    globalTypes: Set<string>;
-    imports: string[];
-    jdocHeader!: string;
+//     constructor (public propertyName: string, public propertyType: string) {
 
-    constructor(public filePath: string,
-        public originalName: string,
-        public className: string,
-        public iface: InterfaceDeclaration | null = null,
-        public typeAlias: TypeAliasDeclaration | null = null,
-        type: NamespaceIndexTypes) {
+//     }
+// }
 
-        this.headerInfo = null;
-        this.properties = [];
-        this.customTypes = new Set<string>();
-        this.globalTypes = new Set<string>();
-        this.imports = new Array<string>();
+// /**
+//  * Classe responsable de la génération des classes d'entités a partir des interfaces
+//  */
+// export class InterfaceData {
 
-        if (type != NamespaceIndexTypes.VALIDATOR) {
-            this.addImport('import { Interfaces } from \'@/riotentity\';');
-        }
+//     /**
+//      * Current JsDoc Header
+//      */
+//     headerInfo!: HeaderInfo | null;
+//     properties: PropertySignature[];
+//     customTypes: Set<string>;
+//     globalTypes: Set<string>;
+//     imports: string[];
+//     jdocHeader!: string;
 
-        if (iface) {
-            const properties: PropertySignature[] = this.#getAllPropertiesByInterfaceDeclaration(iface);
-            this.addProperties(properties);
-        }
-    }
+//     intProp: InterfaceProperties[];
 
-    addHeader(header: HeaderInfo): void {
-        this.headerInfo = header;
-    }
+//     /**
+//      * Allinteface : new InterfaceData(filePath, interfaceName, className, iface, null, this.namespaceType);
+//      * TypeAlias : new InterfaceData(filePath, typeName, className, globalInterface, null, type);
+//      * @param filePath 
+//      * @param originalName 
+//      * @param className 
+//      * @param iface 
+//      * @param typeAlias 
+//      * @param namespaceType 
+//      */
+//     constructor(public filePath: string,
+//                 public originalName: string,
+//                 public className: string,
+//                 public iface: InterfaceDeclaration | null = null,
+//                 public typeAlias: TypeAliasDeclaration | null = null,
+//                 public namespaceType: NamespaceIndexTypes) {
 
-    addProperties(properties: PropertySignature[]): void {
-        if (properties && properties.length > 0) {
-            this.properties = properties;
-            // TODO : Ne pas faire pour Validator ? Ou faire avec « Validator » au lieu de « Interface »
-            this.addCustomAndGlobalTypes(this.properties);
-        }
-    }
+//         this.headerInfo = null;
+//         this.properties = [];
+//         this.customTypes = new Set<string>();
+//         this.globalTypes = new Set<string>();
+//         this.imports = new Array<string>();
+//         this.intProp = new Array<InterfaceProperties>();
 
-    addTypes(custom: Set<string>, global: Set<string>): void {
-        this.customTypes = custom;
-        this.globalTypes = global;
-    }
+//         if (this.namespaceType != NamespaceIndexTypes.VALIDATOR) {
+//             this.addImport('import { Interfaces } from \'@/riotentity\';');
+//         }
 
-    addType(data: { customTypes: Set<string>, globalTypes: Set<string> }): void {
-        this.customTypes = data.customTypes;
-        this.globalTypes = data.globalTypes;
-    }
+//         if (iface) {
+//             const properties: PropertySignature[] = this.#getAllPropertiesByInterfaceDeclaration(iface);
+//             this.addProperties(properties);
+//         }
+//         if (typeAlias) {
+//             console.log('alias')
+//         }
+//     }
 
-    addImport(importData: string): void {
-        if (importData) {
-            this.imports.push(importData);
-        }
-    }
+//     addHeader(header: HeaderInfo): void {
+//         this.headerInfo = header;
+//     }
 
-    addJDOC(jdocData: string) {
-        if (jdocData) {
-            this.jdocHeader = jdocData;
-        }
-    }
+//     addProperties(properties: PropertySignature[]): void {
+//         if (properties && properties.length > 0) {
+//             this.properties = properties;
+//             // TODO : Ne pas faire pour Validator ? Ou faire avec « Validator » au lieu de « Interface »
+//             this.addCustomAndGlobalTypes(this.properties);
+//         }
+//     }
 
-    getFileName(): string {
-        return path.parse(this.filePath).name;
-    }
+//     addTypes(custom: Set<string>, global: Set<string>): void {
+//         this.customTypes = custom;
+//         this.globalTypes = global;
+//     }
 
-    getExportPath(): string {
-        return `./${this.headerInfo?.version}/${this.getFileName()}`;
-    }
+//     addType(data: { customTypes: Set<string>, globalTypes: Set<string> }): void {
+//         this.customTypes = data.customTypes;
+//         this.globalTypes = data.globalTypes;
+//     }
 
-    getExportAlias(): string {
-        return (this.headerInfo?.prefix ? `I${this.headerInfo?.prefix}${this.className}` : '');
-    }
+//     addImport(importData: string): void {
+//         if (importData) {
+//             this.imports.push(importData);
+//         }
+//     }
 
-    getPrefix(): string {
-        return (this.headerInfo?.prefix ? this.headerInfo?.prefix : '');
-    }
+//     addJDOC(jdocData: string) {
+//         if (jdocData) {
+//             this.jdocHeader = jdocData;
+//         }
+//     }
 
-    getInterfaceNameWithoutVersion(): string {
-        return this.originalName.substring(0, this.originalName.lastIndexOf("_"));
-    }
-    getClassesNameWithoutVersion(): string {
-        return this.className.substring(0, this.className.lastIndexOf("_"));
-    }
-    getValidatorClassesName(): string {
-        let className : string = this.className.substring(0, this.className.lastIndexOf("_"));
-        className = className.replace('DTO', '');
+//     getFileName(): string {
+//         return path.parse(this.filePath).name;
+//     }
 
-        return `${className}Validator`;
-    }
+//     getExportPath(): string {
+//         return `./${this.headerInfo?.version}/${this.getFileName()}`;
+//     }
 
-    classContent(): string {
-        if (!this.headerInfo) {
-            throw new Error('HeaderInfo can\'t be null');
-        }
-        const classContent: string[] = [];
-        classContent.push(...this.imports);
-        classContent.push(this.jdocHeader);
-        classContent.push(`export class ${this.className} implements Interfaces.${this.headerInfo.name}_${this.headerInfo.version} {`);
+//     getExportAlias(): string {
+//         return (this.headerInfo?.prefix ? `I${this.headerInfo?.prefix}${this.className}` : '');
+//     }
 
-        classContent.push(this.#generateProperties());
-        classContent.push('}\n'); // add /n for add a empty line EOF
+//     getPrefix(): string {
+//         return (this.headerInfo?.prefix ? this.headerInfo?.prefix : '');
+//     }
 
-        // Utiliser \r\n pour les fins de ligne Windows CR LF
-        // return classContent.join(`\r\n`);
+//     getInterfaceNameWithoutVersion(): string {
+//         return this.originalName.substring(0, this.originalName.lastIndexOf("_"));
+//     }
+//     getClassesNameWithoutVersion(): string {
+//         return this.className.substring(0, this.className.lastIndexOf("_"));
+//     }
+//     getValidatorClassesName(): string {
+//         let className : string = this.className.substring(0, this.className.lastIndexOf("_"));
+//         className = className.replace('DTO', '');
 
-        // Utiliser \n pour les fins de ligne Unix LF
-        return classContent.join('\n');
-    }
+//         return `${className}Validator`;
+//     }
 
-    validatorContent(): string {
-        if (!this.headerInfo) {
-            throw new Error('HeaderInfo can\'t be null');
-        }
+//     classContent(): string {
+//         if (!this.headerInfo) {
+//             throw new Error('HeaderInfo can\'t be null');
+//         }
+//         const classContent: string[] = [];
+//         classContent.push(...this.imports);
+//         classContent.push(this.jdocHeader);
+//         classContent.push(`export class ${this.className} implements Interfaces.${this.headerInfo.name}_${this.headerInfo.version} {`);
 
-        const classContent: string[] = [];
-        classContent.push(...this.imports);
-        classContent.push(this.jdocHeader); // Avoir un Header différent our le validateur
-        classContent.push(`export class ${this.getValidatorClassesName()} {\n`);
+//         classContent.push(this.#generateProperties());
+//         classContent.push('}\n'); // add /n for add a empty line EOF
 
-        classContent.push(`\tstatic schema = z.object({});\n`);
-        // classContent.push(this.#generateProperties());
+//         // Utiliser \r\n pour les fins de ligne Windows CR LF
+//         // return classContent.join(`\r\n`);
 
-        classContent.push(`\tstatic validate(obj: any): SafeParseReturnType<any, any> {`);
-            // classContent.push(`\t\treturn AccountValidator.schema.safeParse(obj);`);
-        classContent.push(`\t\treturn this.schema.safeParse(obj);`);
-        classContent.push(`\t}`);
+//         // Utiliser \n pour les fins de ligne Unix LF
+//         return classContent.join('\n');
+//     }
 
-        classContent.push('\n}\n');
+//     validatorContent(): string {
+//         if (!this.headerInfo) {
+//             throw new Error('HeaderInfo can\'t be null');
+//         }
 
-        // Utiliser \r\n pour les fins de ligne Windows CR LF
-        // return classContent.join(`\r\n`);
+//         const classContent: string[] = [];
+//         classContent.push(...this.imports);
+//         classContent.push(this.jdocHeader); // Avoir un Header différent our le validateur
+//         classContent.push(`export class ${this.getValidatorClassesName()} {\n`);
 
-        // Utiliser \n pour les fins de ligne Unix LF
-        return classContent.join('\n');
-    }
+//         classContent.push(`\tstatic schema = z.object({});\n`);
+//         // classContent.push(this.#generateProperties());
 
-    /**
-     * Generate all imports from types list
-     * @param types
-     * @param importType
-     * @returns
-     */
-    addImportTypes(types: Set<string>, importType: ImportTypes): void {
-        if (types && types.size > 0) {
-            switch (importType) {
-                case ImportTypes.CUSTOM:
-                    const imports = `import { ${[...types].join(', ')} } from '@/riotentity';`; // \n
+//         classContent.push(`\tstatic validate(obj: any): SafeParseReturnType<any, any> {`);
+//             // classContent.push(`\t\treturn AccountValidator.schema.safeParse(obj);`);
+//         classContent.push(`\t\treturn this.schema.safeParse(obj);`);
+//         classContent.push(`\t}`);
 
-                    this.addImport(imports);
-                    break;
+//         classContent.push('\n}\n');
 
-                case ImportTypes.GLOBAL:
-                    // TODO: Now we can `import { Interfaces } from '@/riotentity'`; for Global/Shared
-                    types.forEach(globalType => {
-                        // TODO: Now we can `import { Interfaces } from '@/riotentity'`;
-                        // And use : Interfaces.Shared.IGLOBALXYZ
-                        // const globalImportPath = `@/src/interface/_Global/${globalType}`;
-                        // const imports = `import { ${globalType} } from '${globalImportPath}';`; // \n
+//         // Utiliser \r\n pour les fins de ligne Windows CR LF
+//         // return classContent.join(`\r\n`);
 
-                        // Interfaces.Shared.
+//         // Utiliser \n pour les fins de ligne Unix LF
+//         return classContent.join('\n');
+//     }
 
-                        // this.addImport(imports);
-                    });
-                    break;
-            }
-        }
-    }
+//     /**
+//      * Generate all imports from types list
+//      * @param types
+//      * @param importType
+//      * @returns
+//      */
+//     addImportTypes(types: Set<string>, importType: ImportTypes): void {
+//         if (types && types.size > 0) {
+//             switch (importType) {
+//                 case ImportTypes.CUSTOM:
+//                     const imports = `import { ${[...types].join(', ')} } from '@/riotentity';`; // \n
 
-    /**
-     * Fonction pour extraire les types personnalisés des propriétés d'une interface
-     * @param properties
-     * @returns
-     */
-    addCustomAndGlobalTypes(properties: PropertySignature[]): void {
-        const customTypes = new Set<string>();
-        const globalTypes = new Set<string>();
+//                     this.addImport(imports);
+//                     break;
 
-        properties.forEach(property => {
-            const propType = property.getTypeNode()?.getText() || '';
-            const matches = propType.match(/\b[A-Z][a-zA-Z0-9_]*\b/g);
+//                 case ImportTypes.GLOBAL:
+//                     // TODO: Now we can `import { Interfaces } from '@/riotentity'`; for Global/Shared
+//                     types.forEach(globalType => {
+//                         // TODO: Now we can `import { Interfaces } from '@/riotentity'`;
+//                         // And use : Interfaces.Shared.IGLOBALXYZ
+//                         // const globalImportPath = `@/src/interface/_Global/${globalType}`;
+//                         // const imports = `import { ${globalType} } from '${globalImportPath}';`; // \n
 
-            if (matches) {
-                matches.forEach(type => {
-                    // Exclure les types contenant « Interfaces » ainsi que les types primitifs et globaux
-                    if (!propType.includes('Interfaces.') &&
-                        !['string', 'number', 'boolean', 'any', 'undefined', 'null', 'void', 'never', 'object', 'unknown', 'map'].includes(type.toLowerCase())) {
+//                         // Interfaces.Shared.
 
-                        if (type == 'Declarations' && propType.includes(type)) {
-                            if (!customTypes.has(type)) {
-                                customTypes.add(type);
-                            }
-                        }
+//                         // this.addImport(imports);
+//                     });
+//                     break;
+//             }
+//         }
+//     }
 
-                        // Split customType and globalTypes
-                        if (type.toLowerCase().includes('_global') || type.toLowerCase().includes('Shared')) {
-                            // globalTypes.add(type);
-                            if (!globalTypes.has(type)) {
-                                globalTypes.add(type);
-                            }
-                        }
-                        /*else {
-                            if (!customTypes.has(type)) {
-                                customTypes.add(type);
-                            }
-                        }*/
+//     /**
+//      * Fonction pour extraire les types personnalisés des propriétés d'une interface
+//      * @param properties
+//      * @returns
+//      */
+//     addCustomAndGlobalTypes(properties: PropertySignature[]): void {
+//         const customTypes = new Set<string>();
+//         const globalTypes = new Set<string>();
 
-                        // Foreach
-                    } else {
-                        // "Interfaces.TFT_ICompanionDTO_v1"
-                        // "Interfaces.TFT_ITraitDTO_v1[]"
-                        // "Interfaces.TFT_IUnitDTO_v1[]"
-                        // etc.
-                        // console.log('exclude')
-                    }
-                });
-            }
-        });
-        this.globalTypes = globalTypes;
-        this.customTypes = customTypes;
+//         properties.forEach(property => {
+//             const propType = property.getTypeNode()?.getText() || '';
+//             const matches = propType.match(/\b[A-Z][a-zA-Z0-9_]*\b/g);
 
-        this.addTypes(customTypes, globalTypes);
-        this.addImportTypes(customTypes, ImportTypes.CUSTOM);
-        this.addImportTypes(globalTypes, ImportTypes.GLOBAL);
-    }
+//             if (matches) {
+//                 matches.forEach(type => {
+//                     // Exclure les types contenant « Interfaces » ainsi que les types primitifs et globaux
+//                     if (!propType.includes('Interfaces.') &&
+//                         !['string', 'number', 'boolean', 'any', 'undefined', 'null', 'void', 'never', 'object', 'unknown', 'map'].includes(type.toLowerCase())) {
 
-    /**
-     * Generate all properties
-     * @param properties
-     * @returns
-     */
-    #generateProperties(): string {
-        const propertiesData: string[] = [];
+//                         if (type == 'Declarations' && propType.includes(type)) {
+//                             if (!customTypes.has(type)) {
+//                                 customTypes.add(type);
+//                             }
+//                         }
 
-        if (this.properties && this.properties.length > 0) {
-            this.properties.forEach((property: PropertySignature) => {
-                const propName = property.getName();
-                const propType = property.getTypeNode()?.getText() || 'any';
+//                         // Split customType and globalTypes
+//                         if (type.toLowerCase().includes('_global') || type.toLowerCase().includes('Shared')) {
+//                             // globalTypes.add(type);
+//                             if (!globalTypes.has(type)) {
+//                                 globalTypes.add(type);
+//                             }
+//                         }
+//                         /*else {
+//                             if (!customTypes.has(type)) {
+//                                 customTypes.add(type);
+//                             }
+//                         }*/
 
-                propertiesData.push(`    ${propName}!: ${propType};`);
-            });
-        }
-        return propertiesData.join('\n');
-    }
+//                         // Foreach
+//                     } else {
+//                         // "Interfaces.TFT_ICompanionDTO_v1"
+//                         // "Interfaces.TFT_ITraitDTO_v1[]"
+//                         // "Interfaces.TFT_IUnitDTO_v1[]"
+//                         // etc.
+//                         // console.log('exclude')
+//                     }
+//                 });
+//             }
+//         });
+//         this.globalTypes = globalTypes;
+//         this.customTypes = customTypes;
 
-    /**
-     * Fonction pour extraire les propriétés d'une interface, y compris celles héritées
-     * @param iface
-     * @returns
-     */
-    #getAllPropertiesByInterfaceDeclaration(iface: InterfaceDeclaration): PropertySignature[] {
-        const properties: PropertySignature[] = [];
+//         this.addTypes(customTypes, globalTypes);
+//         this.addImportTypes(customTypes, ImportTypes.CUSTOM);
+//         this.addImportTypes(globalTypes, ImportTypes.GLOBAL);
+//     }
 
-        // Ajouter les propriétés de l'interface actuelle
-        properties.push(...iface.getProperties());
+//     /**
+//      * Generate all properties
+//      * @param properties
+//      * @returns
+//      */
+//     #generateProperties(): string {
+//         const propertiesData: string[] = [];
 
-        // Parcourir les interfaces héritées
-        iface.getExtends().forEach(heritageClause => {
-            const extendedInterface = heritageClause.getType().getSymbol()?.getDeclarations()[0] as InterfaceDeclaration;
-            if (extendedInterface) {
-                properties.push(...this.#getAllPropertiesByInterfaceDeclaration(extendedInterface));
-            }
-        });
+//         if (this.properties && this.properties.length > 0) {
+//             this.properties.forEach((property: PropertySignature) => {
+//                 const propName = property.getName();
+//                 const propType = property.getTypeNode()?.getText() || 'any';
 
-        return properties;
-    }
-}
+//                 propertiesData.push(`    ${propName}!: ${propType};`);
+//             });
+//         }
+//         return propertiesData.join('\n');
+//     }
+
+//     /**
+//      * Fonction pour extraire les propriétés d'une interface, y compris celles héritées
+//      * @param iface
+//      * @returns
+//      */
+//     #getAllPropertiesByInterfaceDeclaration(iface: InterfaceDeclaration): PropertySignature[] {
+//         const properties: PropertySignature[] = [];
+
+//         // Ajouter les propriétés de l'interface actuelle
+//         properties.push(...iface.getProperties());
+
+//         // Parcourir les interfaces héritées
+//         iface.getExtends().forEach(heritageClause => {
+//             const extendedInterface = heritageClause.getType().getSymbol()?.getDeclarations()[0] as InterfaceDeclaration;
+//             if (extendedInterface) {
+//                 properties.push(...this.#getAllPropertiesByInterfaceDeclaration(extendedInterface));
+//             }
+//         });
+
+//         return properties;
+//     }
+// }

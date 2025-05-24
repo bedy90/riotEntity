@@ -64,6 +64,8 @@ export class InterfaceParser {
             const fileName : string | null = iface?.getSourceFile()?.getBaseName() || null; // Full FileName (IAccountDTO.ts)
             const fileNameWithoutExt : string | null = iface?.getSourceFile()?.getBaseNameWithoutExtension() || null; // Filename without ext (IAccountDTO)
 
+            // TODO 2025 : Adaptation pour la génération de Index du « Global »
+            //             Il ne faudrait sans doute pas avoir de « UnionType» pour éviter les conflits (Ex. IMiniSeriesDTO)
             if (!fileName || fileName.toLowerCase().includes('index.ts') || (!includeGlobal && fileName.toLowerCase().includes('_global'))) {
                 return;
             }
