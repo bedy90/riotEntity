@@ -7,11 +7,15 @@
   "exports": {
     ".": {
       "import": "./build/index.js",
-      "types": "./build/index.d.ts"
+      "require": "./build/index.js",
+      "types": "./build/index.d.ts",
+      "default": "./build/index.js"
     },
     "./riotentity": {
       "import": "./build/riotentity.js",
-      "types": "./build/riotentity.d.ts"
+      "require": "./build/riotentity.js",
+      "types": "./build/riotentity.d.ts",
+      "default": "./build/riotentity.js"
     }
   },
   "scripts": {
@@ -34,9 +38,10 @@
     "pubish_dry": "npm publish --dry-run",
     "pubish_build_dry": "npm publish ./build --dry-run",
     "build:package": "node scripts/generate-prod-package.js",
-    "build:tsc": "npx tsc",
+    "build:tsc": "npx tsc && tsc-alias",
     "build:tsc_rim": "rimraf ./build && tsc",
-    "build:full": "rimraf ./build && tsc && npm run build:package",
+    "build:full": "rimraf ./build && tsc && tsc-alias && npm run build:package",
+    "testAA": "rimraf ./build && tsc && tsc-alias",
     "build:tsup_pack": "tsup --config tsup.config.ts"
   },
   "files": [
@@ -85,13 +90,14 @@
     "ts-jest": "^29.3.2",
     "ts-morph": "^25.0.1",
     "ts-node": "^10.9.2",
+    "tsc-alias": "^1.8.16",
+    "tsconfig-paths": "^4.2.0",
     "tsup": "^8.4.0",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.31.0",
     "undici": "^7.8.0"
   },
   "dependencies": {
-    "tsconfig-paths": "^4.2.0",
     "zod": "^3.24.4"
   }
 }

@@ -10,6 +10,20 @@ const filePath = path.join(__dirname, '..', 'build', 'package.json');
 // Supprimer les devDependencies
 delete prodPackage.devDependencies;
 
+// Vérifier et modifier les chemins dans "exports"
+if (prodPackage.exports) {
+  for (const key in prodPackage.exports) {
+    const exportEntry = prodPackage.exports[key];
+    if (typeof exportEntry === 'object' && exportEntry !== null) {
+      for (const subKey of ['import', 'types', 'require', 'default']) {
+        if (exportEntry[subKey]) {
+          exportEntry[subKey] = exportEntry[subKey].replace('/build/', '/');
+        }
+      }
+    }
+  }
+}
+
 // Autres modifications souhaitées, par exemple :
 prodPackage.scripts = {
   start: 'node index.js',
