@@ -11,4 +11,5 @@
 export interface IMatchTimelineDto_v5 {
     // TODO
     // https://developer.riotgames.com/apis#match-v5/GET_getTimeline
+    // /lol/match/v5/matches/{matchId}/timeline
 }

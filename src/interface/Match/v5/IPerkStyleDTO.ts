@@ -9,6 +9,8 @@ import { Interfaces } from '@/riotentity';
  */
 export interface IPerkStyleDTO_v5 {
     description: string;
+
     selections: Interfaces.IPerkStyleSelectionDTO_v5[];
+
     style: number;
 }

@@ -128,3 +128,16 @@ export enum TraitStyle {
     GOLD = 3,
     CHROMATIC = 4
 }
+
+export enum GlobalRegions {
+    EUROPE = 'EUROPE',
+    AMERICAS = 'AMERICAS',
+    ASIA = 'ASIA',
+    ESPORTS = 'ESPORTS',
+    SEA = 'SEA' // Oldest region
+}
+
+export enum Regions {
+    'BR1', 'EUN1', 'EUW1', 'JP1', 'KR', 'LA1', 'LA2', 'ME1', 'NA1', 'OC1', 'RU', 'SG2', 'TR1', 'TW2', 'TVN2'
+}
+

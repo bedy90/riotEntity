@@ -7,6 +7,8 @@
  */
 export interface IPerkStatsDTO_v5 {
     defense: number;
+
     flex: number;
+
     offense: number;
 }

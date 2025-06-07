@@ -19,4 +19,3 @@ export interface IActiveShardDTO_v1 {
 
     activeShard: string;
 }
-// Note we can include « @NotImplemented » on JHeader for exclude process

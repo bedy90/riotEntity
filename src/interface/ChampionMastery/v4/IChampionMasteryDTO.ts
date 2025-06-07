@@ -1,3 +1,5 @@
+import { Interfaces } from '@/riotentity';
+
 /**
  * Interface IChampionMasteryDTO
  *
@@ -15,7 +17,7 @@ export interface IChampionMasteryDTO_v4 {
     /**
      * Number of points needed to achieve next level. Zero if player reached maximum champion level for this champion.
      */
-    championPointsUntilNextLevel: number;
+    championPointsUntilNextLevel: bigint;
 
     /**
      * Is chest granted for this champion or not in current season.
@@ -25,12 +27,12 @@ export interface IChampionMasteryDTO_v4 {
     /**
      * Champion ID for this entry.
      */
-    championId: number;
+    championId: bigint;
 
     /**
      * Last time this champion was played by this player - in Unix milliseconds time format.
      */
-    lastPlayTime: number;
+    lastPlayTime: bigint;
 
     /**
      * 	Champion level for specified player and champion combination.
@@ -45,10 +47,18 @@ export interface IChampionMasteryDTO_v4 {
     /**
      * Number of points earned since current level has been achieved.
      */
-    championPointsSinceLastLevel: number;
+    championPointsSinceLastLevel: bigint; // long
+
+    markRequiredForNextLevel: number;
+
+    championSeasonMilestone: number;
+
+    nextSeasonMilestone: Interfaces.INextSeasonMilestonesDTO_v4;
 
     /**
      * 	The token earned for this champion at the current championLevel. When the championLevel is advanced the tokensEarned resets to 0.
      */
     tokensEarned: number;
+
+    milestoneGrades: string[];
 }

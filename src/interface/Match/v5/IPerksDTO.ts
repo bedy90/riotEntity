@@ -9,5 +9,6 @@ import { Interfaces } from '@/riotentity';
  */
 export interface IPerksDTO_v5 {
     statPerks: Interfaces.IPerkStatsDTO_v5;
+
     styles: Interfaces.IPerkStyleDTO_v5[];
 }

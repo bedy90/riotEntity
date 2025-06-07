@@ -11,7 +11,13 @@ import { Declarations } from '@/riotentity';
 export interface IPlayerDTO_v1 {
     summonerId: string;
 
-    teamId: string;
+     /**
+     * Player Universal Unique Identifier
+     * @length 78
+     */
+    puuid: string;
+
+    teamId?: string;
 
     /**
      * (Legal values: UNSELECTED, FILL, TOP, JUNGLE, MIDDLE, BOTTOM, UTILITY)

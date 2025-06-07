@@ -11,9 +11,14 @@ import { Interfaces } from '@/riotentity';
  */
 export interface IInfoDTO_v5 {
     /**
+     * Refer to indicate if the game ended in termination.
+     */
+    endOfGameResult: string;
+
+    /**
      * Unix timestamp for when the game is created on the game server (i.e., the loading screen).
      */
-    gameCreation: number;
+    gameCreation: bigint;
 
     /**
      * Prior to patch 11.20, this field returns the game length in milliseconds calculated from gameEndTimestamp - gameStartTimestamp.
@@ -21,16 +26,16 @@ export interface IInfoDTO_v5 {
      * field consistent with that of match-v4. The best way to handling the change in this field is to treat the value as milliseconds if
      * the gameEndTimestamp field isn't in the response and to treat the value as seconds if gameEndTimestamp is in the response.
      */
-    gameDuration: number;
+    gameDuration: bigint;
 
     /**
      * 	Unix timestamp for when match ends on the game server. This timestamp can occasionally be significantly longer than when
      * the match "ends". The most reliable way of determining the timestamp for the end of the match would be to add the max time
      *  played of any participant to the gameStartTimestamp. This field was added to match-v5 in patch 11.20 on Oct 5th, 2021.
      */
-    gameEndTimestamp: number;
+    gameEndTimestamp: bigint;
 
-    gameId: number;
+    gameId: bigint;
 
     /**
      * Refer to the Game Constants documentation.
@@ -42,7 +47,7 @@ export interface IInfoDTO_v5 {
     /**
      * 	Unix timestamp for when match starts on the game server.
      */
-    gameStartTimestamp: number;
+    gameStartTimestamp: bigint;
 
     gameType: string;
 

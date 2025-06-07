@@ -16,10 +16,11 @@ export interface IObjectivesDTO_v5 {
 
     dragon: Interfaces.IObjectiveDTO_v5;
 
+    horde: Interfaces.IObjectiveDTO_v5;
+
     inhibitor: Interfaces.IObjectiveDTO_v5;
 
     riftHerald: Interfaces.IObjectiveDTO_v5;
 
     tower: Interfaces.IObjectiveDTO_v5;
-
 }

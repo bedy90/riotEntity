@@ -12,9 +12,15 @@ export interface ILeagueEntryDTO_Global {
 
     /**
      * Player's summonerId (Encrypted)
-     * TODO:
+     * @removed
      */
     summonerId: string;
+
+     /**
+     * Player's encrypted puuid.
+     * @length 78
+     */
+    puuid: string;
 
     queueType: string;
 

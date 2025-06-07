@@ -18,7 +18,7 @@ export interface IAccountDTO_v1 {
      * This field may be excluded from the response if the account doesn't have a gameName.
      * Do not use the # symbol. This is the separator between Game Name and Tagline.
      */
-    gameName: string;
+    gameName?: string;
 
     /**
      * @minLength 3
@@ -26,5 +26,5 @@ export interface IAccountDTO_v1 {
      * This field may be excluded from the response if the account doesn't have a tagLine.
      * [Any Unicode letter is supported]
      */
-    tagLine: string;
+    tagLine?: string;
 }

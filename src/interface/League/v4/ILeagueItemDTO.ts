@@ -15,7 +15,7 @@ export interface ILeagueItemDTO_v4 {
      */
     wins: number;
 
-    miniSeries: Interfaces.IMiniSeriesDTO_v4;
+    miniSeries?: Interfaces.IMiniSeriesDTO_v4;
 
     inactive: boolean;
 
@@ -34,7 +34,12 @@ export interface ILeagueItemDTO_v4 {
 
     /**
      * Player's encrypted summonerId.
-     * TODO
      */
     summonerId: string;
+
+     /**
+     * Player's encrypted puuid.
+     * @length 78
+     */
+     puuid: string;
 }

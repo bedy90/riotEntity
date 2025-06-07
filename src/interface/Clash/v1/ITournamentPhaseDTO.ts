@@ -9,9 +9,9 @@
 export interface ITournamentPhaseDTO_v1 {
     id: number;
 
-    registrationTime: number;
+    registrationTime: bigint;
 
-    startTime: number;
+    startTime: bigint;
 
     cancelled: boolean;
 }
