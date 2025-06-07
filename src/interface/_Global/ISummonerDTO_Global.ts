@@ -22,7 +22,7 @@ export interface ISummonerDTO_Global {
      * The following events will update this timestamp: profile icon change,
      * playing the tutorial or advanced tutorial, finishing a game, summoner name change
      */
-    revisionDate?: number;
+    revisionDate?: bigint;
 
     /**
      * Encrypted summoner ID. Max length 63 characters.
@@ -39,5 +39,5 @@ export interface ISummonerDTO_Global {
     /**
      * Summoner level associated with the summoner.
      */
-    summonerLevel: number;
+    summonerLevel: bigint;
 }

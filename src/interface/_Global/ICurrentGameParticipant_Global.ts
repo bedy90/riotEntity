@@ -12,7 +12,7 @@ export interface ICurrentGameParticipant_Global {
     /**
      * 	The ID of the champion played by this participant
      */
-    championId: number;
+    championId: bigint;
 
     /**
      * Perks / Runes Reforged Information
@@ -22,12 +22,12 @@ export interface ICurrentGameParticipant_Global {
     /**
      * The ID of the profile icon used by this participant
      */
-    profileIconId: number;
+    profileIconId: bigint;
 
     /**
      * The team ID of this participant, indicating the participant's team
      */
-    teamId: number;
+    teamId: bigint;
 
     /**
      * The encrypted summoner ID of this participant
@@ -42,12 +42,12 @@ export interface ICurrentGameParticipant_Global {
     /**
      * 	The ID of the first summoner spell used by this participant
      */
-    spell1Id: number;
+    spell1Id: bigint;
 
     /**
      * The ID of the second summoner spell used by this participant
      */
-    spell2Id: number;
+    spell2Id: bigint;
 
     /**
      * List of Game Customizations

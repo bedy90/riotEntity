@@ -19,12 +19,12 @@ export interface IFeaturedGameInfo_Global {
     /**
      * The amount of time in seconds that has passed since the game started
      */
-    gameLength: number;
+    gameLength: bigint;
 
     /**
      * The ID of the map
      */
-    mapId: number;
+    mapId: bigint;
 
     /**
      * The game type (Legal values: CUSTOM_GAME, MATCHED_GAME, TUTORIAL_GAME)
@@ -39,7 +39,7 @@ export interface IFeaturedGameInfo_Global {
     /**
      * The ID of the game
      */
-    gameId: number;
+    gameId: bigint;
 
     /**
      * The observer information
@@ -49,7 +49,7 @@ export interface IFeaturedGameInfo_Global {
     /**
      * The queue type (queue types are documented on the Game Constants page)
      */
-    gameQueueConfigId: number;
+    gameQueueConfigId: bigint;
 
     /**
      * 	The participant information

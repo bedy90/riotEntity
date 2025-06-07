@@ -14,10 +14,10 @@ export interface IBannedChampion_Global {
     /**
      * The ID of the banned champion
      */
-    championId: number;
+    championId: bigint;
 
     /**
      * The ID of the team that banned the champion
      */
-    teamId: number;
+    teamId: bigint;
 }

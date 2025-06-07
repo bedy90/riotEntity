@@ -12,7 +12,7 @@ export interface ICurrentGameInfo_Global {
     /**
      * The ID of the game
      */
-    gameId: number;
+    gameId: bigint;
 
     /**
      * The game type
@@ -22,17 +22,17 @@ export interface ICurrentGameInfo_Global {
     /**
      * The game start time represented in epoch milliseconds
      */
-    gameStartTime: number;
+    gameStartTime: bigint;
 
     /**
      * 	The ID of the map
      */
-    mapId: number;
+    mapId: bigint;
 
     /**
      * 	The amount of time in seconds that has passed since the game started
      */
-    gameLength: number;
+    gameLength: bigint;
 
     /**
      * The ID of the platform on which the game is being played
@@ -52,7 +52,7 @@ export interface ICurrentGameInfo_Global {
     /**
      * The queue type (queue types are documented on the Game Constants page)
      */
-    gameQueueConfigId: number;
+    gameQueueConfigId: bigint;
 
     /**
      * 	The observer information

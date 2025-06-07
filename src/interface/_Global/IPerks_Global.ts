@@ -9,15 +9,15 @@ export interface IPerks_Global {
     /**
      * IDs of the perks/runes assigned.
      */
-    perkIds: number[];
+    perkIds: bigint[];
 
     /**
      * Primary runes path
      */
-    perkStyle: number;
+    perkStyle: bigint;
 
     /**
      * Secondary runes path
      */
-    perkSubStyle: number;
+    perkSubStyle: bigint;
 }
