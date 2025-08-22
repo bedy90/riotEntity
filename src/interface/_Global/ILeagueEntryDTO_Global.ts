@@ -1,4 +1,4 @@
-import { IMiniSeriesDTO_Global } from './IMiniSeriesDTO_Global';
+import { IMiniSeriesDTO_Global } from './IMiniSeriesDTO_Global.js';
 
 /**
  * Interface ILeagueEntryDTO_Global

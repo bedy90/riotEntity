@@ -1,12 +1,12 @@
-import { IBannedChampion_v4 } from './v4/IBannedChampion';
-import { ICurrentGameInfo_v4 } from './v4/ICurrentGameInfo';
-import { ICurrentGameParticipant_v4 } from './v4/ICurrentGameParticipant';
-import { IFeaturedGameInfo_v4 } from './v4/IFeaturedGameInfo';
-import { IFeaturedGames_v4 } from './v4/IFeaturedGames';
-import { IGameCustomizationObject_v4 } from './v4/IGameCustomizationObject';
-import { IObserver_v4 } from './v4/IObserver';
-import { IParticipant_v4 } from './v4/IParticipant';
-import { IPerks_v4 } from './v4/IPerks';
+import { IBannedChampion_v4 } from './v4/IBannedChampion.js';
+import { ICurrentGameInfo_v4 } from './v4/ICurrentGameInfo.js';
+import { ICurrentGameParticipant_v4 } from './v4/ICurrentGameParticipant.js';
+import { IFeaturedGameInfo_v4 } from './v4/IFeaturedGameInfo.js';
+import { IFeaturedGames_v4 } from './v4/IFeaturedGames.js';
+import { IGameCustomizationObject_v4 } from './v4/IGameCustomizationObject.js';
+import { IObserver_v4 } from './v4/IObserver.js';
+import { IParticipant_v4 } from './v4/IParticipant.js';
+import { IPerks_v4 } from './v4/IPerks.js';
 
 export type {
 	IBannedChampion_v4, ICurrentGameInfo_v4, ICurrentGameParticipant_v4,

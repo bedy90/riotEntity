@@ -2,20 +2,18 @@
   "name": "@bedy90/riotentity",
   "version": "2025.1.1",
   "description": "Bedy90 - Riot Entity",
+  "type": "module",
+  "module": "build/index.js",
   "main": "build/index.js",
   "types": "build/index.d.ts",
   "exports": {
     ".": {
       "import": "./build/index.js",
-      "require": "./build/index.js",
-      "types": "./build/index.d.ts",
-      "default": "./build/index.js"
+      "require": "./build/index.js"
     },
     "./riotentity": {
       "import": "./build/riotentity.js",
-      "require": "./build/riotentity.js",
-      "types": "./build/riotentity.d.ts",
-      "default": "./build/riotentity.js"
+      "require": "./build/riotentity.js"
     }
   },
   "scripts": {
@@ -36,14 +34,17 @@
     "eslint": "npx eslint .",
     "eslintFix": "npx eslint . --fix",
     "== 2025 ==": "",
-    "pubish_dry": "npm publish --dry-run",
-    "pubish_build_dry": "npm publish ./build --dry-run",
-    "build:package": "node scripts/generate-prod-package.js",
+    "publish_dry": "npm publish --dry-run",
+    "publish_build_dry": "npm publish ./build --dry-run",
+    "build:package": "node scripts/generate-prod-package.cjs",
     "build:tsc": "npx tsc && tsc-alias",
     "build:tsc_rim": "rimraf ./build && tsc",
     "build:full": "rimraf ./build && tsc && tsc-alias && npm run build:package",
     "testAA": "rimraf ./build && tsc && tsc-alias",
-    "build:tsup_pack": "tsup --config tsup.config.ts"
+    "build:watch_dev": "tsup --config tsup.config.ts --watch",
+    "== 2025 build module ==": "",
+    "build:tsup_pack": "tsup --config tsup.config.ts",
+    "build:tsup_pack_rim": "rimraf ./build && tsup --config tsup.config.ts && npm run build:package"
   },
   "files": [
     "build/**/*",

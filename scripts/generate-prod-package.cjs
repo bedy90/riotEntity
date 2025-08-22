@@ -30,6 +30,7 @@ prodPackage.scripts = {
 };
 
 prodPackage.main = 'index.js';
+prodPackage.module = 'index.js';
 prodPackage.types = 'index.d.ts';
 prodPackage.files = ['**', 'changelog.md', 'readme.md'];
 

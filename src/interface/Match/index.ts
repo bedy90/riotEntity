@@ -1,17 +1,17 @@
-import { IBanDTO_v5 } from './v5/IBanDTO';
-import { IChallengesDTO_v5 } from './v5/IChallengesDTO';
-import { IInfoDTO_v5 } from './v5/IInfoDTO';
-import { IMatchDTO_v5 } from './v5/IMatchDTO';
-import { IMetadataDTO_v5 } from './v5/IMetadataDTO';
-import { IMissionsDTO_v5 } from './v5/IMissionsDTO';
-import { IObjectiveDTO_v5 } from './v5/IObjectiveDTO';
-import { IObjectivesDTO_v5 } from './v5/IObjectivesDTO';
-import { IParticipantDTO_v5 } from './v5/IParticipantDTO';
-import { IPerksDTO_v5 } from './v5/IPerksDTO';
-import { IPerkStatsDTO_v5 } from './v5/IPerkStatsDTO';
-import { IPerkStyleDTO_v5 } from './v5/IPerkStyleDTO';
-import { IPerkStyleSelectionDTO_v5 } from './v5/IPerkStyleSelectionDTO';
-import { ITeamDTO_v5 } from './v5/ITeamDTO';
+import { IBanDTO_v5 } from './v5/IBanDTO.js';
+import { IChallengesDTO_v5 } from './v5/IChallengesDTO.js';
+import { IInfoDTO_v5 } from './v5/IInfoDTO.js';
+import { IMatchDTO_v5 } from './v5/IMatchDTO.js';
+import { IMetadataDTO_v5 } from './v5/IMetadataDTO.js';
+import { IMissionsDTO_v5 } from './v5/IMissionsDTO.js';
+import { IObjectiveDTO_v5 } from './v5/IObjectiveDTO.js';
+import { IObjectivesDTO_v5 } from './v5/IObjectivesDTO.js';
+import { IParticipantDTO_v5 } from './v5/IParticipantDTO.js';
+import { IPerksDTO_v5 } from './v5/IPerksDTO.js';
+import { IPerkStatsDTO_v5 } from './v5/IPerkStatsDTO.js';
+import { IPerkStyleDTO_v5 } from './v5/IPerkStyleDTO.js';
+import { IPerkStyleSelectionDTO_v5 } from './v5/IPerkStyleSelectionDTO.js';
+import { ITeamDTO_v5 } from './v5/ITeamDTO.js';
 
 export type {
 	IBanDTO_v5, IChallengesDTO_v5, IInfoDTO_v5,

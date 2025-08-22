@@ -1,4 +1,4 @@
-import { Declarations } from '@/riotentity';
+import { Declarations } from '../../../index.js';
 
 /**
  * Interface TFT - ITraitDTO

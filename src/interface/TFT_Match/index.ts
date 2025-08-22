@@ -1,10 +1,10 @@
-import { ICompanionDTO_v1 as ITFT_CompanionDTO_v1 } from './v1/ICompanionDTO';
-import { IInfoDTO_v1 as ITFT_InfoDTO_v1 } from './v1/IInfoDTO';
-import { IMatchDTO_v1 as ITFT_MatchDTO_v1 } from './v1/IMatchDTO';
-import { IMetadataDTO_v1 as ITFT_MetadataDTO_v1 } from './v1/IMetadataDTO';
-import { IParticipantDTO_v1 as ITFT_ParticipantDTO_v1 } from './v1/IParticipantDTO';
-import { ITraitDTO_v1 as ITFT_TraitDTO_v1 } from './v1/ITraitDTO';
-import { IUnitDTO_v1 as ITFT_UnitDTO_v1 } from './v1/IUnitDTO';
+import { ICompanionDTO_v1 as ITFT_CompanionDTO_v1 } from './v1/ICompanionDTO.js';
+import { IInfoDTO_v1 as ITFT_InfoDTO_v1 } from './v1/IInfoDTO.js';
+import { IMatchDTO_v1 as ITFT_MatchDTO_v1 } from './v1/IMatchDTO.js';
+import { IMetadataDTO_v1 as ITFT_MetadataDTO_v1 } from './v1/IMetadataDTO.js';
+import { IParticipantDTO_v1 as ITFT_ParticipantDTO_v1 } from './v1/IParticipantDTO.js';
+import { ITraitDTO_v1 as ITFT_TraitDTO_v1 } from './v1/ITraitDTO.js';
+import { IUnitDTO_v1 as ITFT_UnitDTO_v1 } from './v1/IUnitDTO.js';
 
 export type {
 	ITFT_CompanionDTO_v1, ITFT_InfoDTO_v1, ITFT_MatchDTO_v1,

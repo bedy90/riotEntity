@@ -1,4 +1,5 @@
-import { Interfaces } from '@/riotentity';
+import { Interfaces } from '../../../index.js';
+
 /**
  * Interface ITournamentDTO
  *

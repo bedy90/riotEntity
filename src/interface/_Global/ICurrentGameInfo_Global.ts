@@ -1,6 +1,6 @@
-import { IBannedChampion_Global } from './IBannedChampion_Global';
-import { ICurrentGameParticipant_Global } from './ICurrentGameParticipant_Global';
-import { IObserver_Global } from './IObserver_Global';
+import { IBannedChampion_Global } from './IBannedChampion_Global.js';
+import { ICurrentGameParticipant_Global } from './ICurrentGameParticipant_Global.js';
+import { IObserver_Global } from './IObserver_Global.js';
 
 /**
  * Interface ICurrentGameInfo_Global

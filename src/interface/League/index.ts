@@ -1,7 +1,7 @@
-import { ILeagueEntryDTO_v4 } from './v4/ILeagueEntryDTO';
-import { ILeagueItemDTO_v4 } from './v4/ILeagueItemDTO';
-import { ILeagueListDTO_v4 } from './v4/ILeagueListDTO';
-import { IMiniSeriesDTO_v4 } from './v4/IMiniSeriesDTO';
+import { ILeagueEntryDTO_v4 } from './v4/ILeagueEntryDTO.js';
+import { ILeagueItemDTO_v4 } from './v4/ILeagueItemDTO.js';
+import { ILeagueListDTO_v4 } from './v4/ILeagueListDTO.js';
+import { IMiniSeriesDTO_v4 } from './v4/IMiniSeriesDTO.js';
 
 export type {
 	ILeagueEntryDTO_v4, ILeagueItemDTO_v4, ILeagueListDTO_v4,

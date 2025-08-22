@@ -12,17 +12,7 @@
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "noImplicitAny": true,
-    "skipLibCheck": true,
     "baseUrl": "./src",
-    "paths": {
-      // "@": ["index"],   
-      // "@/*": ["*"],
-      // "@riotentity": ["riotentity"],
-      "@/riotentity": ["riotentity"],
-      "@/riotentity/*": ["riotentity/*"],
-      // "@/riotentity/schema": ["schema/*"],
-      // "@riotentity/*": ["*"]
-    }
   },
   "include": [
     "src/**/*",
@@ -38,10 +28,7 @@
     "./scripts",
     "./lib",
     "./src/manual_test.ts",
-    "./src/test-export.ts",
     "*.ts1",
-    "*.txt",
-    "./src/schema/**",
-    "./src/validator/**",
+    "*.txt"
   ]
 }

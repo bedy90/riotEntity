@@ -1,4 +1,4 @@
-import { IFeaturedGameInfo_Global } from './IFeaturedGameInfo_Global';
+import { IFeaturedGameInfo_Global } from './IFeaturedGameInfo_Global.js';
 
 /**
  * Interface IFeaturedGames_Global

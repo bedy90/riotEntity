@@ -1,6 +1,6 @@
-import { IAccountDTO_v1 } from './v1/IAccountDTO';
-import { IAccountRegionDTO_v1 } from './v1/IAccountRegionDTO';
-import { IActiveShardDTO_v1 } from './v1/IActiveShardDTO';
+import { IAccountDTO_v1 } from './v1/IAccountDTO.js';
+import { IAccountRegionDTO_v1 } from './v1/IAccountRegionDTO.js';
+import { IActiveShardDTO_v1 } from './v1/IActiveShardDTO.js';
 
 export type {
 	IAccountDTO_v1, IAccountRegionDTO_v1, IActiveShardDTO_v1,

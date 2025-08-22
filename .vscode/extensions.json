@@ -4,6 +4,7 @@
         "github.vscode-pull-request-github",
         "felipecaputo.git-project-manager",
         "donjayamanne.githistory",
-        "idered.npm"
+        "idered.npm",
+        "codeium.codeium"
     ]
 }

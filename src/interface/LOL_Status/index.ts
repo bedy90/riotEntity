@@ -1,7 +1,7 @@
-import { IContentDTO_v4 } from './v4/IContentDTO';
-import { IPlatformDataDTO_v4 } from './v4/IPlatformDataDTO';
-import { IStatusDTO_v4 } from './v4/IStatusDTO';
-import { IUpdateDTO_v4 } from './v4/IUpdateDTO';
+import { IContentDTO_v4 } from './v4/IContentDTO.js';
+import { IPlatformDataDTO_v4 } from './v4/IPlatformDataDTO.js';
+import { IStatusDTO_v4 } from './v4/IStatusDTO.js';
+import { IUpdateDTO_v4 } from './v4/IUpdateDTO.js';
 
 export type {
 	IContentDTO_v4, IPlatformDataDTO_v4, IStatusDTO_v4,

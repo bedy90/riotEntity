@@ -81,3 +81,17 @@ export type IUser {
 ## Classe
 
 Export : `export class` permet d’exporter la classe.
+
+
+### Autre info
+module `NodeNext` (ou `Node16`) comprends
+ - modules CommonJS (require/module.exports) 
+ - modules ES Modules (import/export). 
+
+
+ `NodeNext` pour avoir le code le plus a jour.
+ 
+ ```
+"target": "es2022", // Ou "esnext" si vous êtes très à jour
+    "moduleResolution": "NodeNext", // Très important d'ajouter ceci aussi
+ ```

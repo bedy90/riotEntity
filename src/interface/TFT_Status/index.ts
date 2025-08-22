@@ -1,7 +1,7 @@
-import { IContentDTO_v1 as ITFT_ContentDTO_v1 } from './v1/IContentDTO';
-import { IPlatformDataDTO_v1 as ITFT_PlatformDataDTO_v1 } from './v1/IPlatformDataDTO';
-import { IStatusDTO_v1 as ITFT_StatusDTO_v1 } from './v1/IStatusDTO';
-import { IUpdateDTO_v1 as ITFT_UpdateDTO_v1 } from './v1/IUpdateDTO';
+import { IContentDTO_v1 as ITFT_ContentDTO_v1 } from './v1/IContentDTO.js';
+import { IPlatformDataDTO_v1 as ITFT_PlatformDataDTO_v1 } from './v1/IPlatformDataDTO.js';
+import { IStatusDTO_v1 as ITFT_StatusDTO_v1 } from './v1/IStatusDTO.js';
+import { IUpdateDTO_v1 as ITFT_UpdateDTO_v1 } from './v1/IUpdateDTO.js';
 
 export type {
 	ITFT_ContentDTO_v1, ITFT_PlatformDataDTO_v1, ITFT_StatusDTO_v1,

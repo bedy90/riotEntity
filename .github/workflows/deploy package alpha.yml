@@ -44,7 +44,8 @@ jobs:
       run: npm ci
 
     - name: Build
-      run: npm run build:tsc
+      run: npm run build:tsup_pack
+      # run: npm run build:tsc
 
     - name: Generator prod package
       run: npm run build:package

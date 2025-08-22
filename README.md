@@ -128,13 +128,17 @@ For more information about Riot's Developer API, please consult the official API
 | Account | ![Static Badge](https://img.shields.io/badge/implemented-v1-blue?style=for-the-badge&label=implemented&labelColor=grey) |
 | Champion | ![Static Badge](https://img.shields.io/badge/implemented-v3-blue?style=for-the-badge&label=implemented&labelColor=grey) |
 | Champion-Mastery | ![Static Badge](https://img.shields.io/badge/implemented-v4-blue?style=for-the-badge&label=implemented&labelColor=grey) |
+| Clash | ![Static Badge](https://img.shields.io/badge/implemented-v1-blue?style=for-the-badge&label=implemented&labelColor=grey) |
 | League | ![Static Badge](https://img.shields.io/badge/implemented-v4-blue?style=for-the-badge&label=implemented&labelColor=grey) |
+| League-Exp | ![Static Badge](https://img.shields.io/badge/implemented-v4-blue?style=for-the-badge&label=implemented&labelColor=grey) |
+| Lol Challenges | ![Static Badge](https://img.shields.io/badge/notimplemented-v1-red?style=for-the-badge&label=not%20implemented&labelColor=grey) |
+| Lol Status | ![Static Badge](https://img.shields.io/badge/notimplemented-v4-red?style=for-the-badge&label=not%20implemented&labelColor=grey) |
+| Spectactor | ![Static Badge](https://img.shields.io/badge/implemented-v4-blue?style=for-the-badge&label=implemented&labelColor=grey) |
 | Summoner | ![Static Badge](https://img.shields.io/badge/implemented-v4-blue?style=for-the-badge&label=implemented&labelColor=grey) |
 | TFTLeague* | ![Static Badge](https://img.shields.io/badge/implemented-v1-blue?style=for-the-badge&label=implemented&labelColor=grey) |
 | TFTSummoner* | ![Static Badge](https://img.shields.io/badge/implemented-v1-blue?style=for-the-badge&label=implemented&labelColor=grey) |
 
 > *The TFT entity used for summoner and league information is the same as that used for League of Legend.
-
 
 # Authors
 

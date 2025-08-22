@@ -1,6 +1,6 @@
-import { MaintenanceStatus, IncidentSeverity, Platforms } from '@/riotentity';
-import { IContentDTO_Global } from './IContentDTO_Global';
-import { IUpdateDTO_Global } from './IUpdateDTO_Global';
+import { MaintenanceStatus, IncidentSeverity, Platforms } from '../../index.js';
+import { IContentDTO_Global } from './IContentDTO_Global.js';
+import { IUpdateDTO_Global } from './IUpdateDTO_Global.js';
 
 /**
  * Interface IStatusDTO_Global

@@ -1,5 +1,5 @@
-import { IGameCustomizationObject_Global } from './IGameCustomizationObject_Global';
-import { IPerks_Global } from './IPerks_Global';
+import { IGameCustomizationObject_Global } from './IGameCustomizationObject_Global.js';
+import { IPerks_Global } from './IPerks_Global.js';
 
 /**
  * Interface ICurrentGameParticipant_Global

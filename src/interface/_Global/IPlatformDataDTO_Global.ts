@@ -1,4 +1,4 @@
-import { IStatusDTO_Global } from './IStatusDTO_Global';
+import { IStatusDTO_Global } from './IStatusDTO_Global.js';
 
 /**
  * Interface IPlatformDataDTO_Global

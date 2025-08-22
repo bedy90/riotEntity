@@ -1,6 +1,6 @@
 // eslint-disable max-len
 // eslint-disable no-shadow
-import { Interfaces } from '@/riotentity';
+import { Interfaces } from '../../../index.js';
 
 /**
  * Interface TFT - IParticipantDTO

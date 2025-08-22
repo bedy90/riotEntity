@@ -1,5 +1,5 @@
-import { PublishLocations } from '@/riotentity';
-import { IContentDTO_Global } from './IContentDTO_Global';
+import { PublishLocations } from '../../index.js';
+import { IContentDTO_Global } from './IContentDTO_Global.js';
 
 /**
  * Interface IUpdateDTO_Global

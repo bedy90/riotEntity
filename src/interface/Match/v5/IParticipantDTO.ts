@@ -1,6 +1,6 @@
 // eslint-disable max-len
 // eslint-disable no-shadow
-import { Interfaces, Declarations } from '@/riotentity';
+import { Interfaces, Declarations } from '../../../index.js';
 
 /**
  * Interface IParticipantDTO
