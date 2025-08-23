@@ -18,6 +18,18 @@
 # Test
 - Réviser/Ajouts es scénarios de tests
 
+
+# Utilisation ts-to-zod
+- ts-to-zod supporter les JsDoc tag tel que minLength, maxLength, etc.
+- Génération unique
+`npx ts-to-zod chemin/vers/interfaces.ts chemin/vers/generated-schemas.ts`
+
+- Possibilité d'utilise un fichhier de config `ts-to-zod.config.js`
+- Traité ensuite avec `npx ts-to-zod`
+
+# JsDoc Tags
+- Voir `JSDocTag.md`
+
 # Ancienne notes
 - Generator entité
   - si le type contient « I_Global» alors ajouté import
