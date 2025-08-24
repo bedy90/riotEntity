@@ -8,6 +8,7 @@ import { IUpdateDTO_Global } from './IUpdateDTO_Global.js';
  * @namespace Global
  * @version v1
  * @name IStatusDTO_Global
+ * @strict
  */
 export interface IStatusDTO_Global {
     id: number;

@@ -17,5 +17,5 @@ export * from './TFT_Status/index.js';
 export * from './TFT_Summoner/index.js';
 
 // Export Shared
-import * as Shared from './_Global/index.js';
-export { Shared };
+import * as Common from './Common/index.js';
+export { Common };

@@ -7,6 +7,7 @@ import { Interfaces } from '../../../index.js';
  * @version v1
  * @name ILeagueItemDTO
  * @prefix TFT_
+ * @strict
  */
 export interface ILeagueItemDTO_v1 {
     freshBlood: boolean;

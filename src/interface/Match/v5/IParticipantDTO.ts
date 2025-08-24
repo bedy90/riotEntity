@@ -8,6 +8,7 @@ import { Interfaces, Declarations } from '../../../index.js';
  * @namespace Match
  * @version v5
  * @name IParticipantDTO
+ * @strict
  */
 export interface IParticipantDTO_v5 {
     /**

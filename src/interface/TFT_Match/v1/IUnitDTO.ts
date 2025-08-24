@@ -5,6 +5,7 @@
  * @version v1
  * @name IUnitDTO
  * @prefix TFT_
+ * @strict
  */
 export interface IUnitDTO_v1 {
     /**

@@ -5,6 +5,7 @@
  * @version v1
  * @name IMetadataDTO
  * @prefix TFT_
+ * @strict
  */
 export interface IMetadataDTO_v1 {
     /**

@@ -7,8 +7,9 @@ import { Interfaces } from '../../../index.js';
  * @version v1
  * @name ILeagueEntryDTO
  * @prefix TFT_
+ * @strict
  */
-export interface ILeagueEntryDTO_v1 extends Interfaces.Shared.ILeagueEntryDTO_Global {
+export interface ILeagueEntryDTO_v1 extends Interfaces.Common.ILeagueEntryDTO_Global {
     /**
      * Player Universal Unique Identifier. Exact length of 78 characters. (Encrypted)
      * @length 78

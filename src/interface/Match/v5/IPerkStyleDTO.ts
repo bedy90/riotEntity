@@ -6,6 +6,7 @@ import { Interfaces } from '../../../index.js';
  * @namespace Match
  * @version v5
  * @name IPerkStyleDTO
+ * @strict
  */
 export interface IPerkStyleDTO_v5 {
     description: string;

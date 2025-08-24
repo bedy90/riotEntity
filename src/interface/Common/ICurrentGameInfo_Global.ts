@@ -7,6 +7,7 @@ import { IObserver_Global } from './IObserver_Global.js';
  * @version v1
  * @namespace Global
  * @name ICurrentGameInfo_Global
+ * @strict
  */
 export interface ICurrentGameInfo_Global {
     /**

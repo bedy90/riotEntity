@@ -6,7 +6,8 @@ import { Interfaces } from '../../../index.js';
  * @namespace Spectactor
  * @version v4
  * @name ICurrentGameInfo
+ * @strict
  */
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type
-export interface ICurrentGameInfo_v4 extends Interfaces.Shared.ICurrentGameInfo_Global {
+export interface ICurrentGameInfo_v4 extends Interfaces.Common.ICurrentGameInfo_Global {
 }

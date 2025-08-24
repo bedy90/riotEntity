@@ -8,6 +8,7 @@ import { Interfaces } from '../../../index.js';
  * @namespace Match
  * @version v5
  * @name IObjectivesDTO
+ * @strict
  */
 export interface IObjectivesDTO_v5 {
     baron: Interfaces.IObjectiveDTO_v5;

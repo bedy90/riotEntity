@@ -9,6 +9,7 @@ import { IParticipant_Global } from './IParticipant_Global.js';
  * @namespace Global
  * @version v1
  * @name IFeaturedGameInfo_Global
+ * @strict
  */
 export interface IFeaturedGameInfo_Global {
     /**

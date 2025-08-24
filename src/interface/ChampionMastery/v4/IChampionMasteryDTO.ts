@@ -6,6 +6,7 @@ import { Interfaces } from '../../../index.js';
  * @namespace ChampionMastery
  * @version v4
  * @name IChampionMasteryDTO
+ * @strict
  */
 export interface IChampionMasteryDTO_v4 {
     /**

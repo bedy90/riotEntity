@@ -10,6 +10,7 @@ import { Declarations } from '../../../index.js';
  * @name IChallengePercentile
  * @prefix LOL_
  * @NotImplemented
+ * @strict
  */
 export interface IChallengePercentile_v1 {
     percentile : IChallengePercentileType_v1;
@@ -24,6 +25,7 @@ export interface IChallengePercentile_v1 {
  * @name IChallengePercentiles
  * @prefix LOL_
  * @NotImplemented
+ * @strict
  */
 export interface IChallengePercentiles_v1 {
     percentiles : IChallengePercentilesType_v1;
@@ -37,6 +39,7 @@ export interface IChallengePercentiles_v1 {
  * @name ChallengePercentilesType
  * @prefix LOL_
  * @NotImplemented
+ * @strict
  */
 export type IChallengePercentilesType_v1 = Record<string, Map<number, IChallengePercentileType_v1>>;
 
@@ -47,6 +50,7 @@ export type IChallengePercentilesType_v1 = Record<string, Map<number, IChallenge
  * @version v1
  * @name ChallengePercentileType
  * @prefix LOL_
+ * @strict
  */
 export type IChallengePercentileType_v1 = Record<string, Map<Declarations.Level, number>>;
 /*

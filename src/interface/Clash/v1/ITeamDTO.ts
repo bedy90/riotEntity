@@ -7,6 +7,7 @@ import { Interfaces } from '../../../index.js';
  * @version v1
  * @name ITeamDTO
  * @prefix Clash_
+ * @strict
  */
 export interface ITeamDTO_v1 {
     id: string;

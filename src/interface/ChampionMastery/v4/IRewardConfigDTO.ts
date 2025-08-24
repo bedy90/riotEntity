@@ -4,6 +4,7 @@
  * @namespace ChampionMastery
  * @version v4
  * @name IRewardConfigDTO
+ * @strict
  */
 export interface IRewardConfigDTO_v4 {
     /**

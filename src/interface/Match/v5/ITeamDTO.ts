@@ -8,6 +8,7 @@ import { Interfaces } from '../../../index.js';
  * @namespace Match
  * @version v5
  * @name ITeamDTO
+ * @strict
  */
 export interface ITeamDTO_v5 {
     bans: Interfaces.IBanDTO_v5[];

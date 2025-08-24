@@ -4,6 +4,7 @@
  * @namespace Match
  * @version v5
  * @name IMissionsDTO
+ * @strict
  */
 export interface IMissionsDTO_v5 {
     playerScore0: number;

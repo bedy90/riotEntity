@@ -4,6 +4,7 @@
  * @namespace Champion
  * @version v3
  * @name IChampionInfo
+ * @strict
  */
 export interface IChampionInfo_v3 {
     /**

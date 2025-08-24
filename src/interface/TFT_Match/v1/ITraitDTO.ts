@@ -7,6 +7,7 @@ import { Declarations } from '../../../index.js';
  * @version v1
  * @name ITraitDTO
  * @prefix TFT_
+ * @strict
  */
 export interface ITraitDTO_v1 {
     /**

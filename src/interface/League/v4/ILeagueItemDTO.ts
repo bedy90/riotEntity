@@ -6,6 +6,7 @@ import { Interfaces } from '../../../index.js';
  * @namespace League
  * @version v4
  * @name ILeagueItemDTO
+ * @strict
  */
 export interface ILeagueItemDTO_v4 {
     freshBlood: boolean;

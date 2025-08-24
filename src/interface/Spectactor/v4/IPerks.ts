@@ -6,7 +6,8 @@ import { Interfaces } from '../../../index.js';
  * @namespace Spectactor
  * @version v4
  * @name IPerks
+ * @strict
  */
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type
-export interface IPerks_v4 extends Interfaces.Shared.IPerks_Global {
+export interface IPerks_v4 extends Interfaces.Common.IPerks_Global {
 }

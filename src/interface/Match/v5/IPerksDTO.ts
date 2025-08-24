@@ -6,6 +6,7 @@ import { Interfaces } from '../../../index.js';
  * @namespace Match
  * @version v5
  * @name IPerksDTO
+ * @strict
  */
 export interface IPerksDTO_v5 {
     statPerks: Interfaces.IPerkStatsDTO_v5;

@@ -7,7 +7,8 @@ import { Interfaces } from '../../../index.js';
  * @version v1
  * @name ISummonerDTO
  * @prefix TFT_
+ * @strict
  */
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type
-export interface ISummonerDTO_v1 extends Interfaces.Shared.ISummonerDTO_Global {
+export interface ISummonerDTO_v1 extends Interfaces.Common.ISummonerDTO_Global {
 }

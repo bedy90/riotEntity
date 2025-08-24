@@ -9,6 +9,7 @@ import { Interfaces } from '../../../index.js';
  * @version v1
  * @name IMatchDTO
  * @prefix TFT_
+ * @strict
  */
 export interface IMatchDTO_v1 {
     /**

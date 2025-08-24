@@ -46,7 +46,9 @@
     "build:tsup_pack": "tsup --config tsup.config.ts",
     "build:tsup_pack_rim": "rimraf ./build && tsup --config tsup.config.ts && npm run build:package",
     "== 2025 ts-to-zod ==": "",
-    "generate:ts-to-zod": "npx ts-to-zod --config scripts/ts-to-zod.config.cjs"
+    "generate:configFile": "node scripts/generateJsonSchema.cjs",
+    "generate:ts-to-zod": "npx ts-to-zod",
+    "generate:ts-to-zod_conf": "cd scripts && npx ts-to-zod && cd.."
   },
   "files": [
     "build/**/*",

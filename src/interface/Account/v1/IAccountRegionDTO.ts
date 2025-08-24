@@ -4,6 +4,7 @@
  * @namespace Account
  * @version v1
  * @name IAccountRegionDTO
+ * @strict
  */
 export interface IAccountRegionDTO_v1 {
     /**

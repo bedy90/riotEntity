@@ -6,7 +6,8 @@ import { Interfaces } from '../../../index.js';
  * @namespace LoL_Status
  * @version v4
  * @name IUpdateDTO
+ * @strict
  */
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type
-export interface IUpdateDTO_v4 extends Interfaces.Shared.IUpdateDTO_Global {
+export interface IUpdateDTO_v4 extends Interfaces.Common.IUpdateDTO_Global {
 }

@@ -8,6 +8,7 @@ import { Interfaces } from '../../../index.js';
  * @namespace Match
  * @version v5
  * @name IInfoDTO
+ * @strict
  */
 export interface IInfoDTO_v5 {
     /**

@@ -4,6 +4,7 @@
  * @namespace Global
  * @version v1
  * @name ISummonerDTO_Global
+ * @strict
  */
 export interface ISummonerDTO_Global {
     /**

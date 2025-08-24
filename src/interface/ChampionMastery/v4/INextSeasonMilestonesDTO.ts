@@ -6,6 +6,7 @@ import { Interfaces } from '../../../index.js';
  * @namespace ChampionMastery
  * @version v4
  * @name INextSeasonMilestonesDTO
+ * @strict
  */
 export interface INextSeasonMilestonesDTO_v4 {
     requireGradeCounts: object;

@@ -4,6 +4,7 @@
  * @namespace Account
  * @version v1
  * @name IActiveShardDTO
+ * @strict
  */
 export interface IActiveShardDTO_v1 {
     /**

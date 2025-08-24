@@ -4,6 +4,7 @@
  * @namespace Match
  * @version v5
  * @name IPerkStyleSelectionDTO
+ * @strict
  */
 export interface IPerkStyleSelectionDTO_v5 {
     perk: number;

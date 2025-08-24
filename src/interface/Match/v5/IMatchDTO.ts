@@ -8,6 +8,7 @@ import { Interfaces } from '../../../index.js';
  * @namespace Match
  * @version v5
  * @name IMatchDTO
+ * @strict
  */
 export interface IMatchDTO_v5 {
     /**

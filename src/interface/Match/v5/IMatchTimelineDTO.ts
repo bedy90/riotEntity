@@ -5,6 +5,7 @@
  * @version v5
  * @name IMatchTimelineDto
  * @NotImplemented
+ * @strict
  */
 // /* eslint-disable-next-line @typescript-eslint/no-empty-interface */
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type

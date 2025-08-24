@@ -7,6 +7,7 @@ import { Declarations } from '../../../index.js';
  * @version v1
  * @name IPlayerDTO
  * @prefix Clash_
+ * @strict
  */
 export interface IPlayerDTO_v1 {
     summonerId: string;

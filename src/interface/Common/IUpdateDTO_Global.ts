@@ -7,6 +7,7 @@ import { IContentDTO_Global } from './IContentDTO_Global.js';
  * @namespace Global
  * @version v1
  * @name IUpdateDTO_Global
+ * @strict
  */
 export interface IUpdateDTO_Global {
     id: number;

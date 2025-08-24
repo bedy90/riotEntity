@@ -6,6 +6,7 @@ import { IStatusDTO_Global } from './IStatusDTO_Global.js';
  * @namespace Global
  * @version v1
  * @name IPlatformDataDTO_Global
+ * @strict
  */
 export interface IPlatformDataDTO_Global {
     id: string;

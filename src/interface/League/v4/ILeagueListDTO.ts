@@ -6,6 +6,7 @@ import { Interfaces } from '../../../index.js';
  * @namespace League
  * @version v4
  * @name ILeagueListDTO
+ * @strict
  */
 export interface ILeagueListDTO_v4 {
     leagueId: string;

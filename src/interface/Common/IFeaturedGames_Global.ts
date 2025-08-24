@@ -6,6 +6,7 @@ import { IFeaturedGameInfo_Global } from './IFeaturedGameInfo_Global.js';
  * @namespace Global
  * @version v1
  * @name IFeaturedGames_Global
+ * @strict
  */
 export interface IFeaturedGames_Global {
     /**

@@ -7,6 +7,7 @@ import { IPerks_Global } from './IPerks_Global.js';
  * @namespace Global
  * @version v1
  * @name ICurrentGameParticipant_Global
+ * @strict
  */
 export interface ICurrentGameParticipant_Global {
     /**

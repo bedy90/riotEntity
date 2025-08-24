@@ -7,7 +7,8 @@ import { Interfaces } from '../../../index.js';
  * @version v1
  * @name IUpdateDTO
  * @prefix TFT_
+ * @strict
  */
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type
-export interface IUpdateDTO_v1 extends Interfaces.Shared.IUpdateDTO_Global {
+export interface IUpdateDTO_v1 extends Interfaces.Common.IUpdateDTO_Global {
 }

@@ -5,6 +5,7 @@
  * @version v1
  * @name ICompanionDTO
  * @prefix TFT_
+ * @strict
  */
 export interface ICompanionDTO_v1 {
     content_ID: string;

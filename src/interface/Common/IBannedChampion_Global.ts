@@ -4,6 +4,7 @@
  * @namespace Global
  * @version v1
  * @name IBannedChampion_Global
+ * @strict
  */
 export interface IBannedChampion_Global {
     /**

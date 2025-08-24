@@ -7,6 +7,7 @@ import { Declarations } from '../../../index.js';
  * @version v1
  * @name IChallengeConfigInfoDTO
  * @prefix LOL_
+ * @strict
  */
 export interface IChallengeConfigInfoDTO_v1 {
     id: number;

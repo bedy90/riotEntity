@@ -4,6 +4,7 @@
  * @namespace Match
  * @version v5
  * @name IChallengesDTO
+ * @strict
  */
 export interface IChallengesDTO_v5 {
     AssistStreakCount: number;

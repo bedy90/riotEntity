@@ -5,6 +5,7 @@
  * @version v1
  * @name IChallengeInfo
  * @NotImplemented
+ * @strict
  */
 export interface IChallengeInfo_v1 {
     challengeId: number; // Ex: 0
@@ -22,6 +23,7 @@ export interface IChallengeInfo_v1 {
  * @version v1
  * @name IChallengePoint
  * @NotImplemented
+ * @strict
  */
 export interface IChallengePoint_v1 {
     level: string;
@@ -38,6 +40,7 @@ export interface IChallengePoint_v1 {
  * @version v1
  * @name IPlayerClientPreference
  * @NotImplemented
+ * @strict
  */
 export interface IPlayerClientPreference_v1 {
     /*
@@ -65,6 +68,7 @@ export interface IPlayerClientPreference_v1 {
  * @version v1
  * @name IPlayerInfoDTO
  * @NotImplemented
+ * @strict
  */
 export interface IPlayerInfoDTO_v1 {
     challenges: IChallengeInfo_v1[];

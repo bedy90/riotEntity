@@ -6,6 +6,7 @@ import { IMiniSeriesDTO_Global } from './IMiniSeriesDTO_Global.js';
  * @namespace Global
  * @version v1
  * @name ILeagueEntryDTO_Global
+ * @strict
  */
 export interface ILeagueEntryDTO_Global {
     leagueId: string;

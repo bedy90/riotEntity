@@ -4,6 +4,7 @@
  * @namespace Global
  * @version v1
  * @name IPerks_Global
+ * @strict
  */
 export interface IPerks_Global {
     /**
