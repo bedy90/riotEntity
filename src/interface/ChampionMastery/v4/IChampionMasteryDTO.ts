@@ -48,7 +48,7 @@ export interface IChampionMasteryDTO_v4 {
     /**
      * Number of points earned since current level has been achieved.
      */
-    championPointsSinceLastLevel: bigint; // long
+    championPointsSinceLastLevel: bigint;
 
     markRequiredForNextLevel: number;
 

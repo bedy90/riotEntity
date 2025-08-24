@@ -56,11 +56,40 @@ npm install @bedy90/riotEntity
 1. Install the module
 2. Use exemple for using it
    
+## Exemple Javascript
+
+Import the module and try it
+```js
+const RiotEntity = require('@bedy90/riotentity');
+
+// AccountChecker
+const myObj = {
+  puuid: "test",
+  gameName: "test",
+  tagLine: "#TEST"
+}
+
+RiotEntity.AccountChecker.isAccountDTO(myObj) // Return true
+
+// SummonerChecker
+const myObj2 = {
+  accountId: "test",
+  profileIconId: 1,
+  revisionDate: 1,
+  name: "test",
+  id: "test",
+  puuid: "test",
+  summonerLevel: 10
+}
+
+RiotEntity.SummonerChecker.isSummonerDTO(myObj2) // Return true
+```
+
 ## Exemple Typescript
 
 Import the module and try it
 ```ts
-import { IAccountDTO, ISummonerDTO } from '@bedy90/riotentity';
+import { IAccountDTO, AccountChecker, ISummonerDTO, SummonerChecker } from '@bedy90/riotentity';
 
 // Create IAccount DTO
 let myObj: IAccountDTO = {
@@ -68,6 +97,10 @@ let myObj: IAccountDTO = {
     puuid: "test",
     tagLine: "#NA"
 }
+
+// AccountChecker
+let isAccount: boolean = false;
+isAccount = AccountChecker.isAccountDTO(myObj);
 
 // Create ISummonerDTO DTO
 let myObj2: ISummonerDTO = {
@@ -79,6 +112,11 @@ let myObj2: ISummonerDTO = {
     puuid: "test",
     summonerLevel: 10
 }
+
+// AccountChecker
+let isSummoner: boolean = false;
+isSummoner = SummonerChecker.isSummonerDTO(myObj2);
+
 ```
 
 # League of Legends API
