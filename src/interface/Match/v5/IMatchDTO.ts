@@ -1,6 +1,6 @@
-/* eslint-disable max-len */
-/* eslint-disable no-shadow */
-import { Interfaces } from '@/riotentity';
+// eslint-disable max-len
+// eslint-disable no-shadow
+import { Interfaces } from '../../../index.js';
 
 /**
  * Interface IMatchDTO
@@ -8,14 +8,15 @@ import { Interfaces } from '@/riotentity';
  * @namespace Match
  * @version v5
  * @name IMatchDTO
+ * @strict
  */
-export interface IMatchDTO {
+export interface IMatchDTO_v5 {
     /**
      * Match metadata.
      */
-    metadata: Interfaces.Match.v5.IMetadataDTO;
+    metadata: Interfaces.IMetadataDTO_v5;
     /**
      * Match info.
      */
-    info: Interfaces.Match.v5.IInfoDTO;
+    info: Interfaces.IInfoDTO_v5;
 }

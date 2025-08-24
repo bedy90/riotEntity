@@ -1,20 +1,20 @@
 /**
- * Interface IPlayerInfoDTO
+ * Interface IChallengeInfo
  *
  * @namespace LoL_Challenges
  * @version v1
- * @name IPlayerInfoDTO
+ * @name IChallengeInfo
  * @NotImplemented
+ * @strict
  */
-export interface IPlayerInfoDTO {
-    challenges: IChallengeInfo[];
-
-    preferences: IPlayerClientPreference;
-
-    totalPoints: IChallengePoint;
-
-    categoryPoints: Map<string, IChallengePoint>;
+export interface IChallengeInfo_v1 {
+    challengeId: number; // Ex: 0
+    percentile: number; //  0.006;
+    level: string; // "DIAMOND";
+    value: number; //  14165;
+    achievedTime: number; // 1706668297146
 }
+
 
 /**
  * Interface IChallengePoint
@@ -23,29 +23,15 @@ export interface IPlayerInfoDTO {
  * @version v1
  * @name IChallengePoint
  * @NotImplemented
+ * @strict
  */
-export interface IChallengePoint {
+export interface IChallengePoint_v1 {
     level: string;
     current: number;
     max: number;
     percentile: number;
 }
 
-/**
- * Interface IChallengeInfo
- *
- * @namespace LoL_Challenges
- * @version v1
- * @name IChallengeInfo
- * @NotImplemented
- */
-export interface IChallengeInfo {
-    challengeId: number; // Ex: 0
-    percentile: number; //  0.006;
-    level: string; // "DIAMOND";
-    value: number; //  14165;
-    achievedTime: number; // 1706668297146
-}
 
 /**
  * Interface IPlayerClientPreference
@@ -54,8 +40,9 @@ export interface IChallengeInfo {
  * @version v1
  * @name IPlayerClientPreference
  * @NotImplemented
+ * @strict
  */
-export interface IPlayerClientPreference {
+export interface IPlayerClientPreference_v1 {
     /*
       "bannerAccent": "2";
             "title": "";
@@ -72,4 +59,23 @@ export interface IPlayerClientPreference {
     challengeIds: number[];
     crestBorder: number;
     prestigeCrestBorderLevel: number;
+}
+
+/**
+ * Interface IPlayerInfoDTO
+ *
+ * @namespace LoL_Challenges
+ * @version v1
+ * @name IPlayerInfoDTO
+ * @NotImplemented
+ * @strict
+ */
+export interface IPlayerInfoDTO_v1 {
+    challenges: IChallengeInfo_v1[];
+
+    preferences: IPlayerClientPreference_v1;
+
+    totalPoints: IChallengePoint_v1;
+
+    categoryPoints: Map<string, IChallengePoint_v1>;
 }

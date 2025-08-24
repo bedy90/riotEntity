@@ -4,8 +4,9 @@
  * @namespace Champion
  * @version v3
  * @name IChampionInfo
+ * @strict
  */
-export interface IChampionInfo {
+export interface IChampionInfo_v3 {
     /**
      * The maximum level required to be considered a "newPlayer".
      */

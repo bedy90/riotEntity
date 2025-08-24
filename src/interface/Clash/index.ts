@@ -1,13 +1,14 @@
-import * as TournamentPhaseDTOInterface from './v1/ITournamentPhaseDTO';
-import * as TournamentDTOInterface from './v1/ITournamentDTO';
-import * as TeamDTOInterface from './v1/ITeamDTO';
-import * as PlayerDTOInterface from './v1/IPlayerDTO';
+import { IPlayerDTO_v1 as IClash_PlayerDTO_v1 } from './v1/IPlayerDTO.js';
+import { ITeamDTO_v1 as IClash_TeamDTO_v1 } from './v1/ITeamDTO.js';
+import { ITournamentDTO_v1 as IClash_TournamentDTO_v1 } from './v1/ITournamentDTO.js';
+import { ITournamentPhaseDTO_v1 as IClash_TournamentPhaseDTO_v1 } from './v1/ITournamentPhaseDTO.js';
 
-export namespace Clash {
-  export namespace v1 {
-    export import ITournamentPhaseDTO = TournamentPhaseDTOInterface.ITournamentPhaseDTO;
-    export import ITournamentDTO = TournamentDTOInterface.ITournamentDTO;
-    export import ITeamDTO = TeamDTOInterface.ITeamDTO;
-    export import IPlayerDTO = PlayerDTOInterface.IPlayerDTO;
-  }
-}
+export type {
+	IClash_PlayerDTO_v1, IClash_TeamDTO_v1, IClash_TournamentDTO_v1,
+	IClash_TournamentPhaseDTO_v1,
+};
+
+export type IClash_PlayerDTO = IClash_PlayerDTO_v1;
+export type IClash_TeamDTO = IClash_TeamDTO_v1;
+export type IClash_TournamentDTO = IClash_TournamentDTO_v1;
+export type IClash_TournamentPhaseDTO = IClash_TournamentPhaseDTO_v1;

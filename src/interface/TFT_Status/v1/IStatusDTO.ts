@@ -1,4 +1,4 @@
-import { IStatusDTO_Global } from '../../_Global/IStatusDTO_Global';
+import { Interfaces } from '../../../index.js';
 
 /**
  * Interface TFT - IStatusDTO
@@ -6,9 +6,9 @@ import { IStatusDTO_Global } from '../../_Global/IStatusDTO_Global';
  * @namespace TFT_Status
  * @version v1
  * @name IStatusDTO
+ * @prefix TFT_
+ * @strict
  */
-export type IStatusDTO = IStatusDTO_Global
-/*
-export interface IStatusDTO extends IStatusDTO_Global {
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+export interface IStatusDTO_v1 extends Interfaces.Common.IStatusDTO_Global {
 }
-*/

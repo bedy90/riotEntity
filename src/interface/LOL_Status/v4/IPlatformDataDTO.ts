@@ -1,4 +1,4 @@
-import { IPlatformDataDTO_Global } from '../../_Global/IPlatformDataDTO_Global';
+import { Interfaces } from '../../../index.js';
 
 /**
  * Interface IPlatformDataDTO
@@ -6,9 +6,9 @@ import { IPlatformDataDTO_Global } from '../../_Global/IPlatformDataDTO_Global';
  * @namespace LoL_Status
  * @version v4
  * @name IPlatformDataDTO
+ * @strict
  */
-export type IPlatformDataDTO = IPlatformDataDTO_Global
-/*
-export interface IPlatformDataDTO extends IPlatformDataDTO_Global {
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+export interface IPlatformDataDTO_v4 extends Interfaces.Common.IPlatformDataDTO_Global {
 }
-*/
+

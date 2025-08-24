@@ -1,7 +1,11 @@
-import * as ChampionMasteryDTOInterface from './v4/IChampionMasteryDTO';
+import { IChampionMasteryDTO_v4 } from './v4/IChampionMasteryDTO.js';
+import { INextSeasonMilestonesDTO_v4 } from './v4/INextSeasonMilestonesDTO.js';
+import { IRewardConfigDTO_v4 } from './v4/IRewardConfigDTO.js';
 
-export namespace ChampionMastery {
-  export namespace v4 {
-    export import IChampionMasteryDTO = ChampionMasteryDTOInterface.IChampionMasteryDTO;
-  }
-}
+export type {
+	IChampionMasteryDTO_v4, INextSeasonMilestonesDTO_v4, IRewardConfigDTO_v4,
+};
+
+export type IChampionMasteryDTO = IChampionMasteryDTO_v4;
+export type INextSeasonMilestonesDTO = INextSeasonMilestonesDTO_v4;
+export type IRewardConfigDTO = IRewardConfigDTO_v4;

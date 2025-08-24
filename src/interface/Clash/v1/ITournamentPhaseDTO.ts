@@ -4,13 +4,15 @@
  * @namespace Clash
  * @version v1
  * @name ITournamentPhaseDTO
+ * @prefix Clash_
+ * @strict
  */
-export interface ITournamentPhaseDTO {
+export interface ITournamentPhaseDTO_v1 {
     id: number;
 
-    registrationTime: number;
+    registrationTime: bigint;
 
-    startTime: number;
+    startTime: bigint;
 
     cancelled: boolean;
 }

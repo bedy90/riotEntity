@@ -1,4 +1,4 @@
-import { Interfaces } from '@/riotentity';
+import { Interfaces } from '../../../index.js';
 
 /**
  * Interface ILeagueListDTO
@@ -6,11 +6,12 @@ import { Interfaces } from '@/riotentity';
  * @namespace League
  * @version v4
  * @name ILeagueListDTO
+ * @strict
  */
-export interface ILeagueListDTO {
+export interface ILeagueListDTO_v4 {
     leagueId: string;
 
-    entries: Interfaces.League.v4.ILeagueItemDTO[];
+    entries: Interfaces.ILeagueItemDTO_v4[];
 
     tier: string;
 

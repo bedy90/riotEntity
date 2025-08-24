@@ -1,5 +1,4 @@
-import { IUpdateDTO_Global } from '../../_Global/IUpdateDTO_Global';
-
+import { Interfaces } from '../../../index.js';
 
 /**
  * Interface IUpdateDTO
@@ -7,10 +6,8 @@ import { IUpdateDTO_Global } from '../../_Global/IUpdateDTO_Global';
  * @namespace LoL_Status
  * @version v4
  * @name IUpdateDTO
+ * @strict
  */
-export type IUpdateDTO = IUpdateDTO_Global
-/*
-export interface IUpdateDTO extends IUpdateDTO_Global {
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+export interface IUpdateDTO_v4 extends Interfaces.Common.IUpdateDTO_Global {
 }
-*/
-

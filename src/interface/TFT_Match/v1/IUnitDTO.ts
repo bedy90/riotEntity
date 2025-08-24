@@ -4,8 +4,10 @@
  * @namespace TFT_Match
  * @version v1
  * @name IUnitDTO
+ * @prefix TFT_
+ * @strict
  */
-export interface IUnitDTO {
+export interface IUnitDTO_v1 {
     /**
      * A list of the unit's items. Please refer to the Teamfight Tactics documentation for item ids.
      */

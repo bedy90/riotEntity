@@ -1,4 +1,4 @@
-import { Interfaces } from '@/riotentity';
+import { Interfaces } from '../../../index.js';
 
 /**
  * Interface IPerksDTO
@@ -6,8 +6,10 @@ import { Interfaces } from '@/riotentity';
  * @namespace Match
  * @version v5
  * @name IPerksDTO
+ * @strict
  */
-export interface IPerksDTO {
-    statPerks: Interfaces.Match.v5.IPerkStatsDTO;
-    styles: Interfaces.Match.v5.IPerkStyleDTO[];
+export interface IPerksDTO_v5 {
+    statPerks: Interfaces.IPerkStatsDTO_v5;
+
+    styles: Interfaces.IPerkStyleDTO_v5[];
 }

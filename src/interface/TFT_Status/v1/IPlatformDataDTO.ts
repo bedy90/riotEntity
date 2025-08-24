@@ -1,4 +1,4 @@
-import { IPlatformDataDTO_Global } from '../../_Global/IPlatformDataDTO_Global';
+import { Interfaces } from '../../../index.js';
 
 /**
  * Interface TFT - IPlatformDataDTO
@@ -6,9 +6,9 @@ import { IPlatformDataDTO_Global } from '../../_Global/IPlatformDataDTO_Global';
  * @namespace TFT_Status
  * @version v1
  * @name IPlatformDataDTO
+ * @prefix TFT_
+ * @strict
  */
-export type IPlatformDataDTO = IPlatformDataDTO_Global
-/*
-export interface IPlatformDataDTO extends IPlatformDataDTO_Global {
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+export interface IPlatformDataDTO_v1 extends Interfaces.Common.IPlatformDataDTO_Global {
 }
-*/

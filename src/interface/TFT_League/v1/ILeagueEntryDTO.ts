@@ -1,5 +1,4 @@
-import { ILeagueEntryDTO_Global } from '../../_Global/ILeagueEntryDTO_Global';
-// import { IMiniSeriesDTO } from './IMiniSeriesDTO';
+import { Interfaces } from '../../../index.js';
 
 /**
  * Interface TFT - ILeagueEntryDTO
@@ -7,10 +6,13 @@ import { ILeagueEntryDTO_Global } from '../../_Global/ILeagueEntryDTO_Global';
  * @namespace TFT_League
  * @version v1
  * @name ILeagueEntryDTO
+ * @prefix TFT_
+ * @strict
  */
-export interface ILeagueEntryDTO extends ILeagueEntryDTO_Global {
+export interface ILeagueEntryDTO_v1 extends Interfaces.Common.ILeagueEntryDTO_Global {
     /**
-     * 	Player Universal Unique Identifier. Exact length of 78 characters. (Encrypted)
+     * Player Universal Unique Identifier. Exact length of 78 characters. (Encrypted)
+     * @length 78
      */
     puuid: string;
 

@@ -1,4 +1,4 @@
-import { IObserver_Global } from '../../_Global/IObserver_Global';
+import { Interfaces } from '../../../index.js';
 
 /**
  * Interface TFT - IObserver
@@ -6,9 +6,9 @@ import { IObserver_Global } from '../../_Global/IObserver_Global';
  * @namespace TFT_Spectactor
  * @version v5
  * @name IObserver
+ * @prefix TFT_
+ * @strict
  */
-export type IObserver = IObserver_Global
-/*
-export interface IObserver extends IObserver_Global {
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+export interface IObserver_v5 extends Interfaces.Common.IObserver_Global {
 }
-*/

@@ -1,4 +1,4 @@
-import { IParticipant_Global } from '../../_Global/IParticipant_Global';
+import { Interfaces } from '../../../index.js';
 
 /**
  * Interface IParticipant
@@ -6,8 +6,9 @@ import { IParticipant_Global } from '../../_Global/IParticipant_Global';
  * @namespace Spectactor
  * @version v4
  * @name IParticipant
+ * @strict
  */
-export interface IParticipant extends IParticipant_Global {
+export interface IParticipant_v4 extends Interfaces.Common.IParticipant_Global {
     /**
      * Flag indicating whether or not this participant is a bot
      */

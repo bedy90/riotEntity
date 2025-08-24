@@ -1,4 +1,4 @@
-import { IUpdateDTO_Global } from '../../_Global/IUpdateDTO_Global';
+import { Interfaces } from '../../../index.js';
 
 /**
  * Interface TFT - IUpdateDTO
@@ -6,10 +6,9 @@ import { IUpdateDTO_Global } from '../../_Global/IUpdateDTO_Global';
  * @namespace TFT_Status
  * @version v1
  * @name IUpdateDTO
+ * @prefix TFT_
+ * @strict
  */
-export type IUpdateDTO = IUpdateDTO_Global
-/*
-export interface IUpdateDTO extends IUpdateDTO_Global {
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+export interface IUpdateDTO_v1 extends Interfaces.Common.IUpdateDTO_Global {
 }
-*/
-

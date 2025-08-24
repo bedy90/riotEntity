@@ -1,4 +1,4 @@
-import { Interfaces } from '@/riotentity';
+import { Interfaces } from '../../../index.js';
 
 /**
  * Interface TFT - ILeagueItemDTO
@@ -6,8 +6,10 @@ import { Interfaces } from '@/riotentity';
  * @namespace TFT_League
  * @version v1
  * @name ILeagueItemDTO
+ * @prefix TFT_
+ * @strict
  */
-export interface ILeagueItemDTO {
+export interface ILeagueItemDTO_v1 {
     freshBlood: boolean;
 
     /**
@@ -15,7 +17,7 @@ export interface ILeagueItemDTO {
      */
     wins: number;
 
-    miniSeries: Interfaces.TFT_League.v1.IMiniSeriesDTO;
+    miniSeries: Interfaces.ITFT_MiniSeriesDTO_v1;
 
     inactive: boolean;
 
@@ -34,6 +36,7 @@ export interface ILeagueItemDTO {
 
     /**
      * Player's encrypted summonerId.
+     * TODO
      */
     summonerId: string;
 }

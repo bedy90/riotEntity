@@ -1,6 +1,6 @@
-/* eslint-disable max-len */
-/* eslint-disable no-shadow */
-import { Interfaces } from '@/riotentity';
+// eslint-disable max-len
+// eslint-disable no-shadow
+import { Interfaces } from '../../../index.js';
 
 /**
  * Interface ITeamDTO
@@ -8,11 +8,12 @@ import { Interfaces } from '@/riotentity';
  * @namespace Match
  * @version v5
  * @name ITeamDTO
+ * @strict
  */
-export interface ITeamDTO {
-    bans: Interfaces.Match.v5.IBanDTO[];
+export interface ITeamDTO_v5 {
+    bans: Interfaces.IBanDTO_v5[];
 
-    objectives: Interfaces.Match.v5.IObjectivesDTO;
+    objectives: Interfaces.IObjectiveDTO_v5;
 
     teamId: number;
 

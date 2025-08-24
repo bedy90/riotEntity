@@ -1,4 +1,4 @@
-import { Interfaces } from '@/riotentity';
+import { Interfaces } from '../../../index.js';
 
 /**
  * Interface ITeamDTO
@@ -6,8 +6,10 @@ import { Interfaces } from '@/riotentity';
  * @namespace Clash
  * @version v1
  * @name ITeamDTO
+ * @prefix Clash_
+ * @strict
  */
-export interface ITeamDTO {
+export interface ITeamDTO_v1 {
     id: string;
 
     tournamentId: number;
@@ -20,6 +22,7 @@ export interface ITeamDTO {
 
     /**
      * Summoner ID of the team captain.
+     * TODO
      */
     captain: string;
 
@@ -28,5 +31,6 @@ export interface ITeamDTO {
     /**
      * 	Team members.
      */
-    players: Interfaces.Clash.v1.IPlayerDTO[];
+    players: Interfaces.IClash_PlayerDTO_v1[];
 }
+

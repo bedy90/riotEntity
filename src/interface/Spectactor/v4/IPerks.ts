@@ -1,4 +1,4 @@
-import { IPerks_Global } from '../../_Global/IPerks_Global';
+import { Interfaces } from '../../../index.js';
 
 /**
  * Interface IPerks
@@ -6,9 +6,8 @@ import { IPerks_Global } from '../../_Global/IPerks_Global';
  * @namespace Spectactor
  * @version v4
  * @name IPerks
+ * @strict
  */
-export type IPerks = IPerks_Global
-/*
-export interface IPerks extends IPerks_Global {
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+export interface IPerks_v4 extends Interfaces.Common.IPerks_Global {
 }
-*/

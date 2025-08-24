@@ -1,4 +1,4 @@
-import { IMiniSeriesDTO_Global } from '../../_Global/IMiniSeriesDTO_Global';
+import { Interfaces } from '../../../index.js';
 
 /**
  * Interface IMiniSeriesDTO
@@ -6,8 +6,8 @@ import { IMiniSeriesDTO_Global } from '../../_Global/IMiniSeriesDTO_Global';
  * @namespace League
  * @version v4
  * @name IMiniSeriesDTO
+ * @strict
  */
-export type IMiniSeriesDTO = IMiniSeriesDTO_Global
-
-// export interface IMiniSeriesDTO extends IMiniSeriesDTO_Global {
-// }
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+export interface IMiniSeriesDTO_v4 extends Interfaces.Common.IMiniSeriesDTO_Global {
+}

@@ -1,5 +1,4 @@
-import { IObserver_Global } from '../../_Global/IObserver_Global';
-
+import { Interfaces } from '../../../index.js';
 
 /**
  * Interface IObserver
@@ -7,9 +6,8 @@ import { IObserver_Global } from '../../_Global/IObserver_Global';
  * @namespace Spectactor
  * @version v4
  * @name IObserver
+ * @strict
  */
-export type IObserver = IObserver_Global
-/*
-export interface IObserver extends IObserver_Global {
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+export interface IObserver_v4 extends Interfaces.Common.IObserver_Global {
 }
-*/

@@ -112,3 +112,4 @@ build/
 *.bat
 distPackage/
 generate/
+_temp/

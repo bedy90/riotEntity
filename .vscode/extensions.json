@@ -3,6 +3,8 @@
         "github.vscode-github-actions",
         "github.vscode-pull-request-github",
         "felipecaputo.git-project-manager",
-        "donjayamanne.githistory"
+        "donjayamanne.githistory",
+        "idered.npm",
+        "codeium.codeium"
     ]
 }

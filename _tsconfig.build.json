@@ -1,0 +1,34 @@
+{
+  "compilerOptions": {
+    "target": "es2022",
+    "module": "NodeNext",
+    "rootDir": "./src",
+    "moduleResolution": "nodenext",
+    "outDir": "./build",
+    "declaration": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "noImplicitAny": true,
+    "baseUrl": "./src",
+  },
+  "include": [
+    "src/**/*",
+    "README.md",
+    "CHANGELOG.md"
+  ],
+  "exclude": [
+    "node_modules",
+    "build",
+    "test/**/*",
+    "docker",
+    "generate/**/*",
+    "./scripts",
+    "./lib",
+    "./src/manual_test.ts",
+    "*.ts1",
+    "*.txt"
+  ]
+}

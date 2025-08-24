@@ -1,6 +1,6 @@
-/* eslint-disable max-len */
-/* eslint-disable no-shadow */
-import { Interfaces, KaynChampionTransform } from '@/riotentity';
+// eslint-disable max-len
+// eslint-disable no-shadow
+import { Interfaces, Declarations } from '../../../index.js';
 
 /**
  * Interface IParticipantDTO
@@ -8,8 +8,19 @@ import { Interfaces, KaynChampionTransform } from '@/riotentity';
  * @namespace Match
  * @version v5
  * @name IParticipantDTO
+ * @strict
  */
-export interface IParticipantDTO {
+export interface IParticipantDTO_v5 {
+    /**
+     * Yellow crossed swords
+     */
+    allInPings: number;
+
+    /**
+     * Green flag
+     */
+    assistMePings: number;
+
     assists: number;
 
     baronKills: number;
@@ -29,11 +40,18 @@ export interface IParticipantDTO {
     championName: string;
 
     /**
+     * Blue generic ping (ALT+click)
+     */
+    commandPings: number;
+
+    /**
      * This field is currently only utilized for Kayn's transformations. (Legal values: 0 - None, 1 - Slayer, 2 - Assassin)
      */
-    championTransform: KaynChampionTransform | number;
+    championTransform: Declarations.KaynChampionTransform | number;
 
     consumablesPurchased: number;
+
+    challenges: Interfaces.IChallengesDTO[];
 
     damageDealtToBuildings: number;
 
@@ -51,6 +69,18 @@ export interface IParticipantDTO {
 
     dragonKills: number;
 
+    eligibleForProgression: boolean;
+
+    /**
+     * Yellow questionmark
+     */
+    enemyMissingPings: number;
+
+    /**
+     * Red eyeball
+     */
+    enemyVisionPings: number;
+
     firstBloodAssist: boolean;
 
     firstBloodKill: boolean;
@@ -62,6 +92,13 @@ export interface IParticipantDTO {
     gameEndedInEarlySurrender: boolean;
 
     gameEndedInSurrender: boolean;
+
+    holdPings: number;
+
+    /**
+     * Yellow circle with horizontal line
+     */
+    getBackPings: number;
 
     goldEarned: number;
 
@@ -117,7 +154,17 @@ export interface IParticipantDTO {
 
     magicDamageTaken: number;
 
+    missions: Interfaces.IMissionsDTO_v5;
+
+    /**
+     * neutralMinionsKilled = mNeutralMinionsKilled, which is incremented on kills of kPet and kJungleMonster
+     */
     neutralMinionsKilled: number;
+
+    /**
+     * Green ward
+     */
+    needVisionPings: number;
 
     nexusKills: number;
 
@@ -129,11 +176,40 @@ export interface IParticipantDTO {
 
     objectivesStolenAssists: number;
 
+    /**
+     * Blue arrow pointing at ground
+     */
+    onMyWayPings: number;
+
     participantId: number;
+
+    playerScore0: number;
+
+    playerScore1: number;
+
+    playerScore2: number;
+
+    playerScore3: number;
+
+    playerScore4: number;
+
+    playerScore5: number;
+
+    playerScore6: number;
+
+    playerScore7: number;
+
+    playerScore8: number;
+
+    playerScore9: number;
+
+    playerScore10: number;
+
+    playerScore11: number;
 
     pentaKills: number;
 
-    perks: Interfaces.Match.v5.IPerksDTO;
+    perks: Interfaces.IPerksDTO_v5;
 
     physicalDamageDealt: number;
 
@@ -141,13 +217,30 @@ export interface IParticipantDTO {
 
     physicalDamageTaken: number;
 
+    placement: number;
+
+    playerAugment1: number;
+
+    playerAugment2: number;
+
+    playerAugment3: number;
+
+    playerAugment4: number;
+
+    playerSubteamId: number;
+
+    /**
+     * Green minion
+     */
+    pushPings: number;
+
     profileIcon: number;
 
     puuid: string;
 
     quadraKills: number;
 
-    riotIdName: string;
+    riotIdGameName: string;
 
     riotIdTagline: string;
 
@@ -194,6 +287,8 @@ export interface IParticipantDTO {
 
     timePlayed: number;
 
+    totalAllyJungleMinionsKilled: number;
+
     totalDamageDealt: number;
 
     totalDamageDealtToChampions: number;
@@ -201,6 +296,8 @@ export interface IParticipantDTO {
     totalDamageShieldedOnTeammates: number;
 
     totalDamageTaken: number;
+
+    totalEnemyJungleMinionsKilled: number;
 
     totalHeal: number;
 
@@ -231,6 +328,8 @@ export interface IParticipantDTO {
     unrealKills: number;
 
     visionScore: number;
+
+    visionClearedPings: number;
 
     visionWardsBoughtInGame: number;
 

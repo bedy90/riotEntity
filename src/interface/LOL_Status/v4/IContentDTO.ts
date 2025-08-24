@@ -1,14 +1,12 @@
-import { IContentDTO_Global } from '../../_Global/IContentDTO_Global';
-
+import { Interfaces } from '../../../index.js';
 /**
  * Interface IContentDTO
  *
  * @namespace LoL_Status
  * @version v4
  * @name IContentDTO
+ * @strict
  */
-export type IContentDTO = IContentDTO_Global
-/*
-export interface IContentDTO extends IContentDTO_Global {
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+export interface IContentDTO_v4 extends Interfaces.Common.IContentDTO_Global {
 }
-*/

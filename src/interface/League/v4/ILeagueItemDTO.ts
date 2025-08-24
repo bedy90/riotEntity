@@ -1,4 +1,4 @@
-import { Interfaces } from '@/riotentity';
+import { Interfaces } from '../../../index.js';
 
 /**
  * Interface ILeagueItemDTO
@@ -6,8 +6,9 @@ import { Interfaces } from '@/riotentity';
  * @namespace League
  * @version v4
  * @name ILeagueItemDTO
+ * @strict
  */
-export interface ILeagueItemDTO {
+export interface ILeagueItemDTO_v4 {
     freshBlood: boolean;
 
     /**
@@ -15,7 +16,7 @@ export interface ILeagueItemDTO {
      */
     wins: number;
 
-    miniSeries: Interfaces.League.v4.IMiniSeriesDTO;
+    miniSeries?: Interfaces.IMiniSeriesDTO_v4;
 
     inactive: boolean;
 
@@ -36,4 +37,10 @@ export interface ILeagueItemDTO {
      * Player's encrypted summonerId.
      */
     summonerId: string;
+
+     /**
+     * Player's encrypted puuid.
+     * @length 78
+     */
+     puuid: string;
 }

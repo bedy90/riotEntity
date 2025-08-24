@@ -1,4 +1,4 @@
-import { ILeagueEntryDTO_Global } from '../../_Global/ILeagueEntryDTO_Global';
+import { Interfaces } from '../../../index.js';
 
 /**
  * Interface ILeagueEntryDTO
@@ -6,9 +6,8 @@ import { ILeagueEntryDTO_Global } from '../../_Global/ILeagueEntryDTO_Global';
  * @namespace League
  * @version v4
  * @name ILeagueEntryDTO
+ * @strict
  */
-export type ILeagueEntryDTO = ILeagueEntryDTO_Global
-
-// export interface ILeagueEntryDTO extends ILeagueEntryDTO_Global {
-// }
-
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+export interface ILeagueEntryDTO_v4 extends Interfaces.Common.ILeagueEntryDTO_Global {
+}

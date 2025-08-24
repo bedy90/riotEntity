@@ -1,4 +1,4 @@
-import { IFeaturedGameInfo_Global } from '../../_Global/IFeaturedGameInfo_Global';
+import { Interfaces } from '../../../index.js';
 
 /**
  * Interface TFT - IFeaturedGameInfo
@@ -6,9 +6,9 @@ import { IFeaturedGameInfo_Global } from '../../_Global/IFeaturedGameInfo_Global
  * @namespace TFT_Spectactor
  * @version v5
  * @name IFeaturedGameInfo
+ * @prefix TFT_
+ * @strict
  */
-export type IFeaturedGameInfo = IFeaturedGameInfo_Global
-/*
-export interface IFeaturedGameInfo extends IFeaturedGameInfo_Global {
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+export interface IFeaturedGameInfo_v5 extends Interfaces.Common.IFeaturedGameInfo_Global {
 }
-*/

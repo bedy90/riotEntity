@@ -1,4 +1,4 @@
-import { ISummonerDTO_Global } from '../../_Global/ISummonerDTO_Global';
+import { Interfaces } from '../../../index.js';
 
 /**
  * Interface TFT - ISummonerDTO
@@ -6,9 +6,9 @@ import { ISummonerDTO_Global } from '../../_Global/ISummonerDTO_Global';
  * @namespace TFT_Summoner
  * @version v1
  * @name ISummonerDTO
+ * @prefix TFT_
+ * @strict
  */
-export type ISummonerDTO = ISummonerDTO_Global
-/*
-export interface ISummonerDTO extends ISummonerDTO_Global {
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+export interface ISummonerDTO_v1 extends Interfaces.Common.ISummonerDTO_Global {
 }
-*/

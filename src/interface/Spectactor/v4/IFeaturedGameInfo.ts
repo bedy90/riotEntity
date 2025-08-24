@@ -1,4 +1,4 @@
-import { IFeaturedGameInfo_Global } from '../../_Global/IFeaturedGameInfo_Global';
+import { Interfaces } from '../../../index.js';
 
 /**
  * Interface IFeaturedGameInfo
@@ -6,9 +6,8 @@ import { IFeaturedGameInfo_Global } from '../../_Global/IFeaturedGameInfo_Global
  * @namespace Spectactor
  * @version v4
  * @name IFeaturedGameInfo
+ * @strict
  */
-export type IFeaturedGameInfo = IFeaturedGameInfo_Global
-/*
-export interface IFeaturedGameInfo extends IFeaturedGameInfo_Global {
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+export interface IFeaturedGameInfo_v4 extends Interfaces.Common.IFeaturedGameInfo_Global {
 }
-*/

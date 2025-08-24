@@ -1,0 +1,56 @@
+import { IMiniSeriesDTO_Global } from './IMiniSeriesDTO_Global.js';
+
+/**
+ * Interface ILeagueEntryDTO_Global
+ *
+ * @namespace Global
+ * @version v1
+ * @name ILeagueEntryDTO_Global
+ * @strict
+ */
+export interface ILeagueEntryDTO_Global {
+    leagueId: string;
+
+    /**
+     * Player's summonerId (Encrypted)
+     * @removed
+     */
+    summonerId: string;
+
+     /**
+     * Player's encrypted puuid.
+     * @length 78
+     */
+    puuid: string;
+
+    queueType: string;
+
+    tier: string;
+
+    /**
+     * The player's division within a tier.
+     */
+    rank: string;
+
+    leaguePoints: number;
+
+    /**
+     * Winning team on Summoners Rift. First placement in Teamfight Tactics.
+     */
+    wins: number;
+
+    /**
+     * Losing team on Summoners Rift. Second through eighth placement in Teamfight Tactics.
+     */
+    losses: number;
+
+    hotStreak: boolean;
+
+    veteran: boolean;
+
+    freshBlood: boolean;
+
+    inactive: boolean;
+
+    miniSeries?: IMiniSeriesDTO_Global;
+}

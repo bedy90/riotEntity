@@ -1,14 +1,12 @@
-import { IStatusDTO_Global } from '../../_Global/IStatusDTO_Global';
-
+import { Interfaces } from '../../../index.js';
 /**
  * Interface IStatusDTO
  *
  * @namespace LoL_Status
  * @version v4
  * @name IStatusDTO
+ * @strict
  */
-export type IStatusDTO = IStatusDTO_Global
-/*
-export interface IStatusDTO  extends IStatusDTO_Global {
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+export interface IStatusDTO_v4 extends Interfaces.Common.IStatusDTO_Global {
 }
-*/

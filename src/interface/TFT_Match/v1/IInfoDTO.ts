@@ -1,6 +1,6 @@
-/* eslint-disable max-len */
-/* eslint-disable no-shadow */
-import { Interfaces } from '@/riotentity';
+// eslint-disable max-len
+// eslint-disable no-shadow
+import { Interfaces } from '../../../index.js';
 
 /**
  * Interface TFT - IInfoDTO
@@ -8,8 +8,10 @@ import { Interfaces } from '@/riotentity';
  * @namespace TFT_Match
  * @version v1
  * @name IInfoDTO
+ * @prefix TFT_
+ * @strict
  */
-export interface IInfoDTO {
+export interface IInfoDTO_v1 {
     /**
      * 	Unix timestamp.
      */
@@ -27,7 +29,7 @@ export interface IInfoDTO {
 
     game_version: string;
 
-    participants: Interfaces.TFT_Match.v1.IParticipantDTO[];
+    participants: Interfaces.ITFT_ParticipantDTO_v1[];
 
     /**
      * 	Please refer to the League of Legends documentation.

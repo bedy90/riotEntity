@@ -1,9 +1,9 @@
-import * as MiniSeriesDTOInterface from './v4/IMiniSeriesDTO';
-import * as LeagueEntryDTOInterface from './v4/ILeagueEntryDTO';
+import { ILeagueEntryDTO_v4 as ILeagueExp_LeagueEntryDTO_v4 } from './v4/ILeagueEntryDTO.js';
+import { IMiniSeriesDTO_v4 as ILeagueExp_MiniSeriesDTO_v4 } from './v4/IMiniSeriesDTO.js';
 
-export namespace LeagueExp {
-  export namespace v4 {
-    export import IMiniSeriesDTO = MiniSeriesDTOInterface.IMiniSeriesDTO;
-    export import ILeagueEntryDTO = LeagueEntryDTOInterface.ILeagueEntryDTO;
-  }
-}
+export type {
+	ILeagueExp_LeagueEntryDTO_v4, ILeagueExp_MiniSeriesDTO_v4,
+};
+
+export type ILeagueExp_LeagueEntryDTO = ILeagueExp_LeagueEntryDTO_v4;
+export type ILeagueExp_MiniSeriesDTO = ILeagueExp_MiniSeriesDTO_v4;

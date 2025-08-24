@@ -1,5 +1,4 @@
-import { IBannedChampion_Global } from '../../_Global/IBannedChampion_Global';
-
+import { Interfaces } from '../../../index.js';
 
 /**
  * Interface IBannedChampion
@@ -7,9 +6,8 @@ import { IBannedChampion_Global } from '../../_Global/IBannedChampion_Global';
  * @namespace Spectactor
  * @version v4
  * @name IBannedChampion
+ * @strict
  */
-export type IBannedChampion = IBannedChampion_Global
-/*
-export interface IBannedChampion extends IBannedChampion_Global {
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+export interface IBannedChampion_v4 extends Interfaces.Common.IBannedChampion_Global {
 }
-*/

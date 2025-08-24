@@ -1,12 +1,16 @@
 /**
  * Interface IActiveShardDTO
  *
- * @NotImplemented
  * @namespace Account
  * @version v1
  * @name IActiveShardDTO
+ * @strict
  */
-export interface IActiveShardDTO {
+export interface IActiveShardDTO_v1 {
+    /**
+     * Encrypted PUUID. Exact length of 78 characters.
+     * @length 78
+     */
     puuid: number;
 
     /**

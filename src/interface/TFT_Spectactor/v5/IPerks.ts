@@ -1,4 +1,4 @@
-import { IPerks_Global } from '../../_Global/IPerks_Global';
+import { Interfaces } from '../../../index.js';
 
 /**
  * Interface TFT - IPerks
@@ -6,9 +6,9 @@ import { IPerks_Global } from '../../_Global/IPerks_Global';
  * @namespace TFT_Spectactor
  * @version v5
  * @name IPerks
+ * @prefix TFT_
+ * @strict
  */
-export type IPerks = IPerks_Global
-/*
-export interface IPerks extends IPerks_Global {
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+export interface IPerks_v5 extends Interfaces.Common.IPerks_Global {
 }
-*/

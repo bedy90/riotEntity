@@ -1,4 +1,4 @@
-import { ICurrentGameParticipant_Global } from '../../_Global/ICurrentGameParticipant_Global';
+import { Interfaces } from '../../../index.js';
 
 /**
  * Interface ICurrentGameParticipant
@@ -6,7 +6,8 @@ import { ICurrentGameParticipant_Global } from '../../_Global/ICurrentGamePartic
  * @namespace Spectactor
  * @version v4
  * @name ICurrentGameParticipant
+ * @strict
  */
-export interface ICurrentGameParticipant extends ICurrentGameParticipant_Global {
+export interface ICurrentGameParticipant_v4 extends Interfaces.Common.ICurrentGameParticipant_Global {
     bot: boolean;
 }
