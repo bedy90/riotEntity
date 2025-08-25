@@ -1,19 +1,14 @@
-import * as ShardInterface_v3 from './v3/IShardStatus';
-import * as StatusInterface_v4 from './v4/IStatus';
+import { IContentDTO_v4 } from './v4/IContentDTO.js';
+import { IPlatformDataDTO_v4 } from './v4/IPlatformDataDTO.js';
+import { IStatusDTO_v4 } from './v4/IStatusDTO.js';
+import { IUpdateDTO_v4 } from './v4/IUpdateDTO.js';
 
-export namespace LoL_Status {
-    export namespace v3 {
-        export import IIncident = ShardInterface_v3.IIncident;
-        export import IMessage = ShardInterface_v3.IMessage;
-        export import IService = ShardInterface_v3.IService;
-        export import IShardStatus = ShardInterface_v3.IShardStatus;
-        export import ITranslation = ShardInterface_v3.ITranslation;
-    }
+export type {
+	IContentDTO_v4, IPlatformDataDTO_v4, IStatusDTO_v4,
+	IUpdateDTO_v4,
+};
 
-    export namespace v4 {
-        export import IContentDto = StatusInterface_v4.IContentDto;
-        export import IPlatformDataDto = StatusInterface_v4.IPlatformDataDto;
-        export import IStatusDTO = StatusInterface_v4.IStatusDTO;
-        export import IUpdateDto = StatusInterface_v4.IUpdateDto;
-    }
-}
+export type IContentDTO = IContentDTO_v4;
+export type IPlatformDataDTO = IPlatformDataDTO_v4;
+export type IStatusDTO = IStatusDTO_v4;
+export type IUpdateDTO = IUpdateDTO_v4;

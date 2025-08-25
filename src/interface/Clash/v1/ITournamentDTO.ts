@@ -1,17 +1,25 @@
-export interface ITournamentDTO {
+import { Interfaces } from '../../../index.js';
+
+/**
+ * Interface ITournamentDTO
+ *
+ * @namespace Clash
+ * @version v1
+ * @name ITournamentDTO
+ * @prefix Clash_
+ * @strict
+ */
+export interface ITournamentDTO_v1 {
     id: number;
+
     themeId: number;
+
     nameKey: string;
+
     nameKeySecondary: string;
+
     /**
      * 	Tournament phase
      */
-    schedule: ITournamentPhaseDTO[];
-}
-
-export interface ITournamentPhaseDTO {
-    id: number;
-    registrationTime: number;
-    startTime: number;
-    cancelled: boolean;
+    schedule: Interfaces.IClash_TournamentPhaseDTO_v1[];
 }

@@ -1,33 +1,22 @@
-import { IMiniSeriesDTO } from './IMiniSeriesDTO';
+import { Interfaces } from '../../../index.js';
 
-export interface ILeagueListDTO {
+/**
+ * Interface ILeagueListDTO
+ *
+ * @namespace League
+ * @version v4
+ * @name ILeagueListDTO
+ * @strict
+ */
+export interface ILeagueListDTO_v4 {
     leagueId: string;
-    entries: ILeagueItemDTO[];
-    tier: string;
-    name: string;
-    queue: string;
-}
 
-export interface ILeagueItemDTO {
-    freshBlood: boolean;
-    /**
-     * 	Winning team on Summoners Rift.
-     */
-    wins: number;
-    summonerName: string;
-    miniSeries: IMiniSeriesDTO;
-    inactive: boolean;
-    veteran: boolean;
-    hotStreak: boolean;
-    rank: string;
-    leaguePoints: number;
-    /**
-     * Losing team on Summoners Rift.
-     */
-    losses: number;
-    /**
-     * Player's encrypted summonerId.
-     */
-    summonerId: string;
+    entries: Interfaces.ILeagueItemDTO_v4[];
+
+    tier: string;
+
+    name: string;
+
+    queue: string;
 }
 

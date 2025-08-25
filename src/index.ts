@@ -1,8 +1,14 @@
-export * from './declaration';
-export * as Entities from './entity';
-export * as Interfaces from './interface';
-export * as Validator from './validation';
+// Initial
+// export * from './declaration/index.js';
+// export * from './interface/index.js';
+// // export * from './validator';
+// // export * from './schema';
 
+// // By Alias
+// export * as Declarations from './declaration/index.js';
+// export * as Interfaces from './interface/index.js';
+// // export * as Validators from './validator';
+// // export * as Schemas from './schema';
 
-// const test = 'nom';
-// const test2 = 'test';
+// 20280822 : Inverse index and riotentity
+export * from './riotentity.js';

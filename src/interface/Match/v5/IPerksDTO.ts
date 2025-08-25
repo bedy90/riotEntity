@@ -1,23 +1,15 @@
-export interface IPerksDTO {
-    statPerks: IPerkStatsDTO;
-    styles: IPerkStyleDTO[];
-}
+import { Interfaces } from '../../../index.js';
 
-export interface IPerkStatsDTO {
-    defense: number;
-    flex: number;
-    offense: number;
-}
+/**
+ * Interface IPerksDTO
+ *
+ * @namespace Match
+ * @version v5
+ * @name IPerksDTO
+ * @strict
+ */
+export interface IPerksDTO_v5 {
+    statPerks: Interfaces.IPerkStatsDTO_v5;
 
-export interface IPerkStyleDTO {
-    description: string;
-    selections: IPerkStyleSelectionDTO[];
-    style: number;
-}
-
-export interface IPerkStyleSelectionDTO {
-    perk: number;
-    var1: number;
-    var2: number;
-    var3: number;
+    styles: Interfaces.IPerkStyleDTO_v5[];
 }

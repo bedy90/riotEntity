@@ -1,6 +1,8 @@
 node_modules
 src
 tsconfig.json
+_temp/
+
 # README.md
 *.tgz
 *.txt
@@ -24,3 +26,5 @@ npm-debug.log
 # Coverage directory used by tools like istanbul
 coverage*
 *.lcov
+
+# Remove root

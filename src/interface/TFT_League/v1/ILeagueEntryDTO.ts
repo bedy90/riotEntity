@@ -1,59 +1,33 @@
-import { IMiniSeriesDTO } from './IMiniSeriesDTO';
+import { Interfaces } from '../../../index.js';
 
-export interface ILeagueEntryDTO {
-    leagueId: string;
+/**
+ * Interface TFT - ILeagueEntryDTO
+ *
+ * @namespace TFT_League
+ * @version v1
+ * @name ILeagueEntryDTO
+ * @prefix TFT_
+ * @strict
+ */
+export interface ILeagueEntryDTO_v1 extends Interfaces.Common.ILeagueEntryDTO_Global {
     /**
-     * 	Player's summonerId (Encrypted)
+     * Player Universal Unique Identifier. Exact length of 78 characters. (Encrypted)
+     * @length 78
      */
-    summonerId: string;
-    summonerName: string;
-    queueType: string;
+    puuid: string;
+
     /**
      * Only included for the RANKED_TFT_TURBO queueType. (Legal values: ORANGE, PURPLE, BLUE, GREEN, GRAY)
      */
     ratedTier: string;
+
     /**
      * Only included for the RANKED_TFT_TURBO queueType.
      */
     ratedRating: string;
-    /**
-     * Not included for the RANKED_TFT_TURBO queueType.
-     */
-    tier: string;
-    /**
-     * 	The player's division within a tier. Not included for the RANKED_TFT_TURBO queueType.
-     */
-    rank: string;
-    /**
-     * Not included for the RANKED_TFT_TURBO queueType.
-     */
-    leaguePoints: number;
-    /**
-     * First placement in Teamfight Tactics.
-     */
-    wins: number;
-    /**
-     * Second through eighth placement in Teamfight Tactics.
-     */
-    losses: number;
-    /**
-     * Not included for the RANKED_TFT_TURBO queueType.
-     */
-    hotStreak: boolean;
-     /**
-     * Not included for the RANKED_TFT_TURBO queueType.
-     */
-    veteran: boolean;
-     /**
-     * Not included for the RANKED_TFT_TURBO queueType.
-     */
-    freshBlood: boolean;
-     /**
-     * Not included for the RANKED_TFT_TURBO queueType.
-     */
-    inactive: boolean;
-     /**
-     * Not included for the RANKED_TFT_TURBO queueType.
-     */
-    miniSeries: IMiniSeriesDTO;
+
+    //  /**
+    //  * Not included for the RANKED_TFT_TURBO queueType.
+    //  */
+    // miniSeries: IMiniSeriesDTO;
 }

@@ -34,11 +34,44 @@ Changelog entries are classified using the following labels _(from [keep-a-chang
 </details>
 
 <details>
-  <summary><strong>Unreleased</strong<</summary>
+  <summary><strong>Unreleased</strong></summary>
+</details>
+
+## [2025.1.1] - 2025-04-21
+<details>
+  <summary>Version 2025.1.1</summary>
+
+### Added
+
+### Changed
+- Update dependencies
+
+### Fixed
+
+</details>
+
+## [2024.6.1] - 2024-06-15
+<details>
+  <summary>Version 2024.6.1</summary>
+
+### Added
+
+- JDOC header added to interfaces
+- Global interface added for interface inheritance
+- Index generator by namespace/version added for interfaces.
+- Added a namespace/version-based entity class generator based on the interface structure.
+- Added a namespace/version index generator for entity classes.
+
+### Changed
+- Revision of interface structures on May 25
+
+### Fixed
+- Adjustment in the Github deployment action.
 </details>
 
 ## [2024.5.2] - 2024-05-20
-Version 2024.5.2 alpha
+<details>
+  <summary>Version 2024.5.2 alpha</summary>
 
 ### Added
 - Fix Interface name, Class name, Validation Name
@@ -48,9 +81,12 @@ Version 2024.5.2 alpha
 
 ### Fixed
 - ESLINT added to clean up code
-- 
+</details>
+
+
 ## [2024.2.1] - 2024-02-11
-Version 2024.2.1 alpha
+<details>
+  <summary>Version 2024.2.1 alpha</summary>
 
 ### Added
 - Implementation of a namespace system
@@ -67,3 +103,5 @@ Version 2024.2.1 alpha
 - Add interface for AccountDTO, SummonerDTO and LeagueEntryDTO
 
 **Non-breaking changes**
+
+</details>

@@ -1,33 +1,22 @@
-import { IMiniSeriesDTO } from './IMiniSeriesDTO';
+import { Interfaces } from '../../../index.js';
 
-export interface ILeagueListDTO {
+/**
+ * Interface TFT - ILeagueListDTO
+ *
+ * @namespace TFT_League
+ * @version v1
+ * @name ILeagueListDTO
+ * @prefix TFT_
+ * @strict
+ */
+export interface ILeagueListDTO_v1 {
     leagueId: string;
-    entries: ILeagueItemDTO[];
+
+    entries: Interfaces.ITFT_LeagueItemDTO_v1[];
+
     tier: string;
+
     name: string;
+
     queue: string;
 }
-
-export interface ILeagueItemDTO {
-    freshBlood: boolean;
-    /**
-     * 	Winning team on Summoners Rift.
-     */
-    wins: number;
-    summonerName: string;
-    miniSeries: IMiniSeriesDTO;
-    inactive: boolean;
-    veteran: boolean;
-    hotStreak: boolean;
-    rank: string;
-    leaguePoints: number;
-    /**
-     * Losing team on Summoners Rift.
-     */
-    losses: number;
-    /**
-     * Player's encrypted summonerId.
-     */
-    summonerId: string;
-}
-

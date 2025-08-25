@@ -1,17 +1,9 @@
-import * as ApexPlayerInterface from './v1/IApexPlayerInfoDTO';
-import * as ChallengeInterface from './v1/IChallengeConfigInfoDTO';
-import * as PlayerInfo from './v1/IPlayerInfoDTO';
+import { IApexPlayerInfoDTO_v1 as ILOL_ApexPlayerInfoDTO_v1 } from './v1/IApexPlayerInfoDTO.js';
+import { IChallengeConfigInfoDTO_v1 as ILOL_ChallengeConfigInfoDTO_v1 } from './v1/IChallengeConfigInfoDTO.js';
 
-export namespace LoL_Challenges {
-    export namespace v1 {
-        export import IApexPlayerInfoDTO = ApexPlayerInterface.IApexPlayerInfoDTO;
+export type {
+	ILOL_ApexPlayerInfoDTO_v1, ILOL_ChallengeConfigInfoDTO_v1,
+};
 
-        export import IChallengeConfigInfoDTO = ChallengeInterface.IChallengeConfigInfoDTO;
-
-        export import IChallengeInfo = PlayerInfo.IChallengeInfo;
-        export import IChallengePoint = PlayerInfo.IChallengePoint;
-        export import IPlayerClientPreference = PlayerInfo.IPlayerClientPreference;
-        export import IPlayerInfoDTO = PlayerInfo.IPlayerInfoDTO;
-
-    }
-}
+export type ILOL_ApexPlayerInfoDTO = ILOL_ApexPlayerInfoDTO_v1;
+export type ILOL_ChallengeConfigInfoDTO = ILOL_ChallengeConfigInfoDTO_v1;

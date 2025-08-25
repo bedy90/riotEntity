@@ -1,18 +1,36 @@
-import { IPlayerDTO } from './IPlayerDTO';
+import { Interfaces } from '../../../index.js';
 
-export interface ITeamDTO {
+/**
+ * Interface ITeamDTO
+ *
+ * @namespace Clash
+ * @version v1
+ * @name ITeamDTO
+ * @prefix Clash_
+ * @strict
+ */
+export interface ITeamDTO_v1 {
     id: string;
+
     tournamentId: number;
+
     name: string;
+
     iconId: number;
+
     tier: number;
+
     /**
      * Summoner ID of the team captain.
+     * TODO
      */
     captain: string;
+
     abbreviation: string;
+
     /**
      * 	Team members.
      */
-    players: IPlayerDTO[];
+    players: Interfaces.IClash_PlayerDTO_v1[];
 }
+

@@ -1,11 +1,14 @@
-import * as StatusInterface_v1 from './v1/IStatus';
+import { IContentDTO_v1 as ITFT_ContentDTO_v1 } from './v1/IContentDTO.js';
+import { IPlatformDataDTO_v1 as ITFT_PlatformDataDTO_v1 } from './v1/IPlatformDataDTO.js';
+import { IStatusDTO_v1 as ITFT_StatusDTO_v1 } from './v1/IStatusDTO.js';
+import { IUpdateDTO_v1 as ITFT_UpdateDTO_v1 } from './v1/IUpdateDTO.js';
 
-export namespace TFT_Status {
+export type {
+	ITFT_ContentDTO_v1, ITFT_PlatformDataDTO_v1, ITFT_StatusDTO_v1,
+	ITFT_UpdateDTO_v1,
+};
 
-    export namespace v1 {
-        export import IContentDTO = StatusInterface_v1.IContentDTO;
-        export import IPlatformDataDTO = StatusInterface_v1.IPlatformDataDTO;
-        export import IStatusDTO = StatusInterface_v1.IStatusDTO;
-        export import IUpdateDTO = StatusInterface_v1.IUpdateDTO;
-    }
-}
+export type ITFT_ContentDTO = ITFT_ContentDTO_v1;
+export type ITFT_PlatformDataDTO = ITFT_PlatformDataDTO_v1;
+export type ITFT_StatusDTO = ITFT_StatusDTO_v1;
+export type ITFT_UpdateDTO = ITFT_UpdateDTO_v1;

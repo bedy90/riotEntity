@@ -1,9 +1,0 @@
-import * as ApexInfo from './v1/ApexPlayerInfoDTO';
-import * as ChallengeConfig from './v1/ChallengeConfigInfoDTO';
-
-export namespace LoL_Challenges {
-    export namespace v1 {
-        export import ApexPlayerInfoDTO = ApexInfo.ApexPlayerInfoDTO;
-        export import ChallengeConfigInfoDTO = ChallengeConfig.ChallengeConfigInfoDTO;
-    }
-}

@@ -1,7 +1,7 @@
-import * as SummonerInterface from './v4/ISummonerDTO';
+import { ISummonerDTO_v4 } from './v4/ISummonerDTO.js';
 
-export namespace Summoner {
-    export namespace v4 {
-        export import ISummonerDTO = SummonerInterface.ISummonerDTO;
-    }
-}
+export type {
+	ISummonerDTO_v4,
+};
+
+export type ISummonerDTO = ISummonerDTO_v4;

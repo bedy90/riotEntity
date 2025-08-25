@@ -1,5 +1,5 @@
-/* eslint-disable max-len */
-/* eslint-disable no-shadow */
+// eslint-disable max-len
+// eslint-disable no-shadow
 
 export enum State {
     /**
@@ -85,7 +85,7 @@ export enum Platforms {
     IOS = 'ios',
     PS4 = 'ps4',
     XBOX_ONE = 'xbone',
-    SWITCH= 'switch'
+    SWITCH = 'switch'
 }
 
 export enum PublishLocations {
@@ -97,18 +97,28 @@ export enum PublishLocations {
 export enum GameMode {
     CLASSIC = 'CLASSIC',
     ODIN = 'ODIN',
-    ARAM ='ARAM',
+    ARAM = 'ARAM',
     TUTORIAL = 'TUTORIAL',
-    ONEFORALL ='ONEFORALL',
-    ASCENSION='ASCENSION',
-    FIRSTBLOOD='FIRSTBLOOD',
-    KINGPORO ='KINGPORO'
+    ONEFORALL = 'ONEFORALL',
+    ASCENSION = 'ASCENSION',
+    FIRSTBLOOD = 'FIRSTBLOOD',
+    KINGPORO = 'KINGPORO',
+    TFT = 'TFT'
 }
 
 export enum GameType {
     CUSTOM_GAME = 'CUSTOM_GAME',
     MATCHED_GAME = 'MATCHED_GAME',
     TUTORIAL_GAME = 'TUTORIAL_GAME'
+}
+
+export enum QueueType {
+    UNRANKED = 'Unranked',
+    RANKED_SOLO = 'RANKED_SOLO_5x5',
+    RANKED_TEAM = 'RANKED_TEAM_5x5',
+    RANKED_TFT = 'RANKED_TFT',
+    RANKED_FLEX_SOLO = 'RANKED_FLEX_SR',
+    RANKED_FLEX_TEAM = 'RANKED_FLEX_TT'
 }
 
 export enum TraitStyle {
@@ -118,3 +128,16 @@ export enum TraitStyle {
     GOLD = 3,
     CHROMATIC = 4
 }
+
+export enum GlobalRegions {
+    EUROPE = 'EUROPE',
+    AMERICAS = 'AMERICAS',
+    ASIA = 'ASIA',
+    ESPORTS = 'ESPORTS',
+    SEA = 'SEA' // Oldest region
+}
+
+export enum Regions {
+    'BR1', 'EUN1', 'EUW1', 'JP1', 'KR', 'LA1', 'LA2', 'ME1', 'NA1', 'OC1', 'RU', 'SG2', 'TR1', 'TW2', 'TVN2'
+}
+

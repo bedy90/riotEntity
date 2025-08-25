@@ -1,14 +1,32 @@
-import { ClashPosition, ClashRole } from '@/src/declaration';
+import { Declarations } from '../../../index.js';
 
-export interface IPlayerDTO {
+/**
+ * Interface IPlayerDTO
+ *
+ * @namespace Clash
+ * @version v1
+ * @name IPlayerDTO
+ * @prefix Clash_
+ * @strict
+ */
+export interface IPlayerDTO_v1 {
     summonerId: string;
-    teamId: string;
+
+     /**
+     * Player Universal Unique Identifier
+     * @length 78
+     */
+    puuid: string;
+
+    teamId?: string;
+
     /**
      * (Legal values: UNSELECTED, FILL, TOP, JUNGLE, MIDDLE, BOTTOM, UTILITY)
      */
-    position: ClashPosition; // string;
+    position: Declarations.ClashPosition | string;
+
     /**
      * 	(Legal values: CAPTAIN, MEMBER)
      */
-    role: ClashRole; // string;
+    role: Declarations.ClashRole | string;
 }
