@@ -15,7 +15,7 @@ describe('Has a valid AccountDTO - Validate using validator', () => {
 
         let result: any = Validators.AccountValidator.validate(jsonObject);
 
-        expect(result).not.toBeNull;
+        expect(result).not.toBeNull();
         expect(result.success).toBe(true);
 
     });
@@ -29,7 +29,7 @@ describe('Has a valid AccountDTO - Validate using validator', () => {
 
         let result: any = Validators.AccountValidator.validate(intByUnionType);
 
-        expect(result).not.toBeNull;
+        expect(result).not.toBeNull();
         expect(result.success).toBe(true);
     });
 
@@ -42,7 +42,7 @@ describe('Has a valid AccountDTO - Validate using validator', () => {
 
         let result: any = Validators.AccountValidator.validate(intBySpecificVersion);
 
-        expect(result).not.toBeNull;
+        expect(result).not.toBeNull();
         expect(result.success).toBe(true);
     });
 
@@ -52,11 +52,9 @@ describe('Has a invalid AccountDTO - Validate using validator', () => {
 
     test('Using a another interface, invalid data', () => {
         const summoner: Interfaces.ISummonerDTO_v4 = {
-            accountId: 'abcde',
             profileIconId: 1,
-            revisionDate: 1,
-            id: 'abc',
-            summonerLevel: 55,
+            revisionDate: 1n,
+            summonerLevel: 55n,
             puuid: 'pDxMtQ0DTUZAxSu3WZz9itOTPphTc-9b9uTIrQXsQGFXxhgnaIIhyfY9NEaoZZGdKD-qgYbMPK42jg'
         };
 
@@ -64,9 +62,9 @@ describe('Has a invalid AccountDTO - Validate using validator', () => {
         // console.dir(result?.error?.errors)
         // console.log(logType.TEST, `\n\n\n\t Error message : ${result.success ? '' : result.error.message}`);
 
-        expect(result).not.toBeNull;
+        expect(result).not.toBeNull();
         expect(result.success).toBe(false);
-        expect(result.error).not.toBeNull;
+        expect(result.error).not.toBeNull();
     });
 
     test('Using a another JSON Object struct, invalid data', () => {
@@ -77,9 +75,9 @@ describe('Has a invalid AccountDTO - Validate using validator', () => {
 
         let result = Validators.AccountValidator.validate(jsonObject);
 
-        expect(result).not.toBeNull;
+        expect(result).not.toBeNull();
         expect(result.success).toBe(false);
-        expect(result.error).not.toBeNull;
+        expect(result.error).not.toBeNull();
     });
 
     test('Using a incomplete JSON Object, invalid data', () => {
@@ -90,9 +88,9 @@ describe('Has a invalid AccountDTO - Validate using validator', () => {
 
         let result = Validators.AccountValidator.validate(jsonObject);
 
-        expect(result).not.toBeNull;
+        expect(result).not.toBeNull();
         expect(result.success).toBe(false);
-        expect(result.error).not.toBeNull;
+        expect(result.error).not.toBeNull();
     });
 
 
@@ -105,9 +103,9 @@ describe('Has a invalid AccountDTO - Validate using validator', () => {
 
         let result = Validators.AccountValidator.validate(shortTagLink);
 
-        expect(result).not.toBeNull;
+        expect(result).not.toBeNull();
         expect(result.success).toBe(false);
-        expect(result.error).not.toBeNull;
+        expect(result.error).not.toBeNull();
         expect(result.error?.message).toContain('Must be 3 or more characters long');
 
 
@@ -121,7 +119,7 @@ describe('Has a invalid AccountDTO - Validate using validator', () => {
 
         expect(result).toBeDefined();
         expect(result.success).toBe(false);
-        expect(result.error).not.toBeNull;
+        expect(result.error).not.toBeNull();
         expect(result.error?.message).toContain('Must be 5 or fewer characters long')
     });
 
@@ -134,9 +132,9 @@ describe('Has a invalid AccountDTO - Validate using validator', () => {
 
         let result = Validators.AccountValidator.validate(shortGameName);
 
-        expect(result).not.toBeNull;
+        expect(result).not.toBeNull();
         expect(result.success).toBe(false);
-        expect(result.error).not.toBeNull;
+        expect(result.error).not.toBeNull();
         expect(result.error?.message).toContain('Must be 3 or more characters long');
 
         const tooLongGameName: Interfaces.IAccountDTO = {
@@ -149,7 +147,7 @@ describe('Has a invalid AccountDTO - Validate using validator', () => {
 
         expect(result).toBeDefined();
         expect(result.success).toBe(false);
-        expect(result.error).not.toBeNull;
+        expect(result.error).not.toBeNull();
         expect(result.error?.message).toContain('Must be 16 or fewer characters long')
     });
 
@@ -162,9 +160,9 @@ describe('Has a invalid AccountDTO - Validate using validator', () => {
 
         let result = Validators.AccountValidator.validate(shortPuuid);
 
-        expect(result).not.toBeNull;
+        expect(result).not.toBeNull();
         expect(result.success).toBe(false);
-        expect(result.error).not.toBeNull;
+        expect(result.error).not.toBeNull();
         expect(result.error?.message).toContain('Must be 78 characters long');
 
 
@@ -178,7 +176,7 @@ describe('Has a invalid AccountDTO - Validate using validator', () => {
 
         expect(result).toBeDefined();
         expect(result.success).toBe(false);
-        expect(result.error).not.toBeNull;
+        expect(result.error).not.toBeNull();
         expect(result.error?.message).toContain('Must be 16 or fewer characters long')
     });
 

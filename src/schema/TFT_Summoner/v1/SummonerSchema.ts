@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { Interfaces } from '../../../index.js';
 
-export const SummonerSchema_v4 = z.object({
+export const SummonerSchema_v1 = z.object({
     accountId: z.string({ required_error: 'accountId is required' })
         .max(56, { message: 'accountId : Must be 56 characters long' })
         .nonempty({ message: 'accountId is required' }),

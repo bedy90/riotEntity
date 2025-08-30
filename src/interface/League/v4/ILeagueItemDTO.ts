@@ -33,11 +33,6 @@ export interface ILeagueItemDTO_v4 {
      */
     losses: number;
 
-    /**
-     * Player's encrypted summonerId.
-     */
-    summonerId: string;
-
      /**
      * Player's encrypted puuid.
      * @length 78

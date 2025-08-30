@@ -8,12 +8,6 @@
  */
 export interface ISummonerDTO_Global {
     /**
-     * Encrypted account ID. Max length 56 characters.
-     * @maxLength 56
-     */
-    accountId: string;
-
-    /**
      * 	ID of the summoner icon associated with the summoner
      */
     profileIconId: number;
@@ -24,12 +18,6 @@ export interface ISummonerDTO_Global {
      * playing the tutorial or advanced tutorial, finishing a game, summoner name change
      */
     revisionDate?: bigint;
-
-    /**
-     * Encrypted summoner ID. Max length 63 characters.
-     * @maxLength 63
-     */
-    id: string;
 
     /**
      * Encrypted PUUID. Exact length of 78 characters.

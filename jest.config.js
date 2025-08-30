@@ -1,14 +1,24 @@
 /** @type {import('ts-jest').JestConfigWithTsJest} **/
-module.exports = {
+export default {
     testEnvironment: 'node',
+    preset: 'ts-jest/presets/default-esm',
+    extensionsToTreatAsEsm: ['.ts'],
+    globals: {
+        'ts-jest': {
+            useESM: true,
+        },
+    },
+    resolver: 'ts-jest-resolver',
+    transform: {
+        '^.+\\.tsx?$': ['ts-jest', { useESM: true }],
+      },
     verbose: false,
-    preset: 'ts-jest',
     modulePaths: ['<rootDir>/src'],
     moduleNameMapper: {
-        '^@/riotentity$': '<rootDir>/src/index',
+        '^(\\.{1,2}/.*)\\.js$': '$1',
+        '^@/riotentity$': '<rootDir>/src/index.ts',
         '^@/(.*)$': '<rootDir>/src/$1',
     },
-    coveragePathIgnorePatterns: [
-        '/scripts/',
-    ],
+    coveragePathIgnorePatterns: ['/scripts/'],
+    moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
 };
