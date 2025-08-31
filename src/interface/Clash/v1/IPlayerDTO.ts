@@ -10,14 +10,16 @@ import { Declarations } from '../../../index.js';
  * @strict
  */
 export interface IPlayerDTO_v1 {
-    summonerId: string;
-
      /**
      * Player Universal Unique Identifier
      * @length 78
      */
     puuid: string;
 
+    /**
+     * Team Universal Unique Identifier. Only included if the player is on a team.
+     * Value only if « clash/v1players/by-puuid »
+     */
     teamId?: string;
 
     /**

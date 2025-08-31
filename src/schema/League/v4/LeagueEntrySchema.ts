@@ -1,12 +1,15 @@
 import { z } from 'zod';
 import { Interfaces } from '../../../index.js';
-import { MiniSeriesSchema_v4 } from './MiniSeriesSchema';
+import { MiniSeriesSchema_v4 } from './MiniSeriesSchema.js';
 
 export const LeagueEntrySchema_v4 = z.object({
     leagueId: z.string(),
     summonerId: z.string({ required_error: 'summonerId is required' })
         .max(63, { message: 'summonerId : Must be 63 characters long' })
-        .nonempty({ message: 'summonerId is required' }),
+        .nonempty({ message: 'summonerId is required' }).optional(),
+    puuid: z.string({ required_error: 'puuid is required' })
+        .length(78, { message: 'puuid : Must be 78 characters long' })
+        .nonempty({ message: 'puuid is required' }),
     queueType: z.string(),
     tier: z.string(),
     rank: z.string(),
@@ -17,16 +20,5 @@ export const LeagueEntrySchema_v4 = z.object({
     veteran: z.boolean(),
     freshBlood: z.boolean(),
     inactive: z.boolean(),
-    puuid: z.string({ required_error: 'puuid is required' })
-    .length(78, { message: 'puuid : Must be 78 characters long' })
-    .nonempty({ message: 'puuid is required' }),
     miniSeries: MiniSeriesSchema_v4.optional(),
 }).strict() satisfies z.ZodType<Interfaces.ILeagueEntryDTO_v4>;
-
-
-// miniSeries: z.object({
-//     losses: z.number(),
-//     wins: z.number(),
-//     target: z.number(),
-//     progress: z.string(),
-//   }).optional()

@@ -9,7 +9,7 @@
 // export type AccountValidator = AccountValidator_v1;
 
 
-import { AccountValidator as AccountValidator_v1 } from './v1/AccountValidator';
+import { AccountValidator as AccountValidator_v1 } from './v1/AccountValidator.js';
 
 export {
     AccountValidator_v1,

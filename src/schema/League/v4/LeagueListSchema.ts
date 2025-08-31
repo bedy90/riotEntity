@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { Interfaces } from '../../../index.js';
-import { LeagueItemSchema_v4 } from './LeagueItemSchema';
+import { LeagueItemSchema_v4 } from './LeagueItemSchema.js';
 
 export const LeagueListSchema_v4 = z.object({
     leagueId: z.string(),

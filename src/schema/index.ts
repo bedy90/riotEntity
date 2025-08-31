@@ -1,6 +1,11 @@
-export * as AccountSchema from './Account/v1/AccountSchema';
-// ou export { AccountSchema } from './Account/AccountSchema';
+export * as AccountSchema from './Account/index.js';
+// ou export { AccountSchema } from './Account/AccountSchema.js';
 
-export * as LeagueEntrySchema from './League/v4/LeagueEntrySchema';
-export * as MiniSeriesSchema from './League/v4/MiniSeriesSchema';
-export * as SummonerSchema from './Summoner/SummonerSchema';
+export * as ChampionSchema from './Champion/index.js';
+export * as ChampionMasterySchema from './ChampionMastery/index.js';
+
+export * as LeagueSchema from './League/index.js';
+
+export * as SummonerSchema from './Summoner/index.js';
+
+export * as TFT_SummonerSchema from './TFT_Summoner/index.js';

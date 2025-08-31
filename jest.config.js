@@ -1,14 +1,26 @@
 /** @type {import('ts-jest').JestConfigWithTsJest} **/
-module.exports = {
+export default {
+    // Default config
     testEnvironment: 'node',
-    verbose: false,
-    preset: 'ts-jest',
-    modulePaths: ['<rootDir>/src'],
-    moduleNameMapper: {
-        '^@/riotentity$': '<rootDir>/src/index',
-        '^@/(.*)$': '<rootDir>/src/$1',
+    preset: 'ts-jest/presets/default-esm',
+    extensionsToTreatAsEsm: ['.ts'],
+    resolver: 'ts-jest-resolver',
+    transform: {
+        '^.+\\.tsx?$': ['ts-jest', { useESM: true }],
     },
-    coveragePathIgnorePatterns: [
-        '/scripts/',
+    moduleNameMapper: {
+        '^(\\.{1,2}/.*)\\.js$': '$1',
+    },
+
+    // File matching
+    testMatch: ['<rootDir>/test/**/*.test.ts', '<rootDir>/test/**/*.spec.ts'],
+
+    // Coverage config
+    collectCoverage: true,
+    coveragePathIgnorePatterns: ['/node_modules/', '/scripts/', '/src/manual_test.ts', '/src/test-export.ts'],
+    coverageDirectory: '<rootDir>/coverage',
+    coverageReporters: ['json', 'lcov', 'text', 'clover'],
+    collectCoverageFrom: [
+        'src/**/*.{ts,tsx,js,jsx}',
     ],
 };
