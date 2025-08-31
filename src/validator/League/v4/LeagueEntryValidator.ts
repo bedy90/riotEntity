@@ -14,7 +14,7 @@ export class LeagueEntryValidator {
 
 	static validate(obj: any): SafeParseReturnType<any, any> {
 		// return this.SummonerSchema.safeParse(obj);
-		return Schemas.LeagueEntrySchema.LeagueEntrySchema_v4.safeParse(obj);
+		return Schemas.LeagueSchema.LeagueEntrySchema_v4.safeParse(obj);
 	}
 
 }

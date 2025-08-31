@@ -96,6 +96,9 @@ module `NodeNext` (ou `Node16`) comprends
     "moduleResolution": "NodeNext", // Très important d'ajouter ceci aussi
  ```
 
+ ## Clean Cache JEST
+ npx jest --clearCache
+
  ### Problmatique extension .js
  Changer vos imports dans les fichiers TS pour ne pas mettre .js
 

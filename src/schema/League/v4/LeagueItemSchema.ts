@@ -1,7 +1,6 @@
 import { z } from 'zod';
 import { Interfaces } from '../../../index.js';
-// À adapter selon l'import réel de IMiniSeriesDTO_v4
-import { MiniSeriesSchema_v4 } from './MiniSeriesSchema';
+import { MiniSeriesSchema_v4 } from './MiniSeriesSchema.js';
 
 export const LeagueItemSchema_v4 = z.object({
   freshBlood: z.boolean(),
@@ -13,10 +12,8 @@ export const LeagueItemSchema_v4 = z.object({
   rank: z.string(),
   leaguePoints: z.number(),
   losses: z.number(),
-  summonerId: z.string({ required_error: 'summonerId is required' })
-        .max(63, { message: 'summonerId : Must be 63 characters long' })
-        .nonempty({ message: 'summonerId is required' }),
   puuid: z.string({ required_error: 'puuid is required' })
-  .length(78, { message: 'puuid : Must be 78 characters long' })
-  .nonempty({ message: 'puuid is required' }),
+          .length(78, { message: 'puuid : Must be 78 characters long' })
+          .nonempty({ message: 'puuid is required' }),
+
 }).strict() satisfies z.ZodType<Interfaces.ILeagueItemDTO_v4>;

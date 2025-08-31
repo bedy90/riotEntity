@@ -8,4 +8,5 @@ export const SummonerSchema_v4 = z.object({
         .length(78, { message: 'puuid : Must be 78 characters long' })
         .nonempty({ message: 'puuid is required' }),
     summonerLevel: z.bigint().min(BigInt(1)),
+
 }).strict() satisfies z.ZodType<Interfaces.ISummonerDTO>;

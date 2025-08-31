@@ -26,7 +26,7 @@
   ],
   "exclude": [
     "node_modules",
-    "build",
+    "build/**/*",
     "test/**/*",
     "docker",
     "generate/**/*",
@@ -36,7 +36,5 @@
     "./src/test-export.ts",
     "*.ps1",
     "*.txt",
-    "./src/schema/**",
-    "./src/validator/**",
   ]
 }

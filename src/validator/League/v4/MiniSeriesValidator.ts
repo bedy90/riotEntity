@@ -11,7 +11,7 @@ import { Schemas } from '../../../index.js';
 export class MiniSeriesValidator {
 
 	static validate(obj: any): SafeParseReturnType<any, any> {
-		return Schemas.MiniSeriesSchema.MiniSeriesSchema_v4.safeParse(obj);
+		return Schemas.LeagueSchema.MiniSeriesSchema_v4.safeParse(obj);
 	}
 
 }
