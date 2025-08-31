@@ -15,13 +15,8 @@
     "skipLibCheck": true,
     "baseUrl": "./src",
     "paths": {
-      // "@": ["index"],   
-      // "@/*": ["*"],
-      // "@riotentity": ["riotentity"],
       "@/riotentity": ["riotentity"],
       "@/riotentity/*": ["riotentity/*"],
-      // "@/riotentity/schema": ["schema/*"],
-      // "@riotentity/*": ["*"]
     }
   },
   "include": [
@@ -31,7 +26,7 @@
   ],
   "exclude": [
     "node_modules",
-    "build",
+    "build/**/*",
     "test/**/*",
     "docker",
     "generate/**/*",
@@ -39,9 +34,7 @@
     "./lib",
     "./src/manual_test.ts",
     "./src/test-export.ts",
-    "*.ts1",
+    "*.ps1",
     "*.txt",
-    "./src/schema/**",
-    "./src/validator/**",
   ]
 }

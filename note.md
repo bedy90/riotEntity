@@ -95,3 +95,15 @@ module `NodeNext` (ou `Node16`) comprends
 "target": "es2022", // Ou "esnext" si vous êtes très à jour
     "moduleResolution": "NodeNext", // Très important d'ajouter ceci aussi
  ```
+
+ ## Clean Cache JEST
+ npx jest --clearCache
+
+ ### Problmatique extension .js
+ Changer vos imports dans les fichiers TS pour ne pas mettre .js
+
+    En mode "module": "NodeNext", TypeScript vous oblige à mettre .js dans les imports.
+    Mais si vous enlevez .js, la compilation échoue.
+    Vous pouvez essayer "module": "ESNext" et "moduleResolution": "node" dans tsconfig.json pour assouplir ça, mais ce n’est pas garanti.
+
+

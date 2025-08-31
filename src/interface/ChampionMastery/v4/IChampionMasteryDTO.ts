@@ -54,7 +54,7 @@ export interface IChampionMasteryDTO_v4 {
 
     championSeasonMilestone: number;
 
-    nextSeasonMilestone: Interfaces.INextSeasonMilestonesDTO_v4;
+    nextSeasonMilestone?: Interfaces.INextSeasonMilestonesDTO_v4;
 
     /**
      * 	The token earned for this champion at the current championLevel. When the championLevel is advanced the tokensEarned resets to 0.

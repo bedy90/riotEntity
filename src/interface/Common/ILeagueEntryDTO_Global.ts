@@ -15,7 +15,7 @@ export interface ILeagueEntryDTO_Global {
      * Player's summonerId (Encrypted)
      * @removed
      */
-    summonerId: string;
+    summonerId?: string;
 
      /**
      * Player's encrypted puuid.

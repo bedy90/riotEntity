@@ -9,29 +9,28 @@ describe('Has a valid SummonerDTO - Validate using Validators', () => {
 
     test('Using JSON object is valid', () => {
         const jsonObject = {
-            id: "ugo6n4jo5MC4lq28xdh7m4TFNvq3kspmoG2CdNir9eZi8oA",
-            accountId: "3FSDP47jnDNDlbshophTrGYKvVnGK-TGHCtSVDuP3noLPV8",
             puuid: "pDxMtQ0DTUoaxSu3WUz9itOTZphTc-9b9uTIrQXsQGFXxhgjjIIhyfY9NEaoZZGdKD-qgYbMPK42jg",
             profileIconId: 1433,
-            revisionDate: 1745890069000,
-            summonerLevel: 351
+            revisionDate: 1745890069000n,
+            summonerLevel: 351n
         };
 
         let result: any = Validators.SummonerValidator.validate(jsonObject);
 
+        if (!result.success) {
+            console.log(result.error);
+        }
+
         expect(result).not.toBeNull;
         expect(result.success).toBe(true);
-
     });
 
     test('Using union type, is valid', () => {
         const intByUnionType: Interfaces.ISummonerDTO = {
-            id: "ugo6n4jo5MC4lq28xdh7m4TFNvq3kspmoG2CdNir9eZi8oA",
-            accountId: "3FSDP47jnDNDlbshophTrGYKvVnGK-TGHCtSVDuP3noLPV8",
             puuid: "pDxMtQ0DTUoaxSu3WUz9itOTZphTc-9b9uTIrQXsQGFXxhgjjIIhyfY9NEaoZZGdKD-qgYbMPK42jg",
             profileIconId: 1433,
-            revisionDate: 1745890069000,
-            summonerLevel: 351
+            revisionDate: 1745890069000n,
+            summonerLevel: 351n
         };
 
         let result: any = Validators.SummonerValidator.validate(intByUnionType);
@@ -42,12 +41,10 @@ describe('Has a valid SummonerDTO - Validate using Validators', () => {
 
     test('Using interface version, is valid', () => {
         const intBySpecificVersion: Interfaces.ISummonerDTO_v4 = {
-            id: "ugo6n4jo5MC4lq28xdh7m4TFNvq3kspmoG2CdNir9eZi8oA",
-            accountId: "3FSDP47jnDNDlbshophTrGYKvVnGK-TGHCtSVDuP3noLPV8",
             puuid: "pDxMtQ0DTUoaxSu3WUz9itOTZphTc-9b9uTIrQXsQGFXxhgjjIIhyfY9NEaoZZGdKD-qgYbMPK42jg",
             profileIconId: 1433,
-            revisionDate: 1745890069000,
-            summonerLevel: 351
+            revisionDate: 1745890069000n,
+            summonerLevel: 351n
         };
 
         let result: any = Validators.SummonerValidator.validate(intBySpecificVersion);
@@ -76,8 +73,6 @@ describe('Has a invalid SummonerDTO - Validate using Validators', () => {
 
     test('Using a JSON Object interface, id is too long', () => {
         const jsonObject = {
-            id: "ugo6n4jo5MC4lq28xdh7m4TFNvq3kspmoG2CdNir9eZi8oAm4TFNvq3kspmoG2CdNir9eZi8oA",
-            accountId: "3FSDP47jnDNDlbshophTrGYKvVnGK-TGHCtSVDuP3noLPV8",
             puuid: "pDxMtQ0DTUoaxSu3WUz9itOTZphTc-9b9uTIrQXsQGFXxhgjjIIhyfY9NEaoZZGdKD-qgYbMPK42jg",
             profileIconId: 1433,
             revisionDate: 1745890069000,
@@ -95,8 +90,6 @@ describe('Has a invalid SummonerDTO - Validate using Validators', () => {
 
     test('Using a JSON Object interface, accountId is too long', () => {
         const jsonObject = {
-            id: "ugo6n4jo5MC4lq28xdh7m4TFNvq3kspmoG2CdNir9eZi8oA",
-            accountId: "3FSDP47jnDNDlbshophTrGYKvVnGK-TGHCtSVDuP3noLPV8-TGHCtSVDuP3noLPV8",
             puuid: "pDxMtQ0DTUoaxSu3WUz9itOTZphTc-9b9uTIrQXsQGFXxhgjjIIhyfY9NEaoZZGdKD-qgYbMPK42jg",
             profileIconId: 1433,
             revisionDate: 1745890069000,
@@ -115,8 +108,6 @@ describe('Has a invalid SummonerDTO - Validate using Validators', () => {
     test('Using a JSON Object interface, puuid is invalid', () => {
         // Too short puuid
         const shortPuuid_jsonObject = {
-            id: "ugo6n4jo5MC4lq28xdh7m4TFNvq3kspmoG2CdNir9eZi8oA",
-            accountId: "3FSDP47jnDNDlbshophTrGYKvVnGK-TGHCtSVDuP3noLPV8",
             puuid: "pDxMtQ0DTUoaxSu3WUz9itOTZphTc-9b9uTIrQXsQGFXxhgjjIIhyfY9NEaoZZGdKD",
             profileIconId: 1433,
             revisionDate: 1745890069000,
@@ -124,8 +115,6 @@ describe('Has a invalid SummonerDTO - Validate using Validators', () => {
         };
 
         const tooLongPuuid_jsonObject = {
-            id: "ugo6n4jo5MC4lq28xdh7m4TFNvq3kspmoG2CdNir9eZi8oA",
-            accountId: "3FSDP47jnDNDlbshophTrGYKvVnGK-TGHCtSVDuP3noLPV8",
             puuid: "pDxMtQ0DTUoaxSu3WUz9itOTZphTc-9b9uTIrQXsQGFXxhgjjIIhyfY9NEaoZZGdKD-qgYbMPK42jg-qgYbMPK42jg",
             profileIconId: 1433,
             revisionDate: 1745890069000,
@@ -173,85 +162,12 @@ describe('Has a invalid SummonerDTO - Validate using Validators', () => {
         expect(result.error).not.toBeNull;
     });
 
-
-    test('Using union type, invalid id', () => {
-        const tooLongId: Interfaces.ISummonerDTO = {
-            id: "ugo6n4jo5MC4lq28xdh7m4TFNvq3kspmoG2CdNir9eZi8oA-moG2CdNir9eZi8oA",
-            accountId: "3FSDP47jnDNDlbshophTrGYKvVnGK-TGHCtSVDuP3noLPV8",
-            puuid: "pDxMtQ0DTUoaxSu3WUz9itOTZphTc-9b9uTIrQXsQGFXxhgjjIIhyfY9NEaoZZGdKD-qgYbMPK42jg",
-            profileIconId: 1433,
-            revisionDate: 1745890069000,
-            summonerLevel: 351
-        };
-
-        let result = Validators.SummonerValidator.validate(tooLongId);
-
-        expect(result).not.toBeNull;
-        expect(result.success).toBe(false);
-        expect(result.error).not.toBeNull;
-        expect(result.error?.message).toContain('id : Must be 63 characters long');
-
-
-        const emptyId: Interfaces.ISummonerDTO = {
-            id: "",
-            accountId: "3FSDP47jnDNDlbshophTrGYKvVnGK-TGHCtSVDuP3noLPV8",
-            puuid: "pDxMtQ0DTUoaxSu3WUz9itOTZphTc-9b9uTIrQXsQGFXxhgjjIIhyfY9NEaoZZGdKD-qgYbMPK42jg",
-            profileIconId: 1433,
-            revisionDate: 1745890069000,
-            summonerLevel: 351
-        };
-
-        result = Validators.SummonerValidator.validate(emptyId);
-
-        expect(result).toBeDefined();
-        expect(result.success).toBe(false);
-        expect(result.error).not.toBeNull;
-        expect(result.error?.message).toContain('id is required')
-    });
-
-    test('Using union type, invalid accountId', () => {
-        const tooLongAccountId: Interfaces.ISummonerDTO = {
-            id: "ugo6n4jo5MC4lq28xdh7m4TFNvq3kspmoG2CdNir9eZi8oA",
-            accountId: "3FSDP47jnDNDlbshophTrGYKvVnGK-TGHCtSVDuP3noLPV8-V88888888",
-            puuid: "pDxMtQ0DTUoaxSu3WUz9itOTZphTc-9b9uTIrQXsQGFXxhgjjIIhyfY9NEaoZZGdKD-qgYbMPK42jg",
-            profileIconId: 1433,
-            revisionDate: 1745890069000,
-            summonerLevel: 351
-        };
-
-        let result = Validators.SummonerValidator.validate(tooLongAccountId);
-
-        expect(result).not.toBeNull;
-        expect(result.success).toBe(false);
-        expect(result.error).not.toBeNull;
-        expect(result.error?.message).toContain('accountId : Must be 56 characters long');
-
-
-        const emptyAccountId: Interfaces.ISummonerDTO = {
-            id: "ugo6n4jo5MC4lq28xdh7m4TFNvq3kspmoG2CdNir9eZi8oA",
-            accountId: "",
-            puuid: "pDxMtQ0DTUoaxSu3WUz9itOTZphTc-9b9uTIrQXsQGFXxhgjjIIhyfY9NEaoZZGdKD-qgYbMPK42jg",
-            profileIconId: 1433,
-            revisionDate: 1745890069000,
-            summonerLevel: 351
-        };
-
-        result = Validators.SummonerValidator.validate(emptyAccountId);
-
-        expect(result).toBeDefined();
-        expect(result.success).toBe(false);
-        expect(result.error).not.toBeNull;
-        expect(result.error?.message).toContain('accountId is required')
-    });
-
     test('Using union type, invalid puuid', () => {
         const tooLongPuuid: Interfaces.ISummonerDTO = {
-            id: "ugo6n4jo5MC4lq28xdh7m4TFNvq3kspmoG2CdNir9eZi8oA",
-            accountId: "3FSDP47jnDNDlbshophTrGYKvVnGK-TGHCtSVDuP3noLPV8",
             puuid: "pDxMtQ0DTUoaxSu3WUz9itOTZphTc-9b9uTIrQXsQGFXxhgjjIIhyfY9NEaoZZGdKD-qgYbMPK42jg-qgYbMPK42jg",
             profileIconId: 1433,
-            revisionDate: 1745890069000,
-            summonerLevel: 351
+            revisionDate: 1745890069000n,
+            summonerLevel: 351n
         };
 
         let result = Validators.SummonerValidator.validate(tooLongPuuid);
@@ -263,12 +179,10 @@ describe('Has a invalid SummonerDTO - Validate using Validators', () => {
 
 
         const emptyPuuid: Interfaces.ISummonerDTO = {
-            id: "ugo6n4jo5MC4lq28xdh7m4TFNvq3kspmoG2CdNir9eZi8oA",
-            accountId: "TGHCtSVDuP3noLPV8",
             puuid: "",
             profileIconId: 1433,
-            revisionDate: 1745890069000,
-            summonerLevel: 351
+            revisionDate: 1745890069000n,
+            summonerLevel: 351n
         };
 
         result = Validators.SummonerValidator.validate(emptyPuuid);

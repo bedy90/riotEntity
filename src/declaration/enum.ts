@@ -141,3 +141,9 @@ export enum Regions {
     'BR1', 'EUN1', 'EUW1', 'JP1', 'KR', 'LA1', 'LA2', 'ME1', 'NA1', 'OC1', 'RU', 'SG2', 'TR1', 'TW2', 'TVN2'
 }
 
+export enum Game {
+    LEAGUE_OF_LEGENDS = 'lol',
+    VALORANT = 'val',
+    TEAMFIGHT_TACTICS = 'tft',
+    LEGENDS_OF_RUNTERRA = 'lor'
+}

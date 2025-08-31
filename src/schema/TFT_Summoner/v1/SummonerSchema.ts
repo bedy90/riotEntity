@@ -1,15 +1,9 @@
 import { z } from 'zod';
 import { Interfaces } from '../../../index.js';
 
-export const SummonerSchema_v4 = z.object({
-    accountId: z.string({ required_error: 'accountId is required' })
-        .max(56, { message: 'accountId : Must be 56 characters long' })
-        .nonempty({ message: 'accountId is required' }),
+export const SummonerSchema_v1 = z.object({
     profileIconId: z.number().int().min(0),
     revisionDate: z.bigint().min(BigInt(0)).optional(),
-    id: z.string({ required_error: 'id is required' })
-        .max(63, { message: 'id : Must be 63 characters long' })
-        .nonempty({ message: 'id is required' }),
     puuid: z.string({ required_error: 'puuid is required' })
         .length(78, { message: 'puuid : Must be 78 characters long' })
         .nonempty({ message: 'puuid is required' }),
