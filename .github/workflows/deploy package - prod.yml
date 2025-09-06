@@ -44,7 +44,8 @@ jobs:
       run: npm ci
 
     - name: Build
-      run: npm run build:tsc
+      run: npm run build:tsup_pack
+      # run: npm run build:tsc
 
     - name: Generator prod package
       run: npm run build:package
@@ -53,8 +54,19 @@ jobs:
     ##   run: |
     ##     cp package-prod.json build/package.json
 
-    - name: Publish on Github NPM package
-      working-directory: build
-      run: npm publish
-      env:
-        NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    # - name: Publish on Github NPM package
+    #   working-directory: build
+    #   run: npm publish
+    #   env:
+    #     NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - uses: JS-DevTools/npm-publish@v3
+      id : "publishTag"
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        registry: "https://npm.pkg.github.com"
+        tag: prod
+        package: ./build
+
+    - if: ${{ steps.publishTag.outputs.type }}
+      run: echo "Version ${{ steps.publishTag.outputs.version }} has published !"

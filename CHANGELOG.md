@@ -37,16 +37,37 @@ Changelog entries are classified using the following labels _(from [keep-a-chang
   <summary><strong>Unreleased</strong></summary>
 </details>
 
+## [2025.1.2] - 2025-09-01
+<details>
+  <summary>Version 2025.1.2</summary>
+
+### Added
+ - Jest test
+ - Add Schema and validator for Summoner, League, Account, Champion and ChampionMastery
+
+### Changed
+- Revision of interface structures on September 9
+
+### Fixed
+ - PROD adjustment for Github deployment action.
+
+</details>
+
 ## [2025.1.1] - 2025-04-21
 <details>
   <summary>Version 2025.1.1</summary>
 
 ### Added
+- Prepare zod system for schema and validator
 
 ### Changed
 - Update dependencies
+- Revision of interface structures on May 25
+- Eslint config file
 
 ### Fixed
+ - Adjustment in the Github deployment action.
+ - Transform project in Node modules ESM
 
 </details>
 
