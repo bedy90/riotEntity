@@ -36,4 +36,4 @@ runs:
       run: npm ci
       shell: bash
       env:
-        NODE_AUTH_TOKEN: scope: ${{ inputs.npm-token != '' && inputs.npm-token || null }}
+        NODE_AUTH_TOKEN: ${{ inputs.npm-token != '' && inputs.npm-token || null }}

@@ -30,9 +30,10 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v4.1.7
+      uses: actions/checkout@v4
 
-    - name: Execute github composite
+    - id: setup
+      name: Execute github composite
       uses: ./.github/actions/setup-node-npm
       with:
         node-version: ${{ matrix.node-version }}
@@ -53,9 +54,10 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v4.1.7
+      uses: actions/checkout@v4
 
-    - name: Execute github composite
+    - id: setup
+      name: Execute github composite
       uses: ./.github/actions/setup-node-npm
       with:
         node-version: ${{ matrix.node-version }}
@@ -76,9 +78,10 @@ jobs:
     
     steps:
       - name: Checkout
-        uses: actions/checkout@v4.1.7
+        uses: actions/checkout@v4
     
-      - name: Execute github composite
+      - id: setup
+        name: Execute github composite
         uses: ./.github/actions/setup-node-npm
         with:
           node-version: ${{ matrix.node-version }}
@@ -113,9 +116,10 @@ jobs:
     
     steps:
       - name: Checkout
-        uses: actions/checkout@v4.1.7
+        uses: actions/checkout@v4
     
-      - name: Execute github composite
+      - id: setup
+        name: Execute github composite
         uses: ./.github/actions/setup-node-npm
         with:
           node-version: ${{ matrix.node-version }}
