@@ -27,20 +27,15 @@ jobs:
     strategy:
       matrix:
         node-version: [22.x]
-        # language: [ 'javascript', 'typescript' ]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
     - name: Checkout
       uses: actions/checkout@v4.1.7
 
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4.0.2
+    - name: Execute github composite
+      uses: ./.github/actions/setup-node-npm
       with:
         node-version: ${{ matrix.node-version }}
-
-    - name: Install dependencies
-      run: npm ci
 
     - name: Run lint
       run: npm run eslint
@@ -60,17 +55,13 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4.1.7
 
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4.0.2
+    - name: Execute github composite
+      uses: ./.github/actions/setup-node-npm
       with:
         node-version: ${{ matrix.node-version }}
-
-    - name: Install dependencies
-      run: npm ci
       
     - name: Run build tsup
       run: npm run build:tsup_pack
-      # run: npm run build:tsc
       continue-on-error: false  # Arrête le workflow si le build échoue
 
   # -----------------------------------------
@@ -78,7 +69,7 @@ jobs:
   # -----------------------------------------
   audit_solution:
     runs-on: ubuntu-latest
-    needs: [eslint-review] #, build]
+    needs: [build]
     strategy:
       matrix:
         node-version: [22.x]
@@ -87,23 +78,35 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4.1.7
     
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4.0.2
+      - name: Execute github composite
+        uses: ./.github/actions/setup-node-npm
         with:
           node-version: ${{ matrix.node-version }}
-    
-      - name: Install dependencies
-        run: npm ci
  
-      - name: Run audit
-        run: npm audit --audit-level=high
-        continue-on-error: false  # Arrête le workflow si le build échoue
+      - name: Run npm audit and save result
+        id: audit
+        shell: bash -e {0}
+        run: |
+            npm audit --json > audit-result.json || true
+        continue-on-error: true  # Continue même si vulnérabilités trouvées
+  
+      - name: Install dependencies
+        run: npm install mustache
+  
+      - uses: actions/github-script@v5
+        if: steps.audit.outcome == 'success'
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+                const auditScript = require('./.github/scripts/audit.cjs');
+                await auditScript({ github, context }); 
       
   # -----------------------------------------
   # Outdated validation
   # -----------------------------------------
   outdated_package:
     runs-on: ubuntu-latest
+    needs: [build]
     strategy:
       matrix:
         node-version: [22.x]
@@ -112,13 +115,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4.1.7
     
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4.0.2
+      - name: Execute github composite
+        uses: ./.github/actions/setup-node-npm
         with:
           node-version: ${{ matrix.node-version }}
-    
-      - name: Install dependencies
-        run: npm ci
 
       - name: Check outdated dependencies
         id: outdated
@@ -127,9 +127,6 @@ jobs:
         shell: bash -e {0}
         continue-on-error: true  # Continuer en cas d'erreur pour diagnostiquer
 
-      # - name: show detail
-      #   run: ls -l
-
       - name: Install dependencies
         run: npm install mustache
   
@@ -137,210 +134,5 @@ jobs:
         if: steps.outdated.outcome == 'success'
         uses: actions/github-script@v5
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            // Read JSON
-            const fs = require('fs');
-            const outdated = fs.readFileSync('outdated.json', 'utf8');
-            const result = JSON.parse(outdated);
-
-            // Prepare JSON data
-            const packageList = {
-              data: []
-            };
-
-            Object.keys(result).forEach(depName => {
-                const depInfo = result[depName];          
-                packageList.data.push({name: depName, current: depInfo.current, wanted: depInfo.wanted, latest: depInfo.latest })
-            });
-
-            // Read template
-            const templatePath = '.github/template/outdated.md';
-            const templateFile = fs.readFileSync(templatePath, 'utf8');
-            // const commentBody = renderTemplate(templateFile, packageList.data)
-
-            const Mustache = require('mustache');
-            const mustacheCommentBody = Mustache.render(templateFile, packageList);
-
-            // Trouver le commentaire existant
-            const existingComments = await github.rest.issues.listComments({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: context.issue.number
-            })
-            const commentToUpdate = existingComments.data.find(c => c.user.type === 'Bot' && c.body.includes('<!-- outdated-comment -->'))
-      
-            try {
-              if (commentToUpdate) {
-                // Mettre à jour le commentaire existant
-                await github.rest.issues.updateComment({
-                  owner: context.repo.owner,
-                  repo: context.repo.repo,
-                  comment_id: commentToUpdate.id,
-                  body: mustacheCommentBody
-                })
-              } else {
-                // Créer un nouveau commentaire
-                await github.rest.issues.createComment({
-                  owner: context.repo.owner,
-                  repo: context.repo.repo,
-                  issue_number: context.issue.number,
-                  body: mustacheCommentBody
-                })
-              }
-            } catch (error) {
-              console.error('Error commenting on pull request:', error);
-              throw error;
-            }
-
-       #    function renderTemplate(template, data) {
-       #      const parts = template.split('{% for dependency in data %}');
-       #      const header = parts[0];
-       #      const footer = parts[1].split('{% endfor %}')[1];
-       #      const body = data.map(dependency => {
-       #        return `| ${dependency.name} | ${dependency.current} | ${dependency.wanted} | ${dependency.latest} |`;
-       #      }).join('\n');
-       #      return `${header}\n${body}\n${footer}`;
-       #    }
-
-          # script: |
-            # async function commentOnPullRequest(github) {
-            #   try {
-            #     const fs = require('fs');
-            #     const Mustache = require('mustache');
-
-            #     const outdated = fs.readFileSync('outdated.json', 'utf8');
-            #     const result = JSON.parse(outdated);
-
-            #     // Le reste de votre logique de traitement des résultats de npm outdated
-            #     // Organiser les dépendances par niveau de sévérité
-            #     const updatesBySeverity = {
-            #       major: [],
-            #       minor: [],
-            #       patch: [],
-            #     };
-
-            #     Object.keys(result).forEach(depName => {
-            #         const depInfo = result[depName];
-            #         const currentVersion = depInfo.current;
-            #         const wantedVersion = depInfo.wanted;
-            #         const latestVersion = depInfo.latest;
-        
-            #         if (currentVersion !== wantedVersion && wantedVersion.startsWith('1')) {
-            #           updatesBySeverity.major.push({ name: depName, current: currentVersion, wanted: wantedVersion, latest: latestVersion });
-            #         } else if (currentVersion !== wantedVersion && wantedVersion.startsWith('0')) {
-            #           updatesBySeverity.minor.push({ name: depName, current: currentVersion, wanted: wantedVersion, latest: latestVersion });
-            #         } else if (currentVersion !== wantedVersion && wantedVersion.startsWith('0.')) {
-            #           updatesBySeverity.patch.push({ name: depName, current: currentVersion, wanted: wantedVersion, latest: latestVersion });
-            #         }
-            #     });
-
-            #     // Charger le template Markdown depuis le fichier
-            #     const templatePath = '.github/template/outdated.md';
-            #     const templateContent = await github.rest.repos.getContent({
-            #       owner: context.repo.owner,
-            #       repo: context.repo.repo,
-            #       path: templatePath,
-            #     });
-       
-            #     const templateBody = Buffer.from(templateContent.data.content, 'base64').toString('utf-8');
-      
-            #     console.log('step before renderer template preload')
-            #     // Remplacer les placeholders du template avec les données structurées
-            #     const finalComment = Mustache.render(templateBody, updatesBySeverity);
-
-            #     console.log('step after  comment')
-            #     console.log(context.payload.pull_request.number)
-
-            #     // Créer le commentaire sur la Pull Request
-            #       await github.rest.issues.createComment({
-            #       issue_number: context.payload.pull_request.number,
-            #       owner: context.repo.owner,
-            #       repo: context.repo.repo,
-            #       body: finalComment
-            #     });
-
-            #   } catch (error) {
-            #     // console.error('Error commenting on pull request:', error);
-            #     throw error; // Rejeter l'erreur pour la capturer dans le workflow
-            #   }
-            # }
-
-            # commentOnPullRequest(github).catch(error => {
-            #   console.error('Error commenting on pull request:', error);
-            #   process.exit(1);
-            # });
-
-          # script: |
-          #   async function commentOnPullRequest(github) {
-          #     try {
-          #       // Exécuter npm outdated --json pour obtenir les dépendances obsolètes
-          #       const outdated = require('child_process').execSync('npm outdated --json').toString();
-          #       const result = JSON.parse(outdated);
-
-          #       // Organiser les dépendances par niveau de sévérité
-          #       const updatesBySeverity = {
-          #         major: [],
-          #         minor: [],
-          #         patch: [],
-          #       };
-
-          #       Object.keys(result).forEach(depName => {
-          #         const depInfo = result[depName];
-          #         const currentVersion = depInfo.current;
-          #         const wantedVersion = depInfo.wanted;
-          #         const latestVersion = depInfo.latest;
-
-          #         if (isMajorUpdate(currentVersion, wantedVersion)) {
-          #           updatesBySeverity.major.push({ name: depName, current: currentVersion, wanted: wantedVersion, latest: latestVersion });
-          #         } else if (isMinorUpdate(currentVersion, wantedVersion)) {
-          #           updatesBySeverity.minor.push({ name: depName, current: currentVersion, wanted: wantedVersion, latest: latestVersion });
-          #         } else if (isPatchUpdate(currentVersion, wantedVersion)) {
-          #           updatesBySeverity.patch.push({ name: depName, current: currentVersion, wanted: wantedVersion, latest: latestVersion });
-          #         }
-          #       });
-
-          #       // Charger le template Markdown depuis le fichier
-          #       const templatePath = '.github/template/outdated.md';
-          #       const templateContent = await github.repos.getContent({
-          #         owner: context.repo.owner,
-          #         repo: context.repo.repo,
-          #         path: templatePath,
-          #       });
-
-          #       const templateBody = Buffer.from(templateContent.data.content, 'base64').toString('utf-8');
-
-          #       // Remplacer les placeholders du template avec les données structurées
-          #       const finalComment = Mustache.render(templateBody, updatesBySeverity);
-
-          #       // Créer le commentaire sur la Pull Request
-          #       await github.issues.createComment({
-          #         owner: context.repo.owner,
-          #         repo: context.repo.repo,
-          #         issue_number: context.payload.pull_request.number,
-          #         body: finalComment,
-          #       });
-          #     } catch (error) {
-          #       console.error('Error commenting on pull request:', error);
-          #       process.exit(1);
-          #     }
-          #   }
-
-          #   // Fonctions utilitaires pour déterminer le niveau de mise à jour
-          #   function isMajorUpdate(currentVersion, wantedVersion) {
-          #     return currentVersion !== wantedVersion && wantedVersion.startsWith('1');
-          #   }
-
-          #   function isMinorUpdate(currentVersion, wantedVersion) {
-          #     return currentVersion !== wantedVersion && wantedVersion.startsWith('0');
-          #   }
-
-          #   function isPatchUpdate(currentVersion, wantedVersion) {
-          #     return currentVersion !== wantedVersion && wantedVersion.startsWith('0.');
-          #   }
-
-          #   commentOnPullRequest(github).catch(error => {
-          #     console.error('Error commenting on pull request:', error);
-          #     process.exit(1);
-          #   });
- 
+            github-token: ${{ secrets.GITHUB_TOKEN }}
+            script: require('./.github/scripts/outdated.cjs')

@@ -5,10 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+where:
+
+* `YEAR` = `MAJOR` : represents the major version, incremented every year
+* `MONTH` = `MINOR` : represents the minor version, incremented every month
+* `PATCH` : represents the patch version, incremented for each bug fix or minor change
+
+This approach allows us to track changes and updates to the project over time.
 
 <details>
   <summary><strong>Guiding Principles</strong></summary>
-
 - Changelogs are for humans, not machines.
 - There should be an entry for every single version.
 - The same types of changes should be grouped.
@@ -21,7 +27,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 <details>
   <summary><strong>Types of changes</strong></summary>
-
 Changelog entries are classified using the following labels _(from [keep-a-changelog](http://keepachangelog.com/)_):
 
 - `Added` for new features.
@@ -35,6 +40,28 @@ Changelog entries are classified using the following labels _(from [keep-a-chang
 
 <details>
   <summary><strong>Unreleased</strong></summary>
+
+  ### Upcoming
+  - Zod schema
+  - Zod validator
+  - Missing interface
+</details>
+
+## [2025.1.3] - 2025-09-11
+<details>
+  <summary>Version 2025.1.3</summary>
+
+### Added
+- GitHub composite action
+- Audit template / script process
+
+### Changed
+- Explanation of how `Semantic Versioning` works in YYYY.MM.patch
+
+### Fixed
+- Automatic publishing on release
+- Manual publishing of alpha package
+
 </details>
 
 ## [2025.1.2] - 2025-09-01
@@ -50,6 +77,8 @@ Changelog entries are classified using the following labels _(from [keep-a-chang
 
 ### Fixed
  - PROD adjustment for Github deployment action.
+
+ ### Removed
 
 </details>
 
