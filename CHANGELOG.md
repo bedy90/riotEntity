@@ -57,10 +57,14 @@ Changelog entries are classified using the following labels _(from [keep-a-chang
 
 ### Changed
 - Explanation of how `Semantic Versioning` works in YYYY.MM.patch
+- Fix Zod, schema, validator after package updated
 
 ### Fixed
 - Automatic publishing on release
 - Manual publishing of alpha package
+
+### Security
+ - Update outdated package
 
 </details>
 

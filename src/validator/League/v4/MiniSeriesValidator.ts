@@ -1,4 +1,4 @@
-import { SafeParseReturnType } from 'zod';
+import { ZodSafeParseResult } from 'zod';
 import { Schemas } from '../../../index.js';
 
 /**
@@ -10,7 +10,7 @@ import { Schemas } from '../../../index.js';
  */
 export class MiniSeriesValidator {
 
-	static validate(obj: any): SafeParseReturnType<any, any> {
+	static validate(obj: any): ZodSafeParseResult<any> {
 		return Schemas.LeagueSchema.MiniSeriesSchema_v4.safeParse(obj);
 	}
 
