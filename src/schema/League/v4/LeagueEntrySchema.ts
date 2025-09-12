@@ -4,10 +4,10 @@ import { MiniSeriesSchema_v4 } from './MiniSeriesSchema.js';
 
 export const LeagueEntrySchema_v4 = z.object({
     leagueId: z.string(),
-    summonerId: z.string({ required_error: 'summonerId is required' })
+    summonerId: z.string({ error: (issue) => issue.input === undefined ? 'summonerId is required' : 'not a string' })
         .max(63, { message: 'summonerId : Must be 63 characters long' })
         .nonempty({ message: 'summonerId is required' }).optional(),
-    puuid: z.string({ required_error: 'puuid is required' })
+    puuid: z.string({ error: (issue) => issue.input === undefined ? 'puuid is required' : 'not a string' })
         .length(78, { message: 'puuid : Must be 78 characters long' })
         .nonempty({ message: 'puuid is required' }),
     queueType: z.string(),

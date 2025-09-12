@@ -192,7 +192,7 @@ export class InterfaceData {
         classContent.push(`\tstatic schema = z.object({});\n`);
         // classContent.push(this.#generateProperties());
 
-        classContent.push(`\tstatic validate(obj: any): SafeParseReturnType<any, any> {`);
+        classContent.push(`\tstatic validate(obj: any): ZodSafeParseResult<any> {`);
         // classContent.push(`\t\treturn AccountValidator.schema.safeParse(obj);`);
         classContent.push(`\t\treturn this.schema.safeParse(obj);`);
         classContent.push(`\t}`);

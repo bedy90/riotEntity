@@ -1,4 +1,4 @@
-import { SafeParseReturnType } from 'zod';
+import { ZodSafeParseResult } from 'zod';
 import { Schemas } from '../../../index.js';
 
 /**
@@ -11,7 +11,7 @@ import { Schemas } from '../../../index.js';
  */
 export class TFT_SummonerValidator {
 
-	static validate(obj: any): SafeParseReturnType<any, any> {
+	static validate(obj: any): ZodSafeParseResult<any> {
 		return Schemas.TFT_SummonerSchema.SummonerSchema_v1.safeParse(obj);
 	}
 

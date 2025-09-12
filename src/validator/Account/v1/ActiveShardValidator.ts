@@ -20,7 +20,7 @@
 //         // satisfies : validate interface type
 //         .strict() satisfies z.ZodType<Interfaces.IAccountDTO>;
 
-//     static validate(obj: any): SafeParseReturnType<any, any> {
+//     static validate(obj: any): ZodSafeParseResult<any> {
 //         return AccountValidator.AccountSchema.safeParse(obj);
 //     }
 
