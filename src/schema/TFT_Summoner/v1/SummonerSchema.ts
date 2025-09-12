@@ -4,7 +4,7 @@ import { Interfaces } from '../../../index.js';
 export const SummonerSchema_v1 = z.object({
     profileIconId: z.number().int().min(0),
     revisionDate: z.bigint().min(BigInt(0)).optional(),
-    puuid: z.string({ required_error: 'puuid is required' })
+    puuid: z.string({ error: (issue) => issue.input === undefined ? 'puuid is required' : 'not a string' })
         .length(78, { message: 'puuid : Must be 78 characters long' })
         .nonempty({ message: 'puuid is required' }),
     summonerLevel: z.bigint().min(BigInt(1)),

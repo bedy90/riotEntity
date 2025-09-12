@@ -2,7 +2,7 @@
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
         
 # Publish Alpha package on Github. (On publish release)
-name: Bedy90 - Riot Entity - Deploy Prod
+name: Bedy90 - Riot Entity - Deploy package on release published
 
 on:   
   release:
@@ -22,50 +22,31 @@ jobs:
     strategy:
       matrix:
         node-version: [22.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
     - name: Checkout
       uses: actions/checkout@v4
         
-    # Setup .npmrc file to publish to npm
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
+    - name: Execute github composite
+      uses: ./.github/actions/setup-node-npm
       with:
         node-version: ${{ matrix.node-version }}
-        registry-url: https://npm.pkg.github.com/
-         # Defaults to the user or organization that owns the workflow file
-        scope: '@bedy90'
-        
-    - name: Install Typescript
-      run: npm install typescript@5.8.3 -g
-      
-    - name: Install dependencies
-      run: npm ci
+        scope-name: '@bedy90'
 
     - name: Build
+      id: build_process
       run: npm run build:tsup_pack
-      # run: npm run build:tsc
 
     - name: Generator prod package
+      if: steps.build_process.outcome == 'success'
       run: npm run build:package
-
-    ## - name: Copy production package.json
-    ##   run: |
-    ##     cp package-prod.json build/package.json
-
-    # - name: Publish on Github NPM package
-    #   working-directory: build
-    #   run: npm publish
-    #   env:
-    #     NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - uses: JS-DevTools/npm-publish@v3
       id : "publishTag"
+      if: steps.build_process.outcome == 'success'
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         registry: "https://npm.pkg.github.com"
-        tag: prod
         package: ./build
 
     - if: ${{ steps.publishTag.outputs.type }}

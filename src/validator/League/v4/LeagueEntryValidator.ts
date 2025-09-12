@@ -1,4 +1,4 @@
-import { SafeParseReturnType } from 'zod';
+import { ZodSafeParseResult } from 'zod';
 import { Schemas } from '../../../index.js';
 
 /**
@@ -12,7 +12,7 @@ import { Schemas } from '../../../index.js';
 export class LeagueEntryValidator {
 
 
-	static validate(obj: any): SafeParseReturnType<any, any> {
+	static validate(obj: any): ZodSafeParseResult<any> {
 		// return this.SummonerSchema.safeParse(obj);
 		return Schemas.LeagueSchema.LeagueEntrySchema_v4.safeParse(obj);
 	}
