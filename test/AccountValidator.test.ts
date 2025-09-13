@@ -91,7 +91,7 @@ describe('Has a invalid AccountDTO - Validate using validator', () => {
         expect(result).not.toBeNull();
         expect(result.success).toBe(false);
         expect(result.error).not.toBeNull();
-        expect(result.error.message).toContain('tagLine is required');
+        expect(result.error?.message).toContain('tagLine is required');
     });
 
 
