@@ -122,13 +122,14 @@ describe('Has a invalid SummonerDTO - Validate using Validators', () => {
         };
 
         let shortResult = Validators.SummonerValidator.validate(shortPuuid_jsonObject);
-        let longResult = Validators.SummonerValidator.validate(tooLongPuuid_jsonObject);
-        // console.dir(result?.error?.errors)
-        // console.log(logType.TEST, `\n\n\n\t Error message : ${result.success ? '' : result.error.message}`);
+        // console.dir(shortResult?.error?.errors)
+        // console.log(logType.TEST, `\n\n\n\t Error message : ${shortResult.success ? '' : shortResult.error.message}`);
 
         expect(shortResult).not.toBeNull;
         expect(shortResult.success).toBe(false);
         expect(shortResult.error).not.toBeNull;
+
+        let longResult = Validators.SummonerValidator.validate(tooLongPuuid_jsonObject);
 
         expect(longResult).not.toBeNull;
         expect(longResult.success).toBe(false);
