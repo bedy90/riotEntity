@@ -79,8 +79,7 @@ describe('Has a invalid SummonerDTO - Validate using Validators', () => {
             summonerLevel: 351
         };
 
-        let result = Validators.SummonerValidator.validate(jsonObject);
-        
+        let result = Validators.SummonerValidator.validate(jsonObject); 
         // console.dir(result?.error?.errors)
         // console.log(logType.TEST, `\n\n\n\t Error message : ${result.success ? '' : result.error.message}`);
 
